@@ -2,6 +2,10 @@
 #include <string>
 #include <time.h>
 #include "CommandProcessor.h"
+#include "DeadlinedTask.h"
+#include "FloatingTask.h"
+#include "task.h"
+#include "TimedTask.h"
 static int const ASCII_VALUE_0 = 48;
 
 vector <int> CommandProcessor::intProcessor (string userInput)
@@ -18,7 +22,8 @@ string CommandProcessor::cmdProcessor (string userInput, Task* newTask)
 {
 	string cmd;
 	int i;
-	tm sTime, eTime;
+	tm* sTime;
+	tm* eTime;
 	string description, startTime, endTime;
 	
 	for(i=0; i<userInput.size() && userInput[i]!=' ';i++)
@@ -38,8 +43,8 @@ string CommandProcessor::cmdProcessor (string userInput, Task* newTask)
 		description[i]='\0';
 		if(i==userInput.size())
 		{
-			floatingTask *ft=new floatingTask;
-			ft->setter( description);
+			FloatingTask *ft=new FloatingTask;
+			ft->setDesc( description);
 			newTask=ft;
 
 		}
@@ -57,9 +62,11 @@ string CommandProcessor::cmdProcessor (string userInput, Task* newTask)
 			
 			if(i==userInput.size())
 			{
-				eTime=sTime;
-				DeadlineTask *dt= new DeadlineTask;
-				dt->setter(description,eTime);
+				eTime = sTime;
+				DeadlinedTask *dt= new DeadlinedTask;
+				dt->setDesc(description);
+				dt->setEnd(eTime);
+				dt->setStart(NULL);
 				newTask=dt;
 			}
 			else
@@ -72,18 +79,21 @@ string CommandProcessor::cmdProcessor (string userInput, Task* newTask)
 				}
 				endTime[i]='\0';
 				eTime=stringToTime(endTime);
-				timedTask tt= new timedTask;
-				tt->setter (description, sTime, eTime);
+				TimedTask *tt= new TimedTask;
+				tt->setDesc (description);
+				tt->setEnd(eTime);
+				tt->setStart(sTime);
 			}
 		}
 	}
 	return cmd;
 }
 
-void CommandProcessor::descProcessor ( string userInput)
+void CommandProcessor::descProcessor ( string userInput, Task* newTask)
 {
 	int i=0;
 	string description, startTime, endTime;
+	tm* sTime, *eTime;
 	for(; i<userInput.size() && userInput[i]!=',';i++)
 		{
 			description[i]=userInput[i];
@@ -91,8 +101,10 @@ void CommandProcessor::descProcessor ( string userInput)
 		description[i]='\0';
 		if(i==userInput.size())
 		{
-			floatingTask *ft=new floatingTask;
-			ft->setter( description);
+			FloatingTask *ft=new FloatingTask;
+			ft->setDesc( description);
+			ft->setEnd(NULL);
+			ft->setStart(NULL);
 			newTask=ft;
 
 		}
@@ -104,12 +116,15 @@ void CommandProcessor::descProcessor ( string userInput)
 				startTime[i]=userInput[i];
 			}
 			startTime[i]='\0';
+			sTime=stringToTime(startTime);
 			if(i==userInput.size())
 			{
-				endTime=startTime;
+				eTime=sTime;
 				startTime='\0';
-				DeadlineTask dt= new DeadlineTask;
-				dt->setter(description,endTime);
+				DeadlinedTask *dt= new DeadlinedTask;
+				dt->setDesc(description);
+				dt->setEnd(eTime);
+				dt->setStart(sTime);
 				newTask=dt;
 			}
 			else
@@ -121,25 +136,28 @@ void CommandProcessor::descProcessor ( string userInput)
 				
 				}
 				endTime[i]='\0';
-				timedTask tt= new timedTask;
-				tt->setter (description, startTime, endTime);
+				eTime=stringToTime(endTime);
+				TimedTask *tt= new TimedTask;
+				tt->setDesc (description);
+				tt->setEnd(eTime);
+				tt->setStart(sTime);
 			}
 		}
 	}
 
-tm CommandProcessor::stringToTime (string startTime)
+tm* CommandProcessor::stringToTime (string startTime)
 {
-	tm sTime;
+	tm* sTime=new tm;
 	int index=0;
 	int date=(startTime[index]-ASCII_VALUE_0)*10+(startTime[++index]-ASCII_VALUE_0);
 	int month=(startTime[++index]-ASCII_VALUE_0)*10+(startTime[++index]-ASCII_VALUE_0);
 	int year=(startTime[++index]-ASCII_VALUE_0)*1000+(startTime[++index]-ASCII_VALUE_0)*100+(startTime[++index]-ASCII_VALUE_0)*10+(startTime[++index]-ASCII_VALUE_0);
-	sTime.tm_mday=date;
-	sTime.tm_mon=month;
-	sTime.tm_year=year;
+	sTime->tm_mday=date;
+	sTime->tm_mon=month;
+	sTime->tm_year=year;
 	int hour=(startTime[++index]-ASCII_VALUE_0)*10+(startTime[++index]-ASCII_VALUE_0);
 	int min=(startTime[++index]-ASCII_VALUE_0)*10+(startTime[++index]-ASCII_VALUE_0);
-	sTime.tm_hour=hour;
-	sTime.tm_min=min;
+	sTime->tm_hour=hour;
+	sTime->tm_min=min;
 	return sTime;
 }

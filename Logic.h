@@ -1,3 +1,5 @@
+#ifndef LOGIC_H_
+#define LOGIC_H_
 #include<iostream>
 #include<string>
 using namespace std;
@@ -32,11 +34,10 @@ public:
 	bool execute (string,Task*);
 	bool addTask (Task*);
 	void deleteTask (int);
-	bool undoTask ();
-	void search(tm*);
-	void log();
-	bool editTask(Task*);
+	//bool undoTask ();
+	bool search(Task*);
+	void editTask(int);
 	bool findToDelete(Task*);
-	void findToEdit();
+	bool findToEdit(Task*);
 };
-
+#endif

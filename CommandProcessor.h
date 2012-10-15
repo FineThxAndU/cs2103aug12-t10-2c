@@ -1,3 +1,5 @@
+#ifndef COMMAND_H_
+#define COMMAND_H_
 #include <iostream>
 #include <string>
 #include <vector>
@@ -12,10 +14,11 @@ public:
 	vector<int> intProcessor (string);
 	string cmdProcessor (string, Task*);
 	void descProcessor (string, Task*);
-	tm stringToTime (string);
+	tm* stringToTime (string);
 
 
 
 
 
 };
+#endif

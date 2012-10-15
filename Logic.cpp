@@ -9,7 +9,8 @@ int Logic::logicMain()
 	struct tm *current;
 	now = time(0);
 	current = localtime(&now);
-	taskList=searchObj.search (current);
+	userInputTask->setStart(current);
+	taskList=searchObj.search (userInputTask);
 	UIObj.displayHomeScreen(taskList);
 	while(1)
 	{
@@ -53,7 +54,7 @@ bool Logic::execute(string cmd,Task* userInputTask)
 				returnVal=addTask(userInputTask);
 				break;
 		case DELETE:
-				returnVal=deleteTask(userInputTask);
+				returnVal=findToDelete(userInputTask);
 				break;
 		case EDIT:
 				returnVal=editTask(userInputTask);
@@ -116,3 +117,34 @@ void Logic::deleteTask(int index)
 	taskList.erase(taskList.begin()+index);
 }
 	
+bool Logic::search(Task* userInputTask)
+{
+	vector<Task*> searchResults=searchObj.getResults(userInputTask);
+	UIObj.displayHomeScreen(searchResults);
+	return true;
+
+}
+
+bool Logic::findToEdit(Task* userInputTask)
+{
+	vector<int> searchResults= searchObj.getindices(userInputTask);
+	vector<Task*> tempList;
+	for(int i=0;i<searchResults.size();i++)
+	tempList.push_back(taskList[searchResults[i]]);
+	UIObj.displayHomeScreen( tempList);
+	userInput=UIObj.getUserInput();
+	vector<int> userIndex= cmdObj.intProcessor(userInput);
+	for(int i=0;i<userIndex.size();i++)
+	{
+		Logic::editTask(searchResults[userIndex[i]-1]);
+	}
+	return true;
+}
+
+void Logic::editTask(int index)
+{
+	userInput=UIObj.getUserInput();
+	cmdObj.descProcessor(userInput,userInputTask);
+	delete taskList[index];
+	taskList[index]=userInputTask;
+}
