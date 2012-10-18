@@ -1,0 +1,20 @@
+﻿Build started 18/10/2012 9:51:13 AM.
+     1>Project "C:\Users\Spatika\documents\visual studio 2010\Projects\iDo\Source\iDo\iDo.vcxproj" on node 3 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Debug\iDo.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         All outputs are up-to-date.
+       ManifestResourceCompile:
+         All outputs are up-to-date.
+       Link:
+         All outputs are up-to-date.
+       Manifest:
+         All outputs are up-to-date.
+       FinalizeBuildStatus:
+         Deleting file "Debug\iDo.unsuccessfulbuild".
+         Touching "Debug\iDo.lastbuildstate".
+     1>Done Building Project "C:\Users\Spatika\documents\visual studio 2010\Projects\iDo\Source\iDo\iDo.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.12
