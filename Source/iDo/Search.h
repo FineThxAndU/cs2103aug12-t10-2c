@@ -18,5 +18,6 @@ class Search
 		vector<int> getIndices ();
 		vector<Task*> getResults ();
 		vector<Task*> getInputList();
+		void clearSearchResults();
 };
 #endif

@@ -36,3 +36,9 @@ vector<int> Search::getIndices(){
 vector<Task*> Search::getResults(){
 	return Search::searchResults;
 }
+
+void Search::clearSearchResults(){
+
+	Search::searchResults.clear();
+	Search::resultIndices.clear();
+}

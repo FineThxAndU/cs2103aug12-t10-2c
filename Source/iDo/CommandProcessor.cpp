@@ -3,8 +3,7 @@
 #include "FloatingTask.h"
 #include "TimedTask.h"
 
-static int const ASCII_VALUE_0 = 48;
-const int MAX_COMMAND_SIZE = 100 , MAX_TIME_SIZE = 100, MAX_DESC_SIZE = 100;
+
 vector <int> CommandProcessor::intProcessor (string userInput)
 {
 	vector <int> integers; 
@@ -22,25 +21,40 @@ string CommandProcessor::cmdProcessor (string userInput, Task*& newTask)
 	tm* sTime;
 	tm* eTime;
 	char description[MAX_DESC_SIZE], startTime[MAX_TIME_SIZE], endTime[MAX_TIME_SIZE], cmd[MAX_COMMAND_SIZE];
-	
+	strcpy(description, "");
+	strcpy(startTime, "");
+	strcpy(endTime, "");
+	strcpy(cmd, "");
+
 	for(i=0; i<userInput.size()&&userInput[i]!=' ';i++)
 	{
 		cmd[i]=userInput[i];
 	}
 
 	cmd[i]='\0';
-
-	if(i==userInput.size())
-		newTask='\0';
+	bool validCmd = CommandProcessor::actualKeyWord(cmd);
+	if(validCmd == false){
+			strcpy (description ,cmd);
+			strcpy(description, strcat(description, " "));
+			strcpy(cmd, "add");
+		}
+	if(i==userInput.size()){
+		Task *ft = new FloatingTask;
+			ft->setDesc(description);
+			newTask=ft;
+	}
+	
 
 	else
 	{
 		i++;
-		for(j = 0; i<userInput.size() && userInput[i]!=',';i++, j++)
+		for(j = strlen(description) ; i<userInput.size() && userInput[i]!=',';i++, j++)
 		{
 			description[j]=userInput[i];
 		}
 		description[j]='\0';
+		
+
 		if(i==userInput.size())
 		{
 			Task *ft = new FloatingTask;
@@ -68,7 +82,7 @@ string CommandProcessor::cmdProcessor (string userInput, Task*& newTask)
 				DeadlinedTask *dt= new DeadlinedTask;
 				dt->setDesc(description);
 				dt->setEnd(eTime);
-				dt->setStart(NULL);
+				dt->setStart(sTime);
 				newTask=dt;
 			}
 
@@ -166,4 +180,46 @@ tm* CommandProcessor::stringToTime (string startTime)
 	sTime->tm_hour=hour;
 	sTime->tm_min=min;
 	return sTime;
+}
+bool CommandProcessor::actualKeyWord(char userCmd[MAX_COMMAND_SIZE]){
+
+	bool isAdd, isRemove, isEdit, isSearch, isExit, isUndo;
+	
+	isAdd = CommandProcessor::isFound(userCmd, addList);
+	isRemove = CommandProcessor::isFound(userCmd, removeList);
+	isEdit = CommandProcessor::isFound(userCmd, editList);
+	isSearch = CommandProcessor::isFound(userCmd, searchList);
+	isExit = CommandProcessor::isFound(userCmd, exitList);
+	isUndo = CommandProcessor::isFound(userCmd, undoList);
+
+	if(isAdd)
+		strcpy(userCmd, "add");
+	else if(isRemove)
+		strcpy(userCmd, "delete");
+	else if(isEdit)
+		strcpy(userCmd, "edit");
+	else if(isSearch)
+		strcpy(userCmd, "search");
+	else if(isExit)
+		strcpy(userCmd, "exit");
+	else if(isUndo)
+		strcpy(userCmd, "undo");
+	
+	if(isAdd == false && isRemove == false && isEdit == false && isSearch == false && isExit == false && isUndo == false)
+		return false;
+	else 
+		return true;
+
+}
+
+bool CommandProcessor::isFound(char cmd[MAX_COMMAND_SIZE], const char cmdList[][MAX_COMMAND_SIZE]){
+
+	int i = 0;
+	while(strcmpi("-1", cmdList[i]) != 0){
+		if(strcmpi(cmd, cmdList[i]) == 0)
+			return true;
+		i++;
+	}
+
+	return false;
 }

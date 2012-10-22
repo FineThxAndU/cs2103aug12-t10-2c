@@ -147,6 +147,7 @@ bool Logic::search(Task* userInputTask)
 	searchObj.executeSearch(userInputTask->getDesc());
 	vector<Task*> searchResults=searchObj.getResults();
 	UIObj.displayHomeScreen(searchResults);
+	searchObj.clearSearchResults();
 	return true;
 
 }
