@@ -1,8 +1,15 @@
 #include "TimedTask.h"
 
 TimedTask::TimedTask(){
-	}
-
+	TimedTask::description = "\0";
+	TimedTask::endTime = NULL;
+	TimedTask::startTime = NULL;
+}
+TimedTask::TimedTask(string desc, tm *start, tm *end){
+	TimedTask::description = desc;
+	TimedTask::endTime = end;
+	TimedTask::startTime = start;
+}
 string TimedTask::getDesc(){
 
 	return TimedTask::description;

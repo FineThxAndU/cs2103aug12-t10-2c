@@ -1,11 +1,16 @@
 #include "FloatingTask.h"
 
 FloatingTask::FloatingTask(){
-
+	FloatingTask::description = "\0";
 	FloatingTask::endTime = NULL;
 	FloatingTask::startTime = NULL;
 }
-
+FloatingTask::FloatingTask(string desc){
+	
+	FloatingTask::description = desc;
+	FloatingTask::endTime = NULL;
+	FloatingTask::startTime = NULL;
+}
 string FloatingTask::getDesc(){
 
 	return FloatingTask::description;

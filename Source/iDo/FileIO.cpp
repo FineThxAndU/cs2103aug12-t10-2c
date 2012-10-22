@@ -36,8 +36,7 @@ void FileIO::setTaskList(vector<Task*>& list){
 				check = 7;
 			}
 			else{
-				if(start == NULL)
-					start = new tm;
+				
 				start->tm_mday = atoi(day.c_str());
 				check = 3;
 			}
@@ -73,8 +72,7 @@ void FileIO::setTaskList(vector<Task*>& list){
 				check = 12;
 			}
 			else{
-				if(end == NULL)
-					end = new tm;
+				
 				end->tm_mday = atoi(day.c_str());
 				check = 8;
 			}
@@ -102,22 +100,20 @@ void FileIO::setTaskList(vector<Task*>& list){
 		}
 		if(check == 12){
 		Task *newTask;
-		if(end == NULL){
-			newTask = new FloatingTask;
-			newTask->setDesc(description);
+		if(end == NULL && start == NULL){
+			newTask = new FloatingTask(description);
+			
 		}
 		else if(start == NULL){
-			newTask = new DeadlinedTask;
-			newTask->setDesc(description);
-			newTask->setEnd(end);
+			newTask = new DeadlinedTask(description, end);
+			
 		}
 		else{
-			newTask = new TimedTask;
-			newTask->setDesc(description);
-			newTask->setEnd(end);
-			newTask->setStart(start);
+			newTask = new TimedTask(description, start, end);
+			
 		}
-
+		start = new tm;
+		end = new tm;
 		taskList.push_back(newTask);
 		check = 1;
 	  }

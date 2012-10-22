@@ -6,6 +6,7 @@ class FloatingTask : public Task
 {
 public:
 	FloatingTask();
+	FloatingTask(string);
 	string getDesc();
 	tm* getStart();
 	tm* getEnd();

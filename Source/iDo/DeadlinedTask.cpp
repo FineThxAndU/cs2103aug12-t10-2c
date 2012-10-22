@@ -2,6 +2,14 @@
 
 DeadlinedTask::DeadlinedTask(){
 	DeadlinedTask::startTime = NULL;
+	DeadlinedTask::endTime = NULL;
+	DeadlinedTask::description = "\0";
+}
+
+DeadlinedTask::DeadlinedTask(string desc, tm* end){
+	DeadlinedTask::description = desc;
+	DeadlinedTask::endTime = end;
+	DeadlinedTask::startTime = NULL;
 }
 string DeadlinedTask::getDesc(){
 

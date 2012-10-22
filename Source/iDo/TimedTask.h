@@ -7,6 +7,7 @@ class TimedTask : public Task
 {
 public:
 	TimedTask();
+	TimedTask(string, tm*, tm*);
 	string getDesc();
 	tm* getStart();
 	tm* getEnd();

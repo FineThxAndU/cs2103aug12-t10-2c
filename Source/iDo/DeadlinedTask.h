@@ -6,6 +6,7 @@ class DeadlinedTask :public Task
 {
 public:
 	DeadlinedTask();
+	DeadlinedTask(string, tm*);
 	string getDesc();
 	tm* getStart();
 	tm* getEnd();

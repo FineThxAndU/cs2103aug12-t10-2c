@@ -16,7 +16,6 @@ vector <int> CommandProcessor::intProcessor (string userInput)
 
 string CommandProcessor::cmdProcessor (string userInput, Task*& newTask)
 {
-
 	int i, j;
 	tm* sTime = NULL;
 	tm* eTime = NULL;
@@ -37,23 +36,24 @@ string CommandProcessor::cmdProcessor (string userInput, Task*& newTask)
 	bool validCmd = CommandProcessor::actualKeyWord(cmd);
 	if(validCmd == false){
 			strcpy (description ,cmd);
-			strcpy(description, strcat(description, " "));
+			 strcat(description, " ");
 			strcpy(cmd, "add");
 		}
 	if(i==userInput.size()){
-		Task *ft = new FloatingTask;
+		Task *ft = new FloatingTask();
 			ft->setDesc(description);
 			newTask=ft;
 	}
 	
 	else{
+		i++;
 		while(i < userInput.size()){
 
-			for(j = 0; i < userInput.size() && ( userInput[i] != ' ' || userInput[i] == ']');i++, j++){
+			for(j = 0; i < userInput.size() && userInput[i] != ' ' ;i++, j++){
 				singleWord[j] = userInput[i];
 			}
-			
 			singleWord[j] = '\0';
+			strcat(singleWord, " ");
 			i++;
 
 			if(start == true && state == 1){
@@ -77,151 +77,125 @@ string CommandProcessor::cmdProcessor (string userInput, Task*& newTask)
 				state++;
 			}
 			else if(state == 3){
-				strcat(description, " ");
 				strcat(description, singleWord);
 			}
 			
 		}
 	}
-	/*else
-	{
-		i++;
-		for(j = strlen(description) ; i<userInput.size() && userInput[i]!=',';i++, j++)
-		{
-			description[j]=userInput[i];
-		}
-		description[j]='\0';
-		
 
-		if(i==userInput.size())
-		{
-			Task *ft = new FloatingTask;
-			ft->setDesc(description);
-			newTask=ft;
-
-		}
-		else
-		{
-			i++;
-			for(j = 0; i<userInput.size() && userInput[i]!=',';i++,j++)
-			{
-				startTime[j]=userInput[i];
-			}
-			startTime[j]='\0';
-			sTime=stringToTime(startTime);
-			
-			if(i==userInput.size())
-			{
-				eTime = sTime;
-				sTime=NULL;
-				strcpy(startTime,"\0");
-				strcpy(endTime,"\0");
-
-				DeadlinedTask *dt= new DeadlinedTask;
-				dt->setDesc(description);
-				dt->setEnd(eTime);
-				dt->setStart(sTime);
-				newTask=dt;
-			}
-
-			else
-			{
-				i++;
-				for(j = 0; i<userInput.size() && userInput[i]!=',';i++, j++)
-				{
-					endTime[j]=userInput[i];
-				
-				}
-				endTime[j]='\0';
-				eTime=stringToTime(endTime);
-				TimedTask *tt= new TimedTask;
-				tt->setDesc (description);
-				tt->setEnd(eTime);
-				tt->setStart(sTime);
-				newTask=tt;
-			}
-		}
-	}*/
 	if(eTime == NULL && sTime == NULL){
-		newTask = new FloatingTask;
-		newTask->setDesc(description);
+		newTask = new FloatingTask(description);
+		
 	}
 	else if(sTime == NULL){
-		newTask = new DeadlinedTask;
-		newTask->setDesc(description);
-		newTask->setEnd(eTime);
+		newTask = new DeadlinedTask(description, eTime);
+		
 	}
 	else if(eTime == NULL){
-		newTask = new DeadlinedTask;
-		newTask->setDesc(description);
-		newTask->setEnd(sTime);
+		newTask = new DeadlinedTask(description, sTime);
+		
 	}
 	else{
-		newTask = new TimedTask;
-		newTask->setDesc(description);
-		newTask->setEnd(eTime);
-		newTask->setStart(sTime);
+		newTask = new TimedTask(description, sTime, eTime);
 	}
 	return cmd;
 }
 
 void CommandProcessor::descProcessor (string userInput, Task*& newTask)
 {
-	int i=0,j=0;
-	char description[MAX_DESC_SIZE], startTime[MAX_TIME_SIZE], endTime[MAX_TIME_SIZE];
-	tm* sTime = NULL, *eTime = NULL;
-	for(; i<userInput.size() && userInput[i]!=',';i++)
-		{
-			description[i]=userInput[i];
-		}
-		description[i]='\0';
-		if(i==userInput.size())
-		{
-			FloatingTask *ft=new FloatingTask;
-			ft->setDesc( description);
-			ft->setEnd(NULL);
-			ft->setStart(NULL);
-			newTask=ft;
+	int i = 0, j;
+	tm* sTime = NULL;
+	tm* eTime = NULL;
+	char description[MAX_DESC_SIZE], startTime[MAX_TIME_SIZE], endTime[MAX_TIME_SIZE], cmd[MAX_COMMAND_SIZE], singleWord[MAX_COMMAND_SIZE];
+	bool start = false, end = false;
+	int state = 3;
+	strcpy(description, "");
+	strcpy(startTime, "");
+	strcpy(endTime, "");
+	strcpy(cmd, "");
 
-		}
-		else
-		{
+	while(i < userInput.size()){
+
+			for(j = 0; i < userInput.size() &&  userInput[i] != ' ' ;i++, j++){
+				singleWord[j] = userInput[i];
+			}
+			singleWord[j] = '\0';
+			strcat(singleWord, " ");
 			i++;
-			for(j=0; i<userInput.size() && userInput[i]!=',';i++,j++)
-			{
-				startTime[j]=userInput[i];
+
+			if(start == true && state == 1){
+				sTime = CommandProcessor::stringToTime(singleWord);
+				state = 2;
 			}
-			startTime[j]='\0';
-			sTime=stringToTime(startTime);
-			if(i==userInput.size())
-			{
-				eTime = sTime;
-				sTime = NULL;
-				startTime[0]='\0';
-				DeadlinedTask *dt= new DeadlinedTask;
-				dt->setDesc(description);
-				dt->setEnd(eTime);
-				dt->setStart(sTime);
-				newTask=dt;
+			else if(end == true && state == 1){
+				eTime = CommandProcessor::stringToTime(singleWord);
+				state = 2;
 			}
-			else
-			{
-				i++;
-				for(j=0; i<userInput.size() && userInput[i]!=',';j++,i++)
-				{
-					endTime[j]=userInput[i];
-				
-				}
-				endTime[j]='\0';
-				eTime=stringToTime(endTime);
-				TimedTask *tt= new TimedTask;
-				tt->setDesc (description);
-				tt->setEnd(eTime);
-				tt->setStart(sTime);
-				newTask=tt;
+			if(singleWord[0] == '[')
+				CommandProcessor::trim(singleWord);
+			start = isStart(singleWord);
+			end = isEnd(singleWord);
+			
+			if(start != false || end != false){
+				state = 1;
 			}
+
+			if(state == 2){
+				state++;
+			}
+			else if(state == 3){
+				strcat(description, singleWord);
+			}
+			
+		}
+	
+	
+	
+	if(eTime == NULL && sTime == NULL){
+		
+		if(description[0] == '\0')
+			strcpy(description, newTask->getDesc().c_str());  
+		sTime = newTask->getStart();
+		eTime = newTask->getEnd();
+		if(eTime == NULL){
+			newTask = new FloatingTask(description);
+		}
+		else if(sTime == NULL){
+			newTask = new DeadlinedTask(description, eTime);
+		}
+		else{
+			newTask = new TimedTask(description, sTime, eTime);
+		}
+
+	}
+	else if(sTime == NULL){
+		if(description[0] == '\0')
+			strcpy(description, newTask->getDesc().c_str());
+		sTime = newTask->getStart();
+		
+		if(sTime == NULL){
+			newTask = new DeadlinedTask(description, eTime);
+		}
+		else{
+			newTask = new TimedTask(description, sTime, eTime);
 		}
 	}
+	else if(eTime == NULL){
+		if(description[0] == '\0')
+			strcpy(description, newTask->getDesc().c_str());
+		eTime = newTask->getEnd();
+		
+		newTask = new TimedTask(description, sTime, eTime);
+		
+	}
+	else{
+		if(description[0] == '\0')
+			strcpy(description, newTask->getDesc().c_str());
+		newTask = new TimedTask(description, sTime, eTime);
+		
+	}
+		
+}
 
 tm* CommandProcessor::stringToTime (string startTime)
 {

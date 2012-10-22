@@ -21,7 +21,7 @@ int Logic::logicMain()
 	searchObj.executeSearch(userInputTask);
 	introList = searchObj.getResults();
 	UIObj.displayHomeScreen(introList);
-
+	searchObj.clearSearchResults();
 	while(1)
 	{
 		userInput=UIObj.getUserInput();
@@ -126,6 +126,7 @@ bool Logic::findToDelete(Task * userInputTask)
 	}
 	fileObj.setTaskList(taskList);
 	fileObj.writeList();
+	searchObj.clearSearchResults();
 	return true;
 	//getUserInput() and call intProcessor of command processor
 	//now u have int vector use that to find matching task * from retrieved list (from search)
@@ -154,6 +155,7 @@ bool Logic::search(Task* userInputTask)
 
 bool Logic::findToEdit(Task* userInputTask)
 {
+	searchObj.setInputList(Logic::taskList);
 	searchObj.executeSearch(userInputTask->getDesc());
 	vector<int> searchResults= searchObj.getIndices();
 	vector<Task*> tempList;
@@ -168,12 +170,14 @@ bool Logic::findToEdit(Task* userInputTask)
 	}
 	fileObj.setTaskList(Logic::taskList);
 	fileObj.writeList();
+	searchObj.clearSearchResults();
 	return true;
 }
 
 void Logic::editTask(int index)
 {
 	userInput=UIObj.getUserInput();
+	userInputTask = taskList[index];
 	cmdObj.descProcessor(userInput,userInputTask);
 	delete taskList[index];
 	taskList[index]=userInputTask;

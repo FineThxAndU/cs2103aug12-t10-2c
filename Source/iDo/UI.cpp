@@ -60,11 +60,15 @@ void UI::displayHomeScreen(vector<Task*> tasksToDisplay) {
 		 (*(it))->getEnd()->tm_mday<<'/' <<(*(it))->getEnd()->tm_mon<<'/'<<(*(it))->getEnd()->tm_year<< " "
 			 <<(*(it))->getEnd()->tm_hour<<":"<<(*(it))->getEnd()->tm_min<<setw(15);  ; 
 	 }
-
+	 else if((*(it))->getStart() != NULL && (*(it))->getEnd() == NULL){
+		 cout << taskNo << "\t" << (*(it))->getDesc()<< "\t" << 
+		 (*(it))->getStart()->tm_mday<<'/' <<(*(it))->getStart()->tm_mon<<'/'<<(*(it))->getStart()->tm_year<< " "
+			 <<(*(it))->getStart()->tm_hour<<":"<<(*(it))->getStart()->tm_min<<setw(15);  ; 
+	 }
 	 //floating tasks, sorted to the bottom of tasksToDisplay
 	 else if((*(it))->getStart() == NULL && (*(it))->getEnd() == NULL) {
 		 cout << taskNo << "\t" << (*(it))->getDesc();
-		 break ;
+		
 	 }	
  }
 
