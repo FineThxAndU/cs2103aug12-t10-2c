@@ -18,9 +18,11 @@ string CommandProcessor::cmdProcessor (string userInput, Task*& newTask)
 {
 
 	int i, j;
-	tm* sTime;
-	tm* eTime;
-	char description[MAX_DESC_SIZE], startTime[MAX_TIME_SIZE], endTime[MAX_TIME_SIZE], cmd[MAX_COMMAND_SIZE];
+	tm* sTime = NULL;
+	tm* eTime = NULL;
+	char description[MAX_DESC_SIZE], startTime[MAX_TIME_SIZE], endTime[MAX_TIME_SIZE], cmd[MAX_COMMAND_SIZE], singleWord[MAX_COMMAND_SIZE];
+	bool start = false, end = false;
+	int state = 3;
 	strcpy(description, "");
 	strcpy(startTime, "");
 	strcpy(endTime, "");
@@ -44,8 +46,44 @@ string CommandProcessor::cmdProcessor (string userInput, Task*& newTask)
 			newTask=ft;
 	}
 	
+	else{
+		while(i < userInput.size()){
 
-	else
+			for(j = 0; i < userInput.size() && ( userInput[i] != ' ' || userInput[i] == ']');i++, j++){
+				singleWord[j] = userInput[i];
+			}
+			
+			singleWord[j] = '\0';
+			i++;
+
+			if(start == true && state == 1){
+				sTime = CommandProcessor::stringToTime(singleWord);
+				state = 2;
+			}
+			else if(end == true && state == 1){
+				eTime = CommandProcessor::stringToTime(singleWord);
+				state = 2;
+			}
+			if(singleWord[0] == '[')
+				CommandProcessor::trim(singleWord);
+			start = isStart(singleWord);
+			end = isEnd(singleWord);
+			
+			if(start != false || end != false){
+				state = 1;
+			}
+
+			if(state == 2){
+				state++;
+			}
+			else if(state == 3){
+				strcat(description, " ");
+				strcat(description, singleWord);
+			}
+			
+		}
+	}
+	/*else
 	{
 		i++;
 		for(j = strlen(description) ; i<userInput.size() && userInput[i]!=',';i++, j++)
@@ -103,6 +141,26 @@ string CommandProcessor::cmdProcessor (string userInput, Task*& newTask)
 				newTask=tt;
 			}
 		}
+	}*/
+	if(eTime == NULL && sTime == NULL){
+		newTask = new FloatingTask;
+		newTask->setDesc(description);
+	}
+	else if(sTime == NULL){
+		newTask = new DeadlinedTask;
+		newTask->setDesc(description);
+		newTask->setEnd(eTime);
+	}
+	else if(eTime == NULL){
+		newTask = new DeadlinedTask;
+		newTask->setDesc(description);
+		newTask->setEnd(sTime);
+	}
+	else{
+		newTask = new TimedTask;
+		newTask->setDesc(description);
+		newTask->setEnd(eTime);
+		newTask->setStart(sTime);
 	}
 	return cmd;
 }
@@ -222,4 +280,27 @@ bool CommandProcessor::isFound(char cmd[MAX_COMMAND_SIZE], const char cmdList[][
 	}
 
 	return false;
+}
+
+
+bool CommandProcessor::isStart(char singleWord[MAX_COMMAND_SIZE]){
+	
+    return CommandProcessor::isFound(singleWord, startList);
+
+}
+
+bool CommandProcessor::isEnd(char singleWord[MAX_COMMAND_SIZE]){
+	
+	return CommandProcessor::isFound(singleWord, endList);
+
+}
+
+void CommandProcessor::trim(char word[MAX_COMMAND_SIZE]){
+	char trimmed[MAX_COMMAND_SIZE];
+	int i;
+	for( i = 0;  word[i + 1] != ']'; i++){
+		trimmed[i] = word[i + 1];
+	}
+	trimmed[i] = '\0';
+	strcpy(word, trimmed);
 }
