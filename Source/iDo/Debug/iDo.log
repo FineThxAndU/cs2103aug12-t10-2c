@@ -1,26 +1,12 @@
-﻿Build started 21/10/2012 4:38:42 PM.
+﻿Build started 22/10/2012 4:39:10 PM.
      1>Project "C:\Users\aravin\Desktop\iDo\Source\iDo\iDo.vcxproj" on node 2 (Build target(s)).
      1>InitializeBuildStatus:
-         Touching "Debug\iDo.unsuccessfulbuild".
+         Creating "Debug\iDo.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /FR"Debug\\" /Gd /TP /analyze- /errorReport:prompt Logic.cpp Main.cpp Search.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /FR"Debug\\" /Gd /TP /analyze- /errorReport:prompt Search.cpp
          Search.cpp
      1>c:\users\aravin\desktop\ido\source\ido\search.cpp(14): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\aravin\desktop\ido\source\ido\search.cpp(15): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
      1>c:\users\aravin\desktop\ido\source\ido\search.cpp(24): warning C4018: '<' : signed/unsigned mismatch
-         Generating Code...
-         Compiling...
-         Logic.cpp
-     1>c:\users\aravin\desktop\ido\source\ido\logic.cpp(17): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\time.inl(112) : see declaration of 'localtime'
-     1>c:\users\aravin\desktop\ido\source\ido\logic.cpp(117): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\aravin\desktop\ido\source\ido\logic.cpp(123): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\aravin\desktop\ido\source\ido\logic.cpp(160): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\aravin\desktop\ido\source\ido\logic.cpp(165): warning C4018: '<' : signed/unsigned mismatch
-         Generating Code...
-         Skipping... (no relevant changes detected)
-         Main.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\aravin\Desktop\iDo\Debug\iDo.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:C:\Users\aravin\Desktop\iDo\Lib gtestd.Lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\iDo.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\aravin\Desktop\iDo\Debug\iDo.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\aravin\Desktop\iDo\Debug\iDo.lib" /MACHINE:X86 Debug\CommandProcessor.obj
          Debug\DeadlinedTask.obj
@@ -45,4 +31,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:23.30
+Time Elapsed 00:00:33.98

@@ -12,7 +12,7 @@ vector<Task*> Search::getInputList(){
 bool Search::executeSearch(string description){
 
 	for(int i =  0; i < Search::inputList.size(); i++){
-		if(strcmpi(Search::inputList[i]->getDesc().c_str(), description.c_str()) == 0){
+		if(strstr(Search::inputList[i]->getDesc().c_str(), description.c_str()) != NULL ){
 			Search::searchResults.push_back(Search::inputList[i]);
 			Search::resultIndices.push_back(i);
 		}

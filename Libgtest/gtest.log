@@ -1,4 +1,4 @@
-﻿Build started 21/10/2012 3:45:52 PM.
+﻿Build started 22/10/2012 9:37:08 AM.
      1>Project "C:\Users\aravin\Desktop\iDo\Source\gtest-1.6.0\msvc\gtest.vcxproj" on node 2 (Build target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(299,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
      1>InitializeBuildStatus:
@@ -20,4 +20,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:04.75
+Time Elapsed 00:00:29.09
