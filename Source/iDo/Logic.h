@@ -40,6 +40,12 @@ public:
 	bool execute(string,Task*);
 	bool addTask(Task*);
 	void deleteTask(int);
+
+	//FUNCTION to delete expired timed/deadlined tasks
+	//can be called when? every time before you display tasks on home screen
+	//also has to be called once when starting iDo
+
+	void deleteExpired() ;
 	
 	bool undoTask ();
 
@@ -47,7 +53,7 @@ public:
 	void editTask(int);
 	bool findToDelete(Task*);
 	bool findToEdit(Task*);
-	;
+	
 };
 
 #endif

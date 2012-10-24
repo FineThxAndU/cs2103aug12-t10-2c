@@ -12,7 +12,7 @@ int Logic::logicMain()
 {
 	vector<Task*> introList;
 	time_t now;
-	struct tm *current;
+	struct tm *current ;
 	time(&now);
 	current = localtime(&now);
 	userInputTask = new TimedTask;
@@ -183,6 +183,28 @@ void Logic::editTask(int index)
 	taskList[index]=userInputTask;
 }
 	
+void Logic::deleteExpired() 
+{
+	time_t now;
+	struct tm *current;
+	time(&now);
+	current = localtime(&now);
+
+	int i = 0 ;
+	for(i=0 ; i < taskList.size() ; i++) {
+
+		if(taskList[i] =
+
+	}
+
+	//iterate through taskList
+	//if system time is greater than task time, deleteTask(index)
+	//deadlined task, deadline can be stored either in start time or end time, whichever is not null
+
+
+
+
+}
 
 bool Logic::undoTask (){
 
