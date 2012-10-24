@@ -1,0 +1,150 @@
+﻿Build started 24/10/2012 11:22:59 PM.
+     1>Project "C:\Users\Spatika\Documents\Visual Studio 2012\Projects\iDo\Source\iDo\iDo.vcxproj" on node 2 (Build target(s)).
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /FR"Debug\\" /Gd /TP /analyze- /errorReport:prompt CommandProcessor.cpp DeadlinedTask.cpp FileIO.cpp FloatingTask.cpp Logic.cpp Main.cpp Search.cpp Sort.cpp TimedTask.cpp UI.cpp
+         UI.cpp
+         TimedTask.cpp
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\timedtask.cpp(46): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
+         Sort.cpp
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\sort.cpp(27): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\sort.cpp(33): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\sort.cpp(43): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\sort.cpp(44): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\sort.cpp(45): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\sort.cpp(56): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\sort.cpp(57): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\sort.cpp(58): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\sort.cpp(68): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\sort.cpp(69): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\sort.cpp(80): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\sort.cpp(81): warning C4018: '<' : signed/unsigned mismatch
+         Search.cpp
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\search.cpp(14): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\search.cpp(24): warning C4018: '<' : signed/unsigned mismatch
+         Main.cpp
+         Logic.cpp
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\logic.cpp(17): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\time.inl(112) : see declaration of 'localtime'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\logic.cpp(117): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\logic.cpp(123): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\logic.cpp(162): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\logic.cpp(167): warning C4018: '<' : signed/unsigned mismatch
+         FloatingTask.cpp
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\floatingtask.cpp(47): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
+         FileIO.cpp
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\fileio.cpp(33): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\fileio.cpp(69): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\fileio.cpp(127): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\fileio.cpp(133): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdlib.h(867) : see declaration of 'itoa'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\fileio.cpp(136): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdlib.h(867) : see declaration of 'itoa'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\fileio.cpp(139): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdlib.h(867) : see declaration of 'itoa'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\fileio.cpp(142): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdlib.h(867) : see declaration of 'itoa'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\fileio.cpp(145): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdlib.h(867) : see declaration of 'itoa'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\fileio.cpp(153): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdlib.h(867) : see declaration of 'itoa'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\fileio.cpp(156): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdlib.h(867) : see declaration of 'itoa'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\fileio.cpp(159): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdlib.h(867) : see declaration of 'itoa'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\fileio.cpp(162): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdlib.h(867) : see declaration of 'itoa'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\fileio.cpp(165): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdlib.h(867) : see declaration of 'itoa'
+         DeadlinedTask.cpp
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\deadlinedtask.cpp(47): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
+         CommandProcessor.cpp
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(10): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(25): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(26): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(27): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(28): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(30): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(38): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(39): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(40): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(50): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(52): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(56): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(80): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(112): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(113): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(114): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(115): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(117): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(119): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(123): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(147): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(157): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(173): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(185): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(193): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(228): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(230): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(232): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(234): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(236): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(238): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(250): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(251): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
+     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(279): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+         Generating Code...
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Spatika\Documents\Visual Studio 2012\Projects\iDo\Debug\iDo.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\Users\Spatika\Documents\Visual Studio 2012\Projects\iDo\Lib" gtestd.Lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\iDo.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Spatika\Documents\Visual Studio 2012\Projects\iDo\Debug\iDo.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Spatika\Documents\Visual Studio 2012\Projects\iDo\Debug\iDo.lib" /MACHINE:X86 Debug\CommandProcessor.obj
+         Debug\DeadlinedTask.obj
+         Debug\FileIO.obj
+         Debug\FloatingTask.obj
+         Debug\Logic.obj
+         Debug\Main.obj
+         Debug\Search.obj
+         Debug\Sort.obj
+         Debug\TimedTask.obj
+         Debug\UI.obj
+     1>CommandProcessor.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/INCREMENTAL:NO' specification
+         iDo.vcxproj -> C:\Users\Spatika\Documents\Visual Studio 2012\Projects\iDo\Debug\iDo.exe
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\iDo.exe.embed.manifest" /outputresource:"C:\Users\Spatika\Documents\Visual Studio 2012\Projects\iDo\Debug\iDo.exe;#1" /manifest Debug\iDo.exe.intermediate.manifest
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\bscmake.exe /nologo /o"C:\Users\Spatika\Documents\Visual Studio 2012\Projects\iDo\Debug\iDo.bsc" /n Debug\CommandProcessor.sbr Debug\DeadlinedTask.sbr Debug\FileIO.sbr Debug\FloatingTask.sbr Debug\Logic.sbr Debug\Main.sbr Debug\Search.sbr Debug\Sort.sbr Debug\TimedTask.sbr Debug\UI.sbr
+     1>Done Building Project "C:\Users\Spatika\Documents\Visual Studio 2012\Projects\iDo\Source\iDo\iDo.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:18.54
