@@ -156,7 +156,7 @@ bool Logic::findToDelete(Task * userInputTask)
 
 void Logic::deleteTask(int index)
 {
-	setUndoStack(REMOVE,taskList[index],-1);
+	setUndoStack(REMOVE,taskList[index],index);
 	delete taskList[index];
 	taskList.erase(taskList.begin()+index);
 }
@@ -232,6 +232,9 @@ bool Logic::undoTask (){
 		case EDIT:
 				delete taskList[index];
 				taskList[index]=userInputTask;
+				fileObj.setTaskList(taskList);
+				fileObj.writeList();
+				searchObj.clearSearchResults();
 				returnVal=true;
 				break;
 		default:
@@ -254,5 +257,35 @@ void Logic::setUndoStack(CommandType type,Task* tempTask,int index)
 }
 bool Logic::redoTask()
 {
-	return true;
+	CommandType redoType;
+	redoType=Logic::redoStack.top().type;
+	userInputTask=redoStack.top().taskObj;
+	int index= redoStack.top().index;
+	Logic::redoStack.pop();
+	bool returnVal;
+	switch(redoType)
+	{
+		case ADD: 
+				returnVal=addTask(userInputTask);
+				undoStack.pop();
+				break;
+		case REMOVE:
+				deleteTask(index);
+				undoStack.pop();
+				fileObj.setTaskList(taskList);
+				fileObj.writeList();
+				searchObj.clearSearchResults();
+				returnVal=true;
+				break;
+		case EDIT:
+				delete taskList[index];
+				taskList[index]=userInputTask;
+				fileObj.setTaskList(taskList);
+				fileObj.writeList();
+				searchObj.clearSearchResults();
+				returnVal=true;
+				break;
+		default: returnVal=false;
+	}
+	return returnVal;
 }
