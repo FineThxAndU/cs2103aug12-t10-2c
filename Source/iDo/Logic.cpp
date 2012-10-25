@@ -209,7 +209,8 @@ bool Logic::undoTask (){
 	undoType=Logic::undoStack.top().type;
 	userInputTask=undoStack.top().taskObj;
 	int index= undoStack.top().index;
-	redoStack.push(undoStack.top());
+	Task* newtask= new TimedTask;
+	setRedoStack(undoType,userInputTask,index);
 	Logic::undoStack.pop();
 	bool returnVal;
 	switch(undoType)
@@ -254,6 +255,17 @@ void Logic::setUndoStack(CommandType type,Task* tempTask,int index)
 	userStruct.taskObj=newTask;
 	userStruct.index=index;
 	undoStack.push(userStruct);
+}
+void Logic::setRedoStack(CommandType type,Task* tempTask,int index)
+{
+	Task* newTask= new TimedTask;
+	newTask->setDesc(tempTask->getDesc());
+	newTask->setEnd(tempTask->getEnd());
+	newTask->setStart(tempTask->getStart());
+	userStruct.type=type;
+	userStruct.taskObj=newTask;
+	userStruct.index=index;
+	redoStack.push(userStruct);
 }
 bool Logic::redoTask()
 {

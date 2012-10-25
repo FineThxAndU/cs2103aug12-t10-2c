@@ -1,18 +1,6 @@
-birthday party 
-20
-12
-2012
-7
-30
-12
-12
-2012
-8
+meeting 
 0
-annual party 
-14
-9
-2012
-9
+0
+swimming 
 0
 0

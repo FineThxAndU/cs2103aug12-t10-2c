@@ -50,6 +50,7 @@ public:
 	bool execute(string,Task*);
 	bool addTask(Task*);
 	void deleteTask(int);
+	void setRedoStack(CommandType,Task*,int);
 	
 	bool undoTask ();
 	void setUndoStack(CommandType,Task*,int);
