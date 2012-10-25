@@ -4,7 +4,6 @@ Logic::Logic()
 	fileObj.setFileName("task.txt");
 	fileObj.readList();
 	taskList=fileObj.getTaskList();
-
 }
 
 
@@ -12,7 +11,7 @@ int Logic::logicMain()
 {
 	vector<Task*> introList;
 	time_t now;
-	struct tm *current ;
+	struct tm *current;
 	time(&now);
 	current = localtime(&now);
 	userInputTask = new TimedTask;
@@ -26,7 +25,6 @@ int Logic::logicMain()
 	{
 		userInput=UIObj.getUserInput();
 		string cmd=cmdObj.cmdProcessor(userInput, userInputTask);
-		
 		bool returnVal=Logic::execute(cmd,userInputTask);
 		UIObj.feedback(returnVal,cmd);
 	}
@@ -47,6 +45,8 @@ Logic::CommandType Logic::determineCommand(string cmd)
 		type=EDIT;
 	else if(cmd=="undo")
 		type=UNDO;
+	else if(cmd=="redo")
+		type=REDO;
 	else if(cmd=="exit")
 		type=EXIT;
 	//NEED ONE MORE TYPE for the follow up user input to delete i.e. string "1 2" 
@@ -76,6 +76,9 @@ bool Logic::execute(string cmd,Task* userInputTask)
 		case UNDO:
 				returnVal=undoTask();
 				break;
+		case REDO:
+				returnVal=redoTask();
+				break;
 		case EXIT:
 			exit(0);
 	}
@@ -91,12 +94,27 @@ bool Logic::addTask(Task* userInputTask)
 	//taskList = fileObj.getTaskList();
 	//append userInputTask to the list returned from fileObj 
 	taskList.push_back(userInputTask);
+
+//	setUndoStack(ADD,userInputTask,-1);
 	//sort that taskList using sort obj
 	sortObj.setInputList(taskList);
 	sortObj.executeSort();
 	//write to file
 	fileObj.setTaskList(taskList);
 	fileObj.writeList();
+	vector<int> searchResults;
+	//fileObj.setFileName("task.txt");
+	//fileObj.readList();
+	//Logic::taskList = fileObj.getTaskList();
+	searchObj.setInputList(fileObj.getTaskList());
+	searchObj.executeSearch(userInputTask);
+	searchResults=searchObj.getIndices();
+	if(searchResults.size()>1)
+		setUndoStack(ADD,userInputTask,-1);
+	else
+		setUndoStack(ADD,userInputTask,searchResults[0]);
+	searchObj.clearSearchResults();
+
 	//return bool
 	return true;
 }
@@ -138,6 +156,7 @@ bool Logic::findToDelete(Task * userInputTask)
 
 void Logic::deleteTask(int index)
 {
+	setUndoStack(REMOVE,taskList[index],index);
 	delete taskList[index];
 	taskList.erase(taskList.begin()+index);
 }
@@ -179,34 +198,106 @@ void Logic::editTask(int index)
 	userInput=UIObj.getUserInput();
 	userInputTask = taskList[index];
 	cmdObj.descProcessor(userInput,userInputTask);
+	setUndoStack(EDIT,taskList[index],index);
 	delete taskList[index];
 	taskList[index]=userInputTask;
 }
 	
-void Logic::deleteExpired() 
-{
-	time_t now;
-	struct tm *current;
-	time(&now);
-	current = localtime(&now);
-
-	int i = 0 ;
-	for(i=0 ; i < taskList.size() ; i++) {
-
-		if(taskList[i] =
-
-	}
-
-	//iterate through taskList
-	//if system time is greater than task time, deleteTask(index)
-	//deadlined task, deadline can be stored either in start time or end time, whichever is not null
-
-
-
-
-}
 
 bool Logic::undoTask (){
+	CommandType undoType;
+	undoType=Logic::undoStack.top().type;
+	userInputTask=undoStack.top().taskObj;
+	int index= undoStack.top().index;
+	Task* newtask= new TimedTask;
+	setRedoStack(undoType,userInputTask,index);
+	Logic::undoStack.pop();
+	bool returnVal;
+	switch(undoType)
+	{
+		case ADD:
+				if(index==-1)
+					returnVal=false;
+				else
+					deleteTask(index);
+					undoStack.pop();
+					fileObj.setTaskList(taskList);
+					fileObj.writeList();
+					searchObj.clearSearchResults();
+					returnVal=true;
+					break;
+		case REMOVE:
+				returnVal=addTask(userInputTask);
+				undoStack.pop();
+				break;
+		case EDIT:
+				delete taskList[index];
+				taskList[index]=userInputTask;
+				fileObj.setTaskList(taskList);
+				fileObj.writeList();
+				searchObj.clearSearchResults();
+				returnVal=true;
+				break;
+		default:
+				returnVal= false;
+			
 
-	return false;
+	}
+	return returnVal;
+}
+void Logic::setUndoStack(CommandType type,Task* tempTask,int index)
+{
+	Task* newTask= new TimedTask;
+	newTask->setDesc(tempTask->getDesc());
+	newTask->setEnd(tempTask->getEnd());
+	newTask->setStart(tempTask->getStart());
+	userStruct.type=type;
+	userStruct.taskObj=newTask;
+	userStruct.index=index;
+	undoStack.push(userStruct);
+}
+void Logic::setRedoStack(CommandType type,Task* tempTask,int index)
+{
+	Task* newTask= new TimedTask;
+	newTask->setDesc(tempTask->getDesc());
+	newTask->setEnd(tempTask->getEnd());
+	newTask->setStart(tempTask->getStart());
+	userStruct.type=type;
+	userStruct.taskObj=newTask;
+	userStruct.index=index;
+	redoStack.push(userStruct);
+}
+bool Logic::redoTask()
+{
+	CommandType redoType;
+	redoType=Logic::redoStack.top().type;
+	userInputTask=redoStack.top().taskObj;
+	int index= redoStack.top().index;
+	Logic::redoStack.pop();
+	bool returnVal;
+	switch(redoType)
+	{
+		case ADD: 
+				returnVal=addTask(userInputTask);
+				undoStack.pop();
+				break;
+		case REMOVE:
+				deleteTask(index);
+				undoStack.pop();
+				fileObj.setTaskList(taskList);
+				fileObj.writeList();
+				searchObj.clearSearchResults();
+				returnVal=true;
+				break;
+		case EDIT:
+				delete taskList[index];
+				taskList[index]=userInputTask;
+				fileObj.setTaskList(taskList);
+				fileObj.writeList();
+				searchObj.clearSearchResults();
+				returnVal=true;
+				break;
+		default: returnVal=false;
+	}
+	return returnVal;
 }
