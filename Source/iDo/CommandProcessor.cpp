@@ -215,7 +215,7 @@ tm* CommandProcessor::stringToTime (string startTime)
 }
 bool CommandProcessor::actualKeyWord(char userCmd[MAX_COMMAND_SIZE]){
 
-	bool isAdd, isRemove, isEdit, isSearch, isExit, isUndo;
+	bool isAdd, isRemove, isEdit, isSearch, isExit, isUndo,isRedo;
 	
 	isAdd = CommandProcessor::isFound(userCmd, addList);
 	isRemove = CommandProcessor::isFound(userCmd, removeList);
@@ -223,6 +223,7 @@ bool CommandProcessor::actualKeyWord(char userCmd[MAX_COMMAND_SIZE]){
 	isSearch = CommandProcessor::isFound(userCmd, searchList);
 	isExit = CommandProcessor::isFound(userCmd, exitList);
 	isUndo = CommandProcessor::isFound(userCmd, undoList);
+	isRedo=CommandProcessor::isFound(userCmd,redoList);
 
 	if(isAdd)
 		strcpy(userCmd, "add");
@@ -236,8 +237,10 @@ bool CommandProcessor::actualKeyWord(char userCmd[MAX_COMMAND_SIZE]){
 		strcpy(userCmd, "exit");
 	else if(isUndo)
 		strcpy(userCmd, "undo");
+	else if(isRedo)
+		strcpy(userCmd, "redo");
 	
-	if(isAdd == false && isRemove == false && isEdit == false && isSearch == false && isExit == false && isUndo == false)
+	if(isAdd == false && isRemove == false && isEdit == false && isSearch == false && isExit == false && isUndo == false && isRedo==false)
 		return false;
 	else 
 		return true;
