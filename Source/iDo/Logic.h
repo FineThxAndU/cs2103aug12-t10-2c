@@ -17,6 +17,7 @@ using namespace std;
 #include "FloatingTask.h"
 #include <time.h>
 #include <vector>
+#include <stack>
 
 class Logic
 {
@@ -28,32 +29,42 @@ class Logic
 	string userInput;
 	CommandProcessor cmdObj;
 	Task* userInputTask ;
+	
+
+	
 
 public:
-
+	
 	static enum CommandType{
-		ADD, REMOVE, EDIT, SEARCH, UNDO,INVALID,EXIT //what happens for user command "1 2" it's not invalid, but it will determined to be in determineCommandType
+		ADD, REMOVE, EDIT, SEARCH, UNDO,REDO,INVALID,EXIT //what happens for user command "1 2" it's not invalid, but it will determined to be in determineCommandType
 	} ;
+	struct Input
+	{
+		CommandType type;
+		Task* taskObj;
+		int index;
+	};
 	Logic();
 	CommandType determineCommand(string);
     int logicMain();
 	bool execute(string,Task*);
 	bool addTask(Task*);
 	void deleteTask(int);
-
-	//FUNCTION to delete expired timed/deadlined tasks
-	//can be called when? every time before you display tasks on home screen
-	//also has to be called once when starting iDo
-
-	void deleteExpired() ;
+	void setRedoStack(CommandType,Task*,int);
 	
 	bool undoTask ();
+	void setUndoStack(CommandType,Task*,int);
+	string getUndoStack();
 
 	bool search(Task*);
 	void editTask(int);
 	bool findToDelete(Task*);
 	bool findToEdit(Task*);
-	
+	bool redoTask();
+private:
+		stack < Logic::Input> undoStack;
+		stack <Input> redoStack;
+		Input userStruct;
 };
 
 #endif

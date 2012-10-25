@@ -19,6 +19,7 @@ const char undoList[][MAX_COMMAND_SIZE] = {"un", "und", "undo", "-1"};
 const char exitList[][MAX_COMMAND_SIZE] = { "esc","ex", "exi", "exit","qu","qui","quit", "-1"};
 const char startList[][MAX_COMMAND_SIZE] = {"s", "st", "sta", "star", "start","b", "be", "beg", "begi", "begin", "-1"};
 const char endList[][MAX_COMMAND_SIZE] = {"e", "en", "end", "-1"};
+const char redoList[][MAX_COMMAND_SIZE] = {"r","re","red","redo","-1"};
 
 class CommandProcessor
 {
