@@ -14,7 +14,7 @@ vector <int> CommandProcessor::intProcessor (string userInput)
 	return integers;
 }
 
-string CommandProcessor::cmdProcessor (string userInput, Task*& newTask)
+string CommandProcessor::cmdProcessor (string userInput, Command*& newCommand)
 {
 	int i, j;
 	tm* sTime = NULL;
@@ -27,12 +27,13 @@ string CommandProcessor::cmdProcessor (string userInput, Task*& newTask)
 	strcpy(endTime, "");
 	strcpy(cmd, "");
 
-	for(i=0; i<userInput.size()&&userInput[i]!=' ';i++)
+	for(i=0; i < userInput.size() && userInput[i]!=' ';i++)
 	{
 		cmd[i]=userInput[i];
 	}
 
 	cmd[i]='\0';
+
 	bool validCmd = CommandProcessor::actualKeyWord(cmd);
 	if(validCmd == false){
 			strcpy (description ,cmd);

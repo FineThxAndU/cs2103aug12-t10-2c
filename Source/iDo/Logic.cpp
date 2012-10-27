@@ -1,12 +1,19 @@
  #include "Logic.h"
+
 Logic::Logic()
 {
+	
 	fileObj.setFileName("task.txt");
 	fileObj.readList();
 	taskList=fileObj.getTaskList();
 }
 
-
+Logic * Logic::getLogicInstance() 
+{
+	if(theOne == NULL)
+		theOne = new Logic() ;
+	return theOne ;
+}
 int Logic::logicMain()
 {
 	vector<Task*> introList;
@@ -16,18 +23,24 @@ int Logic::logicMain()
 	current = localtime(&now);
 	userInputTask = new TimedTask;
 	userInputTask->setStart(current);
+	
 	searchObj.setInputList(taskList);
 	searchObj.executeSearch(userInputTask);
+	
 	introList = searchObj.getResults();
+	
 	UIObj.displayHomeScreen(introList);
+	
 	searchObj.clearSearchResults();
+	
 	while(1)
 	{
 		userInput=UIObj.getUserInput();
 		//instead of returning a string that specifies the command, this should instead return a ptr to object of Command class
-		//this is passed to execute of Logic instead of the string
+		//this is passed to Logic::execute instead of the string 'cmd'
 		string cmd=cmdObj.cmdProcessor(userInput, userInputTask);
-		bool returnVal=Logic::execute(cmd,userInputTask);
+		//cmdObj.cmdProcessor(userInput, userInputTask) ;
+		bool returnVal=Logic::execute(newCommand);
 		UIObj.feedback(returnVal,cmd);
 	}
 
@@ -57,34 +70,16 @@ Logic::CommandType Logic::determineCommand(string cmd)
 	return type;
 }
 
-bool Logic::execute(string cmd,Task* userInputTask)
+bool Logic::execute(string cmd, Command * newCommand)
 {
 	CommandType type=Logic::determineCommand(cmd);
 	bool returnVal = false;
-	switch(type)
-	{
-		case ADD:
-				returnVal=addTask(userInputTask);
-				break;
-		case REMOVE:
-				returnVal=findToDelete(userInputTask);
-				break;
-		case EDIT:
-				returnVal=findToEdit(userInputTask);
-				break;
-		case SEARCH:
-				returnVal=Logic::search(userInputTask);
-				break;
-		case UNDO:
-				returnVal=undoTask();
-				break;
-		case REDO:
-				returnVal=redoTask();
-				break;
-		case EXIT:
+	if(type == ADD || type == REMOVE || type == SEARCH || type == EDIT)
+			newCommand->execute(taskList, UIObj) ; 
+	else if(type == EXIT)
 			exit(0);
-	}
-	return returnVal;
+	
+	return true ;
 }
 
 bool Logic::addTask(Task* userInputTask)
@@ -184,7 +179,7 @@ bool Logic::findToEdit(Task* userInputTask)
 	vector<Task*> tempList;
 	for(int i=0;i<searchResults.size();i++)
 	tempList.push_back(taskList[searchResults[i]]);
-	UIObj.displayHomeScreen( tempList);
+	UIObj.displayHomeScreen(tempList);
 	userInput=UIObj.getUserInput();
 	vector<int> userIndex= cmdObj.intProcessor(userInput);
 	for(int i=0;i<userIndex.size();i++)
@@ -199,12 +194,12 @@ bool Logic::findToEdit(Task* userInputTask)
 
 void Logic::editTask(int index)
 {
-	userInput=UIObj.getUserInput();
-	userInputTask = taskList[index];
-	cmdObj.descProcessor(userInput,userInputTask);
-	setUndoStack(EDIT,taskList[index],index);
-	delete taskList[index];
-	taskList[index]=userInputTask;
+	userInput=UIObj.getUserInput() ;
+	userInputTask = taskList[index] ;
+	cmdObj.descProcessor(userInput,userInputTask) ;
+	setUndoStack(EDIT,taskList[index],index) ;
+	delete taskList[index] ;
+	taskList[index]=userInputTask ;
 }
 	
 
@@ -249,6 +244,7 @@ bool Logic::undoTask (){
 	}
 	return returnVal;
 }
+
 void Logic::setUndoStack(CommandType type,Task* tempTask,int index)
 {
 	Task* newTask= new TimedTask;
@@ -260,6 +256,8 @@ void Logic::setUndoStack(CommandType type,Task* tempTask,int index)
 	userStruct.index=index;
 	undoStack.push(userStruct);
 }
+
+
 void Logic::setRedoStack(CommandType type,Task* tempTask,int index)
 {
 	Task* newTask= new TimedTask;
@@ -271,6 +269,7 @@ void Logic::setRedoStack(CommandType type,Task* tempTask,int index)
 	userStruct.index=index;
 	redoStack.push(userStruct);
 }
+
 bool Logic::redoTask()
 {
 	CommandType redoType;

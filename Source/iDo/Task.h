@@ -7,9 +7,11 @@ using namespace std;
 class Task
 {
 protected:
+
 	string description;
 	tm* startTime, *endTime;
 public:
+
 	virtual string getDesc() = 0;
 	virtual tm* getStart() = 0;
 	virtual tm* getEnd() = 0;

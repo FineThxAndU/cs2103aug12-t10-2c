@@ -24,6 +24,9 @@ using namespace std;
 
 class Logic
 {
+	//private ctor for Singleton class
+	Logic();
+	static Logic * theOne ;
 	
 	UI UIObj;
 	string userInput;
@@ -49,6 +52,7 @@ class Logic
 
 public:
 
+	static Logic* getLogicInstance() ;
 
 	static enum CommandType{
 		ADD, REMOVE, EDIT, SEARCH, UNDO,REDO,INVALID,EXIT //what happens for user command "1 2" it's not invalid, but it will determined to be in determineCommandType
@@ -62,9 +66,11 @@ public:
 		int index;
 	};
 
-	Logic();
+	
 	int logicMain();
-	bool execute(string,Task*);
+	//bool execute(string,Task*);
+
+	bool execute(string cmd, Command *) ;
 	
 	
 	//this will no longer be needed?
