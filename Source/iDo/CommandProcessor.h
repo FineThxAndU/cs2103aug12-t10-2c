@@ -6,6 +6,7 @@
 #include <vector>
 #include <time.h>
 #include "Task.h"
+#include "Command.h"
 
 using namespace std;
 
@@ -28,10 +29,13 @@ class CommandProcessor
 public:
 
 	vector<int> intProcessor (string);
+	
+	//will instead return Command object - can try to use the same one for edit also
+	string cmdProcessor (string, Command *&);
+	
 	//will instead return Command object
-	string cmdProcessor (string, Task*& );
-	//will instead return Command object
-	void descProcessor (string, Task*& );
+	void descProcessor (string, Task*&);
+	
 	tm* stringToTime (string);
 	bool actualKeyWord(char userCmd[MAX_COMMAND_SIZE]);
 	bool isFound(char cmd[MAX_COMMAND_SIZE], const char cmdList[][MAX_COMMAND_SIZE]);
