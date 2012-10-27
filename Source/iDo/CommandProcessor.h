@@ -1,5 +1,5 @@
-#ifndef COMMAND_H_
-#define COMMAND_H_
+#ifndef COMMANDPROCESSOR_H_
+#define COMMANDPROCESSOR_H_
 
 #include <iostream>
 #include <string>
@@ -10,6 +10,7 @@
 using namespace std;
 
 static int const ASCII_VALUE_0 = 48;
+//what's the minus 1 for
 const int MAX_COMMAND_SIZE = 100 , MAX_TIME_SIZE = 100, MAX_DESC_SIZE = 100;
 const char addList[][MAX_COMMAND_SIZE] = {"add" , "ad" , "a", "-1"};
 const char removeList[][MAX_COMMAND_SIZE] = { "del", "de", "delet", "dele", "delete", "re", "rem", "remo","remov", "remove",  "-1"};
@@ -27,7 +28,9 @@ class CommandProcessor
 public:
 
 	vector<int> intProcessor (string);
+	//will instead return Command object
 	string cmdProcessor (string, Task*& );
+	//will instead return Command object
 	void descProcessor (string, Task*& );
 	tm* stringToTime (string);
 	bool actualKeyWord(char userCmd[MAX_COMMAND_SIZE]);

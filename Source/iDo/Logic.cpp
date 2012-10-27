@@ -24,6 +24,8 @@ int Logic::logicMain()
 	while(1)
 	{
 		userInput=UIObj.getUserInput();
+		//instead of returning a string that specifies the command, this should instead return a ptr to object of Command class
+		//this is passed to execute of Logic instead of the string
 		string cmd=cmdObj.cmdProcessor(userInput, userInputTask);
 		bool returnVal=Logic::execute(cmd,userInputTask);
 		UIObj.feedback(returnVal,cmd);
@@ -88,10 +90,9 @@ bool Logic::execute(string cmd,Task* userInputTask)
 bool Logic::addTask(Task* userInputTask)
 {
 
-	//setfile name to tasks.t
+	
 	fileObj.setFileName("task.txt");
-	//get list of task* from file
-	//taskList = fileObj.getTaskList();
+
 	//append userInputTask to the list returned from fileObj 
 	taskList.push_back(userInputTask);
 
@@ -100,10 +101,13 @@ bool Logic::addTask(Task* userInputTask)
 	sortObj.setInputList(taskList);
 	sortObj.executeSort();
 	//write to file
+	
 	fileObj.setTaskList(taskList);
 	fileObj.writeList();
+	
 	vector<int> searchResults;
-	//fileObj.setFileName("task.txt");
+	
+//fileObj.setFileName("task.txt");
 	//fileObj.readList();
 	//Logic::taskList = fileObj.getTaskList();
 	searchObj.setInputList(fileObj.getTaskList());
