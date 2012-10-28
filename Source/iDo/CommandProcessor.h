@@ -6,6 +6,7 @@
 #include <vector>
 #include <time.h>
 #include <assert.h>
+#include <ctype.h>
 #include "Task.h"
 
 
