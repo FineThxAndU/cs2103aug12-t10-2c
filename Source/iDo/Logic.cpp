@@ -4,6 +4,11 @@ Logic::Logic()
 	fileObj.setFileName("task.txt");
 	fileObj.readList();
 	taskList=fileObj.getTaskList();
+	while(!undoStack.empty())
+	{
+		undoStack.pop() ;
+	}
+
 }
 
 
@@ -24,8 +29,14 @@ int Logic::logicMain()
 	while(1)
 	{
 		userInput=UIObj.getUserInput();
+		//assertion 1
+		assert(userInput != "\0") ;
 		string cmd=cmdObj.cmdProcessor(userInput, userInputTask);
+		//assertion 2
+		assert(cmd != "\0") ;
 		bool returnVal=Logic::execute(cmd,userInputTask);
+		//assertion 3
+		assert(returnVal == true || returnVal == false) ;
 		UIObj.feedback(returnVal,cmd);
 	}
 
@@ -49,15 +60,18 @@ Logic::CommandType Logic::determineCommand(string cmd)
 		type=REDO;
 	else if(cmd=="exit")
 		type=EXIT;
-	//NEED ONE MORE TYPE for the follow up user input to delete i.e. string "1 2" 
+	//but type is never invalid because if it is not any of the above, it is made 'add' command automatically.
 	else
 		type=INVALID ;
+	//can put an exception here for invalid type
 	return type;
 }
 
 bool Logic::execute(string cmd,Task* userInputTask)
 {
+
 	CommandType type=Logic::determineCommand(cmd);
+
 	bool returnVal = false;
 	switch(type)
 	{
@@ -65,7 +79,7 @@ bool Logic::execute(string cmd,Task* userInputTask)
 				returnVal=addTask(userInputTask);
 				break;
 		case REMOVE:
-				returnVal=findToDelete(userInputTask);
+				returnVal = findToDelete(userInputTask) ;
 				break;
 		case EDIT:
 				returnVal=findToEdit(userInputTask);
@@ -74,11 +88,20 @@ bool Logic::execute(string cmd,Task* userInputTask)
 				returnVal=Logic::search(userInputTask);
 				break;
 		case UNDO:
+				try {
 				returnVal=undoTask();
+				}
+				catch(string except) {
+				UIObj.printThis(except) ;
+				//cout << except ;
+				returnVal = true ;
+				}
 				break;
 		case REDO:
 				returnVal=redoTask();
 				break;
+		case INVALID: 
+				//put an exception here?
 		case EXIT:
 			exit(0);
 	}
@@ -118,22 +141,25 @@ bool Logic::addTask(Task* userInputTask)
 	//return bool
 	return true;
 }
-
-bool Logic::findToDelete(Task * userInputTask)
+ 
+bool Logic::findToDelete(Task * userInputTask) 
 {
 	int i;
-	//task has JUST description 
-	//based on description, use search obj to retrieve vector list of matching tasks
+	
 	vector<int> searchResults;
 	//fileObj.setFileName("task.txt");
 	//fileObj.readList();
 	//Logic::taskList = fileObj.getTaskList();
 	searchObj.setInputList(fileObj.getTaskList());
 	searchObj.executeSearch(userInputTask->getDesc());
+	bool returnVal = true ;
 
 	searchResults = searchObj.getIndices(); //returns the indices of matches corresponding to MAIN taskList
 	if(searchResults.size() == 0)
-		return false ;
+	{
+		returnVal = false ;
+		return returnVal ;
+	}
 	
 	vector<Task*> tempList ;
 	
@@ -144,9 +170,10 @@ bool Logic::findToDelete(Task * userInputTask)
 
 	UIObj.displayHomeScreen(tempList);
 	userInput=UIObj.getUserInput();
-	vector<int> userIndex= cmdObj.intProcessor(userInput);
 
-	for(i=0;i<userIndex.size();i++)
+	vector<int> userIndex = cmdObj.intProcessor(userInput);
+
+	for(i=0; i < userIndex.size() ; i++)
 	{
 		Logic::deleteTask(searchResults[userIndex[i]-1]);
 	}
@@ -154,13 +181,8 @@ bool Logic::findToDelete(Task * userInputTask)
 	fileObj.setTaskList(taskList);
 	fileObj.writeList();
 	searchObj.clearSearchResults();
-	
-	return true;
-	//getUserInput() and call intProcessor of command processor
-	//now u have int vector use that to find matching task * from retrieved list (from search)
-	//matching task * shld be deleted (find a vector function that does the shifting as well)
-	//
-
+	returnVal = true ;
+	return returnVal ;
 
 }
 
@@ -214,8 +236,14 @@ void Logic::editTask(int index)
 }
 	
 
-bool Logic::undoTask (){
+bool Logic::undoTask () throw(string)
+{
 	CommandType undoType;
+
+	if(undoStack.size() == 0)
+	{
+		throw  string("No commands to undo yet!") ;
+	}
 	undoType=Logic::undoStack.top().type;
 	userInputTask=undoStack.top().taskObj;
 	int index= undoStack.top().index;
@@ -223,6 +251,7 @@ bool Logic::undoTask (){
 	setRedoStack(undoType,userInputTask,index);
 	Logic::undoStack.pop();
 	bool returnVal;
+
 	switch(undoType)
 	{
 		case ADD:
@@ -251,7 +280,6 @@ bool Logic::undoTask (){
 		default:
 				returnVal= false;
 			
-
 	}
 	return returnVal;
 }
