@@ -130,48 +130,72 @@ void CommandProcessor::descProcessor (string userInput, Task*& newTask)
 	int i = 0, j;
 	tm* sTime = NULL;
 	tm* eTime = NULL;
-	char description[MAX_DESC_SIZE], startTime[MAX_TIME_SIZE], endTime[MAX_TIME_SIZE], cmd[MAX_COMMAND_SIZE], singleWord[MAX_WORD_SIZE];
-	bool start = false, end = false;
-	int state = 3;
+	char description[MAX_DESC_SIZE], dateTime[MAX_TIME_SIZE], cmd[MAX_COMMAND_SIZE], singleWord[MAX_WORD_SIZE];
+	bool start = false, end = false, checkTime;
 	strcpy(description, "");
-	strcpy(startTime, "");
-	strcpy(endTime, "");
+	strcpy(dateTime, "");
 	strcpy(cmd, "");
 
-	while(i < userInput.size()){
+			while(i < userInput.size()){
 
-			for(j = 0; i < userInput.size() &&  userInput[i] != ' ' ;i++, j++){
+			for(j = 0; i < userInput.size() && userInput[i] != ' ' ;i++, j++){
 				singleWord[j] = userInput[i];
 			}
 			singleWord[j] = '\0';
-			strcat(singleWord, " ");
-			i++;
-
-			if(start == true && state == 1){
-				sTime = CommandProcessor::stringToTime(singleWord);
-				state = 2;
-			}
-			else if(end == true && state == 1){
-				eTime = CommandProcessor::stringToTime(singleWord);
-				state = 2;
-			}
+			
+			
+			checkTime = isTime(singleWord);
 			if(singleWord[0] == '[')
 				CommandProcessor::trim(singleWord);
-			start = isStart(singleWord);
-			end = isEnd(singleWord);
 			
-			if(start != false || end != false){
-				state = 1;
-			}
+			if(checkTime == true && (start == true || end == true)){
+				strcat(singleWord, " ");
+				strcat(dateTime, singleWord);
+				if( i == userInput.size() ){
+					CommandProcessor::parseDateTime(dateTime);
+						if(start == true){
+							sTime = CommandProcessor::stringToTime(dateTime);
+							start = false;
+						}
+						else if(end == true){
+							eTime = CommandProcessor::stringToTime(dateTime);
+							end = false;
+						}
+						strcpy(dateTime, "");
 
-			if(state == 2){
-				state++;
+				}
 			}
-			else if(state == 3){
-				strcat(description, singleWord);
-			}
+			else {
+				if(isStart(singleWord)){
+					start = true;
+				}
+
+				else if(isEnd(singleWord)){
+					end = true;
+				}
 			
-		}
+				else{
+					strcat(singleWord, " ");
+					strcat(description, singleWord);
+				}
+
+				if(strlen(dateTime) > 0){
+					CommandProcessor::parseDateTime(dateTime);
+						if(start == true){
+							sTime = CommandProcessor::stringToTime(dateTime);
+							start = false;
+						}
+						else if(end == true){
+							eTime = CommandProcessor::stringToTime(dateTime);
+							end = false;
+						}
+						strcpy(dateTime, "");
+				}
+				
+		}	
+		i++;
+
+	}
 	
 	
 	
