@@ -1,0 +1,19 @@
+﻿Build started 28/10/2012 3:59:02 PM.
+     1>Project "C:\Users\aravin\Desktop\iDo\Source\iDo\iDo.vcxproj" on node 2 (Build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Debug\iDo.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         All outputs are up-to-date.
+       Link:
+         All outputs are up-to-date.
+         iDo.vcxproj -> C:\Users\aravin\Desktop\iDo\Debug\iDo.exe
+       BscMake:
+         All outputs are up-to-date.
+       FinalizeBuildStatus:
+         Deleting file "Debug\iDo.unsuccessfulbuild".
+         Touching "Debug\iDo.lastbuildstate".
+     1>Done Building Project "C:\Users\aravin\Desktop\iDo\Source\iDo\iDo.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.07
