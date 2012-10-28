@@ -283,6 +283,7 @@ bool Logic::undoTask () throw(string)
 	}
 	return returnVal;
 }
+
 void Logic::setUndoStack(CommandType type,Task* tempTask,int index)
 {
 	Task* newTask= new TimedTask;
