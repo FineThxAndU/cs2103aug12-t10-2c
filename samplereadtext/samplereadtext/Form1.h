@@ -121,7 +121,7 @@ namespace samplereadtext {
 				this->Start, this->End});
 			this->dataGridView1->Location = System::Drawing::Point(-4, 32);
 			this->dataGridView1->Name = L"dataGridView1";
-			this->dataGridView1->Size = System::Drawing::Size(442, 150);
+			this->dataGridView1->Size = System::Drawing::Size(442, 189);
 			this->dataGridView1->TabIndex = 6;
 			//this->dataGridView1->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &Form1::dataGridView1_CellContentClick);
 			// 
@@ -180,16 +180,34 @@ namespace samplereadtext {
 private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
 	  StreamReader^ din= File::OpenText ("text2.txt");
 	  String^ str;
-      int count = 0;
+      int countering = 0;
 	  int cellIndex=0;
-	  for(int i=0;i<3;i++)
+	  array <int> ^ a=gcnew array<int>(16);
+	  for(int i=0;i<16;i++)
+		  a[i]=i;
+	   dataGridView1->Rows[0]->Cells[cellIndex++]->Value = a[0];
+		dataGridView1->Rows[0]->Cells[cellIndex++]->Value = a[1];
+		dataGridView1->Rows[0]->Cells[cellIndex++]->Value = a[2];
+		dataGridView1->Rows[0]->Cells[cellIndex]->Value = a[3];
+	  /*dataGridView1->Rows[dataGridView1->Rows->Count-1]->Cells[cellIndex++]->Value = a[0];
+		dataGridView1->Rows[dataGridView1->Rows->Count-1]->Cells[cellIndex++]->Value = a[1];
+		dataGridView1->Rows[dataGridView1->Rows->Count-1]->Cells[cellIndex++]->Value = a[2];
+		dataGridView1->Rows[dataGridView1->Rows->Count-1]->Cells[cellIndex]->Value = a[3];*/
+	  for(int i=0;i<1;i++)
 	  {
-		  cellIndex=0;
-	   dataGridView1->Rows[count]->Cells[cellIndex++]->Value=cellIndex.ToString();
-	   dataGridView1->Rows[count]->Cells[cellIndex++]->Value=cellIndex.ToString();
-	   dataGridView1->Rows[count]->Cells[cellIndex++]->Value=cellIndex.ToString();
-	   dataGridView1->Rows[count]->Cells[cellIndex++]->Value=cellIndex.ToString();
-	   count++;
+		cellIndex=0;
+		//if(i==0)
+		 dataGridView1->Rows->Add();
+		  dataGridView1->Rows[0]->Cells[cellIndex++]->Value = a[0];
+		   dataGridView1->Rows[0]->Cells[cellIndex++]->Value = a[0];
+ dataGridView1->Rows[0]->Cells[cellIndex++]->Value = a[0];
+		    dataGridView1->Rows[0]->Cells[cellIndex++]->Value = a[0];
+
+		/*dataGridView1->Rows[dataGridView1->Rows->Count-1]->Cells[cellIndex++]->Value = a[i++];
+		dataGridView1->Rows[dataGridView1->Rows->Count-1]->Cells[cellIndex++]->Value = a[i++];
+		dataGridView1->Rows[dataGridView1->Rows->Count-1]->Cells[cellIndex++]->Value = a[i++];
+		dataGridView1->Rows[dataGridView1->Rows->Count-1]->Cells[cellIndex]->Value = a[i];*/
+	   
 	  }
 	 // array<datatype*>^ strarray = gcnew array<datatype*>(100);
   //    while ((str = din->ReadLine()) != nullptr) 
@@ -210,6 +228,7 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
   //    }
 	 // din->Close();
    }
+
 
 };
 }
