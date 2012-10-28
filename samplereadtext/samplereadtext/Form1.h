@@ -76,6 +76,7 @@ namespace samplereadtext {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(Form1::typeid));
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
@@ -89,14 +90,16 @@ namespace samplereadtext {
 			// 
 			// textBox2
 			// 
-			this->textBox2->Location = System::Drawing::Point(12, 230);
+			this->textBox2->Location = System::Drawing::Point(12, 264);
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->Size = System::Drawing::Size(224, 20);
 			this->textBox2->TabIndex = 1;
+			this->textBox2->Text = L"Enter Command";
+			this->textBox2->TextChanged += gcnew System::EventHandler(this, &Form1::textBox2_TextChanged);
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(242, 227);
+			this->button1->Location = System::Drawing::Point(242, 261);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(29, 23);
 			this->button1->TabIndex = 3;
@@ -106,7 +109,7 @@ namespace samplereadtext {
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(536, 81);
+			this->button2->Location = System::Drawing::Point(489, 81);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(30, 23);
 			this->button2->TabIndex = 5;
@@ -116,14 +119,16 @@ namespace samplereadtext {
 			// 
 			// dataGridView1
 			// 
+			this->dataGridView1->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(4) {this->No, this->Description, 
 				this->Start, this->End});
-			this->dataGridView1->Location = System::Drawing::Point(-4, 32);
+			this->dataGridView1->GridColor = System::Drawing::SystemColors::AppWorkspace;
+			this->dataGridView1->Location = System::Drawing::Point(-4, 36);
 			this->dataGridView1->Name = L"dataGridView1";
-			this->dataGridView1->Size = System::Drawing::Size(442, 150);
+			this->dataGridView1->ReadOnly = true;
+			this->dataGridView1->Size = System::Drawing::Size(487, 202);
 			this->dataGridView1->TabIndex = 6;
-			//this->dataGridView1->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &Form1::dataGridView1_CellContentClick);
 			// 
 			// No
 			// 
@@ -153,13 +158,15 @@ namespace samplereadtext {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(620, 392);
+			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Center;
+			this->ClientSize = System::Drawing::Size(519, 297);
 			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->textBox2);
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^  >(resources->GetObject(L"$this.Icon")));
 			this->Name = L"Form1";
-			this->Text = L"Form1";
+			this->Text = L"iDO";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->dataGridView1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -180,35 +187,27 @@ namespace samplereadtext {
 private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
 	  StreamReader^ din= File::OpenText ("text2.txt");
 	  String^ str;
-      int count = 0;
 	  int cellIndex=0;
-	  for(int i=0;i<3;i++)
-	  {
-		  cellIndex=0;
-	   dataGridView1->Rows[count]->Cells[cellIndex++]->Value=cellIndex.ToString();
-	   dataGridView1->Rows[count]->Cells[cellIndex++]->Value=cellIndex.ToString();
-	   dataGridView1->Rows[count]->Cells[cellIndex++]->Value=cellIndex.ToString();
-	   dataGridView1->Rows[count]->Cells[cellIndex++]->Value=cellIndex.ToString();
-	   count++;
-	  }
-	 // array<datatype*>^ strarray = gcnew array<datatype*>(100);
-  //    while ((str = din->ReadLine()) != nullptr) 
-  //    {
-  //       int cellIndex=0;
-		// //textBox1->Text=str;
-		////system("pause");
-		// //strarray[count]=new datatype;
-		//  dataGridView1->Rows[count]->Cells[cellIndex++]->Value=count.ToString();
-		//  dataGridView1->Rows[count]->Cells[cellIndex++]->Value=din->ReadLine();
-		//  dataGridView1->Rows[count]->Cells[cellIndex++]->Value=din->ReadLine();
-		//  dataGridView1->Rows[count]->Cells[cellIndex]->Value=din->ReadLine();
-		///* strarray[count]->index=count;
-		// strarray[count]->description = str;
-		// strarray[count]->start=din->ReadLine();
-		// strarray[count]->end=din->ReadLine();*/
-		// count++;
-  //    }
-	 // din->Close();
+	  //array<datatype*>^ strarray = gcnew array<datatype*>(100);
+	  int count=1;
+	  if(str=din->ReadLine())
+			  dataGridView1->Rows[0]->Cells[0]->Value=count.ToString();
+			  dataGridView1->Rows[0]->Cells[1]->Value=str;
+			  dataGridView1->Rows[0]->Cells[2]->Value=din->ReadLine();
+			  dataGridView1->Rows[0]->Cells[3]->Value=din->ReadLine();
+	  while ((str = din->ReadLine()) != nullptr) 
+		  {
+
+		      int cellIndex=0;
+			  count++;
+			  dataGridView1->Rows->Add();
+			  dataGridView1->Rows[0]->Cells[0]->Value=count.ToString();
+			  dataGridView1->Rows[0]->Cells[1]->Value=str;
+			  dataGridView1->Rows[0]->Cells[2]->Value=din->ReadLine();
+			  dataGridView1->Rows[0]->Cells[3]->Value=din->ReadLine();
+			
+     }
+	 din->Close();
    }
 
 };
