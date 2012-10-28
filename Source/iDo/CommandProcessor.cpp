@@ -4,14 +4,18 @@
 #include "TimedTask.h"
 
 
-vector <int> CommandProcessor::intProcessor (string userInput)
+vector <int> CommandProcessor::intProcessor (string userInput)// throw(string)
 {
 	vector <int> integers; 
 	//asertion
 	assert(integers.size() == 0) ;
 	for(int i=0; i < userInput.size() ; i++)
-	{
+	{ //should be separated by space!!
+		/*
+		if(!isdigit(userInput[i]))
+			throw string("Invalid selection, enter the serial number(s) from tasks displayed above.") ; */
 		integers.push_back(userInput[i] - 48);
+	
 	}
 	return integers;
 }
@@ -155,8 +159,6 @@ void CommandProcessor::descProcessor (string userInput, Task*& newTask)
 			}
 			
 		}
-	
-	
 	
 	if(eTime == NULL && sTime == NULL){
 		
