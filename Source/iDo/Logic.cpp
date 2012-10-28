@@ -130,10 +130,18 @@ bool Logic::findToDelete(Task * userInputTask)
 	//Logic::taskList = fileObj.getTaskList();
 	searchObj.setInputList(fileObj.getTaskList());
 	searchObj.executeSearch(userInputTask->getDesc());
-	searchResults=searchObj.getIndices();
-	vector<Task*> tempList;
-	for(i=0;i<searchResults.size();i++)
-	tempList.push_back(taskList[searchResults[i]]);
+
+	searchResults = searchObj.getIndices(); //returns the indices of matches corresponding to MAIN taskList
+	if(searchResults.size() == 0)
+		return false ;
+	
+	vector<Task*> tempList ;
+	
+	for(i=0 ; i < searchResults.size() ; i++)
+	{
+		tempList.push_back(taskList[searchResults[i]]);
+	}
+
 	UIObj.displayHomeScreen(tempList);
 	userInput=UIObj.getUserInput();
 	vector<int> userIndex= cmdObj.intProcessor(userInput);
@@ -142,9 +150,11 @@ bool Logic::findToDelete(Task * userInputTask)
 	{
 		Logic::deleteTask(searchResults[userIndex[i]-1]);
 	}
+
 	fileObj.setTaskList(taskList);
 	fileObj.writeList();
 	searchObj.clearSearchResults();
+	
 	return true;
 	//getUserInput() and call intProcessor of command processor
 	//now u have int vector use that to find matching task * from retrieved list (from search)
