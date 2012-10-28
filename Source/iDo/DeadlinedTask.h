@@ -1,5 +1,5 @@
 #ifndef DEADLINED_H
-#define DADLINED_H
+#define DEADLINED_H
 #include "Task.h"
 
 class DeadlinedTask :public Task

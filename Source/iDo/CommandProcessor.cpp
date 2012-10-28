@@ -1,15 +1,11 @@
 #include "CommandProcessor.h"
-#include "DeadlinedTask.h"
-#include "FloatingTask.h"
-#include "TimedTask.h"
+
 
 
 vector <int> CommandProcessor::intProcessor (string userInput)
 {
 	vector <int> integers; 
-	//asertion
-	assert(integers.size() == 0) ;
-	for(int i=0; i < userInput.size() ; i++)
+	for(int i=0;i<userInput.size();i++)
 	{
 		integers.push_back(userInput[i] - 48);
 	}
@@ -21,31 +17,26 @@ string CommandProcessor::cmdProcessor (string userInput, Task*& newTask)
 	int i, j;
 	tm* sTime = NULL;
 	tm* eTime = NULL;
-	//what are these character arrays for -endTime, etc.?
-	char description[MAX_DESC_SIZE], startTime[MAX_TIME_SIZE], endTime[MAX_TIME_SIZE], cmd[MAX_COMMAND_SIZE], singleWord[MAX_COMMAND_SIZE];
-	bool start = false, end = false;
-	int state = 3;
-	
+	char description[MAX_DESC_SIZE], dateTime[MAX_TIME_SIZE], cmd[MAX_COMMAND_SIZE], singleWord[MAX_WORD_SIZE];
+	bool start = false, end = false, checkTime = false;
 	strcpy(description, "");
-	strcpy(startTime, "");
-	strcpy(endTime, "");
+	strcpy(dateTime, "");
 	strcpy(cmd, "");
 
-	for(i=0; i < userInput.size() && userInput[i]!=' ' ; i++)
+	for(i=0; i<userInput.size()&&userInput[i]!=' ';i++)
 	{
 		cmd[i]=userInput[i];
 	}
-	cmd[i]= '\0' ;
-	assert(strcmp(cmd,"\0")) ;
-	bool validCmd = CommandProcessor::actualKeyWord(cmd) ;
-	//what 2 do for invalid command?
-	//can maybe add one more check here: if validCmd = false && no end time && no start time => invalid command else strcpy(cmd,add)
-	if(validCmd == false) {
-			strcpy (description, cmd);
+
+	cmd[i]='\0';
+	
+	bool validCmd = CommandProcessor::actualKeyWord(cmd);
+	if(validCmd == false){
+			strcpy (description ,cmd);
 			strcat(description, " ");
 			strcpy(cmd, "add");
-	}
-
+			
+		}
 	if(i==userInput.size()){
 		Task *ft = new FloatingTask();
 			ft->setDesc(description);
@@ -60,34 +51,59 @@ string CommandProcessor::cmdProcessor (string userInput, Task*& newTask)
 				singleWord[j] = userInput[i];
 			}
 			singleWord[j] = '\0';
-			strcat(singleWord, " ");
-			i++;
-
-			if(start == true && state == 1){
-				sTime = CommandProcessor::stringToTime(singleWord);
-				state = 2;
-			}
-			else if(end == true && state == 1){
-				eTime = CommandProcessor::stringToTime(singleWord);
-				state = 2;
-			}
+			
+			
+			checkTime = isTime(singleWord);
 			if(singleWord[0] == '[')
 				CommandProcessor::trim(singleWord);
-			start = isStart(singleWord);
-			end = isEnd(singleWord);
 			
-			if(start != false || end != false){
-				state = 1;
-			}
+			if(checkTime == true && (start == true || end == true)){
+				strcat(singleWord, " ");
+				strcat(dateTime, singleWord);
+				if( i == userInput.size() ){
+					CommandProcessor::parseDateTime(dateTime);
+						if(start == true){
+							sTime = CommandProcessor::stringToTime(dateTime);
+							start = false;
+						}
+						else if(end == true){
+							eTime = CommandProcessor::stringToTime(dateTime);
+							end = false;
+						}
+						strcpy(dateTime, "");
 
-			if(state == 2){
-				state++;
+				}
 			}
-			else if(state == 3){
-				strcat(description, singleWord);
-			}
+			else {
+				if(isStart(singleWord)){
+					start = true;
+				}
+
+				else if(isEnd(singleWord)){
+					end = true;
+				}
 			
-		}
+				else{
+					strcat(singleWord, " ");
+					strcat(description, singleWord);
+				}
+
+				if(strlen(dateTime) > 0){
+					CommandProcessor::parseDateTime(dateTime);
+						if(start == true){
+							sTime = CommandProcessor::stringToTime(dateTime);
+							start = false;
+						}
+						else if(end == true){
+							eTime = CommandProcessor::stringToTime(dateTime);
+							end = false;
+						}
+						strcpy(dateTime, "");
+				}
+				
+		}	
+		i++;
+
 	}
 
 	if(eTime == NULL && sTime == NULL){
@@ -106,6 +122,7 @@ string CommandProcessor::cmdProcessor (string userInput, Task*& newTask)
 		newTask = new TimedTask(description, sTime, eTime);
 	}
 	return cmd;
+	}
 }
 
 void CommandProcessor::descProcessor (string userInput, Task*& newTask)
@@ -113,48 +130,72 @@ void CommandProcessor::descProcessor (string userInput, Task*& newTask)
 	int i = 0, j;
 	tm* sTime = NULL;
 	tm* eTime = NULL;
-	char description[MAX_DESC_SIZE], startTime[MAX_TIME_SIZE], endTime[MAX_TIME_SIZE], cmd[MAX_COMMAND_SIZE], singleWord[MAX_COMMAND_SIZE];
-	bool start = false, end = false;
-	int state = 3;
+	char description[MAX_DESC_SIZE], dateTime[MAX_TIME_SIZE], cmd[MAX_COMMAND_SIZE], singleWord[MAX_WORD_SIZE];
+	bool start = false, end = false, checkTime;
 	strcpy(description, "");
-	strcpy(startTime, "");
-	strcpy(endTime, "");
+	strcpy(dateTime, "");
 	strcpy(cmd, "");
 
-	while(i < userInput.size()){
+			while(i < userInput.size()){
 
-			for(j = 0; i < userInput.size() &&  userInput[i] != ' ' ;i++, j++){
+			for(j = 0; i < userInput.size() && userInput[i] != ' ' ;i++, j++){
 				singleWord[j] = userInput[i];
 			}
 			singleWord[j] = '\0';
-			strcat(singleWord, " ");
-			i++;
-
-			if(start == true && state == 1){
-				sTime = CommandProcessor::stringToTime(singleWord);
-				state = 2;
-			}
-			else if(end == true && state == 1){
-				eTime = CommandProcessor::stringToTime(singleWord);
-				state = 2;
-			}
+			
+			
+			checkTime = isTime(singleWord);
 			if(singleWord[0] == '[')
 				CommandProcessor::trim(singleWord);
-			start = isStart(singleWord);
-			end = isEnd(singleWord);
 			
-			if(start != false || end != false){
-				state = 1;
-			}
+			if(checkTime == true && (start == true || end == true)){
+				strcat(singleWord, " ");
+				strcat(dateTime, singleWord);
+				if( i == userInput.size() ){
+					CommandProcessor::parseDateTime(dateTime);
+						if(start == true){
+							sTime = CommandProcessor::stringToTime(dateTime);
+							start = false;
+						}
+						else if(end == true){
+							eTime = CommandProcessor::stringToTime(dateTime);
+							end = false;
+						}
+						strcpy(dateTime, "");
 
-			if(state == 2){
-				state++;
+				}
 			}
-			else if(state == 3){
-				strcat(description, singleWord);
-			}
+			else {
+				if(isStart(singleWord)){
+					start = true;
+				}
+
+				else if(isEnd(singleWord)){
+					end = true;
+				}
 			
-		}
+				else{
+					strcat(singleWord, " ");
+					strcat(description, singleWord);
+				}
+
+				if(strlen(dateTime) > 0){
+					CommandProcessor::parseDateTime(dateTime);
+						if(start == true){
+							sTime = CommandProcessor::stringToTime(dateTime);
+							start = false;
+						}
+						else if(end == true){
+							eTime = CommandProcessor::stringToTime(dateTime);
+							end = false;
+						}
+						strcpy(dateTime, "");
+				}
+				
+		}	
+		i++;
+
+	}
 	
 	
 	
@@ -214,7 +255,6 @@ tm* CommandProcessor::stringToTime (string startTime)
 	sTime->tm_mday=date;
 	sTime->tm_mon=month;
 	sTime->tm_year=year;
-
 	int hour=(startTime[8]-ASCII_VALUE_0)*10+(startTime[9]-ASCII_VALUE_0);
 	int min=(startTime[10]-ASCII_VALUE_0)*10+(startTime[11]-ASCII_VALUE_0);
 	sTime->tm_hour=hour;
@@ -268,13 +308,13 @@ bool CommandProcessor::isFound(char cmd[MAX_COMMAND_SIZE], const char cmdList[][
 }
 
 
-bool CommandProcessor::isStart(char singleWord[MAX_COMMAND_SIZE]){
+bool CommandProcessor::isStart(char singleWord[MAX_WORD_SIZE]){
 	
     return CommandProcessor::isFound(singleWord, startList);
 
 }
 
-bool CommandProcessor::isEnd(char singleWord[MAX_COMMAND_SIZE]){
+bool CommandProcessor::isEnd(char singleWord[MAX_WORD_SIZE]){
 	
 	return CommandProcessor::isFound(singleWord, endList);
 
@@ -288,4 +328,230 @@ void CommandProcessor::trim(char word[MAX_COMMAND_SIZE]){
 	}
 	trimmed[i] = '\0';
 	strcpy(word, trimmed);
+}
+
+bool CommandProcessor::isTime(char singleWord[MAX_WORD_SIZE]){
+	bool time = isFound(singleWord, timeList);
+	if(time == true)
+		return time;
+	else
+		time = isNumericalTime(singleWord);
+	return time;
+}
+
+bool CommandProcessor::isNumericalTime(char singleWord[MAX_COMMAND_SIZE]){
+	int buffer = 0, i = 0;
+	bool returnVal = false;
+	
+	switch (strlen(singleWord)){
+			// Case 10 and 8 for dd/mm/yyyy and dd/mm/yy respectively
+		case 6:
+		case 7:
+		case 9:
+		case 10:
+		case 8:	
+			buffer = 0;
+			i = 0;
+			while(singleWord[i] != '/' && singleWord[i] != '.' && i < strlen(singleWord)){
+				buffer = buffer * 10 + (singleWord[i] - 48);
+				i++;
+			}
+			
+			returnVal = isDay(buffer);
+			if(returnVal == false)
+				return false;
+			buffer = 0;
+			i++;
+
+			while(singleWord[i] != '/' && singleWord[i] != '.' && i < strlen(singleWord)){
+			buffer = buffer * 10 + (singleWord[i] - 48);
+			i++;
+			}
+			
+			returnVal = isMonth(buffer);
+			if(returnVal == false)
+				return false;
+			buffer = 0;
+			i++;
+
+			while(singleWord[i] != '/' && singleWord[i] != '.' && i < strlen(singleWord)){
+				buffer = buffer * 10 + (singleWord[i] - 48);
+				i++;
+			}
+			
+			returnVal = isYear(buffer);
+				
+			break;
+			//case 3, 4, 5 for h:m, hh:m or h:mm, hh:mm respectively
+		
+		case 3 :
+		case 4 :
+		case 5 :
+			buffer = 0;
+			i = 0;
+			while(singleWord[i] != ':' && singleWord[i] != '.' && i < strlen(singleWord)){
+				buffer = buffer * 10 + (singleWord[i] - 48);
+				i++;
+			}
+			
+			returnVal = isHour(buffer);
+			if(returnVal == false)
+				return false;
+
+			buffer = 0;
+			i++;
+
+			while((singleWord[i] != ':' || singleWord[i] != '.' )&& i < strlen(singleWord)){
+				buffer = buffer * 10 + (singleWord[i] - 48);
+				i++;
+			}
+			
+			returnVal = isMinute(buffer);
+			
+			break;
+		
+		default: returnVal = false;
+
+		}
+	return returnVal;
+}
+	
+bool CommandProcessor::isDay(int input){
+	if(input >=1 && input <= 31){
+		return true;
+	}
+}
+
+bool CommandProcessor::isMonth(int input){
+	if(input >=1 && input <= 12)
+		return true;
+	else 
+		return false;
+}
+
+bool CommandProcessor::isYear(int input){
+	if(input > 0 && input < 100){
+		return true;
+	}
+	else if(input > 1000){
+		return true;
+	}
+	else
+		return false;
+}
+
+bool CommandProcessor::isHour(int input){
+	if(input >= 0 && input <= 24)
+		return true;
+	else 
+		return false;
+}
+
+bool CommandProcessor::isMinute(int input){
+	if(input >= 0 && input <= 60)
+		return true;
+	else 
+		return false;
+}
+
+bool CommandProcessor::parseDateTime(char dateTime[MAX_TIME_SIZE]){
+	char singleWord[MAX_TIME_SIZE], finalTime[MAX_TIME_SIZE];
+	strcpy(finalTime, "");
+	int i = 0, j, tempTime = 0;
+	while(i < strlen(dateTime)){
+		for(j = 0; i < strlen(dateTime) && dateTime[i] != ' '; i++, j++){
+			singleWord[j] = dateTime[i];
+		}
+		singleWord[j] = '\0';
+		
+		bool isNumeric = CommandProcessor::isNumericalTime(singleWord);
+		if(isNumeric == true){
+			if(strlen(singleWord) >= 6){
+				CommandProcessor::addZeroes(singleWord);
+				CommandProcessor::convertDate(singleWord);
+				strcat(finalTime, singleWord);
+			}
+			else{
+				CommandProcessor::addZeroes(singleWord);
+				CommandProcessor::convertTime(singleWord);
+				strcat(finalTime, singleWord);
+			}
+			
+		}
+		else{
+		}
+
+		i++;
+	}
+	strcpy(dateTime, finalTime);
+	return true;
+}
+
+
+void CommandProcessor::convertDate(char Date[MAX_TIME_SIZE]){
+	
+	int j = 0, k = 0,  year;
+	char tempTime[MAX_TIME_SIZE], tempYear[MAX_TIME_SIZE];
+	strcpy(tempTime, "");
+	strcpy(tempYear, "");
+	for(j = 0; j < strlen(Date); j++){
+		tempTime[j] = Date[j];
+		
+	}
+	tempTime[j] = '\0';
+	//when date is dd/mm/yy
+	if(strlen(tempTime) == 6){
+		year = (tempTime[4] - 48)*10 + (tempTime[5] - 48);
+		if(year >= 90){
+			year = 1900 + year;
+		}
+		else{
+			year = 2000 + year;
+		}
+		tempTime[4] = '\0';
+		itoa(year, tempYear, 10);
+		strcat(tempTime, tempYear);
+	}
+	strcpy(Date, tempTime);
+}
+void CommandProcessor::convertTime(char Date[MAX_TIME_SIZE]){
+	int j = 0, k = 0,  year;
+	char tempTime[MAX_TIME_SIZE];
+	
+	for(j = 0; j < strlen(Date); j++){
+		if(isalnum(Date[j]) && !(isalpha(Date[j]))){
+		tempTime[j] = Date[j];
+		}
+	}
+	tempTime[j] = '\0';
+	strcpy(Date, tempTime);
+}
+
+void CommandProcessor::addZeroes(char input[MAX_TIME_SIZE]){
+	char newDate[MAX_TIME_SIZE], tempDate[MAX_TIME_SIZE];
+	strcpy(newDate, "");
+	int i = 0, j = 0;
+	int buffer;
+	while(i < strlen(input)){
+		buffer = 0;
+		for(; (input[i] != '/' && input[i] != ':' && input[i] != '.' ) &&(i < strlen(input)); i++){
+			if( isalnum(input[i]) && !(isalpha(input[i])) ){
+				buffer = buffer * 10 + (input[i] - 48) ;
+			}
+		}
+		i++;
+			if(buffer < 10){
+				newDate[j] = '0';
+				j++;
+				newDate[j] = buffer + 48;
+				j++;
+				newDate[j] = '\0';
+			}
+			else{
+				itoa(buffer, tempDate, 10);
+				strcat(newDate, tempDate);
+				j += 2;
+			}
+	}
+	strcpy(input, newDate);
 }
