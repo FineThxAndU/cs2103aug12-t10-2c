@@ -1,23 +1,8 @@
-﻿Build started 28/10/2012 11:09:46 AM.
+﻿Build started 28/10/2012 4:26:15 PM.
      1>Project "C:\Users\Spatika\Documents\Visual Studio 2012\Projects\iDo\Source\iDo\iDo.vcxproj" on node 2 (Build target(s)).
-         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /FR"Debug\\" /Gd /TP /analyze- /errorReport:prompt UI.cpp
-         UI.cpp
-         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Spatika\Documents\Visual Studio 2012\Projects\iDo\Debug\iDo.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\Users\Spatika\Documents\Visual Studio 2012\Projects\iDo\Lib" gtestd.Lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\iDo.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Spatika\Documents\Visual Studio 2012\Projects\iDo\Debug\iDo.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Spatika\Documents\Visual Studio 2012\Projects\iDo\Debug\iDo.lib" /MACHINE:X86 Debug\CommandProcessor.obj
-         Debug\DeadlinedTask.obj
-         Debug\FileIO.obj
-         Debug\FloatingTask.obj
-         Debug\Logic.obj
-         Debug\Main.obj
-         Debug\Search.obj
-         Debug\Sort.obj
-         Debug\TimedTask.obj
-         Debug\UI.obj
-     1>CommandProcessor.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/INCREMENTAL:NO' specification
          iDo.vcxproj -> C:\Users\Spatika\Documents\Visual Studio 2012\Projects\iDo\Debug\iDo.exe
-         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\iDo.exe.embed.manifest" /outputresource:"C:\Users\Spatika\Documents\Visual Studio 2012\Projects\iDo\Debug\iDo.exe;#1" /manifest Debug\iDo.exe.intermediate.manifest
-         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\bscmake.exe /nologo /o"C:\Users\Spatika\Documents\Visual Studio 2012\Projects\iDo\Debug\iDo.bsc" /n Debug\CommandProcessor.sbr Debug\DeadlinedTask.sbr Debug\FileIO.sbr Debug\FloatingTask.sbr Debug\Logic.sbr Debug\Main.sbr Debug\Search.sbr Debug\Sort.sbr Debug\TimedTask.sbr Debug\UI.sbr
      1>Done Building Project "C:\Users\Spatika\Documents\Visual Studio 2012\Projects\iDo\Source\iDo\iDo.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:08.91
+Time Elapsed 00:00:00.11

@@ -7,7 +7,9 @@
 vector <int> CommandProcessor::intProcessor (string userInput)
 {
 	vector <int> integers; 
-	for(int i=0;i<userInput.size();i++)
+	//asertion
+	assert(integers.size() == 0) ;
+	for(int i=0; i < userInput.size() ; i++)
 	{
 		integers.push_back(userInput[i] - 48);
 	}
@@ -19,26 +21,31 @@ string CommandProcessor::cmdProcessor (string userInput, Task*& newTask)
 	int i, j;
 	tm* sTime = NULL;
 	tm* eTime = NULL;
+	//what are these character arrays for -endTime, etc.?
 	char description[MAX_DESC_SIZE], startTime[MAX_TIME_SIZE], endTime[MAX_TIME_SIZE], cmd[MAX_COMMAND_SIZE], singleWord[MAX_COMMAND_SIZE];
 	bool start = false, end = false;
 	int state = 3;
+	
 	strcpy(description, "");
 	strcpy(startTime, "");
 	strcpy(endTime, "");
 	strcpy(cmd, "");
 
-	for(i=0; i<userInput.size()&&userInput[i]!=' ';i++)
+	for(i=0; i < userInput.size() && userInput[i]!=' ' ; i++)
 	{
 		cmd[i]=userInput[i];
 	}
-
-	cmd[i]='\0';
-	bool validCmd = CommandProcessor::actualKeyWord(cmd);
-	if(validCmd == false){
-			strcpy (description ,cmd);
-			 strcat(description, " ");
+	cmd[i]= '\0' ;
+	assert(strcmp(cmd,"\0")) ;
+	bool validCmd = CommandProcessor::actualKeyWord(cmd) ;
+	//what 2 do for invalid command?
+	//can maybe add one more check here: if validCmd = false && no end time && no start time => invalid command else strcpy(cmd,add)
+	if(validCmd == false) {
+			strcpy (description, cmd);
+			strcat(description, " ");
 			strcpy(cmd, "add");
-		}
+	}
+
 	if(i==userInput.size()){
 		Task *ft = new FloatingTask();
 			ft->setDesc(description);
@@ -207,6 +214,7 @@ tm* CommandProcessor::stringToTime (string startTime)
 	sTime->tm_mday=date;
 	sTime->tm_mon=month;
 	sTime->tm_year=year;
+
 	int hour=(startTime[8]-ASCII_VALUE_0)*10+(startTime[9]-ASCII_VALUE_0);
 	int min=(startTime[10]-ASCII_VALUE_0)*10+(startTime[11]-ASCII_VALUE_0);
 	sTime->tm_hour=hour;

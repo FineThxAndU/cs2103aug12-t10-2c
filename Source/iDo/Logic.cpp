@@ -24,8 +24,14 @@ int Logic::logicMain()
 	while(1)
 	{
 		userInput=UIObj.getUserInput();
+		//assertion 1
+		assert(userInput != "\0") ;
 		string cmd=cmdObj.cmdProcessor(userInput, userInputTask);
+		//assertion 2
+		assert(cmd != "\0") ;
 		bool returnVal=Logic::execute(cmd,userInputTask);
+		//assertion 3
+		assert(returnVal == true || returnVal == false) ;
 		UIObj.feedback(returnVal,cmd);
 	}
 
@@ -49,15 +55,17 @@ Logic::CommandType Logic::determineCommand(string cmd)
 		type=REDO;
 	else if(cmd=="exit")
 		type=EXIT;
-	//NEED ONE MORE TYPE for the follow up user input to delete i.e. string "1 2" 
+	//but type is never invalid because if it is not any of the above, it is made 'add' command automatically.
 	else
 		type=INVALID ;
+	//can put an exception here for invalid type
 	return type;
 }
 
 bool Logic::execute(string cmd,Task* userInputTask)
 {
 	CommandType type=Logic::determineCommand(cmd);
+
 	bool returnVal = false;
 	switch(type)
 	{
@@ -79,6 +87,8 @@ bool Logic::execute(string cmd,Task* userInputTask)
 		case REDO:
 				returnVal=redoTask();
 				break;
+		case INVALID: 
+				//put an exception here?
 		case EXIT:
 			exit(0);
 	}
