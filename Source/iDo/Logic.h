@@ -3,9 +3,6 @@
 
 #include<iostream>
 #include<string>
-#include <time.h>
-#include <vector>
-#include <stack>
 
 using namespace std;
 
@@ -18,66 +15,46 @@ using namespace std;
 #include "TimedTask.h"
 #include "DeadlinedTask.h"
 #include "FloatingTask.h"
-#include "Command.h"
-
-
+#include <time.h>
+#include <vector>
+#include <stack>
 
 class Logic
 {
-	//private ctor for Singleton class
-	Logic();
-	static Logic * theOne ;
-	
 	UI UIObj;
+	Search searchObj;
+	FileIO fileObj;
+	Sort sortObj;
+	vector<Task*> taskList; 
 	string userInput;
-
-
-	//this?
 	CommandProcessor cmdObj;
-
-	//actually this also no need anymore, instead vector to Command object
 	Task* userInputTask ;
 	
 
-	//needs this for logicMain, Command also needs this
-	Search searchObj;
-	//used in ctor - no longer needed if do not need to setfileName in Logic itself
-	FileIO fileObj;
-	//only 'add' needs this
-	Sort sortObj;
-
-	//this??
-	vector<Task*> taskList; 
 	
 
 public:
-
-	static Logic* getLogicInstance() ;
-
+	
 	static enum CommandType{
 		ADD, REMOVE, EDIT, SEARCH, UNDO,REDO,INVALID,EXIT //what happens for user command "1 2" it's not invalid, but it will determined to be in determineCommandType
 	} ;
 
-	//this structure will be replaced by a stack of Command class objects.
 	struct Input
 	{
 		CommandType type;
 		Task* taskObj;
 		int index;
-	};
+	} ;
 
-	
-	int logicMain();
-	//bool execute(string,Task*);
-
-	bool execute(string cmd, Command *) ;
-	
-	
-	//this will no longer be needed?
+	Logic();
 	CommandType determineCommand(string);
+    int logicMain();
+	bool execute(string,Task*);
 	bool addTask(Task*);
 	void deleteTask(int);
 	void setRedoStack(CommandType,Task*,int);
+	void deleteExpired() ;
+	
 	bool undoTask ();
 	void setUndoStack(CommandType,Task*,int);
 	string getUndoStack();
@@ -89,10 +66,11 @@ public:
 	bool redoTask();
 
 private:
-	//new architecture this becomes a stack of Command objects
+		
 		stack < Logic::Input> undoStack;
 		stack <Input> redoStack;
 		Input userStruct;
+
 };
 
 #endif
