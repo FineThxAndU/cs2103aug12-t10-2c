@@ -64,6 +64,7 @@ Logic::CommandType Logic::determineCommand(string cmd)
 
 bool Logic::execute(string cmd,Task* userInputTask)
 {
+
 	CommandType type=Logic::determineCommand(cmd);
 
 	bool returnVal = false;
