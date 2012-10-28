@@ -1,6 +1,5 @@
 #ifndef FLOATING_H
 #define FLOATING_H
-
 #include "Task.h"
 
 class FloatingTask : public Task

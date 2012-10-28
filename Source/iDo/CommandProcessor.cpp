@@ -14,7 +14,7 @@ vector <int> CommandProcessor::intProcessor (string userInput)
 	return integers;
 }
 
-string CommandProcessor::cmdProcessor (string userInput, Command*& newCommand)
+string CommandProcessor::cmdProcessor (string userInput, Task*& newTask)
 {
 	int i, j;
 	tm* sTime = NULL;
@@ -27,13 +27,12 @@ string CommandProcessor::cmdProcessor (string userInput, Command*& newCommand)
 	strcpy(endTime, "");
 	strcpy(cmd, "");
 
-	for(i=0; i < userInput.size() && userInput[i]!=' ';i++)
+	for(i=0; i<userInput.size()&&userInput[i]!=' ';i++)
 	{
 		cmd[i]=userInput[i];
 	}
 
 	cmd[i]='\0';
-
 	bool validCmd = CommandProcessor::actualKeyWord(cmd);
 	if(validCmd == false){
 			strcpy (description ,cmd);
@@ -200,18 +199,37 @@ void CommandProcessor::descProcessor (string userInput, Task*& newTask)
 
 tm* CommandProcessor::stringToTime (string startTime)
 {
-	tm* sTime=new tm;
-	int index=0;
+	
+	time_t now ;
+	time(&now) ;
+	tm* sTime = new tm;
+	int index = 0;
+
+	sTime->tm_isdst = -1 ;
+	sTime->tm_hour = 0 ;
+	sTime->tm_mday = 0;
+	sTime->tm_min = 0 ;
+	sTime->tm_mon = 0 ;
+	sTime->tm_wday = 0 ;
+	sTime->tm_yday = 0 ;
+	sTime->tm_year = 0 ;
+	sTime->tm_sec = 0 ;
+
+
 	int date=(startTime[0]-ASCII_VALUE_0)*10+(startTime[1]-ASCII_VALUE_0);
 	int month=(startTime[2]-ASCII_VALUE_0)*10+(startTime[3]-ASCII_VALUE_0);
 	int year=(startTime[4]-ASCII_VALUE_0)*1000+(startTime[5]-ASCII_VALUE_0)*100+(startTime[6]-ASCII_VALUE_0)*10+(startTime[7]-ASCII_VALUE_0);
+	
 	sTime->tm_mday=date;
 	sTime->tm_mon=month;
-	sTime->tm_year=year;
+	sTime->tm_year=year-1900 ;
+	
 	int hour=(startTime[8]-ASCII_VALUE_0)*10+(startTime[9]-ASCII_VALUE_0);
 	int min=(startTime[10]-ASCII_VALUE_0)*10+(startTime[11]-ASCII_VALUE_0);
-	sTime->tm_hour=hour;
-	sTime->tm_min=min;
+	
+	sTime->tm_hour = hour;
+	sTime->tm_min = min;
+	
 	return sTime;
 }
 bool CommandProcessor::actualKeyWord(char userCmd[MAX_COMMAND_SIZE]){

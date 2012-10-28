@@ -82,35 +82,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AddCommand.cpp" />
-    <ClCompile Include="Command.cpp" />
     <ClCompile Include="CommandProcessor.cpp" />
     <ClCompile Include="DeadlinedTask.cpp" />
-    <ClCompile Include="DeleteCommand.cpp" />
-    <ClCompile Include="EditCommand.cpp" />
     <ClCompile Include="FileIO.cpp" />
     <ClCompile Include="FloatingTask.cpp" />
     <ClCompile Include="Logic.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Search.cpp" />
-    <ClCompile Include="SearchCommand.cpp" />
     <ClCompile Include="Sort.cpp" />
     <ClCompile Include="TimedTask.cpp" />
     <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Testing\Tester.h" />
-    <ClInclude Include="AddCommand.h" />
-    <ClInclude Include="Command.h" />
     <ClInclude Include="CommandProcessor.h" />
     <ClInclude Include="DeadlinedTask.h" />
-    <ClInclude Include="DeleteCommand.h" />
-    <ClInclude Include="EditCommand.h" />
     <ClInclude Include="FileIO.h" />
     <ClInclude Include="FloatingTask.h" />
     <ClInclude Include="Logic.h" />
     <ClInclude Include="Search.h" />
-    <ClInclude Include="SearchCommand.h" />
     <ClInclude Include="Sort.h" />
     <ClInclude Include="Task.h" />
     <ClInclude Include="TimedTask.h" />
