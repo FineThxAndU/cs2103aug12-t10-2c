@@ -1,6 +1,5 @@
 #include "UI.h"
 
-
 const string UI::MESSAGE_NEXT_COMMAND = "Enter Command: " ;
 const string UI::MESSAGE_WELCOME = "\t\t\t\t ****iDo****" ;
 
