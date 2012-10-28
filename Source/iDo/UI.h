@@ -47,6 +47,8 @@ private:
 	static const string MESSAGE_INVALID_SEARCH ;
 
 	static const string MESSAGE_EXIT ;
+	static const string MESSAGE_UNDONE ;
+
    
  public:
 
@@ -56,6 +58,8 @@ private:
 	void displayFloatingTasks(vector<Task*>) ;
 
 	void feedback(bool, string command) ;
+
+	void printThis(string) ;
 	
 	//to be implemented later - for now all feedback in feedback function
 
