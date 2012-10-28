@@ -5,7 +5,11 @@
 #include <string>
 #include <vector>
 #include <time.h>
+#include <assert.h>
+#include <ctype.h>
 #include "Task.h"
+
+
 
 using namespace std;
 
@@ -35,7 +39,6 @@ public:
 	bool isStart(char singleWord[MAX_COMMAND_SIZE]);
 	bool isEnd(char singleWord[MAX_COMMAND_SIZE]);
 	void trim(char word[MAX_COMMAND_SIZE]);
-	void initTimeStructure(tm*&) ;
 } ;
 
 
