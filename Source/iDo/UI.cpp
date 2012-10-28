@@ -16,14 +16,15 @@ const string UI::MESSAGE_ADDED =  "Successfully added task to schedule." ;
 const string UI::MESSAGE_INVALID_ADD = "Unable to add task to schedule." ;
 
 const string UI::MESSAGE_DELETED = "Deleted task(s) from schedule." ;
-const string UI::MESSAGE_INVALID_DELETE = "Unable to delete task(s) from schedule." ;
+const string UI::MESSAGE_INVALID_DELETE = "Unable to delete/Task(s) matching entered description not found." ;
 
 const string UI::MESSAGE_EDITED = "Edited task in schedule." ;
 
-const string UI::MESSAGE_SEARCH_SUCCESS = "The following tasks match the entered description: " ;
+const string UI::MESSAGE_SEARCH_SUCCESS = "The above tasks matched the entered description." ;
 const string UI::MESSAGE_INVALID_SEARCH = "No tasks matching the entered description were found!" ; 
 
 const string UI::MESSAGE_EXIT = "Exiting iDo now." ;
+const string UI::MESSAGE_UNDONE = "Command successfully undone." ;
 
 void UI::displayHomeScreen(vector<Task*> tasksToDisplay) {
 
@@ -94,15 +95,18 @@ void UI::feedback(bool result, string command) {
     else if(command == "search") {
 		cout << MESSAGE_SEARCH_SUCCESS ;
     }
-
 	else if(command == "exit") {
-		
+		//need to move to atexit function
 		cout << MESSAGE_EXIT ; 
 		currentCursor.Y++ ;
 		placeCursorAt(currentCursor.X, currentCursor.Y) ;
 		system("pause") ;
 	}
-    }
+	else {
+		cout << MESSAGE_UNDONE ;
+	}
+  }
+
  
  else {
 
@@ -124,9 +128,7 @@ void UI::feedback(bool result, string command) {
 		currentCursor.Y++ ;
 		placeCursorAt(currentCursor.X, currentCursor.Y) ;
 		system("pause") ;
-
 	}
-
 	else {
 		cout << MESSAGE_INVALID ;
 	}
@@ -160,3 +162,9 @@ string UI::getUserInput() {
 
 }
 
+void UI::printThis(string messageToUser) {
+
+	currentCursor.Y++ ;
+    placeCursorAt(currentCursor.X, currentCursor.Y) ;
+	cout << messageToUser ;
+}
