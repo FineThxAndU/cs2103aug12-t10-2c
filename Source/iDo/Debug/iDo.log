@@ -1,71 +1,7 @@
-﻿Build started 28/10/2012 9:06:21 AM.
+﻿Build started 28/10/2012 11:09:46 AM.
      1>Project "C:\Users\Spatika\Documents\Visual Studio 2012\Projects\iDo\Source\iDo\iDo.vcxproj" on node 2 (Build target(s)).
-         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /FR"Debug\\" /Gd /TP /analyze- /errorReport:prompt CommandProcessor.cpp
-         CommandProcessor.cpp
-     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(10): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(25): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(26): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(27): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(28): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(30): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(38): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(39): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(40): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(50): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(52): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(56): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(80): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(112): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(113): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(114): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(115): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(117): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(119): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(123): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(147): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(157): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(173): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(185): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(193): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(248): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(250): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(252): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(254): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(256): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(258): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(260): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(272): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(273): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\spatika\documents\visual studio 2012\projects\ido\source\ido\commandprocessor.cpp(301): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /FR"Debug\\" /Gd /TP /analyze- /errorReport:prompt UI.cpp
+         UI.cpp
          c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Spatika\Documents\Visual Studio 2012\Projects\iDo\Debug\iDo.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\Users\Spatika\Documents\Visual Studio 2012\Projects\iDo\Lib" gtestd.Lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\iDo.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Spatika\Documents\Visual Studio 2012\Projects\iDo\Debug\iDo.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Spatika\Documents\Visual Studio 2012\Projects\iDo\Debug\iDo.lib" /MACHINE:X86 Debug\CommandProcessor.obj
          Debug\DeadlinedTask.obj
          Debug\FileIO.obj
@@ -84,4 +20,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:05.37
+Time Elapsed 00:00:08.91
