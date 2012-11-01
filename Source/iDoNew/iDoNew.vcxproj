@@ -79,3 +79,17 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
 </Project>
+    <ClInclude Include="DeadlinedTask.h" />
+    <ClInclude Include="FileIO.h" />
+    <ClInclude Include="FloatingTask.h" />
+    <ClInclude Include="Logic.h" />
+    <ClInclude Include="Search.h" />
+    <ClInclude Include="Sort.h" />
+    <ClInclude Include="Task.h" />
+    <ClInclude Include="Tester.h" />
+    <ClInclude Include="UI.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
