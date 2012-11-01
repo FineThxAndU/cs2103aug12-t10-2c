@@ -14,7 +14,7 @@
     <ProjectGuid>{07226E80-C381-4AFB-9603-FD871F50B57A}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>iDoNew</RootNamespace>
-    <ProjectName>iDoV0.3</ProjectName>
+    <ProjectName>iDo</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -40,6 +40,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(SolutionDir)source\gtest-1.6.0\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -56,6 +57,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>gtestd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -76,7 +79,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\Source\iDoNew\Command.cpp" />
     <ClCompile Include="..\Source\iDoNew\CommandProcessor.cpp" />
     <ClCompile Include="..\Source\iDoNew\DeadlinedTask.cpp" />
     <ClCompile Include="..\Source\iDoNew\FileIO.cpp" />
@@ -98,6 +100,7 @@
     <ClInclude Include="..\Source\iDoNew\Search.h" />
     <ClInclude Include="..\Source\iDoNew\Sort.h" />
     <ClInclude Include="..\Source\iDoNew\Task.h" />
+    <ClInclude Include="..\Source\iDoNew\Tester.h" />
     <ClInclude Include="..\Source\iDoNew\TimedTask.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
