@@ -91,7 +91,6 @@
     <ClCompile Include="..\Source\iDoNew\UI.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Source\iDoNew\Command.h" />
     <ClInclude Include="..\Source\iDoNew\CommandProcessor.h" />
     <ClInclude Include="..\Source\iDoNew\DeadlinedTask.h" />
     <ClInclude Include="..\Source\iDoNew\FileIO.h" />

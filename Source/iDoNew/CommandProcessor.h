@@ -26,7 +26,7 @@ const char exitList[][MAX_COMMAND_SIZE] = { "esc","ex", "exi", "exit","qu","qui"
 const char startList[][MAX_COMMAND_SIZE] = {"s", "st", "sta", "star", "start","b", "be", "beg", "begi", "begin", "-1"};
 const char endList[][MAX_COMMAND_SIZE] = {"e", "en", "end", "-1"};
 const char redoList[][MAX_COMMAND_SIZE] = {"r","re","red","redo","-1"};
-const char timeList[][MAX_COMMAND_SIZE] = {"day","after","today", "tomorrow","before","yesterday", "next" , "am" , "pm", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday", "-1"};
+const char timeList[][MAX_COMMAND_SIZE] = {"day","after","today", "tomorrow","before","yesterday", "next" , "am" , "pm", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday","th","coming","week","month","year", "-1"};
 const char days[][MAX_COMMAND_SIZE] = {"monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday", "-1"};
 
 class CommandProcessor
@@ -42,7 +42,7 @@ public:
 	bool isFound(char cmd[MAX_COMMAND_SIZE], const char cmdList[][MAX_COMMAND_SIZE]);
 	bool isStart(char singleWord[MAX_COMMAND_SIZE]);
 	bool isEnd(char singleWord[MAX_COMMAND_SIZE]);
-	bool isTime(char singleWord[MAX_COMMAND_SIZE]);
+	bool isDateTime(char singleWord[MAX_COMMAND_SIZE]);
 	bool isNumericalTime(char singleWord[MAX_COMMAND_SIZE]);
 	void trim(char word[MAX_COMMAND_SIZE]);
 	bool isDay(int input);
@@ -54,6 +54,16 @@ public:
 	void convertDate(char Date[MAX_TIME_SIZE]);
 	void convertTime(char Date[MAX_TIME_SIZE]);
 	void addZeroes(char Date[MAX_TIME_SIZE]);
+	bool isDate(int first, int second, int third );
+	bool isTime(int first, int second, int third );
+	void splitTime(char singleWord[MAX_COMMAND_SIZE], int &first, int &second, int&third);
+	void parseCharTime(char singleWord[MAX_WORD_SIZE], char finalTime[MAX_TIME_SIZE]);
+	tm evaluateDate(char day[MAX_TIME_SIZE], char finalTime[MAX_TIME_SIZE]);
+	void incrementDate(tm *date, int days);
+	void incrementMonth(tm *date, int months);
+	void incrementYear(tm *date, int years);
+	bool isLeapYear(int year);
+	void dateToString(tm *date, char finalDate[MAX_TIME_SIZE]);
 } ;
 
 
