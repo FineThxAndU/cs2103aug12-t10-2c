@@ -19,11 +19,19 @@ int Logic::logicMain()
 	searchObj.setInputList(taskList);
 	searchObj.executeSearch(userInputTask);
 	introList = searchObj.getResults();
-	UIObj.displayHomeScreen(introList);
+	//UIObj.displayHomeScreen(introList);
+	//ofstream fw("text2.txt");
+	GUIObj.writeToOutput(introList);
+		
+	
+
+
 	searchObj.clearSearchResults();
 	while(1)
 	{
-		userInput=UIObj.getUserInput();
+
+		userInput=GUIObj.readUserInput();
+
 		//assertion 1
 		assert(userInput != "\0") ;
 		string cmd=cmdObj.cmdProcessor(userInput, userInputTask);
@@ -153,8 +161,10 @@ bool Logic::findToDelete(Task * userInputTask)
 		tempList.push_back(taskList[searchResults[i]]);
 	}
 
-	UIObj.displayHomeScreen(tempList);
-	userInput=UIObj.getUserInput();
+	//UIObj.displayHomeScreen(tempList);
+	GUIObj.writeToOutput(tempList);
+	//userInput=UIObj.getUserInput();
+	userInput=GUIObj.readUserInput();
 	vector<int> userIndex= cmdObj.intProcessor(userInput);
 
 	for(i=0;i<userIndex.size();i++)
@@ -187,7 +197,8 @@ bool Logic::search(Task* userInputTask)
 	searchObj.setInputList(Logic::taskList);
 	searchObj.executeSearch(userInputTask->getDesc());
 	vector<Task*> searchResults=searchObj.getResults();
-	UIObj.displayHomeScreen(searchResults);
+	//UIObj.displayHomeScreen(searchResults);
+	GUIObj.writeToOutput(searchResults);
 	searchObj.clearSearchResults();
 	return true;
 
@@ -201,8 +212,10 @@ bool Logic::findToEdit(Task* userInputTask)
 	vector<Task*> tempList;
 	for(int i=0;i<searchResults.size();i++)
 	tempList.push_back(taskList[searchResults[i]]);
-	UIObj.displayHomeScreen( tempList);
-	userInput=UIObj.getUserInput();
+	//UIObj.displayHomeScreen( tempList);
+	GUIObj.writeToOutput(tempList);
+	//userInput=UIObj.getUserInput();
+	userInput=GUIObj.readUserInput();
 	vector<int> userIndex= cmdObj.intProcessor(userInput);
 	for(int i=0;i<userIndex.size();i++)
 	{
@@ -216,7 +229,8 @@ bool Logic::findToEdit(Task* userInputTask)
 
 void Logic::editTask(int index)
 {
-	userInput=UIObj.getUserInput();
+	//userInput=UIObj.getUserInput();
+	userInput=GUIObj.readUserInput();
 	userInputTask = taskList[index];
 	cmdObj.descProcessor(userInput,userInputTask);
 	setUndoStack(EDIT,taskList[index],index);

@@ -8,6 +8,7 @@
 using namespace std;
 
 #include "UI.h"
+#include "GUI.h"
 #include "Search.h"
 #include "FileIO.h"
 #include "Sort.h"
@@ -30,6 +31,8 @@ class Logic
 	string userInput;
 	CommandProcessor cmdObj;
 	Task* userInputTask ;
+	GUI GUIObj;
+
 	
 
 	

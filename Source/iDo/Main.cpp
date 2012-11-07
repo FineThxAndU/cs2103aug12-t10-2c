@@ -1,5 +1,7 @@
 #include "Logic.h" 
 #include "../../Testing/Tester.h"
+#include "../samplereadtext/samplereadtext/Form1.h"
+
 
 
 

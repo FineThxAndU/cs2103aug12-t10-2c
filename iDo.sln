@@ -8,6 +8,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "iDo", "Source\iDo\iDo.vcxpr
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gtest", "Source\gtest-1.6.0\msvc\gtest.vcxproj", "{C8F6C172-56F2-4E76-B5FA-C3B423B31BE7}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "samplereadtext", "samplereadtext\samplereadtext\samplereadtext.vcxproj", "{7A31AD97-D392-43D6-BF21-A1773A529A72}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +30,16 @@ Global
 		{1DFECFAE-263C-4E41-BF6B-11368021D974}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{1DFECFAE-263C-4E41-BF6B-11368021D974}.Release|Win32.ActiveCfg = Release|Win32
 		{1DFECFAE-263C-4E41-BF6B-11368021D974}.Release|Win32.Build.0 = Release|Win32
+		{7A31AD97-D392-43D6-BF21-A1773A529A72}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{7A31AD97-D392-43D6-BF21-A1773A529A72}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{7A31AD97-D392-43D6-BF21-A1773A529A72}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{7A31AD97-D392-43D6-BF21-A1773A529A72}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7A31AD97-D392-43D6-BF21-A1773A529A72}.Debug|Win32.Build.0 = Debug|Win32
+		{7A31AD97-D392-43D6-BF21-A1773A529A72}.Release|Any CPU.ActiveCfg = Release|Win32
+		{7A31AD97-D392-43D6-BF21-A1773A529A72}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{7A31AD97-D392-43D6-BF21-A1773A529A72}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{7A31AD97-D392-43D6-BF21-A1773A529A72}.Release|Win32.ActiveCfg = Release|Win32
+		{7A31AD97-D392-43D6-BF21-A1773A529A72}.Release|Win32.Build.0 = Release|Win32
 		{C8F6C172-56F2-4E76-B5FA-C3B423B31BE7}.Debug|Any CPU.ActiveCfg = Debug|Win32
 		{C8F6C172-56F2-4E76-B5FA-C3B423B31BE7}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
 		{C8F6C172-56F2-4E76-B5FA-C3B423B31BE7}.Debug|Mixed Platforms.Build.0 = Debug|Win32

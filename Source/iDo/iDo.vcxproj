@@ -86,6 +86,7 @@
     <ClCompile Include="DeadlinedTask.cpp" />
     <ClCompile Include="FileIO.cpp" />
     <ClCompile Include="FloatingTask.cpp" />
+    <ClCompile Include="GUI.cpp" />
     <ClCompile Include="Logic.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Search.cpp" />
@@ -99,6 +100,7 @@
     <ClInclude Include="DeadlinedTask.h" />
     <ClInclude Include="FileIO.h" />
     <ClInclude Include="FloatingTask.h" />
+    <ClInclude Include="GUI.h" />
     <ClInclude Include="Logic.h" />
     <ClInclude Include="Search.h" />
     <ClInclude Include="Sort.h" />
