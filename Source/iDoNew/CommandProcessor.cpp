@@ -26,12 +26,14 @@ string CommandProcessor::cmdProcessor (string userInput, Task*& newTask)
 	int i, j;
 	tm* sTime = NULL;
 	tm* eTime = NULL;
-	char description[MAX_DESC_SIZE], dateTime[MAX_TIME_SIZE], cmd[MAX_COMMAND_SIZE], singleWord[MAX_WORD_SIZE], tempSingleWord[MAX_WORD_SIZE];
+	char description[MAX_DESC_SIZE], dateTime[MAX_TIME_SIZE], cmd[MAX_COMMAND_SIZE], singleWord[MAX_WORD_SIZE], tempSingleWord[MAX_WORD_SIZE], modInput[MAX_INPUT_SIZE];
 	bool start = false, end = false, checkTime = false;
 	strcpy(description, "");
 	strcpy(dateTime, "");
 	strcpy(cmd, "");
-
+	strcpy(modInput,userInput.c_str());
+	CommandProcessor::deleteConsecSpaces(modInput);
+	userInput = modInput;
 	for(i=0; i<userInput.size()&&userInput[i]!=' ';i++)
 	{
 		cmd[i]=userInput[i];
@@ -63,10 +65,10 @@ string CommandProcessor::cmdProcessor (string userInput, Task*& newTask)
 			
 			
 			checkTime = isDateTime(singleWord);
-			strcpy(tempSingleWord, singleWord);
+			/*strcpy(tempSingleWord, singleWord);
 			if(tempSingleWord[0] == '['){
 				CommandProcessor::trim(tempSingleWord);
-			}
+			}*/
 			if(isStart(tempSingleWord) == true || isEnd(tempSingleWord) == true)
 				CommandProcessor::trim(singleWord);
 			
@@ -145,11 +147,14 @@ void CommandProcessor::descProcessor (string userInput, Task*& newTask)
 	int i = 0, j;
 	tm* sTime = NULL;
 	tm* eTime = NULL;
-	char description[MAX_DESC_SIZE], dateTime[MAX_TIME_SIZE], cmd[MAX_COMMAND_SIZE], singleWord[MAX_WORD_SIZE];
+	char description[MAX_DESC_SIZE], dateTime[MAX_TIME_SIZE], cmd[MAX_COMMAND_SIZE], singleWord[MAX_WORD_SIZE], modInput[MAX_INPUT_SIZE];
 	bool start = false, end = false, checkTime;
 	strcpy(description, "");
 	strcpy(dateTime, "");
 	strcpy(cmd, "");
+	strcpy(modInput,userInput.c_str());
+	CommandProcessor::deleteConsecSpaces(modInput);
+	userInput = modInput;
 
 			while(i < userInput.size()){
 
@@ -160,8 +165,8 @@ void CommandProcessor::descProcessor (string userInput, Task*& newTask)
 			
 			
 			checkTime = isDateTime(singleWord);
-			if(singleWord[0] == '[')
-				CommandProcessor::trim(singleWord);
+			/*if(singleWord[0] == '[')
+				CommandProcessor::trim(singleWord);*/
 			
 			if(checkTime == true && (start == true || end == true)){
 				strcat(singleWord, " ");
@@ -291,16 +296,24 @@ tm* CommandProcessor::stringToTime (string startTime)
 	else{
 		sTime->tm_year = now->tm_year ;
 	}
-	int hour=(startTime[8]-ASCII_VALUE_0)*10+(startTime[9]-ASCII_VALUE_0);
-	int min=(startTime[10]-ASCII_VALUE_0)*10+(startTime[11]-ASCII_VALUE_0);
+	int hour, min;
+	if(strlen(startTime.c_str()) > 8){
+		hour=(startTime[8]-ASCII_VALUE_0)*10+(startTime[9]-ASCII_VALUE_0);
+		min=(startTime[10]-ASCII_VALUE_0)*10+(startTime[11]-ASCII_VALUE_0);
+	}
+	else{
+		hour = now->tm_hour;
+		min = now->tm_min;
+	}
 	sTime->tm_hour=hour;
 	sTime->tm_min=min;
-	
-	if((sTime ->tm_mday < now ->tm_mday) && (sTime->tm_mon < now->tm_mon)){
-		sTime->tm_mon++;
-	}
-	if((sTime ->tm_mon < now ->tm_mon) && (sTime->tm_year < now->tm_year)){
-		sTime->tm_year++;
+	if(sTime->tm_year <= now->tm_year){
+		if((sTime ->tm_mday < now ->tm_mday) && (sTime->tm_mon < now->tm_mon)){
+			sTime->tm_mon++;
+		}
+		if((sTime ->tm_mon < now ->tm_mon)){
+			sTime->tm_year++;
+		}
 	}
 	return sTime;
 }
@@ -455,14 +468,30 @@ bool CommandProcessor::parseDateTime(char dateTime[MAX_TIME_SIZE]){
 			CommandProcessor::splitTime(singleWord, first, second, third);
 			time = isTime(first, second, third);
 			date = isDate(first, second, third);
-			char* pos = strstr(dateTime, "th");
-			if(pos != NULL){
+			char *posth = strstr(dateTime, "th"), *posst = strstr(dateTime, "st"), *posnd = strstr(dateTime, "nd");
+			if(posth != NULL){
 				date = true;
 				time = false;
-				char *tmp = pos + 2;
-				*(pos - 1) = '\0';
+				char *tmp = posth + 2;
+				*(posth - 1) = '\0';
 				strcat(dateTime, tmp);
 			}
+			else if(posnd != NULL){
+				date = true;
+				time = false;
+				char *tmp = posnd + 2;
+				*(posnd - 1) = '\0';
+				strcat(dateTime, tmp);
+			}
+			else if(posst != NULL){
+				date = true;
+				time = false;
+				char *tmp = posst + 2;
+				*(posst - 1) = '\0';
+				strcat(dateTime, tmp);
+			}
+
+			
 			if(time == true && date == true){
 				if(i == strlen(dateTime)){
 					CommandProcessor::addZeroes(singleWord);
@@ -619,7 +648,7 @@ void CommandProcessor::addZeroes(char input[MAX_TIME_SIZE]){
 bool CommandProcessor::isDate(int first, int second, int third ){
 	bool returnVal = false;
 	if(third == -1 && second == -1){
-			if(isDay(first) == true ){
+			if(isDay(first) == true || isYear(first) ==  true){
 				returnVal = true;
 			}
 			else{
@@ -635,6 +664,7 @@ bool CommandProcessor::isDate(int first, int second, int third ){
 			}
 	}
 		else{
+			
 			if(isDay(first) == true && isMonth(second) == true && isYear(third) == true){
 				returnVal = true;
 			}
@@ -711,27 +741,50 @@ void CommandProcessor::parseCharTime(char singleWord[MAX_WORD_SIZE], char finalT
 	now->tm_mon++;
 	now->tm_year += 1900;
 	tm dateTime = *now;
-	static int no_next = 0;
+	static int no_next = 0, day = 0, after = 0, tomorrow = 0;
 	int wday = now->tm_wday;
 	if(strlen(finalTime) != 0){
 		dateTime = *CommandProcessor::stringToTime(finalTime);
 		dateTime.tm_wday = wday;
 	}
-	bool isDay;
+	bool isDay, isMonth;
 	char tmp[MAX_TIME_SIZE];
 	if(strlen(finalTime) == 0){
 				
 		CommandProcessor::dateToString(now, finalTime);
 		
 	}
-	
+		isMonth = isFound(singleWord, monthList);
 		isDay = isFound(singleWord, days);
 		if(isDay ==  true){
-			CommandProcessor::incrementDate(&dateTime, no_next*7);
+			CommandProcessor::incrementDate(&dateTime, (no_next - 1)*7);
 			strcpy(finalTime, "");
 			CommandProcessor::dateToString(&dateTime, finalTime);
 			dateTime = evaluateDate(singleWord, finalTime);
 			no_next = 0;
+		}
+		else if(isMonth == true){
+			if(no_next != 0){
+			CommandProcessor::incrementYear(&dateTime, (no_next - 1));
+			}
+			
+			strcpy(finalTime, "");
+			CommandProcessor::dateToString(&dateTime, finalTime);
+			dateTime = evaluateMonth(singleWord, finalTime);
+			no_next = 0;
+		}
+		else if(strcmpi(singleWord, "day") == 0){
+			day = 1;
+		}
+		else if(strcmpi(singleWord, "after") == 0){
+			after = 1;
+		}
+		else if(strcmpi(singleWord, "tomorrow") == 0){
+			tomorrow = 1;
+		}
+		else if(strcmpi(singleWord, "now") == 0){
+			dateTime = *now;
+			CommandProcessor::dateToString(&dateTime, finalTime);
 		}
 		else if(strcmpi(singleWord, "week") == 0){
 			CommandProcessor::incrementDate(&dateTime, no_next*7);
@@ -755,6 +808,31 @@ void CommandProcessor::parseCharTime(char singleWord[MAX_WORD_SIZE], char finalT
 			if(strcmpi(singleWord, "next") == 0){
 				no_next++;
 			}
+		}
+		if(day == 1 && after == 1 && tomorrow == 1){
+			dateTime = *now;
+			if(no_next != 0){
+				CommandProcessor::incrementDate(&dateTime, 2 + (no_next - 1));
+				no_next = 0;
+			}
+			else{
+			CommandProcessor::incrementDate(&dateTime, 2);
+			}
+			CommandProcessor::dateToString(&dateTime, finalTime);
+			day = after = tomorrow = 0;
+
+		}
+		else if(tomorrow == 1){
+			dateTime = *now;
+			if(no_next != 0){
+				CommandProcessor::incrementDate(&dateTime, 1 + (no_next - 1));
+				no_next = 0;
+			}
+			else{
+				CommandProcessor::incrementDate(&dateTime, 1 );
+			}
+			CommandProcessor::dateToString(&dateTime, finalTime);
+			tomorrow = 0;
 		}
 		strcpy(finalTime, "");
 		CommandProcessor::dateToString(&dateTime, finalTime);
@@ -934,4 +1012,118 @@ void CommandProcessor::dateToString(tm* date, char finalDate[MAX_TIME_SIZE]){
 		}
 		itoa(date->tm_min,tmp , 10);
 		strcat(finalDate, tmp);
+}
+
+void CommandProcessor::deleteConsecSpaces(char input[MAX_INPUT_SIZE]){
+	int i, j;
+	for(i = 0; i < strlen(input); i++){
+		if(input[i] == ' ' && input[i + 1] == ' '){
+			for(j = i; j < strlen(input); j++){
+				input[j] = input[j + 1];
+			}
+			i--;
+		}
+	}
+}
+
+tm CommandProcessor::evaluateMonth(char month[MAX_TIME_SIZE], char finalTime[MAX_TIME_SIZE]){
+	time_t curr;
+	time(&curr);
+	tm* returnTime ;
+	returnTime = localtime(&curr); 
+	returnTime->tm_mon++;
+	returnTime->tm_mday = 1;
+	returnTime->tm_year += 1900;
+	int wday = returnTime->tm_wday;
+	
+	if(strlen(finalTime) != 0){
+		returnTime = CommandProcessor::stringToTime(finalTime);
+		returnTime->tm_wday = wday;
+	}
+	
+	
+	bool isJan = !(bool)(strcmpi(month, "January") );
+	bool isFeb = !(bool)(strcmpi(month, "February"));
+	bool isMar = !(bool)(strcmpi(month, "March"));
+	bool isApr = !(bool)(strcmpi(month, "April"));
+	bool isMay = !(bool)(strcmpi(month, "May"));
+	bool isJun = !(bool)(strcmpi(month, "June"));
+	bool isJul = !(bool)(strcmpi(month, "July"));
+	bool isAug = !(bool)(strcmpi(month, "August"));
+	bool isSep = !(bool)(strcmpi(month, "September"));
+	bool isOct = !(bool)(strcmpi(month, "October"));
+	bool isNov = !(bool)(strcmpi(month, "November"));
+	bool isDec = !(bool)(strcmpi(month, "December"));
+
+	if(isJan == true){
+		returnTime->tm_year++;
+		returnTime->tm_mon = 1;
+	}
+	else if(isFeb == true){
+		returnTime->tm_mon = 2;
+		if(returnTime->tm_mon > 1){
+			returnTime->tm_year++;			
+		}
+	}
+	else if(isMar == true){
+		returnTime->tm_mon = 3;
+		if(returnTime->tm_mon >= 3){
+			returnTime->tm_year++;			
+		}
+	}
+	else if(isApr == true){
+		returnTime->tm_mon = 4;
+		if(returnTime->tm_mon >= 4){
+			returnTime->tm_year++;			
+		}
+	}
+	else if(isMay == true){
+		returnTime->tm_mon = 5;
+		if(returnTime->tm_mon >= 5){
+			returnTime->tm_year++;			
+		}
+	}
+	else if(isJun == true){
+		returnTime->tm_mon = 6;
+		if(returnTime->tm_mon >= 6){
+			returnTime->tm_year++;			
+		}
+	}
+	else if(isJul == true){
+		returnTime->tm_mon = 7;
+		if(returnTime->tm_mon >= 7){
+			returnTime->tm_year++;			
+		}
+	}
+	else if(isAug == true){
+		returnTime->tm_mon = 8;
+		if(returnTime->tm_mon >= 8){
+			returnTime->tm_year++;			
+		}
+	}
+	else if(isSep == true){
+		returnTime->tm_mon = 9;
+		if(returnTime->tm_mon >= 9){
+			returnTime->tm_year++;			
+		}
+	}
+	else if(isOct == true){
+		returnTime->tm_mon = 10;
+		if(returnTime->tm_mon >= 10){
+			returnTime->tm_year++;			
+		}
+	}
+	else if(isNov == true){
+		returnTime->tm_mon = 11;
+		if(returnTime->tm_mon >= 11){
+			returnTime->tm_year++;			
+		}
+	}
+	else if(isDec == true){
+		returnTime->tm_mon = 12;
+		if(returnTime->tm_mon >= 12){
+			returnTime->tm_year++;			
+		}
+	}
+	return *returnTime;
 }

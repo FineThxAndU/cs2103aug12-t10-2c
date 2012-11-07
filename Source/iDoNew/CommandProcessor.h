@@ -16,7 +16,7 @@
 using namespace std;
 
 static int const ASCII_VALUE_0 = 48;
-const int MAX_COMMAND_SIZE = 100 , MAX_TIME_SIZE = 100, MAX_DESC_SIZE = 100, MAX_WORD_SIZE = 100;
+const int MAX_COMMAND_SIZE = 100 , MAX_TIME_SIZE = 100, MAX_DESC_SIZE = 100, MAX_WORD_SIZE = 100 , MAX_INPUT_SIZE = 100 ;
 const char addList[][MAX_COMMAND_SIZE] = {"add" , "ad" , "a", "-1"};
 const char removeList[][MAX_COMMAND_SIZE] = { "del", "de", "delet", "dele", "delete", "re", "rem", "remo","remov", "remove",  "-1"};
 const char editList[][MAX_COMMAND_SIZE] =  {"ed", "edi", "edit", "mo", "mod", "modi", "modif", "modify", "-1"};
@@ -26,8 +26,9 @@ const char exitList[][MAX_COMMAND_SIZE] = { "esc","ex", "exi", "exit","qu","qui"
 const char startList[][MAX_COMMAND_SIZE] = {"s", "st", "sta", "star", "start","b", "be", "beg", "begi", "begin", "-1"};
 const char endList[][MAX_COMMAND_SIZE] = {"e", "en", "end", "-1"};
 const char redoList[][MAX_COMMAND_SIZE] = {"r","re","red","redo","-1"};
-const char timeList[][MAX_COMMAND_SIZE] = {"day","after","today", "tomorrow","before","yesterday", "next" , "am" , "pm", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday","th","coming","week","month","year", "-1"};
-const char days[][MAX_COMMAND_SIZE] = {"monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday", "-1"};
+const char timeList[][MAX_COMMAND_SIZE] = {"day","after","today", "tomorrow","before","yesterday", "next" , "am" , "pm", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday","th", "st","nd","coming","week","month","year","January","February","March","April","May","June","July","August","September","October","November","December","now", "-1"};
+const char monthList[][MAX_COMMAND_SIZE]  = {"January","February","March","April","May","June","July","August","September","October","November","December", "-1"};
+const char days[][MAX_COMMAND_SIZE] = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "-1"};
 
 class CommandProcessor
 {
@@ -59,11 +60,13 @@ public:
 	void splitTime(char singleWord[MAX_COMMAND_SIZE], int &first, int &second, int&third);
 	void parseCharTime(char singleWord[MAX_WORD_SIZE], char finalTime[MAX_TIME_SIZE]);
 	tm evaluateDate(char day[MAX_TIME_SIZE], char finalTime[MAX_TIME_SIZE]);
+	tm evaluateMonth(char month[MAX_TIME_SIZE], char finalTime[MAX_TIME_SIZE]);
 	void incrementDate(tm *date, int days);
 	void incrementMonth(tm *date, int months);
 	void incrementYear(tm *date, int years);
 	bool isLeapYear(int year);
 	void dateToString(tm *date, char finalDate[MAX_TIME_SIZE]);
+	void deleteConsecSpaces(char input[MAX_INPUT_SIZE]);
 } ;
 
 

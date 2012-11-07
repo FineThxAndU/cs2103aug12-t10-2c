@@ -34,7 +34,8 @@ int Logic::logicMain()
 		string cmd=cmdObj.cmdProcessor(userInput, userInputTask);
 		//assertion 2
 		assert(cmd != "\0") ;
-		bool returnVal=Logic::execute(cmd,userInputTask);
+		bool returnVal;
+		returnVal = Logic::execute(cmd,userInputTask);
 		//assertion 3
 		assert(returnVal == true || returnVal == false) ;
 		UIObj.feedback(returnVal,cmd);
