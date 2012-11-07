@@ -95,7 +95,7 @@ namespace samplereadtext {
 			this->textBox2->Size = System::Drawing::Size(224, 20);
 			this->textBox2->TabIndex = 1;
 			this->textBox2->Text = L"Enter Command";
-			this->textBox2->TextChanged += gcnew System::EventHandler(this, &Form1::textBox2_TextChanged);
+			//this->textBox2->TextChanged += gcnew System::EventHandler(this, &Form1::textBox2_TextChanged);
 			// 
 			// button1
 			// 
