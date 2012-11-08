@@ -2,6 +2,7 @@
 #include "FloatingTask.h"
 #include "DeadlinedTask.h"
 #include "TimedTask.h"
+#include "stdafx.h"
 
 const int MAX_INPUT_SIZE = 100;
 

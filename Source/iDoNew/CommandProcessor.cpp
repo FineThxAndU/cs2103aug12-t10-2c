@@ -1,4 +1,5 @@
 #include "CommandProcessor.h"
+#include "stdafx.h"
 
 vector <int> CommandProcessor::intProcessor (string userInput)
 {

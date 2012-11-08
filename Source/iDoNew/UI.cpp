@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "UI.h"
 
 const string UI::MESSAGE_NEXT_COMMAND = "Enter Command: " ;

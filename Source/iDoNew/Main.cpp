@@ -1,5 +1,6 @@
+#include "stdafx.h"
 #include "Logic.h" 
-#include "Tester.h"
+//#include "Tester.h"
 
 
 

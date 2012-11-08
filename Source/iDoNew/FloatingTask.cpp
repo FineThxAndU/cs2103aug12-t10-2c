@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "FloatingTask.h"
 
 FloatingTask::FloatingTask(){

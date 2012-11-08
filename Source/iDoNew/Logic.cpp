@@ -1,4 +1,5 @@
- #include "Logic.h"
+#include "stdafx.h"
+#include "Logic.h"
 Logic::Logic()
 {
 	fileObj.setFileName("task.txt");

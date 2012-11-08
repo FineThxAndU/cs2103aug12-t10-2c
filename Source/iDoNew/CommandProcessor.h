@@ -12,7 +12,7 @@
 #include "FloatingTask.h"
 #include "TimedTask.h"
 #include "Task.h"
-
+#include "stdafx.h"
 using namespace std;
 
 static int const ASCII_VALUE_0 = 48;
