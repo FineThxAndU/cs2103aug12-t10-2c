@@ -307,14 +307,14 @@ tm* CommandProcessor::stringToTime (string startTime)
 	}
 	sTime->tm_hour=hour;
 	sTime->tm_min=min;
-	if(sTime->tm_year <= now->tm_year){
+	/*if(sTime->tm_year <= now->tm_year){
 		if((sTime ->tm_mday < now ->tm_mday) && (sTime->tm_mon < now->tm_mon)){
 			sTime->tm_mon++;
 		}
 		if((sTime ->tm_mon < now ->tm_mon)){
 			sTime->tm_year++;
 		}
-	}
+	}*/
 	return sTime;
 }
 bool CommandProcessor::actualKeyWord(char userCmd[MAX_COMMAND_SIZE]){
@@ -458,6 +458,7 @@ bool CommandProcessor::parseDateTime(char dateTime[MAX_TIME_SIZE]){
 	int i = 0, j, tempTime = 0, first = -1, second = -1, third = -1;
 
 	while(i < strlen(dateTime)){
+		first = second = third = -1;
 		for(j = 0; i < strlen(dateTime) && dateTime[i] != ' '; i++, j++){
 			singleWord[j] = dateTime[i];
 		}
@@ -493,12 +494,13 @@ bool CommandProcessor::parseDateTime(char dateTime[MAX_TIME_SIZE]){
 
 			
 			if(time == true && date == true){
-				if(i == strlen(dateTime)){
+				if(i >= (strlen(dateTime) - 3)){
 					CommandProcessor::addZeroes(singleWord);
 					CommandProcessor::convertTime(singleWord);
 					if(strlen(finalTime) == 0){
 						strcat(finalTime, "00000000");
 					}
+					finalTime[8] = '\0';
 					strcat(finalTime, singleWord);
 				}
 			
@@ -515,6 +517,7 @@ bool CommandProcessor::parseDateTime(char dateTime[MAX_TIME_SIZE]){
 				if(strlen(finalTime) == 0){
 						strcat(finalTime, "00000000");
 					}
+				finalTime[8] = '\0';
 				strcat(finalTime, singleWord);
 			}
 			else if(date == true){
@@ -1029,16 +1032,19 @@ void CommandProcessor::deleteConsecSpaces(char input[MAX_INPUT_SIZE]){
 tm CommandProcessor::evaluateMonth(char month[MAX_TIME_SIZE], char finalTime[MAX_TIME_SIZE]){
 	time_t curr;
 	time(&curr);
-	tm* returnTime ;
-	returnTime = localtime(&curr); 
-	returnTime->tm_mon++;
-	returnTime->tm_mday = 1;
-	returnTime->tm_year += 1900;
-	int wday = returnTime->tm_wday;
+	tm* returnTime ,*now;
+	now = localtime(&curr);
+	now->tm_mon++;
+	now->tm_mday = 1;
+	now->tm_year += 1900;
+	int wday = now->tm_wday;
 	
 	if(strlen(finalTime) != 0){
 		returnTime = CommandProcessor::stringToTime(finalTime);
 		returnTime->tm_wday = wday;
+	}
+	else{
+		returnTime = now;
 	}
 	
 	
@@ -1061,67 +1067,68 @@ tm CommandProcessor::evaluateMonth(char month[MAX_TIME_SIZE], char finalTime[MAX
 	}
 	else if(isFeb == true){
 		returnTime->tm_mon = 2;
-		if(returnTime->tm_mon > 1){
+		if(now->tm_mon > 1){
 			returnTime->tm_year++;			
 		}
 	}
 	else if(isMar == true){
 		returnTime->tm_mon = 3;
-		if(returnTime->tm_mon >= 3){
+		if((now->tm_mon > 3) || (now ->tm_mon == 3 && now->tm_mday > returnTime->tm_mday)){
 			returnTime->tm_year++;			
 		}
+		
 	}
 	else if(isApr == true){
 		returnTime->tm_mon = 4;
-		if(returnTime->tm_mon >= 4){
+		if((now->tm_mon > 4) || (now ->tm_mon == 4 && now->tm_mday > returnTime->tm_mday)){
 			returnTime->tm_year++;			
 		}
 	}
 	else if(isMay == true){
 		returnTime->tm_mon = 5;
-		if(returnTime->tm_mon >= 5){
+		if((now->tm_mon > 5) || (now ->tm_mon == 5 && now->tm_mday > returnTime->tm_mday)){
 			returnTime->tm_year++;			
 		}
 	}
 	else if(isJun == true){
 		returnTime->tm_mon = 6;
-		if(returnTime->tm_mon >= 6){
+		if((now->tm_mon > 6) || (now ->tm_mon == 6 && now->tm_mday > returnTime->tm_mday)){
 			returnTime->tm_year++;			
 		}
 	}
 	else if(isJul == true){
 		returnTime->tm_mon = 7;
-		if(returnTime->tm_mon >= 7){
+		if((now->tm_mon > 7) || (now ->tm_mon == 7 && now->tm_mday > returnTime->tm_mday)){
 			returnTime->tm_year++;			
 		}
 	}
 	else if(isAug == true){
 		returnTime->tm_mon = 8;
-		if(returnTime->tm_mon >= 8){
+		if((now->tm_mon > 8) || (now ->tm_mon == 8 && now->tm_mday > returnTime->tm_mday)){
 			returnTime->tm_year++;			
 		}
 	}
 	else if(isSep == true){
 		returnTime->tm_mon = 9;
-		if(returnTime->tm_mon >= 9){
+		if((now->tm_mon > 9) || (now ->tm_mon == 9 && now->tm_mday > returnTime->tm_mday)){
 			returnTime->tm_year++;			
 		}
 	}
 	else if(isOct == true){
 		returnTime->tm_mon = 10;
-		if(returnTime->tm_mon >= 10){
+		if((now->tm_mon > 10) || (now ->tm_mon == 10 && now->tm_mday > returnTime->tm_mday)){
 			returnTime->tm_year++;			
 		}
 	}
 	else if(isNov == true){
 		returnTime->tm_mon = 11;
-		if(returnTime->tm_mon >= 11){
+		if((now->tm_mon > 11) || (now ->tm_mon == 11 && now->tm_mday > returnTime->tm_mday)){
 			returnTime->tm_year++;			
 		}
 	}
 	else if(isDec == true){
 		returnTime->tm_mon = 12;
-		if(returnTime->tm_mon >= 12){
+		if((now->tm_mon > 12) || (now ->tm_mon == 12 && now->tm_mday > returnTime->tm_mday)){
 			returnTime->tm_year++;			
 		}
 	}
