@@ -29,26 +29,42 @@ const string UI::MESSAGE_EXIT = "Exiting iDo now." ;
 const string UI::MESSAGE_UNDONE = "Command successfully undone." ;
 const string UI::MESSAGE_UNDO_FAIL = "Undo not possible." ;
 
-void UI::makeConvertibleToString(tm * & timePointer) {
-
-
-
+void UI::makeConvertibleToString(tm * timePointer) {
+	
+	timePointer->tm_year -= 1900;
+	timePointer->tm_mon -= 1;
+	timePointer->tm_isdst = -1;
+	timePointer->tm_wday = 0;
+	timePointer->tm_yday = 0;
+	timePointer->tm_sec = 0;
 
 }
 
-void UI::changeBackTimePointer(tm * &) {
+void UI::changeBackTimePointer(tm * timePointer) {
+
+	timePointer->tm_mon += 1;
+    timePointer->tm_year += 1900;
 
 }
+
 
 void UI::displayTimedTasks(tm * & startTime, tm * & endTime, string description, int taskNo) {
 
-	//makeConvertibleToString(startTime) ;
-	//makeConvertibleToString(endTime) ;
+	makeConvertibleToString(startTime) ;
+	makeConvertibleToString(endTime) ;
 	cout << taskNo << "\t" << description << setw(17) ;
 	cout << asctime(startTime) << asctime(endTime) ;
-   // changeBackTimePointer(startTime) ;
-	//changeBackTimePointer(endTime) ;
+    changeBackTimePointer(startTime) ;
+	changeBackTimePointer(endTime) ;
 
+}
+
+void UI::displayDeadlineTasks(tm * & deadline, string description, int taskNo) {
+
+	makeConvertibleToString(deadline) ;
+	cout << taskNo << "\t" << description << "\t" ;
+	cout << asctime(deadline) ;
+    changeBackTimePointer(deadline) ;
 }
 
 void UI::displayHomeScreen(vector<Task*> tasksToDisplay) {
@@ -79,13 +95,11 @@ void UI::displayHomeScreen(vector<Task*> tasksToDisplay) {
 	 }
 
 	 else if(startTime == NULL && endTime != NULL) {
-		 cout << taskNo << "\t" << description << "\t" ;
-		 cout << asctime(endTime) ;
+		displayDeadlineTasks(endTime, description, taskNo) ;
 	 }
 
 	 else if(startTime != NULL && endTime == NULL) {
-		 cout << taskNo << "\t" << description << "\t"  ;
-		 cout << asctime(endTime) ;
+		displayDeadlineTasks(startTime, description, taskNo) ;
 	 }
 
 	 //floating tasks, sorted to the bottom of tasksToDisplay
@@ -179,7 +193,6 @@ void UI::displayFalseFeedback(string command) {
 	}
 
  }
-
 
 void UI::placeCursorAt(int x, int y) {
 	

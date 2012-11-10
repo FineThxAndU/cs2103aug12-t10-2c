@@ -18,8 +18,8 @@ private:
 	
 	string userInput ;
 	void placeCursorAt(const int, const int) ;
-	void makeConvertibleToString(tm * & timePointer) ;
-	void changeBackTimePointer(tm * &) ;
+	void makeConvertibleToString(tm * timePointer) ;
+	void changeBackTimePointer(tm *) ;
 	void displayTimedTasks(tm * &, tm * &, string, int taskNo) ;
 	void displayDeadlineTasks(tm * &, string, int taskNo) ;
 	COORD currentCursor ;

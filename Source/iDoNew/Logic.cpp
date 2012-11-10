@@ -26,7 +26,7 @@ int Logic::logicMain()
 	searchObj.setInputList(taskList);
 	searchObj.executeSearchTime(userInputTask);
 	introList = searchObj.getResults();
-	//UIObj.displayHomeScreen(introList);
+	UIObj.displayHomeScreen(introList);
 	searchObj.clearSearchResults();
 	while(1)
 	{ 
