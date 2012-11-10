@@ -14,25 +14,24 @@ using namespace std;
 
 /************************************************************************/
 
-//TEST(basic_test, cmdProcessor)
-//
-//{
-//	CommandProcessor cp;
-//	Task *newTask = new TimedTask;
-//	string op = cp.cmdProcessor("meeting [start] 30.08.93 9.25 boss at office", newTask).c_str();
-//	
-//	ASSERT_EQ(0, strcmp("add",op.c_str()));
-//	ASSERT_EQ(0, strcmp("meeting boss at office ", newTask->getDesc().c_str()));
-//	ASSERT_EQ(30, newTask->getEnd()->tm_mday);
-//	ASSERT_EQ(8, newTask->getEnd()->tm_mon);
-//	ASSERT_EQ(93, newTask->getEnd()->tm_year);
-//	ASSERT_EQ(9, newTask->getEnd()->tm_hour);
-//	ASSERT_EQ(25, newTask->getEnd()->tm_min);
-//	delete newTask;
-//
-//}
-//
+/*
+TEST(basic_test, cmdProcessor)
 
+{
+	CommandProcessor cp;
+	Task *newTask = new TimedTask;
+	string op = cp.cmdProcessor("meeting [start] 30.08.93 9.25 boss at office", newTask).c_str();
+	ASSERT_EQ(0, strcmp("add",op.c_str()));	ASSERT_EQ(0, strcmp("meeting boss at office ", newTask->getDesc().c_str()));
+	ASSERT_EQ(30, newTask->getEnd()->tm_mday);
+	ASSERT_EQ(8, newTask->getEnd()->tm_mon);
+    ASSERT_EQ(93, newTask->getEnd()->tm_year);
+    ASSERT_EQ(9, newTask->getEnd()->tm_hour);
+    ASSERT_EQ(25, newTask->getEnd()->tm_min);
+    delete newTask;
+
+}
+
+*/
 
 //	CommandProcessor cp;
 //	int a[] = {1, 2, 6, 4, 8, 10, 13, 15};

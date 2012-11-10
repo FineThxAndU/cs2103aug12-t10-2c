@@ -10,10 +10,10 @@ class Sort
 	string criteria;
 	char order;
 	bool isFirstGreater(tm, tm) ;
-	bool isFirstLower(tm, tm) ;
+	//bool isFirstLower(tm, tm) ;
 public:
 	Sort();
-	void executeSort();
+	vector <Task*> executeSort();
 	void sortByDescripAsc();
 	void sortByTimeAsc();
 	void sortByDescripDesc();
