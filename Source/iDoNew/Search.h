@@ -3,6 +3,7 @@
 #include "Task.h"
 #include <string>
 #include <vector>
+#include <time.h>
 
 class Search
 {
@@ -19,5 +20,6 @@ class Search
 		vector<Task*> getResults ();
 		vector<Task*> getInputList();
 		void clearSearchResults();
+		bool executeSearchTime(Task* query);
 };
 #endif

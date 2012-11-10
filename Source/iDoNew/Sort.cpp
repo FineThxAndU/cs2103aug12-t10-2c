@@ -22,8 +22,8 @@ void Sort::setOrder(char order){
 	Sort::order = order;
 }
 
-void Sort::executeSort(){
-
+vector <Task*> Sort::executeSort(){
+	
 	if(strcmpi(Sort::criteria.c_str(), "time") == 0){
 		if(tolower(Sort::order) == 'a')
 			sortByTimeAsc();
@@ -36,6 +36,7 @@ void Sort::executeSort(){
 			else if(tolower(Sort::order) == 'd')
 					Sort::sortByDescripDesc();
 	}
+	return inputList;
 }
 
 void Sort::sortByDescripAsc(){
@@ -75,13 +76,14 @@ void Sort::sortByTimeAsc(){
 			}
 		}
 	}
+	//return inputList;
 }
 
-void Sort::sortByTimeDesc(){
+void Sort::sortByTimeDesc() {
 	for(int i = 0; i < Sort::inputList.size() - 1; i++){
 		for(int j = 0; j < Sort::inputList.size() - 1 - i; j++){
 			//if first parameter less than second parameter
-			if(isFirstLower(*(inputList[j]->getEnd()),*(inputList[j+1]->getEnd()))) {
+			if(!isFirstGreater(*(inputList[j]->getEnd()),*(inputList[j+1]->getEnd()))) {
 				Task *temp = Sort::inputList[j];
 				Sort::inputList[j] = Sort::inputList[j + 1];
 				Sort::inputList[j + 1] = temp;
@@ -92,7 +94,7 @@ void Sort::sortByTimeDesc(){
 
 bool Sort::isFirstGreater(tm t1, tm t2) {
 
-	if(t1.tm_year > t2.tm_year)
+	/*if(t1.tm_year > t2.tm_year)
 		return true;
 	else if(t1.tm_mon > t2.tm_mon)
 		return true;
@@ -105,10 +107,29 @@ bool Sort::isFirstGreater(tm t1, tm t2) {
 	else if(t1.tm_sec >t2.tm_sec)
 		return true;
 	else
-		return false;
+		return false;*/
+t1.tm_isdst=-1;
+t1.tm_year-=1900;
+t1.tm_sec=0;
+t1.tm_wday=0;
+t1.tm_mon-=1;
+t1.tm_yday=0;
+
+t2.tm_isdst=-1;
+t2.tm_year-=1900;
+t2.tm_sec=0;
+t2.tm_wday=0;
+t2.tm_mon-=1;
+t2.tm_yday=0;
+bool returnVal=false;
+if( difftime(mktime(&t1),mktime(&t2))>0)
+	returnVal = true;
+else
+	returnVal = false;
+return returnVal;
 }
 
-bool Sort::isFirstLower(tm t1, tm t2){
+/*bool Sort::isFirstLower(tm t1, tm t2){
 
 	if(t1.tm_year < t2.tm_year)
 		return true;
@@ -124,4 +145,4 @@ bool Sort::isFirstLower(tm t1, tm t2){
 		return true;
 	else
 		return false;
-}
+}*/

@@ -5,7 +5,8 @@
 #include <string>
 #include <vector>
 #include <iomanip>
-#include <Windows.h>
+#include <windows.h>
+#include <time.h>
 #include "Task.h" 
 
 using namespace std ;
@@ -17,7 +18,12 @@ private:
 	
 	string userInput ;
 	void placeCursorAt(const int, const int) ;
+	void makeConvertibleToString(tm * & timePointer) ;
+	void changeBackTimePointer(tm * &) ;
+	void displayTimedTasks(tm * &, tm * &, string, int taskNo) ;
+	void displayDeadlineTasks(tm * &, string, int taskNo) ;
 	COORD currentCursor ;
+
 	
 	static const int TABLE_START_POSITION_X = 2 ;
 	static const int TABLE_START_POSITION_Y = 4 ;
@@ -52,6 +58,10 @@ private:
 	void displayHomeScreen(vector<Task*>) ; 
 
 	void feedback(bool, string command) ;
+
+	void displayTrueFeedback(string command) ;
+
+	void displayFalseFeedback(string command) ;
 
 	void printThis(string) ;
 	

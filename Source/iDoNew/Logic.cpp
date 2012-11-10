@@ -24,9 +24,9 @@ int Logic::logicMain()
 	userInputTask = new TimedTask;
 	userInputTask->setStart(current);
 	searchObj.setInputList(taskList);
-	searchObj.executeSearch(userInputTask);
+	searchObj.executeSearchTime(userInputTask);
 	introList = searchObj.getResults();
-	UIObj.displayHomeScreen(introList);
+	//UIObj.displayHomeScreen(introList);
 	searchObj.clearSearchResults();
 	while(1)
 	{ 
@@ -289,7 +289,7 @@ bool Logic::addTask(Task* userInputTask)
 //	setUndoStack(ADD,userInputTask,-1);
 	//sort that taskList using sort obj
 	sortObj.setInputList(taskList);
-	sortObj.executeSort();
+	taskList=sortObj.executeSort();
 	//write to file
 	fileObj.setTaskList(taskList);
 	fileObj.writeList();
