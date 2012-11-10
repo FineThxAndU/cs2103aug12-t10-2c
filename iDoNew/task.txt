@@ -1,140 +1,22 @@
-meet prof 
-0
-30
-7
-2013
-7
-45
-meeting prod 
-0
-30
-9
-2013
-19
-45
-meeting prof 
-0
-6
-6
-2013
-19
-0
-meeting cs tutor 
-0
-30
-11
-2013
+meeting1 
 10
-39
-meeting prof 
-0
-30
-11
-2013
-10
-39
-meeting damith 
-0
-30
-12
-2013
-10
-39
-meeting for project 
-0
-30
-12
-2013
-10
-41
-meeting for 2103 
-0
-0
-meeting 2103 
-0
-30
-11
-2013
-10
-50
-meet prof 
-0
-30
-12
-2012
-10
-57
-meet prof 
-0
-30
-7
-2013
-10
-58
-meet prof 
-0
-30
-6
-2013
-10
-58
-meet for project 
-0
-12
 11
 2012
+18
+0
 10
-59
-meeting for proj 
-0
-12
-11
-2012
-11
-0
-submit project 
-0
-8
 11
 2012
 19
 0
-submit 
-0
-8
+meeting2 
+10
 11
 2012
-11
-2
-submit 2271 
+21
 0
+10
+11
+2012
 22
-11
-2012
-11
-3
-submit 2103 
 0
-8
-11
-2012
-11
-3
-submit 2021 homework 
-8
-11
-2012
-11
-4
-9
-11
-2012
-11
-4
-go to movie 
-0
-12
-11
-2012
-11
-5

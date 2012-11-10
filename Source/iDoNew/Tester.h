@@ -25,15 +25,15 @@ using namespace std;
 //	ASSERT_EQ(0, strcmp("meeting boss at office ", newTask->getDesc().c_str()));
 //	ASSERT_EQ(30, newTask->getEnd()->tm_mday);
 //	ASSERT_EQ(8, newTask->getEnd()->tm_mon);
-//	ASSERT_EQ(1993, newTask->getEnd()->tm_year);
+//	ASSERT_EQ(93, newTask->getEnd()->tm_year);
 //	ASSERT_EQ(9, newTask->getEnd()->tm_hour);
 //	ASSERT_EQ(25, newTask->getEnd()->tm_min);
 //	delete newTask;
 //
 //}
 //
-//TEST(basic_test, intProcessor)
-//{
+
+
 //	CommandProcessor cp;
 //	int a[] = {1, 2, 6, 4, 8, 10, 13, 15};
 //	vector<int> results = cp.intProcessor("1 2 6 4 8 10 13 15");
@@ -43,8 +43,8 @@ using namespace std;
 //
 //TEST(basic_test, cmdType)
 //{
-//	CommandProcessor cp;
-//	char keyword[100];
+//this test will no longer pass
+/*
 //	
 //	strcpy(keyword, "ad");
 //	cp.actualKeyWord(keyword);
@@ -75,7 +75,7 @@ using namespace std;
 //TEST(basic_test, trim)
 //{
 //	CommandProcessor cp;
-//	char toTrim[100];
+*/
 //	strcpy(toTrim, "[abcdefg]");
 //	cp.trim(toTrim);
 //	ASSERT_EQ(0, strcmp("abcdefg", toTrim));
@@ -130,6 +130,14 @@ using namespace std;
 //	ASSERT_EQ(0,strcmp(dateTime,"300809"));
 //}
 
+TEST(basic_test, addZeroes)
+{
+	CommandProcessor cp;
+	char dateTime[100];
+	strcpy(dateTime, "30.8.9");
+	cp.addZeroes(dateTime);
+	ASSERT_EQ(0,strcmp(dateTime,"300809"));
+}
 /************************************************************************/
 
 /* Test function to be called in main */

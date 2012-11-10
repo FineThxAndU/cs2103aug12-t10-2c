@@ -9,6 +9,8 @@ class Sort
 	vector<Task*> inputList;
 	string criteria;
 	char order;
+	bool isFirstGreater(tm, tm) ;
+	bool isFirstLower(tm, tm) ;
 public:
 	Sort();
 	void executeSort();

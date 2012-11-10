@@ -3,14 +3,12 @@
 
 #include <iostream>
 #include <string>
-#include "Task.h" 
 #include <vector>
 #include <iomanip>
 #include <Windows.h>
+#include "Task.h" 
 
 using namespace std ;
-
-
 
 class UI
 {
@@ -21,10 +19,6 @@ private:
 	void placeCursorAt(const int, const int) ;
 	COORD currentCursor ;
 	
-	//switch back to white after printing 
-	//not implemented yet
-	void printInColor() ;
-
 	static const int TABLE_START_POSITION_X = 2 ;
 	static const int TABLE_START_POSITION_Y = 4 ;
 	static const string TABLE_FIELDS ;
@@ -34,6 +28,9 @@ private:
 	static const string MESSAGE_HELP ;
 	static const string MESSAGE_INVALID ;
 
+	static const string MESSAGE_ALTERNATE_SUCCESS ; 
+	static const string MESSAGE_ALTERNATE_FAIL ;
+
 	static const string MESSAGE_ADDED ;
 	static const string MESSAGE_INVALID_ADD ;
 
@@ -41,33 +38,22 @@ private:
 	static const string MESSAGE_INVALID_DELETE ;
 
 	static const string MESSAGE_EDITED ;
-	//static const string MESSAGE_INVALID_EDIT ;
+	static const string MESSAGE_INVALID_EDIT ;
 
 	static const string MESSAGE_SEARCH_SUCCESS ;
 	static const string MESSAGE_INVALID_SEARCH ;
 
 	static const string MESSAGE_EXIT ;
 	static const string MESSAGE_UNDONE ;
+	static const string MESSAGE_UNDO_FAIL ;
 
-   
  public:
 
 	void displayHomeScreen(vector<Task*>) ; 
 
-	//this one is not yet implemented
-	void displayFloatingTasks(vector<Task*>) ;
-
 	void feedback(bool, string command) ;
 
 	void printThis(string) ;
-	
-	//to be implemented later - for now all feedback in feedback function
-
-	//void addFeedback(bool) 
-	//void deleteFeedback(bool) 
-	//void editFeedback(bool) 
-	//void searchFeedback(bool) 
-	//void undoFeedback(bool) 
 	
 	string getUserInput() ;
 

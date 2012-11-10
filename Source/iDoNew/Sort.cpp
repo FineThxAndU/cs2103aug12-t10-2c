@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "Sort.h"
 
 
@@ -68,7 +67,8 @@ void Sort::sortByDescripDesc(){
 void Sort::sortByTimeAsc(){
 	for(int i = 0; i < Sort::inputList.size() - 1; i++){
 		for(int j = 0; j < Sort::inputList.size() - 1 - i; j++){
-			if(Sort::inputList[j]->getEnd() > Sort::inputList[j+1]->getEnd()) {
+			//if first parameter greater than second parameter
+			if(isFirstGreater(*(inputList[j]->getEnd()),*(inputList[j+1]->getEnd()))) {
 				Task *temp = Sort::inputList[j];
 				Sort::inputList[j] = Sort::inputList[j + 1];
 				Sort::inputList[j + 1] = temp;
@@ -80,7 +80,8 @@ void Sort::sortByTimeAsc(){
 void Sort::sortByTimeDesc(){
 	for(int i = 0; i < Sort::inputList.size() - 1; i++){
 		for(int j = 0; j < Sort::inputList.size() - 1 - i; j++){
-			if(Sort::inputList[j]->getEnd() < Sort::inputList[j+1]->getEnd()) {
+			//if first parameter less than second parameter
+			if(isFirstLower(*(inputList[j]->getEnd()),*(inputList[j+1]->getEnd()))) {
 				Task *temp = Sort::inputList[j];
 				Sort::inputList[j] = Sort::inputList[j + 1];
 				Sort::inputList[j + 1] = temp;
@@ -89,7 +90,7 @@ void Sort::sortByTimeDesc(){
 	}
 }
 
-bool operator > (tm t1, tm t2){
+bool Sort::isFirstGreater(tm t1, tm t2) {
 
 	if(t1.tm_year > t2.tm_year)
 		return true;
@@ -107,7 +108,7 @@ bool operator > (tm t1, tm t2){
 		return false;
 }
 
-bool operator < (tm t1, tm t2){
+bool Sort::isFirstLower(tm t1, tm t2){
 
 	if(t1.tm_year < t2.tm_year)
 		return true;

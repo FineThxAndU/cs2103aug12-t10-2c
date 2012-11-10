@@ -1,5 +1,5 @@
 #include "DeadlinedTask.h"
-#include "stdafx.h"
+
 DeadlinedTask::DeadlinedTask(){
 	DeadlinedTask::startTime = NULL;
 	DeadlinedTask::endTime = NULL;

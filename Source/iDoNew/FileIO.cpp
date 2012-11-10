@@ -2,7 +2,7 @@
 #include "FloatingTask.h"
 #include "DeadlinedTask.h"
 #include "TimedTask.h"
-#include "stdafx.h"
+
 
 const int MAX_INPUT_SIZE = 100;
 
@@ -11,6 +11,44 @@ vector<Task*> FileIO::getTaskList(){
 	return FileIO::taskList;
 
 }
+
+string FileIO::convertToString(char * charArray) {
+
+	string str ;
+	stringstream ss ;
+	ss << charArray ;
+	ss >> str ;
+	return str ;
+
+}
+
+vector<string> FileIO::readFromFile() {
+
+	ifstream fin(FileIO::fileName, ios::in) ;
+	char line[MAX_CHAR_IN_LINE] ;
+	
+	string strLine ;
+	vector<string> fileContents ;
+	
+	while(fin.getline(line,MAX_CHAR_IN_LINE)) {
+		strLine = convertToString(line) ;
+		fileContents.push_back(strLine) ;
+	}
+
+    fin.close() ;
+	return fileContents ;
+}
+
+void FileIO::writeToFile(const char * word) {
+
+	ofstream fout(FileIO::fileName, ios::app|ios::out) ;
+
+	fout << word << endl ; 
+
+	fout.close() ;
+
+}
+
 void FileIO::setFileName(string fileName){
 	this->fileName = fileName.c_str();
 }
@@ -119,12 +157,14 @@ void FileIO::setTaskList(vector<Task*>& list){
 		check = 1;
 	  }
 	}
-	fin.close();
+	fin.close() ;
 }
+
 void FileIO::writeList(){
 	ofstream fout(FileIO::fileName);
 	string day, month, year, hour, min;
 	char buffer[MAX_INPUT_SIZE];
+
 	for(int i = 0; i < FileIO::taskList.size(); i++){
 		fout.write(FileIO::taskList[i]->getDesc().c_str(), strlen(FileIO::taskList[i]->getDesc().c_str())).put('\n');
 		if(FileIO::taskList[i]->getStart() == NULL){
@@ -147,10 +187,12 @@ void FileIO::writeList(){
 			min = buffer;
 			fout.write(min.c_str(), strlen(min.c_str())).put('\n');
 		}
+
 		if(FileIO::taskList[i]->getEnd()==NULL){
 			fout.write("0", 1).put('\n');
 		}
-		else{
+
+		else {
 			itoa(FileIO::taskList[i]->getEnd()->tm_mday, buffer, 10);
 			day = string(buffer);
 			fout.write(day.c_str(), strlen(day.c_str())).put('\n');
