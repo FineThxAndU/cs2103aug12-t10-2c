@@ -1,5 +1,5 @@
 #include "CommandProcessor.h"
-
+//For processing the serial numbers of the tasks entered by the user when multiple tasks are to be edited or deleted
 vector <int> CommandProcessor::intProcessor (string userInput)
 {
 	vector <int> integers; 
@@ -20,7 +20,7 @@ vector <int> CommandProcessor::intProcessor (string userInput)
 		integers.push_back(temp);
 	return integers;
 }
-
+//Processing the initial command entered by the user
 string CommandProcessor::cmdProcessor (string userInput, Task*& newTask, Task*& editTask)
 {
 	int i, j;
@@ -153,7 +153,7 @@ string CommandProcessor::cmdProcessor (string userInput, Task*& newTask, Task*& 
 	
 	}
 }
-
+//Processes the edit command
 void CommandProcessor::editProcessor(string userInput, Task*& newTask, Task*&editTask){
 	char cmd[MAX_COMMAND_SIZE], description[MAX_INPUT_SIZE], singleWord[MAX_INPUT_SIZE], tempSingleWord[MAX_INPUT_SIZE];
 	int i, j;
@@ -201,7 +201,7 @@ void CommandProcessor::editProcessor(string userInput, Task*& newTask, Task*&edi
 		descProcessor(description, newTask);
 	}
 }
-
+//Processes the description entered by the user for edit and delete
 void CommandProcessor::descProcessor (string userInput, Task*& newTask)
 {
 	int i = 0, j;
@@ -356,17 +356,16 @@ void CommandProcessor::descProcessor (string userInput, Task*& newTask)
 	}
 		
 }
-
+//Converts a string of the form ddmmyyyyhhmm to a tm structure and returns a pointer to it
 tm* CommandProcessor::stringToTime (string startTime)
 {
 	tm* now = new tm;
 	CommandProcessor::setCurrentTime(now);
 	tm* sTime=new tm;
 	int index=0;
-	
-	int date=(startTime[0]-ASCII_VALUE_0)*10+(startTime[1]-ASCII_VALUE_0);
-	int month=(startTime[2]-ASCII_VALUE_0)*10+(startTime[3]-ASCII_VALUE_0);
-	int year=(startTime[4]-ASCII_VALUE_0)*1000+(startTime[5]-ASCII_VALUE_0)*100+(startTime[6]-ASCII_VALUE_0)*10+(startTime[7]-ASCII_VALUE_0);
+	int date=(startTime[datemsb]-ASCII_VALUE_0)*10+(startTime[datelsb]-ASCII_VALUE_0);
+	int month=(startTime[monthmsb]-ASCII_VALUE_0)*10+(startTime[monthlsb]-ASCII_VALUE_0);
+	int year=(startTime[year4]-ASCII_VALUE_0)*1000+(startTime[year3]-ASCII_VALUE_0)*100+(startTime[year2]-ASCII_VALUE_0)*10+(startTime[year1]-ASCII_VALUE_0);
 	
 	if(date != 0){
 		sTime->tm_mday=date;
@@ -408,7 +407,7 @@ tm* CommandProcessor::stringToTime (string startTime)
 	sTime->tm_min=min;
 	return sTime;
 }
-
+//returns the actual keyword in case a synonym/wrong spelling of a keyword is entered
 bool CommandProcessor::actualKeyWord(char userCmd[MAX_COMMAND_SIZE]){
 
 	bool isAdd, isRemove, isEdit, isSearch, isExit, isUndo,isRedo;
@@ -458,7 +457,7 @@ bool CommandProcessor::actualKeyWord(char userCmd[MAX_COMMAND_SIZE]){
 	}
 
 }
-
+//checks if the string cmd is found in cmdList
 bool CommandProcessor::isFound(char cmd[MAX_COMMAND_SIZE], const char cmdList[][MAX_COMMAND_SIZE]){
 
 	int i = 0;
@@ -475,19 +474,19 @@ bool CommandProcessor::isFound(char cmd[MAX_COMMAND_SIZE], const char cmdList[][
 	return false;
 }
 
-
+//checks if a particualr word indicates start time
 bool CommandProcessor::isStart(char singleWord[MAX_WORD_SIZE]){
 	
     return CommandProcessor::isFound(singleWord, startList);
 
 }
-
+//checks if a particualr word indicates end time
 bool CommandProcessor::isEnd(char singleWord[MAX_WORD_SIZE]){
 	
 	return CommandProcessor::isFound(singleWord, endList);
 
 }
-
+//trims a word that starts with '[' and ends with ']'
 void CommandProcessor::trim(char word[MAX_COMMAND_SIZE]){
 	char trimmed[MAX_COMMAND_SIZE];
 	int i;
@@ -499,7 +498,7 @@ void CommandProcessor::trim(char word[MAX_COMMAND_SIZE]){
 	trimmed[i] = '\0';
 	strcpy(word, trimmed);
 }
-
+//Checks if a single word is a time related word
 bool CommandProcessor::isDateTime(char singleWord[MAX_WORD_SIZE]){
 	
 	bool time = isFound(singleWord, timeList);
@@ -514,7 +513,7 @@ bool CommandProcessor::isDateTime(char singleWord[MAX_WORD_SIZE]){
 	
 	return time;
 }
-
+//checks if a single word is a numerical time like 30.08.1993 or 7:30 
 bool CommandProcessor::isNumericalTime(char singleWord[MAX_COMMAND_SIZE]){
 	int first = -1, second = -1, third = -1;
 	bool returnVal = false;
@@ -528,7 +527,7 @@ bool CommandProcessor::isNumericalTime(char singleWord[MAX_COMMAND_SIZE]){
 	
 	return returnVal;
 }
-	
+//Checks if a number is a valid day of the month	
 bool CommandProcessor::isDay(int input){
 	if(input >=1 && input <= 31){
 		return true;
@@ -538,7 +537,7 @@ bool CommandProcessor::isDay(int input){
 		return false;
 	}
 }
-
+//Checks if a number is a valid month of the year
 bool CommandProcessor::isMonth(int input){
 	
 	if(input >=1 && input <= 12){
@@ -549,7 +548,7 @@ bool CommandProcessor::isMonth(int input){
 		return false;
 	}
 }
-
+//checks if a number is a valid year
 bool CommandProcessor::isYear(int input){
 	
 	if(input > 0 && input < 100){
@@ -564,7 +563,7 @@ bool CommandProcessor::isYear(int input){
 		return false;
 	}
 }
-
+//checks if a number is a valid hour in a day
 bool CommandProcessor::isHour(int input){
 	
 	if(input >= 0 && input <= 24){
@@ -575,7 +574,7 @@ bool CommandProcessor::isHour(int input){
 		return false;
 	}
 }
-
+//checks if a number is a valid minute in an hour
 bool CommandProcessor::isMinute(int input){
 	
 	if(input >= 0 && input <= 60){
@@ -585,7 +584,7 @@ bool CommandProcessor::isMinute(int input){
 		return false;
 	}
 }
-
+//Parses a string consisting of the entire date and time
 bool CommandProcessor::parseDateTime(char dateTime[MAX_TIME_SIZE]){
 	char singleWord[MAX_TIME_SIZE], finalTime[MAX_TIME_SIZE], temp[MAX_WORD_SIZE];
 	bool time = false, date = false;
@@ -701,7 +700,7 @@ bool CommandProcessor::parseDateTime(char dateTime[MAX_TIME_SIZE]){
 	
 	return true;
 }
-
+//sets date or time as true or false according to the input pos
 void CommandProcessor::setDateTimeBool(bool &date, bool & time, char dateTime[MAX_TIME_SIZE], char *pos){
 	
 	char *tmp;
@@ -711,7 +710,7 @@ void CommandProcessor::setDateTimeBool(bool &date, bool & time, char dateTime[MA
 	*(pos - 1) = '\0';
 	strcat(dateTime, tmp);
 }
-
+//Converts a date of any numerical form to ddmmyyyy
 void CommandProcessor::convertDate(char Date[MAX_TIME_SIZE]){
 	
 	int j = 0, k = 0,  year, month;
@@ -755,6 +754,8 @@ void CommandProcessor::convertDate(char Date[MAX_TIME_SIZE]){
 	}
 	strcpy(Date, tempTime);
 }
+
+//converts time of any numerical form to hhmm
 void CommandProcessor::convertTime(char Date[MAX_TIME_SIZE]){
 	int j = 0, k = 0,  year;
 	char tempTime[MAX_TIME_SIZE];
@@ -773,7 +774,7 @@ void CommandProcessor::convertTime(char Date[MAX_TIME_SIZE]){
 	
 	strcpy(Date, tempTime);
 }
-
+//adds zeroes to incomplete time strings like d/m/yy
 void CommandProcessor::addZeroes(char input[MAX_TIME_SIZE]){
 	char newDate[MAX_TIME_SIZE], tempDate[MAX_TIME_SIZE];
 	strcpy(newDate, "");
@@ -807,6 +808,7 @@ void CommandProcessor::addZeroes(char input[MAX_TIME_SIZE]){
 	strcpy(input, newDate);
 }
 
+//checks if first, second and third form a date
 bool CommandProcessor::isDate(int first, int second, int third ){
 	bool returnVal = false;
 	
@@ -846,6 +848,7 @@ bool CommandProcessor::isDate(int first, int second, int third ){
 	return returnVal;
 }
 
+//checks if first, second and third form a time
 bool CommandProcessor::isTime(int first, int second, int third ){
 	bool returnVal = false;
 	if(third == -1){
@@ -871,6 +874,7 @@ bool CommandProcessor::isTime(int first, int second, int third ){
 	return returnVal;
 }
 
+//splits a date string to 3 or 2 or 1 entity(ies) depending upon the in put like in dd/mm/yyyy first second ans third will store date, month and year respectively
 void CommandProcessor::splitTime(char singleWord[MAX_COMMAND_SIZE], int &first, int &second, int&third){
 	int buffer, i;
 	buffer = 0;
@@ -916,6 +920,7 @@ void CommandProcessor::splitTime(char singleWord[MAX_COMMAND_SIZE], int &first, 
 	}
 }
 
+//parses a character based time like sunday or next month
 void CommandProcessor::parseCharTime(char singleWord[MAX_WORD_SIZE], char finalTime[MAX_TIME_SIZE]){
 	tm *now = new tm;
 	CommandProcessor::setCurrentTime(now);
@@ -1046,6 +1051,7 @@ void CommandProcessor::parseCharTime(char singleWord[MAX_WORD_SIZE], char finalT
 		CommandProcessor::dateToString(&dateTime, finalTime);
 }
 
+//evaluates the Date according to the value in day and returns the time structure corresponding to the date
 tm CommandProcessor::evaluateDate(char day[MAX_TIME_SIZE], char finalTime[MAX_TIME_SIZE]){
 	tm* returnTime = new tm ;
 	CommandProcessor::setCurrentTime(returnTime);
@@ -1148,6 +1154,7 @@ tm CommandProcessor::evaluateDate(char day[MAX_TIME_SIZE], char finalTime[MAX_TI
 	return *returnTime;
 }
 
+//increments the Date by the number of days specified
 void CommandProcessor::incrementDate(tm *date, int days){
 
 	bool isLeap;
@@ -1189,7 +1196,7 @@ void CommandProcessor::incrementDate(tm *date, int days){
 	
 }
 
-
+//increments the month by the number of months specified
 void CommandProcessor::incrementMonth(tm *date, int months){
 	date->tm_mon += months;
 	while(date->tm_mon > 12){
@@ -1198,10 +1205,13 @@ void CommandProcessor::incrementMonth(tm *date, int months){
 			}
 	
 }
+
+//increments the year by the number of years specified
 void CommandProcessor::incrementYear(tm *date, int years){
 	date->tm_year += years;
 }
 
+//checks if a year s a leap year
 bool CommandProcessor::isLeapYear(int year){
 	
 	if(((year % 100) == 0) && ((year % 400) == 0)){
@@ -1221,6 +1231,7 @@ bool CommandProcessor::isLeapYear(int year){
 	}
 }
 
+//converts a date specified by the tm structuure date to a string of the form ddmmyyyyhhmm
 void CommandProcessor::dateToString(tm* date, char finalDate[MAX_TIME_SIZE]){
 
 	char tmp[MAX_TIME_SIZE];
@@ -1260,6 +1271,7 @@ void CommandProcessor::dateToString(tm* date, char finalDate[MAX_TIME_SIZE]){
 	strcat(finalDate, tmp);
 }
 
+//deletes consecutive spaces in the input
 void CommandProcessor::deleteConsecSpaces(char input[MAX_INPUT_SIZE]){
 	int i, j;
 	for(i = 0; i < strlen(input); i++){
@@ -1274,6 +1286,7 @@ void CommandProcessor::deleteConsecSpaces(char input[MAX_INPUT_SIZE]){
 	}
 }
 
+//evaluates the date according to the value in month and returns the time structure corresponding to the date
 tm CommandProcessor::evaluateMonth(char month[MAX_TIME_SIZE], char finalTime[MAX_TIME_SIZE]){
 	tm* returnTime ,*now = new tm;
 	CommandProcessor::setCurrentTime(now);
@@ -1404,6 +1417,7 @@ tm CommandProcessor::evaluateMonth(char month[MAX_TIME_SIZE], char finalTime[MAX
 	return *returnTime;
 }
 
+//sets the current time into now
 void CommandProcessor::setCurrentTime(tm * now){
 	time_t curr;
 	time(&curr);
@@ -1414,6 +1428,7 @@ void CommandProcessor::setCurrentTime(tm * now){
 
 }
 
+//Validates and corrects date. e.g. feb 30 is invalid
 void CommandProcessor::correctTaskDate(tm *t){
 	
 	switch(t->tm_mon){
