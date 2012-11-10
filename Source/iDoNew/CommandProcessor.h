@@ -16,7 +16,7 @@
 using namespace std;
 
 static int const ASCII_VALUE_0 = 48;
-const int hours_msb = 8, hours_lsb = 9, min_msb = 10, min_lsb = 11, date_size = 8;
+const int hours_msb = 8, hours_lsb = 9, min_msb = 10, min_lsb = 11, date_size = 8, datemsb = 0, datelsb = 1, monthmsb = 2, monthlsb = 3, year4 = 4, year3 = 5, year2 = 6, year1 = 7; 
 const int jan = 1, feb = 2, mar = 3, apr = 4, may = 5, june = 6, july = 7, aug = 8, sep = 9, octo = 10, novem = 11, decem = 12;
 const int MAX_COMMAND_SIZE = 100 , MAX_TIME_SIZE = 100, MAX_DESC_SIZE = 100, MAX_WORD_SIZE = 100 , MAX_INPUT_SIZE = 100 ;
 const char addList[][MAX_COMMAND_SIZE] = {"add" , "ad" , "a", "-1"};
@@ -25,7 +25,7 @@ const char editList[][MAX_COMMAND_SIZE] =  {"ed", "edi", "edit", "mo", "mod", "m
 const char searchList[][MAX_COMMAND_SIZE] = {"se", "sea", "sear", "searc", "search", "fi", "fin", "find","ge", "get", "-1"};
 const char undoList[][MAX_COMMAND_SIZE] = {"un", "und", "undo", "-1"};
 const char exitList[][MAX_COMMAND_SIZE] = { "esc","ex", "exi", "exit","qu","qui","quit", "-1"};
-const char startList[][MAX_COMMAND_SIZE] = {"s", "st", "sta", "star", "start","b", "be", "beg", "begi", "begin", "-1"};
+const char startList[][MAX_COMMAND_SIZE] = {"s", "st", "sta", "sta", "start","b", "be", "beg", "begi", "begin", "-1"};
 const char endList[][MAX_COMMAND_SIZE] = {"e", "en", "end", "-1"};
 const char redoList[][MAX_COMMAND_SIZE] = {"r","re","red","redo","-1"};
 const char timeList[][MAX_COMMAND_SIZE] = {"day","after","today", "tomorrow","before","yesterday", "next" , "am" , "pm", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday","th", "st","nd","rd","coming","week","month","year","January","February","March","April","May","June","July","August","September","October","November","December","now", "-1"};
