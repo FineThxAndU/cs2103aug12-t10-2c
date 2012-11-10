@@ -1,4 +1,4 @@
-﻿Build started 10/11/2012 7:08:48 PM.
+﻿Build started 10/11/2012 8:34:30 PM.
      1>Project "C:\Users\Spatika\Documents\Visual Studio 2010\Projects\iDoNew\iDoNew\iDoNew.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\iDo.unsuccessfulbuild" because "AlwaysCreate" was specified.
@@ -74,4 +74,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:03.25
+Time Elapsed 00:00:02.74
