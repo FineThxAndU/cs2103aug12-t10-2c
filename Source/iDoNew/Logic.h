@@ -30,7 +30,7 @@ class Logic
 	vector<Task*> taskList; 
 	string userInput;
 	CommandProcessor cmdObj;
-	Task* userInputTask ;
+	Task* userInputTask, *userInputNewTask ;
 	
 
 	
@@ -49,7 +49,7 @@ public:
 	Logic();
 	CommandType determineCommand(string);
     int logicMain();
-	bool execute(string,Task*);
+	bool execute(string,Task*, Task*);
 	bool addTask(Task*);
 	void deleteTask(int);
 	void setRedoStack(CommandType,Task*,int);
@@ -61,7 +61,7 @@ public:
 	bool search(Task*);
 	void editTask(int);
 	bool findToDelete(Task*);
-	bool findToEdit(Task*);
+	bool findToEdit(Task*, Task*);
 	bool redoTask();
 private:
 		stack < Logic::Input> undoStack;

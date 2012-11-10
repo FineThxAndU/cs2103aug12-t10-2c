@@ -16,6 +16,8 @@
 using namespace std;
 
 static int const ASCII_VALUE_0 = 48;
+const int hours_msb = 8, hours_lsb = 9, min_msb = 10, min_lsb = 11, date_size = 8;
+const int jan = 1, feb = 2, mar = 3, apr = 4, may = 5, june = 6, july = 7, aug = 8, sep = 9, octo = 10, novem = 11, decem = 12;
 const int MAX_COMMAND_SIZE = 100 , MAX_TIME_SIZE = 100, MAX_DESC_SIZE = 100, MAX_WORD_SIZE = 100 , MAX_INPUT_SIZE = 100 ;
 const char addList[][MAX_COMMAND_SIZE] = {"add" , "ad" , "a", "-1"};
 const char removeList[][MAX_COMMAND_SIZE] = { "del", "de", "delet", "dele", "delete", "re", "rem", "remo","remov", "remove",  "-1"};
@@ -26,7 +28,7 @@ const char exitList[][MAX_COMMAND_SIZE] = { "esc","ex", "exi", "exit","qu","qui"
 const char startList[][MAX_COMMAND_SIZE] = {"s", "st", "sta", "star", "start","b", "be", "beg", "begi", "begin", "-1"};
 const char endList[][MAX_COMMAND_SIZE] = {"e", "en", "end", "-1"};
 const char redoList[][MAX_COMMAND_SIZE] = {"r","re","red","redo","-1"};
-const char timeList[][MAX_COMMAND_SIZE] = {"day","after","today", "tomorrow","before","yesterday", "next" , "am" , "pm", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday","th", "st","nd","coming","week","month","year","January","February","March","April","May","June","July","August","September","October","November","December","now", "-1"};
+const char timeList[][MAX_COMMAND_SIZE] = {"day","after","today", "tomorrow","before","yesterday", "next" , "am" , "pm", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday","th", "st","nd","rd","coming","week","month","year","January","February","March","April","May","June","July","August","September","October","November","December","now", "-1"};
 const char monthList[][MAX_COMMAND_SIZE]  = {"January","February","March","April","May","June","July","August","September","October","November","December", "-1"};
 const char days[][MAX_COMMAND_SIZE] = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "-1"};
 
@@ -36,8 +38,9 @@ class CommandProcessor
 public:
 
 	vector<int> intProcessor (string);
-	string cmdProcessor (string, Task*& );
+	string cmdProcessor (string, Task*&, Task*& );
 	void descProcessor (string, Task*& );
+	void editProcessor(string, Task*&, Task*&);
 	tm* stringToTime (string);
 	bool actualKeyWord(char userCmd[MAX_COMMAND_SIZE]);
 	bool isFound(char cmd[MAX_COMMAND_SIZE], const char cmdList[][MAX_COMMAND_SIZE]);
@@ -52,6 +55,7 @@ public:
 	bool isHour(int input);
 	bool isMinute(int input);
 	bool parseDateTime(char dateTime[MAX_TIME_SIZE]);
+	void setDateTimeBool(bool &date, bool & time, char DateTime[MAX_TIME_SIZE], char *pos);
 	void convertDate(char Date[MAX_TIME_SIZE]);
 	void convertTime(char Date[MAX_TIME_SIZE]);
 	void addZeroes(char Date[MAX_TIME_SIZE]);
@@ -67,6 +71,8 @@ public:
 	bool isLeapYear(int year);
 	void dateToString(tm *date, char finalDate[MAX_TIME_SIZE]);
 	void deleteConsecSpaces(char input[MAX_INPUT_SIZE]);
+	void setCurrentTime(tm *now);
+	void correctTaskDate(tm *t);
 } ;
 
 
