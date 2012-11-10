@@ -1,16 +1,17 @@
-#include "stdafx.h"
 #include "UI.h"
 
 const string UI::MESSAGE_NEXT_COMMAND = "Enter Command: " ;
 const string UI::MESSAGE_WELCOME = "\t\t\t\t ****iDo****" ;
 
-//eventually we will include: undo, redo, archive, restore, done
-
-const string UI::MESSAGE_HELP = "Valid Commands: add, delete, search, edit & exit." ;
+const string UI::MESSAGE_HELP = "Valid Commands: add, delete, search, edit, undo, redo, alternate, exit and user defined ones." ;
 const string UI::MESSAGE_INVALID = "Invalid command entered!" ;
+
 const string UI::TABLE_FIELDS = "No.  Task Description\t\t\t  From/At\t\tTo\t\t" ;
 
 //const string UI::MESSAGE_EMPTY = "\niDo is empty! No tasks added yet." ;
+
+const string UI::MESSAGE_ALTERNATE_SUCCESS = "Successfully added alternate keyword." ;
+const string UI::MESSAGE_ALTERNATE_FAIL = "Unable to add alternate to keyword." ;
 
 const string UI::MESSAGE_ADDED =  "Successfully added task to schedule." ;
 const string UI::MESSAGE_INVALID_ADD = "Unable to add task to schedule." ;
@@ -19,16 +20,18 @@ const string UI::MESSAGE_DELETED = "Deleted task(s) from schedule." ;
 const string UI::MESSAGE_INVALID_DELETE = "Unable to delete/Task(s) matching entered description not found." ;
 
 const string UI::MESSAGE_EDITED = "Edited task in schedule." ;
+const string UI::MESSAGE_INVALID_EDIT = "Unable to edit/Task(s) matching entered description not found." ;
 
 const string UI::MESSAGE_SEARCH_SUCCESS = "The above tasks matched the entered description." ;
 const string UI::MESSAGE_INVALID_SEARCH = "No tasks matching the entered description were found!" ; 
 
 const string UI::MESSAGE_EXIT = "Exiting iDo now." ;
 const string UI::MESSAGE_UNDONE = "Command successfully undone." ;
+const string UI::MESSAGE_UNDO_FAIL = "Undo not possible." ;
 
 void UI::displayHomeScreen(vector<Task*> tasksToDisplay) {
 
- //tasksToDisplay has ONLY the timed and deadlined tasks right?
+ 
  system("cls") ;
  cout << MESSAGE_WELCOME ;
  int taskNo = 0 ;
@@ -49,21 +52,21 @@ void UI::displayHomeScreen(vector<Task*> tasksToDisplay) {
 	 //timed task
 	 if((*(it))->getEnd() != NULL && (*(it))-> getStart() != NULL) {
 		 cout << taskNo << "\t" << (*(it))->getDesc() << setw(17) << (*(it))->getStart()->tm_mday<<'/'
-			 <<(*(it))->getStart()->tm_mon<<'/'<<(*(it))->getStart()->tm_year<<"\t"
-			 <<(*(it))->getStart()->tm_hour<<":"<<(*(it))->getStart()->tm_min<< "\t" 
-			<<(*(it))->getEnd()->tm_mday<<'/' <<(*(it))->getEnd()->tm_mon<<'/'<<(*(it))->getEnd()->tm_year<<" "
+			 <<(*(it))->getStart()->tm_mon<<'/'<<(*(it))->getStart()->tm_year <<"\t"
+			 <<(*(it))->getStart()->tm_hour<<":"<<(*(it))->getStart()->tm_min << "\t" 
+			<<(*(it))->getEnd()->tm_mday<<'/' <<(*(it))->getEnd()->tm_mon<<'/'<<(*(it))->getEnd()->tm_year  <<" "
 			 <<(*(it))->getEnd()->tm_hour<<":"<<(*(it))->getEnd()->tm_min ; 
 	 }
 
 	 //for deadline tasks, deadline is stored in endTime
 	 else if((*(it))->getStart() == NULL && (*(it))->getEnd() != NULL) {
 	 cout << taskNo << "\t" << (*(it))->getDesc()<< "\t" << 
-		 (*(it))->getEnd()->tm_mday<<'/' <<(*(it))->getEnd()->tm_mon<<'/'<<(*(it))->getEnd()->tm_year<< " "
+		 (*(it))->getEnd()->tm_mday<<'/' <<(*(it))->getEnd()->tm_mon<<'/'<<(*(it))->getEnd()->tm_year << " "
 			 <<(*(it))->getEnd()->tm_hour<<":"<<(*(it))->getEnd()->tm_min<<setw(15);  ; 
 	 }
 	 else if((*(it))->getStart() != NULL && (*(it))->getEnd() == NULL){
 		 cout << taskNo << "\t" << (*(it))->getDesc()<< "\t" << 
-		 (*(it))->getStart()->tm_mday<<'/' <<(*(it))->getStart()->tm_mon<<'/'<<(*(it))->getStart()->tm_year<< " "
+		 (*(it))->getStart()->tm_mday<<'/' <<(*(it))->getStart()->tm_mon<<'/'<<(*(it))->getStart()->tm_year  << " "
 			 <<(*(it))->getStart()->tm_hour<<":"<<(*(it))->getStart()->tm_min<<setw(15);  ; 
 	 }
 	 //floating tasks, sorted to the bottom of tasksToDisplay
@@ -80,7 +83,8 @@ void UI::feedback(bool result, string command) {
  currentCursor.Y+= 2 ;
  placeCursorAt(currentCursor.X, currentCursor.Y) ;
 
- if(result) {	
+ if(result == true) {	
+
 	if(command == "add") {
 		cout << MESSAGE_ADDED ;
 	}
@@ -96,18 +100,21 @@ void UI::feedback(bool result, string command) {
 		cout << MESSAGE_SEARCH_SUCCESS ;
     }
 	else if(command == "exit") {
-		//need to move to atexit function
+
 		cout << MESSAGE_EXIT ; 
 		currentCursor.Y++ ;
 		placeCursorAt(currentCursor.X, currentCursor.Y) ;
 		system("pause") ;
+	}
+	else if(command == "alternate") {
+		cout << MESSAGE_ALTERNATE_SUCCESS ;
 	}
 	else {
 		cout << MESSAGE_UNDONE ;
 	}
   }
 
- 
+ //result was false
  else {
 
 	 if(command == "add") {
@@ -118,9 +125,22 @@ void UI::feedback(bool result, string command) {
 		cout << MESSAGE_INVALID_DELETE ;
 	}
 
-	else if(command == "edit" || command == "search") {
+	else if(command == "search") {
 		cout << MESSAGE_INVALID_SEARCH ;
     }
+
+	else if(command == "edit") {
+		cout << MESSAGE_INVALID_EDIT ;
+	}
+
+	else if(command == "alternate") {
+		cout << MESSAGE_ALTERNATE_FAIL ;
+	}
+
+	else if(command == "undo") {
+		cout << MESSAGE_UNDO_FAIL ;
+
+	}
 
 	else if(command == "exit") {
 		cout << MESSAGE_EXIT ;
@@ -137,7 +157,6 @@ void UI::feedback(bool result, string command) {
 }
 
 void UI::placeCursorAt(int x, int y) {
-	
 	
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	COORD cursorPosition;

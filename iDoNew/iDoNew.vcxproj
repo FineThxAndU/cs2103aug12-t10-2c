@@ -101,6 +101,7 @@
     <ClInclude Include="..\Source\iDoNew\Task.h" />
     <ClInclude Include="..\Source\iDoNew\Tester.h" />
     <ClInclude Include="..\Source\iDoNew\TimedTask.h" />
+    <ClInclude Include="..\Source\iDoNew\UI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

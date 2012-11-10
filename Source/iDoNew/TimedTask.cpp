@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "TimedTask.h"
 
 TimedTask::TimedTask(){

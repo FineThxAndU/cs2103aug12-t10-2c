@@ -3,6 +3,7 @@
 
 #include<iostream>
 #include<string>
+#include<cstring>
 #include<assert.h>
 #include<exception>
 
@@ -32,13 +33,13 @@ class Logic
 	CommandProcessor cmdObj;
 	Task* userInputTask ;
 	
-
-	
+	//for findToDelete and findToEdit
+	bool isUserIndexValid(int, vector<int>) ;
 
 public:
 	
 	static enum CommandType{
-		ADD, REMOVE, EDIT, SEARCH, UNDO,REDO,INVALID,EXIT //what happens for user command "1 2" it's not invalid, but it will determined to be in determineCommandType
+		ADD, REMOVE, EDIT, SEARCH, UNDO,REDO,ALT,INVALID,EXIT //what happens for user command "1 2" it's not invalid, but it will determined to be in determineCommandType
 	} ;
 	struct Input
 	{
@@ -46,6 +47,8 @@ public:
 		Task* taskObj;
 		int index;
 	};
+
+
 	Logic();
 	CommandType determineCommand(string);
     int logicMain();
@@ -53,6 +56,7 @@ public:
 	bool addTask(Task*);
 	void deleteTask(int);
 	void setRedoStack(CommandType,Task*,int);
+
 	
 	bool undoTask ();
 	void setUndoStack(CommandType,Task*,int);
@@ -63,6 +67,10 @@ public:
 	bool findToDelete(Task*);
 	bool findToEdit(Task*);
 	bool redoTask();
+	bool createAlternateKeyword(Task *) ;
+	void deleteExpired() ;
+	void appendToCommandList(const char *, CommandType type) ;
+
 private:
 		stack < Logic::Input> undoStack;
 		stack <Input> redoStack;
