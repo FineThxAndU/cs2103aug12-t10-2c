@@ -27,13 +27,13 @@ string FileIO::convertToString(char * charArray) {
 
 vector<string> FileIO::readFromFile() {
 
-	ifstream fin(FileIO::fileName, ios::in) ;
+	ifstream fin(fileName, ios::in) ;
 	char line[MAX_CHAR_IN_LINE] ;
 	
 	string strLine ;
 	vector<string> fileContents ;
 	
-	while(fin.getline(line,MAX_CHAR_IN_LINE)) {
+	while(fin.getline(line, MAX_CHAR_IN_LINE)) {
 		strLine = convertToString(line) ;
 		fileContents.push_back(strLine) ;
 	}
@@ -43,13 +43,12 @@ vector<string> FileIO::readFromFile() {
 }
 
 void FileIO::writeToFile(const char * word) {
-
-	ofstream fout(FileIO::fileName, ios::app|ios::out) ;
-
+	
+	ofstream fout(fileName, ios::app|ios::out) ;
+	
 	fout << word << endl ; 
 
 	fout.close() ;
-
 }
 
 void FileIO::setFileName(string fileName){

@@ -35,11 +35,20 @@ class Logic
 	string userInput;
 	CommandProcessor cmdObj;
 	Task* userInputTask ;
-	
-	static enum CommandType
-	{
-		ADD, REMOVE, EDIT, SEARCH, UNDO,REDO,ALT,INVALID,EXIT 
+
+	static enum CommandType {
+		ADD, REMOVE, EDIT, SEARCH, UNDO, REDO, ALT, EXIT 
 	} ;
+
+	static const string FILENAME_ADD_ALTERNATES ;
+	static const string FILENAME_REMOVE_ALTERNATES ;
+	static const string FILENAME_EDIT_ALTERNATES ;
+	static const string FILENAME_EXIT_ALTERNATES ;
+	static const string FILENAME_SEARCH_ALTERNATES ;
+	static const string FILENAME_ALTERNATE_ALTERNATES ;
+	static const string FILENAME_UNDO_ALTERNATES ;
+	static const string FILENAME_REDO_ALTERNATES ;
+
 	struct Input
 	{
 		CommandType type;
@@ -57,7 +66,7 @@ class Logic
 	bool execute(string,Task*);
 	CommandType determineCommand(string);
 
-	void deleteExpired() ;
+	void deleteExpiredTasks() ;
 	
 	void setRedoStack(CommandType,Task*,int);
 	void setUndoStack(CommandType,Task*,int);
@@ -81,10 +90,10 @@ public:
 	bool findToDelete(Task*);
 	void deleteTask(int);
 	bool findToEdit(Task*);
-	bool createAlternateKeyword(Task *) ;
-	void appendToCommandList(const char *, CommandType type) ;
-	bool isUserIndexValid(int, vector<int>) ;
+	bool createAlternateKeyword(Task *) ;	
 
+	bool isUserIndexValid(int, vector<int>) ;
+	
 	bool undoTask ();
 	bool redoTask();
 };

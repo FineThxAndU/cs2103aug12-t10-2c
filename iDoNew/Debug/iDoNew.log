@@ -1,13 +1,18 @@
-﻿Build started 11/11/2012 11:59:18 AM.
+﻿Build started 10/11/2012 8:34:30 PM.
      1>Project "C:\Users\Supraja\Documents\Visual Studio 2010\Projects\iDoNew\iDoNew\iDoNew.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
-         Creating "Debug\iDo.unsuccessfulbuild" because "AlwaysCreate" was specified.
+         Touching "Debug\iDo.unsuccessfulbuild".
        ClCompile:
-         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\Source\iDoNew\Main.cpp
-         Main.cpp
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\tester.h(160): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\Source\iDoNew\Logic.cpp
+         Logic.cpp
+     1>c:\users\spatika\documents\visual studio 2010\projects\idonew\source\idonew\logic.cpp(23): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\time.inl(112) : see declaration of 'localtime'
+     1>c:\users\spatika\documents\visual studio 2010\projects\idonew\source\idonew\logic.cpp(146): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\tester.h(178): warning C4700: uninitialized local variable 'start' used
+     1>c:\users\spatika\documents\visual studio 2010\projects\idonew\source\idonew\logic.cpp(150): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\spatika\documents\visual studio 2010\projects\idonew\source\idonew\logic.cpp(155): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>c:\users\spatika\documents\visual studio 2010\projects\idonew\source\idonew\logic.cpp(302): warning C4553: '==' : operator has no effect; did you intend '='?
        Link:
          c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Supraja\Documents\Visual Studio 2010\Projects\iDoNew\Debug\iDo.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\Users\Supraja\Documents\Visual Studio 2010\Projects\iDoNew\lib" gtestd.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\iDo.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Supraja\Documents\Visual Studio 2010\Projects\iDoNew\Debug\iDo.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Supraja\Documents\Visual Studio 2010\Projects\iDoNew\Debug\iDo.lib" /MACHINE:X86 Debug\CommandProcessor.obj
          Debug\DeadlinedTask.obj
@@ -30,4 +35,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:06.79
+Time Elapsed 00:00:02.74
