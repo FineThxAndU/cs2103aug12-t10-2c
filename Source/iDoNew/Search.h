@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 #include <time.h>
+#include <assert.h>
+#include <exception>
 
 class Search
 {
@@ -21,5 +23,8 @@ class Search
 		vector<Task*> getInputList();
 		void clearSearchResults();
 		bool executeSearchTime(Task* query);
+		void makeConvertible(tm*);
+		void formatHourYear(tm*);
+		void revertToOriginalTime( tm *time, int hour);
 };
 #endif

@@ -5,6 +5,9 @@
 
 
 const int MAX_INPUT_SIZE = 100;
+const string TASK_LOG_FILE_NAME = "Input.txt";
+const string ERROR_LOG_FILE_NAME = "Error.txt";
+
 
 vector<Task*> FileIO::getTaskList(){
 
@@ -214,4 +217,22 @@ void FileIO::writeList(){
 
 	fout.close();
 
+}
+
+void FileIO::writeErrorLog (string log){
+	ofstream filePtr(TASK_LOG_FILE_NAME, ios::app);
+	tm* current=getCurrentTime(); 
+	// make time
+
+	filePtr << current << log << endl;
+
+	
+}
+
+tm* FileIO::getCurrentTime()	{
+	time_t now;
+	struct tm *current;
+	time(&now);
+	current = localtime(&now);
+	return current;
 }

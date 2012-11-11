@@ -1,11 +1,15 @@
 #ifndef LOGIC_H_
 #define LOGIC_H_
 
-#include<iostream>
-#include<string>
-#include<cstring>
-#include<assert.h>
-#include<exception>
+#include <iostream>
+#include <string>
+#include <cstring>
+#include <assert.h>
+#include <exception>
+#include <time.h>
+#include <time.h>
+#include <vector>
+#include <stack>
 
 using namespace std;
 
@@ -18,12 +22,11 @@ using namespace std;
 #include "TimedTask.h"
 #include "DeadlinedTask.h"
 #include "FloatingTask.h"
-#include <time.h>
-#include <vector>
-#include <stack>
+
 
 class Logic
 {
+	static const string TASK_FILE_NAME;
 	UI UIObj;
 	Search searchObj;
 	FileIO fileObj;
@@ -33,13 +36,9 @@ class Logic
 	CommandProcessor cmdObj;
 	Task* userInputTask ;
 	
-	//for findToDelete and findToEdit
-	bool isUserIndexValid(int, vector<int>) ;
-
-public:
-	
-	static enum CommandType{
-		ADD, REMOVE, EDIT, SEARCH, UNDO,REDO,ALT,INVALID,EXIT //what happens for user command "1 2" it's not invalid, but it will determined to be in determineCommandType
+	static enum CommandType
+	{
+		ADD, REMOVE, EDIT, SEARCH, UNDO,REDO,ALT,INVALID,EXIT 
 	} ;
 	struct Input
 	{
@@ -48,33 +47,46 @@ public:
 		int index;
 	};
 
+	//
+	stack < Logic::Input> undoStack;
+	//
+	stack <Input> redoStack;
+	//
+	Input userStruct;
 
-	Logic();
-	CommandType determineCommand(string);
-    int logicMain();
 	bool execute(string,Task*);
-	bool addTask(Task*);
-	void deleteTask(int);
-	void setRedoStack(CommandType,Task*,int);
+	CommandType determineCommand(string);
 
+	void deleteExpired() ;
 	
-	bool undoTask ();
+	void setRedoStack(CommandType,Task*,int);
 	void setUndoStack(CommandType,Task*,int);
 	string getUndoStack();
 
+	tm* getCurrentTime();
+	void updateHomeScreen();
+	//
+	void updateTaskFile();
+	//
+	void setSearchObj();
+	//void updateSearchResults();
+
+public:
+	Logic();
+	int logicMain();
+
+	bool addTask(Task*);
 	bool search(Task*);
 	void editTask(int);
 	bool findToDelete(Task*);
+	void deleteTask(int);
 	bool findToEdit(Task*);
-	bool redoTask();
 	bool createAlternateKeyword(Task *) ;
-	void deleteExpired() ;
 	void appendToCommandList(const char *, CommandType type) ;
+	bool isUserIndexValid(int, vector<int>) ;
 
-private:
-		stack < Logic::Input> undoStack;
-		stack <Input> redoStack;
-		Input userStruct;
+	bool undoTask ();
+	bool redoTask();
 };
 
 #endif

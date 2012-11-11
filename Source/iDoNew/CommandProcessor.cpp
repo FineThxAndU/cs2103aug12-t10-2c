@@ -1,6 +1,5 @@
 #include "CommandProcessor.h"
 
-
 CommandProcessor::CommandProcessor()
 {
   //load from all files into the respective char arrays
@@ -175,24 +174,33 @@ void CommandProcessor::initExitList()
 }
 
 
-vector <int> CommandProcessor::intProcessor (string userInput)
+vector <int> CommandProcessor::intProcessor (string userInput) throw(string)
 {
+	if (userInput == "\0") {
+		throw("User input not valid");
+	}
 	vector <int> integers; 
-	//asertion
 	assert(integers.size() == 0) ;
 	int temp = 0;
-	for(int i=0;i<userInput.size();i++)
-	{
-		if(userInput[i] == ' '){
-		integers.push_back(temp);
-		temp = 0;
+	for(int i=0;i<userInput.size();i++) {
+		if(userInput[i] == ' ') {
+			if( isdigit(temp)) {
+				integers.push_back(temp);
+			}
+			temp = 0;
 		}
-		else{
-			temp = temp*10 + (userInput[i] - 48);
+		else {
+			temp = temp*10 + (userInput[i] - ASCII_VALUE_0);
 		}
 	}
-	if(temp != 0)
-		integers.push_back(temp);
+	if(temp != 0) {
+		if(isdigit(temp)) {
+			integers.push_back(temp);
+		}
+	}
+	if(integers.size() == 0) {
+		throw ("User input is not a valid interger");
+	}
 	return integers;
 }
 
@@ -441,8 +449,7 @@ void CommandProcessor::descProcessor (string userInput, Task*& newTask)
 		
 }
 
-tm* CommandProcessor::stringToTime (string startTime)
-{
+tm* CommandProcessor::stringToTime (string startTime) {
 
 	time_t curr;
 	time(&curr);
@@ -471,50 +478,42 @@ tm* CommandProcessor::stringToTime (string startTime)
 	//seconds after the minute, 0-59
 	sTime->tm_sec = 0 ;
 
-	int date=(startTime[0]-ASCII_VALUE_0)*10+(startTime[1]-ASCII_VALUE_0);
-	int month=(startTime[2]-ASCII_VALUE_0)*10+(startTime[3]-ASCII_VALUE_0);
-	int year=(startTime[4]-ASCII_VALUE_0)*1000+(startTime[5]-ASCII_VALUE_0)*100+(startTime[6]-ASCII_VALUE_0)*10+(startTime[7]-ASCII_VALUE_0);
+	int date = (startTime[0] - ASCII_VALUE_0) * 10 + (startTime[1] - ASCII_VALUE_0);
+	int month = (startTime[2] - ASCII_VALUE_0) * 10 + (startTime[3] - ASCII_VALUE_0);
+	int year = (startTime[4] - ASCII_VALUE_0) * 1000 + (startTime[5] - ASCII_VALUE_0) * 100 + (startTime[6] - ASCII_VALUE_0) * 10 + (startTime[7] - ASCII_VALUE_0);
 	
 	
 	
-	if(date != 0){
-		sTime->tm_mday=date;
+	if(date != 0) {
+		sTime->tm_mday = date;
 	}
-	else{
+	else {
 		sTime->tm_mday = now->tm_mday;
 	}
-	if(month != 0){
-		sTime->tm_mon=month;
+	if(month != 0) {
+		sTime->tm_mon = month;
 	}
-	else{
+	else {
 		sTime->tm_mon = now->tm_mon;
 	}
-	if(year !=0){
-		sTime->tm_year=year ;
+	if(year != 0) {
+		sTime->tm_year = year ;
 	}
-	else{
+	else {
 		sTime->tm_year = now->tm_year ;
 	}
 	int hour, min;
-	if(strlen(startTime.c_str()) > 8){
-		hour=(startTime[8]-ASCII_VALUE_0)*10+(startTime[9]-ASCII_VALUE_0);
-		min=(startTime[10]-ASCII_VALUE_0)*10+(startTime[11]-ASCII_VALUE_0);
+	if(strlen(startTime.c_str()) > 8) {
+		hour = (startTime[8] - ASCII_VALUE_0) * 10 + (startTime[9] - ASCII_VALUE_0);
+		min = (startTime[10] - ASCII_VALUE_0) * 10 + (startTime[11] - ASCII_VALUE_0);
 	}
-	else{
+	else {
 		hour = now->tm_hour;
 		min = now->tm_min;
 	}
 	sTime->tm_hour = hour;
 	sTime->tm_min = min;
 
-	/*if(sTime->tm_year <= now->tm_year){
-		if((sTime ->tm_mday < now ->tm_mday) && (sTime->tm_mon < now->tm_mon)){
-			sTime->tm_mon++;
-		}
-		if((sTime ->tm_mon < now ->tm_mon)){
-			sTime->tm_year++;
-		}
-	}*/
 	return sTime ;
 }
 

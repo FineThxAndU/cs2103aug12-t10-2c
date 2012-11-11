@@ -19,81 +19,57 @@ bool Search::executeSearch(string description){
 	}
 	return true;
 }
-bool Search::executeSearchTime(Task* query)
-	{
-	    tm* currentTime=query->getStart();
-		currentTime->tm_sec=0;
-		currentTime->tm_isdst=-1;
-		currentTime->tm_wday=0;
-		currentTime->tm_yday=0;
-		currentTime->tm_hour=0;
-		currentTime->tm_min=0;
-
-	for(int i =  0; i < Search::inputList.size(); i++){
-			
-			//mktime(tempTime);
-			if(Search::inputList[i]->getStart())
-				{
-				tm* tempTime= Search::inputList[i]->getStart();
-				tempTime->tm_year-=1900;
-				tempTime->tm_mon-=1;
-				tempTime->tm_isdst=-1;
-				tempTime->tm_wday=0;
-				tempTime->tm_yday=0;
-				tempTime->tm_sec=0;
-				int tempHour=tempTime->tm_hour;
-				tempTime->tm_hour=0;
-
-				if(!difftime(mktime(tempTime),mktime(query->getStart())))
-				{
-				tempTime->tm_mon+=1;
-				tempTime->tm_year+=1900;
-				tempTime->tm_hour=tempHour;
-				Search::searchResults.push_back(Search::inputList[i]);
-				Search::resultIndices.push_back(i);
+bool Search::executeSearchTime(Task* query) throw(string){
+	bool returnVal = true;
+	if( inputList.size() == 0) {
+		returnVal = false;
+		throw ("No tasks found in the search list");
+	}
+	assert(query != NULL);
+	tm* currentTime = query->getStart();
+	assert ( currentTime != NULL);
+	makeConvertible(currentTime);
+	for(int i =  0; i < Search::inputList.size(); i++) {
+			if(Search::inputList[i]->getStart()) {
+				tm* tempTime = Search::inputList[i]->getStart();
+				int tempHour = tempTime->tm_hour;
+				formatHourYear(tempTime);
+				makeConvertible(tempTime);
+				if(!difftime(mktime(tempTime),mktime(query->getStart()))) {
+					revertToOriginalTime( tempTime, tempHour);
+					Search::searchResults.push_back(Search::inputList[i]);
+					Search::resultIndices.push_back(i);
 				}
-				else
-				{
-					tempTime->tm_mon+=1;
-					tempTime->tm_year+=1900;
-					tempTime->tm_hour=tempHour;
+				else {
+					revertToOriginalTime(tempTime,tempHour);
 				}
 				
-				}
+			}
 
-			else if(Search::inputList[i]->getEnd())
-				{
-				tm* tempTime= Search::inputList[i]->getEnd();
-				tempTime->tm_year-=1900;
-				tempTime->tm_mon-=1;
-				tempTime->tm_isdst=-1;
-				tempTime->tm_wday=0;
-				tempTime->tm_yday=0;
-				tempTime->tm_sec=0;
-				int tempHour=tempTime->tm_hour;
-				tempTime->tm_hour=0;
-				if(!difftime(mktime(tempTime),mktime(query->getStart())))
-				{ 
-				tempTime->tm_mon+=1;
-				tempTime->tm_year+=1900;
-				tempTime->tm_hour=tempHour;
-				Search::searchResults.push_back(Search::inputList[i]);
-				Search::resultIndices.push_back(i);
+			else if(Search::inputList[i]->getEnd())	{
+				tm* tempTime = Search::inputList[i]->getEnd();
+				int tempHour = tempTime->tm_hour;
+				formatHourYear(tempTime);
+				makeConvertible(tempTime);
+				if(!difftime(mktime(tempTime),mktime(query->getStart()))) { 
+					revertToOriginalTime(tempTime,tempHour);
+					Search::searchResults.push_back(Search::inputList[i]);
+					Search::resultIndices.push_back(i);
 				}
-				else
-					{
-					tempTime->tm_mon+=1;
-					tempTime->tm_year+=1900;
-					tempTime->tm_hour=tempHour;
-					}
+				else {
+					revertToOriginalTime(tempTime,tempHour);
+				}
 				
-				}
+			}
+			else {
+				returnVal = false;
+			}
 
 			
 
 	}
-	return true;
-	}
+	return returnVal;
+}
 bool Search::executeSearch(Task* query){
 
 	for(int i =  0; i < Search::inputList.size(); i++){
@@ -116,4 +92,29 @@ void Search::clearSearchResults(){
 
 	Search::searchResults.clear();
 	Search::resultIndices.clear();
+}
+
+void Search::makeConvertible( tm *time) {
+		assert (time != NULL);
+		time->tm_sec=0;
+		time->tm_isdst=-1;
+		time->tm_wday=0;
+		time->tm_yday=0;
+		time->tm_hour=0;
+		time->tm_min=0;
+
+}
+
+void Search::formatHourYear(tm *time) {
+	assert (time != NULL);
+	time->tm_year-=1900;
+	time->tm_mon-=1;
+
+}
+
+void Search::revertToOriginalTime( tm *time, int hour) {
+	assert (time != NULL);
+	time->tm_mon += 1;
+	time->tm_year += 1900;
+	time->tm_hour = hour;
 }
