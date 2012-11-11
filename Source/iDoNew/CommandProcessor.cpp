@@ -606,6 +606,7 @@ tm* CommandProcessor::stringToTime (string startTime)
 	sTime->tm_min = min;
 
 	return sTime ;
+}
 
 void CommandProcessor::appendToAddList(const char *newKeyword) {
 	int addIndex ; 
@@ -705,6 +706,7 @@ void CommandProcessor::appendToExitList(const char *newKeyword) {
 	strcpy(exitList[exitIndex + 1], "-1") ;
 }
 
+
 //returns the actual keyword in case a synonym/wrong spelling of a keyword is entered
 bool CommandProcessor::actualKeyWord(char userCmd[MAX_COMMAND_SIZE]) {
 
@@ -757,6 +759,7 @@ bool CommandProcessor::actualKeyWord(char userCmd[MAX_COMMAND_SIZE]) {
 	else {
 		return true;
 	}
+}
 
 bool CommandProcessor::isFound(char cmd[MAX_COMMAND_SIZE], string cmdType) {
 	int index = 0;

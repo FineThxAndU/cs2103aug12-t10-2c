@@ -23,7 +23,10 @@ Logic::Logic()	{
 
 int Logic::logicMain()	{
 	updateHomeScreen();
+	time_t now;
+	time(&now);
 
+	tm * current = localtime(&now);
 	while(1) { 
 	userInputNewTask = new TimedTask;
 	userInputNewTask->setStart(current);
@@ -166,7 +169,8 @@ bool Logic::createAlternateKeyword(Task * userInputTask) throw (string) {
 
 	bool returnVal = true ;
 	Task * tempTask = new TimedTask ;
-	string keyword = cmdObj.cmdProcessor(userInputTask->getDesc(), tempTask) ;
+	Task * editTask = new TimedTask ;
+	string keyword = cmdObj.cmdProcessor(userInputTask->getDesc(), tempTask, editTask) ;
 	CommandType type = determineCommand(keyword);
 
   //NEED TO REMOVE TRAILING SPACE FROM TEMPTASK->description
@@ -301,8 +305,8 @@ bool Logic::findToDelete(Task * userInputTask) throw(string) {
 		          returnVal = false;
                      }
      		   //for now do nothing else, later get user input again after printing same list?
-	}
-        
+		  }
+	}    
         else if(searchResults.size() == 1){
 				Logic::deleteTask(0);
 	}
@@ -416,7 +420,7 @@ void Logic::editTask(int index) {
 		throw string ("User input not valid");
 	}
 	userInputTask = taskList[index];
-	cmdObj.descProcessor(userInput,userInputTask);*/
+	cmdObj.descProcessor(userInput,userInputTask);
 	if(userInputNewTask->getStart() == NULL ){
 			userInputNewTask->setStart(taskList[index]->getStart());
 	}
@@ -619,7 +623,7 @@ void Logic::updateHomeScreen() throw(string) {
 	introList = searchObj.getResults();
 	if (introList.size() == 0)
 	{
-		throw string (" You do not have any tasks scheduled for today");
+	//	throw string (" You do not have any tasks scheduled for today");
 		searchObj.clearSearchResults();
 	}
 	UIObj.displayHomeScreen(introList);
@@ -634,5 +638,5 @@ void Logic::updateTaskFile() {
 
 void Logic::setSearchObj() {
 	searchObj.setInputList(taskList);
-	searchObj.executeSearch(userInputTask);
+	searchObj.executeSearch(userInputTask->getDesc());
 }

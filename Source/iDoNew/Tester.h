@@ -149,20 +149,7 @@ TEST(basic_test, addZeroes)
 	cp.addZeroes(dateTime);
 	ASSERT_EQ(0,strcmp(dateTime,"300809"));
 }
-		}
-		catch(string except) {
-			ASSERT_EQ(except,"No undo to redo yet!");
-		}
-}
-TEST(basic_test, addZeroes)
-{
-	CommandProcessor cp;
-	char dateTime[100];
-	strcpy(dateTime, "30.8.9");
-	cp.addZeroes(dateTime);
-	ASSERT_EQ(0,strcmp(dateTime,"300809"));
-}
-
+		
 TEST (basic_test, undoTask) {
 	Logic testObj;
 	bool returnVal;

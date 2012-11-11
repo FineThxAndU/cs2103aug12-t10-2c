@@ -86,9 +86,14 @@ vector<Task*> Search::getResults(){
 }
 
 void Search::clearSearchResults(){
-
-	Search::searchResults.clear();
-	Search::resultIndices.clear();
+	
+	if(searchResults.size() != 0){
+		Search::searchResults.clear();
+	}
+	
+	if(resultIndices.size() != 0){
+		Search::resultIndices.clear();
+	}
 }
 
 void Search::makeConvertible( tm *time) {
