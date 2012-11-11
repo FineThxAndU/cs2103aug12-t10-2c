@@ -66,23 +66,19 @@ void Sort::sortByDescripDesc(){
 }
 
 void Sort::sortByTimeAsc(){
-	bool isGreater=false;
-
 	for(int i = 0; i < Sort::inputList.size() - 1; i++){
 		for(int j = 0; j < Sort::inputList.size() - 1 - i; j++){
 			//if first parameter greater than second parameter
-			if(! inputList[j]->getEnd() ) {
+			bool isGreater ;
+			if (! inputList[j]->getEnd()) {
 				isGreater = true;
 			}
-			else if (! inputList[j+1] ->getEnd()) {
+			else if (! inputList[j+1]->getEnd()) {
 				isGreater = false;
 			}
 			else {
-				isGreater = isFirstGreater(*(inputList[j]->getEnd()),*(inputList[j+1]->getEnd()));
+				isGreater = isFirstGreater(*(inputList[j]->getEnd()),*(inputList[j+1]->getEnd())) ;
 			}
-
-
-
 			if(isGreater) {
 				Task *temp = Sort::inputList[j];
 				Sort::inputList[j] = Sort::inputList[j + 1];
@@ -107,7 +103,6 @@ void Sort::sortByTimeDesc() {
 }
 
 bool Sort::isFirstGreater(tm t1, tm t2) {
-
 t1.tm_isdst=-1;
 t1.tm_year-=1900;
 t1.tm_sec=0;
@@ -128,3 +123,4 @@ else
 	returnVal = false;
 return returnVal;
 }
+
