@@ -77,7 +77,7 @@ class Logic
 	//
 	void updateTaskFile();
 	//
-	void setSearchObj();
+	void setSearchObj(Task*);
 	//void updateSearchResults();
 
 public:
