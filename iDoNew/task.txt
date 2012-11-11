@@ -27,47 +27,15 @@ meeting2
 2012
 22
 0
-dinner with mom 
-12
-11
-2012
-16
+tomorrow 
 0
-12
-11
-2012
-18
 0
-dd father 
-20
-10
-2012
-20
+floating task 
 0
-20
-12
-2012
-21
 0
-iie 
-12
-3
-2013
-20
+testing function 
 0
-13
-3
-2013
-22
 0
-dd indus 
-20
-1
-2014
-4
+lake 
 0
-21
-2
-2015
-18
 0
