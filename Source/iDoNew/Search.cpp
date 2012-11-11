@@ -21,10 +21,6 @@ bool Search::executeSearch(string description){
 }
 bool Search::executeSearchTime(Task* query) throw(string){
 	bool returnVal = true;
-	if( inputList.size() == 0) {
-		returnVal = false;
-		throw ("No tasks found in the search list");
-	}
 	assert(query != NULL);
 	tm* currentTime = query->getStart();
 	assert ( currentTime != NULL);

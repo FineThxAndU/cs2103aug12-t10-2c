@@ -228,7 +228,7 @@ bool Logic::addTask(Task* userInputTask) throw(string) {
 	sortObj.setInputList(taskList);
 	taskList = sortObj.executeSort();
 	updateTaskFile();
-	setSearchObj();
+	setSearchObj(userInputTask);
 	vector<int> searchResults;
 	searchResults = searchObj.getIndices();
 	assert ( searchResults.size() >= 1) ;
@@ -247,7 +247,7 @@ bool Logic::isUserIndexValid(int index, vector<int> vectorOfIndices) {
 
 	bool returnVal ;
   
-	if(index >= 1 && index <= vectorOfIndices.size()) {
+	if(index >= 1 && index <= vectorOfIndices.size() + 1) {
 		returnVal = true ;
 	}
 	else { 
@@ -262,7 +262,7 @@ bool Logic::findToDelete(Task * userInputTask) throw(string) {
 	assert(userInputTask != '\0');
 	vector<int> searchResults;
 	bool returnVal = true ;
-	setSearchObj();
+	setSearchObj(userInputTask);
 	searchResults = searchObj.getIndices(); //returns the indices of matches corresponding to MAIN taskList
 	assert(searchResults.size() > 0);
 	vector<Task*> tempList ;
@@ -275,40 +275,38 @@ bool Logic::findToDelete(Task * userInputTask) throw(string) {
 		throw string("No matches found");
 	}
 
-
-
-        if(searchResults.size() > 1){
-	       UIObj.displayHomeScreen(tempList);
-	       userInput = UIObj.getUserInput();
-               if ( userInput == "\0") {
-		     updateTaskFile();
-		     searchObj.clearSearchResults();
-		     throw string ("Not a valid input");
-		     returnVal=false;
-  	        }
-	        vector<int> userIndex;
-	        try {
-		     userIndex = cmdObj.intProcessor(userInput);
-	        }
-	        catch (string except) {
-		     UIObj.printThis(except);
-		     returnVal = false;
-	        }
-	        for(i = 0; i < userIndex.size() ; i++) {
-	             if(isUserIndexValid(userIndex[i],userIndex)) {
-	                  Logic::deleteTask(searchResults[userIndex[i]-1]) ;
-	             }
-	             else {
-		          updateTaskFile();
-		          searchObj.clearSearchResults();
-		          throw string("Invalid option chosen.") ;
-		          returnVal = false;
-                     }
-     		   //for now do nothing else, later get user input again after printing same list?
-		  }
+	if(searchResults.size() > 1){
+	    UIObj.displayHomeScreen(tempList);
+	    userInput = UIObj.getUserInput();
+            if ( userInput == "\0") {
+		    updateTaskFile();
+		    searchObj.clearSearchResults();
+		    throw string ("Not a valid input");
+		    returnVal=false;
+  	    }
+	    vector<int> userIndex;
+	    try {
+		    userIndex = cmdObj.intProcessor(userInput);
+	    }
+	    catch (string except) {
+		    UIObj.printThis(except);
+		    returnVal = false;
+	    }
+	    for(i = 0; i < userIndex.size() ; i++) {
+	            if(isUserIndexValid(userIndex[i],userIndex)) {
+	                Logic::deleteTask(searchResults[userIndex[i]-1]) ;
+	            }
+	            else {
+		        updateTaskFile();
+		        searchObj.clearSearchResults();
+		        throw string("Invalid option chosen.") ;
+		        returnVal = false;
+                    }
+     		//for now do nothing else, later get user input again after printing same list?
+		}
 	}    
         else if(searchResults.size() == 1){
-				Logic::deleteTask(0);
+				Logic::deleteTask(searchResults[0]);
 	}
 
 	updateTaskFile();
@@ -319,17 +317,7 @@ bool Logic::findToDelete(Task * userInputTask) throw(string) {
 	return returnVal ;
 }
 
-
-
-
-
-
-
-
-
-
 void Logic::deleteTask(int index) {
-
 
 	assert ( index >= 0 && index <= taskList.size());
 	setUndoStack(REMOVE,taskList[index],index);
@@ -338,7 +326,7 @@ void Logic::deleteTask(int index) {
 }
 	
 bool Logic::search(Task* userInputTask) throw(string){
-	setSearchObj();
+	setSearchObj(userInputTask);
 	bool returnVal = true;
 //	assert (searchObj.searchResults.size() == 0);
 	vector<Task*> searchResults = searchObj.getResults();
@@ -355,19 +343,21 @@ bool Logic::search(Task* userInputTask) throw(string){
 
 bool Logic::findToEdit(Task* userInputTask, Task* userInputNewTask) throw (string) {
 	bool returnVal=true;
-	setSearchObj();
+	setSearchObj(userInputTask);
 	vector<int> searchResults = searchObj.getIndices();
 	assert(searchResults.size() > 0);
+	int i = 0;
 	vector<Task*> tempList;
-	for(int i = 0;i < searchResults.size();i++) {
+	for(i = 0;i < searchResults.size();i++) {
 		tempList.push_back(taskList[searchResults[i]]);
 	}
-	if(searchResults.size() > 1){
-	     if (tempList.size() == 0) {
+	if (tempList.size() == 0) {
 	   	     returnVal=false;
 		     searchObj.clearSearchResults();
 		     throw string ("No matching tasks found");
 	     }
+	if(searchResults.size() > 1){
+	     
 	     UIObj.displayHomeScreen( tempList);
 	     userInput = UIObj.getUserInput();
 	     if ( userInput == "\0") {
@@ -385,15 +375,15 @@ bool Logic::findToEdit(Task* userInputTask, Task* userInputNewTask) throw (strin
 		  returnVal = false;
 	     }
 	     assert(userIndex.size() != 0) ;
-	     for(int i = 0; i < userIndex.size();i++) {
-		   if(isUserIndexValid(userIndex[i],userIndex)) {
+	     for(i = 0; i < userIndex.size();i++) {
+		   if(isUserIndexValid(userIndex[i],searchResults)) {
 			   try {
 				Logic::editTask(searchResults[userIndex[i]-1]);
 			    }
-		    	   catch (string except){
-				UIObj.printThis(except);
-				returnVal=false;
-			   }
+		    		catch (string except){
+					UIObj.printThis(except);
+					returnVal=false;
+					}
 	           }
 	        else { 
 		       returnVal=false;
@@ -414,9 +404,7 @@ bool Logic::findToEdit(Task* userInputTask, Task* userInputNewTask) throw (strin
 
 void Logic::editTask(int index) {
 	assert ( index < taskList.size() );
-	userInput = UIObj.getUserInput();
-	if (userInput == "\0")
-	{
+	if (userInput == "\0"){
 		throw string ("User input not valid");
 	}
 	userInputTask = taskList[index];
@@ -430,7 +418,7 @@ void Logic::editTask(int index) {
 	
 	setUndoStack(EDIT,taskList[index],index);
 	delete taskList[index];
-	taskList[index] = userInputTask;
+	taskList[index] = userInputNewTask;
 }
 	
 bool Logic::undoTask () throw(string) {
@@ -636,7 +624,7 @@ void Logic::updateTaskFile() {
 	fileObj.writeList();
 }
 
-void Logic::setSearchObj() {
+void Logic::setSearchObj( Task* userInputTask) {
 	searchObj.setInputList(taskList);
 	searchObj.executeSearch(userInputTask->getDesc());
 }

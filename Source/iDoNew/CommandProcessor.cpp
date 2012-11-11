@@ -181,20 +181,17 @@ vector <int> CommandProcessor::intProcessor (string userInput) throw(string)
 	int temp = 0;
 	for(int i=0;i<userInput.size();i++) {
 		if(userInput[i] == ' ') {
-			if( isdigit(temp)) {
-				integers.push_back(temp);
-			}
+			integers.push_back(temp);
 			temp = 0;
 		}
 		else {
 			temp = temp*10 + (userInput[i] - ASCII_VALUE_0);
 		}
 	}
-	if(temp != 0) {
-		if(isdigit(temp)) {
-			integers.push_back(temp);
-		}
+	if(temp != 0){
+		integers.push_back(temp);
 	}
+
 	if(integers.size() == 0) {
 		throw ("User input is not a valid interger");
 	}
@@ -314,7 +311,7 @@ string CommandProcessor::cmdProcessor (string userInput, Task*& newTask, Task*& 
 	}
 	
 	else if(eTime == NULL){
-		newTask = new DeadlinedTask(description, sTime);
+		newTask = new TimedTask(description, sTime, NULL);
 		
 	}
 	

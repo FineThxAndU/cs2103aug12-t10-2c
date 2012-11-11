@@ -47,27 +47,27 @@ TEST(basic_test, cmdType)
 	CommandProcessor cp;
 	char keyword[100];
 	
-	strcpy(keyword, "ad");
+	strcpy(keyword, "add");
 	cp.actualKeyWord(keyword);
 	ASSERT_EQ(0, strcmp("add", keyword));
 
-	strcpy(keyword, "del");
+	strcpy(keyword, "delete");
 	cp.actualKeyWord(keyword);
 	ASSERT_EQ(0, strcmp("delete", keyword));
 
-	strcpy(keyword, "mod");
+	strcpy(keyword, "edit");
 	cp.actualKeyWord(keyword);
 	ASSERT_EQ(0, strcmp("edit", keyword));
 
-	strcpy(keyword, "fin");
+	strcpy(keyword, "search");
 	cp.actualKeyWord(keyword);
 	ASSERT_EQ(0, strcmp("search", keyword));
 
-	strcpy(keyword, "und");
+	strcpy(keyword, "undo");
 	cp.actualKeyWord(keyword);
 	ASSERT_EQ(0, strcmp("undo", keyword));
 
-	strcpy(keyword, "qui");
+	strcpy(keyword, "exit");
 	cp.actualKeyWord(keyword);
 	ASSERT_EQ(0, strcmp("exit", keyword));
 
@@ -124,9 +124,9 @@ TEST(basic_test, parseDateTime)
 	cp.parseDateTime(dateTime);
 	retTime = cp.stringToTime(dateTime);
 
-	ASSERT_EQ(retTime->tm_year, now->tm_year + 2 + 1900);
+	ASSERT_EQ(retTime->tm_year, now->tm_year + 3 + 1900);
 	ASSERT_EQ(retTime->tm_mon, 8);
-	ASSERT_EQ(retTime->tm_mday, now->tm_mday);
+	ASSERT_EQ(retTime->tm_mday, 1);
 	ASSERT_EQ(retTime->tm_hour, now->tm_hour);
 	ASSERT_EQ(retTime->tm_min, now->tm_min);
 
@@ -134,9 +134,9 @@ TEST(basic_test, parseDateTime)
 	cp.parseDateTime(dateTime);
 	retTime = cp.stringToTime(dateTime);
 
-	ASSERT_EQ(retTime->tm_year, 1900 + now->tm_year + ((2 + now->tm_mon) /13 ));
-	ASSERT_EQ(retTime->tm_mon, (now->tm_year + 2 + 1) %13);
-	ASSERT_EQ(retTime->tm_mday, now->tm_mday);
+	ASSERT_EQ(retTime->tm_year, 1900 + now->tm_year + ((2 + 1 + now->tm_mon) /13 ));
+	ASSERT_EQ(retTime->tm_mon, 1);
+	ASSERT_EQ(retTime->tm_mday, 1 );
 	ASSERT_EQ(retTime->tm_hour, now->tm_hour);
 	ASSERT_EQ(retTime->tm_min, now->tm_min);
 }
