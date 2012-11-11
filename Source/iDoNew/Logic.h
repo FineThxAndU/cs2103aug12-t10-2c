@@ -34,7 +34,7 @@ class Logic
 	vector<Task*> taskList; 
 	string userInput;
 	CommandProcessor cmdObj;
-	Task* userInputTask, *userInputNewTask ;
+	Task* userInputTask ;
 
 	static enum CommandType {
 		ADD, REMOVE, EDIT, SEARCH, UNDO, REDO, ALT, EXIT 
@@ -63,7 +63,7 @@ class Logic
 	//
 	Input userStruct;
 
-        bool execute(string,Task*, Task*);
+	bool execute(string,Task*);
 	CommandType determineCommand(string);
 
 	void deleteExpiredTasks() ;
@@ -83,15 +83,13 @@ class Logic
 public:
 	Logic();
 	int logicMain();
-        
+
 	bool addTask(Task*);
 	bool search(Task*);
 	void editTask(int);
 	bool findToDelete(Task*);
 	void deleteTask(int);
-	bool findToEdit(Task*, Task*);
-
-
+	bool findToEdit(Task*);
 	bool createAlternateKeyword(Task *) ;	
 
 	bool isUserIndexValid(int, vector<int>) ;

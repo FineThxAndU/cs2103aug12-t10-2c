@@ -29,7 +29,7 @@ public:
 	void writeToFile(const char *) ;
 	vector<string> readFromFile() ;
 	tm* getCurrentTime();
-
+	string makePrintableTimeString(char * timeInAscii);
 
 } ;
 

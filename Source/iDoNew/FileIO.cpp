@@ -15,24 +15,13 @@ vector<Task*> FileIO::getTaskList(){
 
 }
 
-string FileIO::convertToString(char * charArray) {
-
-	string str ;
-	stringstream ss ;
-	ss << charArray ;
-	ss >> str ;
-	return str ;
-
-}
 
 vector<string> FileIO::readFromFile() {
 
 	ifstream fin(fileName, ios::in) ;
 	char line[MAX_CHAR_IN_LINE] ;
-	
 	string strLine ;
 	vector<string> fileContents ;
-	
 	while(fin.getline(line, MAX_CHAR_IN_LINE)) {
 		strLine = convertToString(line) ;
 		fileContents.push_back(strLine) ;
@@ -218,20 +207,61 @@ void FileIO::writeList(){
 
 }
 
-void FileIO::writeErrorLog (string log){
-	ofstream filePtr(TASK_LOG_FILE_NAME, ios::app);
-	tm* current=getCurrentTime(); 
-	// make time
-
-	filePtr << current << log << endl;
-
-	
+void FileIO::writeErrorLog (string log) {
+	ofstream filePtr(TASK_LOG_FILE_NAME, ios::app) ;
+	tm* current = getCurrentTime() ; 
+	string time = makePrintableTimeString(asctime(current)) ;
+	filePtr << time << "\t" << log << endl;
 }
-
+void FileIO::writeInputLog (string log) {
+	ofstream filePtr(ERROR_LOG_FILE_NAME, ios::app) ;
+	tm* current = getCurrentTime() ; 
+	string time = makePrintableTimeString(asctime(current)) ;
+	filePtr << time << "\t" << log << endl;
+}
 tm* FileIO::getCurrentTime()	{
 	time_t now;
 	struct tm *current;
 	time(&now);
 	current = localtime(&now);
 	return current;
+}
+
+string FileIO::convertToString(char * sentence) {
+
+	string strOfSentence ;
+	stringstream ss ;
+	ss << sentence ;
+	strOfSentence = ss.str() ;
+	return strOfSentence ;
+}
+
+
+string FileIO::makePrintableTimeString(char * timeInAscii) {
+
+	string timeString = convertToString(timeInAscii) ;
+	string timeStringPart1 ;
+	string timeStringPart2 ;
+
+	//isolate timeStringPart2
+
+	int secondZeroOfMinute = 15 ;
+	int lastLetterIndex = secondZeroOfMinute ; 
+
+	int dayOfWeekSize = 3 ;
+	int firstLetterIndex = dayOfWeekSize + 1 ;
+	
+	int sizeOfNewSentence = lastLetterIndex - firstLetterIndex + 1 ;
+	timeStringPart1 = timeString.substr(firstLetterIndex, sizeOfNewSentence) ;
+
+	//isolate timeStringPart2
+	firstLetterIndex = lastLetterIndex + 4 ;
+	lastLetterIndex = timeString.size() - 2 ;
+	
+	sizeOfNewSentence = lastLetterIndex - firstLetterIndex + 1 ;
+	timeStringPart2 = timeString.substr(firstLetterIndex, sizeOfNewSentence) ;
+	
+	timeString = timeStringPart1 + timeStringPart2 ;
+	return timeString ;
+
 }
