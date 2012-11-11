@@ -18,18 +18,18 @@ TEST(basic_test, cmdProcessor)
 
 {
 	CommandProcessor cp;
-	Task *newTask = new TimedTask;
-	Task *editTask = new TimedTask;
+	Task* newTask = new TimedTask, *editTask = new TimedTask;
+
 	string op = cp.cmdProcessor("meeting start 30.08.93 9.25 boss at office", newTask, editTask).c_str();
 	
 	ASSERT_EQ(0, strcmp("add",op.c_str()));
 	ASSERT_EQ(0, strcmp("meeting boss at office ", newTask->getDesc().c_str()));
-	ASSERT_EQ(30, newTask->getEnd()->tm_mday);
-	ASSERT_EQ(8, newTask->getEnd()->tm_mon);
-	ASSERT_EQ(1993, newTask->getEnd()->tm_year);
-	ASSERT_EQ(9, newTask->getEnd()->tm_hour);
-	ASSERT_EQ(25, newTask->getEnd()->tm_min);
-	delete newTask;
+	ASSERT_EQ(30, newTask->getStart()->tm_mday);
+	ASSERT_EQ(8, newTask->getStart()->tm_mon);
+	ASSERT_EQ(1993, newTask->getStart()->tm_year);
+	ASSERT_EQ(9, newTask->getStart()->tm_hour);
+	ASSERT_EQ(25, newTask->getStart()->tm_min);
+	
 
 }
 
@@ -179,22 +179,22 @@ TEST (basic_test, redoTask) {
 TEST(basic_test, addTask)
 {
 	Logic testObj;
-	Task* testTask = new TimedTask;
+	TimedTask testTask;
 	tm* end = new tm;
 	end->tm_hour=4;
 	end->tm_min=0;
 	end->tm_mon=5;
 	end->tm_mday= 15;
 	end->tm_year=2012;
-	testTask->setDesc("Test");
-	testTask->setEnd(end);
+	testTask.setDesc("Test");
+	testTask.setEnd(end);
 	tm* start = new tm;
 	start->tm_hour=4;
 	start->tm_min=0;
 	start->tm_mon=5;
 	start->tm_mday= 16;
 	start->tm_year=2012;
-	testTask->setStart(start);
+	testTask.setStart(start);
 	bool returnVal;
 	
 	try {
@@ -213,7 +213,7 @@ TEST(basic_test, addTask)
 }
 TEST (basic_test,searchTask) {
 	Logic testObj;
-	Task* testTask = new TimedTask;
+	TimedTask testTask;
 	testTask->setDesc("Test");
 	bool returnVal;
 	try {
@@ -265,23 +265,23 @@ TEST (basic_test,searchTask) {
 
 
 TEST (basic_test,deleteTask) {
-	Logic testObj;
-	Task* testTask = new TimedTask;
+//	Task* testTask = new TimedTask;
+//	tm* end = new tm;
 	tm* end = new tm;
-	end->tm_hour=4;
-	end->tm_min=0;
-	end->tm_mon=5;
-	end->tm_mday= 15;
-	end->tm_year=2012;
-	testTask->setDesc("Test");
-	testTask->setEnd(end);
+//	end->tm_min=0;
+//	end->tm_mon=5;
+//	end->tm_mday= 15;
+//	end->tm_year=2012;
+//	testTask->setDesc("Test");
+//	testTask->setEnd(end);
+//	tm* start = new tm;
 	tm* start = new tm;
-	start->tm_hour=4;
-	start->tm_min=0;
-	start->tm_mon=5;
-	start->tm_mday= 16;
-	start->tm_year=2012;
-	testTask->setStart(start);
+//	start->tm_min=0;
+//	start->tm_mon=5;
+//	start->tm_mday= 16;
+//	start->tm_year=2012;
+//	testTask->setStart(start);
+//	testObj.findToDelete(testTask);
 	bool returnVal;
 	
 	try {
