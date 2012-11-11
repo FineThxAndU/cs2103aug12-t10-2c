@@ -404,9 +404,9 @@ bool Logic::findToEdit(Task* userInputTask, Task* userInputNewTask) throw (strin
 
 void Logic::editTask(int index) {
 	assert ( index < taskList.size() );
-	if (userInput == "\0"){
+	/*if (userInput == "\0"){
 		throw string ("User input not valid");
-	}
+	}*/
 	userInputTask = taskList[index];
 	cmdObj.descProcessor(userInput,userInputTask);
 	if(userInputNewTask->getStart() == NULL ){
