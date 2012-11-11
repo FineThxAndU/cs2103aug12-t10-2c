@@ -31,7 +31,7 @@ int Logic::logicMain()	{
 	userInputNewTask = new TimedTask;
 	userInputNewTask->setStart(current);
 	    userInput = UIObj.getUserInput();
-		assert(userInput != "\0") ;
+		//assert(userInput != "\0") ;
 		string cmd = cmdObj.cmdProcessor(userInput, userInputTask, userInputNewTask);
 		assert(cmd != "\0") ;
 		bool returnVal;
@@ -156,7 +156,6 @@ bool Logic::execute(string cmd,Task* userInputTask, Task* userInputNewTask) thro
 			   returnVal = false ;
 			}	
 			break ;
-
 		case EXIT:
 			exit(0);
 		default:
@@ -172,9 +171,18 @@ bool Logic::createAlternateKeyword(Task * userInputTask) throw (string) {
 	Task * editTask = new TimedTask ;
 	string keyword = cmdObj.cmdProcessor(userInputTask->getDesc(), tempTask, editTask) ;
 	CommandType type = determineCommand(keyword);
+	string newKeyword ;
 
-  //NEED TO REMOVE TRAILING SPACE FROM TEMPTASK->description
-	string newKeyword = cmdObj.removeLastSpace(tempTask->getDesc()) ;
+	try {
+		newKeyword = cmdObj.removeLastSpace(tempTask->getDesc()) ;
+	} 
+
+	catch (string excption) {
+		UIObj.printThis(excption) ;
+		returnVal = false ;
+		return returnVal ;
+	}
+
 	switch(type)
 	{
 	 case ADD:
@@ -264,7 +272,7 @@ bool Logic::findToDelete(Task * userInputTask) throw(string) {
 	bool returnVal = true ;
 	setSearchObj(userInputTask);
 	searchResults = searchObj.getIndices(); //returns the indices of matches corresponding to MAIN taskList
-	assert(searchResults.size() > 0);
+	//add exception here
 	vector<Task*> tempList ;
 	for(i = 0 ; i < searchResults.size() ; i++) {
 		tempList.push_back(taskList[searchResults[i]]);
@@ -345,7 +353,7 @@ bool Logic::findToEdit(Task* userInputTask, Task* userInputNewTask) throw (strin
 	bool returnVal=true;
 	setSearchObj(userInputTask);
 	vector<int> searchResults = searchObj.getIndices();
-	assert(searchResults.size() > 0);
+	//add exception here
 	int i = 0;
 	vector<Task*> tempList;
 	for(i = 0;i < searchResults.size();i++) {
@@ -366,6 +374,7 @@ bool Logic::findToEdit(Task* userInputTask, Task* userInputNewTask) throw (strin
 		  returnVal=false;
 		  throw string ( "No user input found");
 	     }
+
 	     vector<int> userIndex;
 	     try {
 		  userIndex = cmdObj.intProcessor(userInput) ;

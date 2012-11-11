@@ -26,8 +26,11 @@ void CommandProcessor::initAddList() {
 	int addIndex = 0 ;
 	fileObject.setFileName(FILENAME_ADD_ALTERNATES) ;
 	strcpy(addList[addIndex],"add") ;
-
 	addIndex++ ;
+
+	strcpy(addList[addIndex],"ad") ;
+	addIndex++ ;
+
 	vector<string> storedAddList = fileObject.readFromFile() ;
 	vector<string>::iterator it ;
 	it = storedAddList.begin() ;
@@ -1193,8 +1196,13 @@ void CommandProcessor::addZeroes(char input[MAX_TIME_SIZE]){
 	strcpy(input, newDate);
 }
 
-string CommandProcessor::removeLastSpace(string word) {
+string CommandProcessor::removeLastSpace(string word) throw(string) {
 	string tempWord ;
+
+	if(word.size() == 0) {
+		throw string("Invalid/no alternative keyword entered.") ;
+	}
+
 	int lastLetterIndex = word.size()-1 ;
 	
 	if(word[lastLetterIndex] == ' ') {
