@@ -219,7 +219,7 @@ bool Logic::addTask(Task* userInputTask) throw(string) {
 	sortObj.setInputList(taskList);
 	taskList = sortObj.executeSort();
 	updateTaskFile();
-	setSearchObj();
+	setSearchObj(userInputTask);
 	vector<int> searchResults;
 	searchResults = searchObj.getIndices();
 	assert ( searchResults.size() >= 1) ;
@@ -253,7 +253,7 @@ bool Logic::findToDelete(Task * userInputTask) throw(string) {
 	assert(userInputTask != '\0');
 	vector<int> searchResults;
 	bool returnVal = true ;
-	setSearchObj();
+	setSearchObj(userInputTask);
 	searchResults = searchObj.getIndices(); //returns the indices of matches corresponding to MAIN taskList
 	assert(searchResults.size() > 0);
 	vector<Task*> tempList ;
@@ -310,7 +310,7 @@ void Logic::deleteTask(int index) {
 }
 	
 bool Logic::search(Task* userInputTask) throw(string){
-	setSearchObj();
+	setSearchObj(userInputTask);
 	bool returnVal = true;
 //	assert (searchObj.searchResults.size() == 0);
 	vector<Task*> searchResults = searchObj.getResults();
@@ -327,7 +327,7 @@ bool Logic::search(Task* userInputTask) throw(string){
 
 bool Logic::findToEdit(Task* userInputTask) throw (string) {
 	bool returnVal=true;
-	setSearchObj();
+	setSearchObj(userInputTask);
 	vector<int> searchResults = searchObj.getIndices();
 	assert(searchResults.size() > 0);
 	vector<Task*> tempList;
@@ -595,7 +595,7 @@ void Logic::updateTaskFile() {
 	fileObj.writeList();
 }
 
-void Logic::setSearchObj() {
+void Logic::setSearchObj(Task *userInputTask) {
 	searchObj.setInputList(taskList);
-	searchObj.executeSearch(userInputTask);
+	searchObj.executeSearch(userInputTask->getDesc());
 }
