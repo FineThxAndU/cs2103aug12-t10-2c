@@ -21,8 +21,9 @@ Logic::Logic()	{
 
 
 int Logic::logicMain()	{
-	
-	while(1)	{ 
+	updateHomeScreen();
+
+	while(1) { 
 	    userInput = UIObj.getUserInput();
 		assert(userInput != "\0") ;
 		string cmd = cmdObj.cmdProcessor(userInput, userInputTask);
@@ -145,8 +146,7 @@ bool Logic::execute(string cmd,Task* userInputTask) throw(string) {
 			catch(string except) {
 			   UIObj.printThis(except) ;
 			   returnVal = false ;
-			}
-			 }		
+			}	
 			break ;
 
 		case EXIT:
@@ -265,6 +265,7 @@ bool Logic::findToDelete(Task * userInputTask) throw(string) {
 		searchObj.clearSearchResults();
 		throw string("No matches found");
 	}
+
 	UIObj.displayHomeScreen(tempList);
 	userInput = UIObj.getUserInput();
 	if ( userInput == "\0") {
@@ -399,7 +400,7 @@ bool Logic::undoTask () throw(string) {
 		returnVal = false;
 	}
 	undoType = Logic::undoStack.top().type;
-	assert(undoType != INVALID);
+	//assert(undoType != INVALID);
 	userInputTask = undoStack.top().taskObj;
 	assert (undoType != NULL);
 	int index = undoStack.top().index;
@@ -453,7 +454,7 @@ void Logic::setUndoStack(CommandType type,Task* tempTask,int index) {
 	newTask->setDesc(tempTask->getDesc());
 	newTask->setEnd(tempTask->getEnd());
 	newTask->setStart(tempTask->getStart());
-	assert(type != INVALID);
+//	assert(type != INVALID);
 	userStruct.type = type;
 	assert (newTask != NULL);
 	userStruct.taskObj = newTask;
@@ -465,7 +466,7 @@ void Logic::setRedoStack(CommandType type,Task* tempTask,int index) {
 	newTask->setDesc(tempTask->getDesc());
 	newTask->setEnd(tempTask->getEnd());
 	newTask->setStart(tempTask->getStart());
-	assert(type != INVALID);
+//	assert(type != INVALID);
 	userStruct.type = type;
 	assert (newTask != NULL);
 	userStruct.taskObj = newTask;
