@@ -1,178 +1,174 @@
 #include "CommandProcessor.h"
 
-CommandProcessor::CommandProcessor()
-{
-  //load from all files into the respective char arrays
-  //should also have initial command and -1
-  initAddList() ;
-  initRemoveList() ;
-  initEditList() ;
-  initSearchList() ;
-  initUndoList() ;
-  initExitList() ;
-  initRedoList() ;
-  initAltList() ;
+const string CommandProcessor::FILENAME_ADD_ALTERNATES = "addlist.txt" ;
+const string CommandProcessor::FILENAME_REMOVE_ALTERNATES = "removelist.txt" ;
+const string CommandProcessor::FILENAME_EDIT_ALTERNATES = "editlist.txt" ;
+const string CommandProcessor::FILENAME_EXIT_ALTERNATES  = "exitlist.txt" ;
+const string CommandProcessor::FILENAME_SEARCH_ALTERNATES = "searchlist.txt" ;
+const string CommandProcessor::FILENAME_ALTERNATE_ALTERNATES = "altlist.txt" ;
+const string CommandProcessor::FILENAME_UNDO_ALTERNATES = "undolist.txt" ;
+const string CommandProcessor::FILENAME_REDO_ALTERNATES = "redolist.txt" ;
+
+CommandProcessor::CommandProcessor() {
+  //load stored alternates from previous runs
+  //into the respective char arrays
+	initAddList() ;
+	initRemoveList() ;
+	initEditList() ;
+	initSearchList() ;
+	initUndoList() ;
+	initExitList() ;
+	initRedoList() ;
+	initAltList() ; 
+}
+
+void CommandProcessor::initAddList() {
+	int addIndex = 0 ;
+	fileObject.setFileName(FILENAME_ADD_ALTERNATES) ;
+	strcpy(addList[addIndex],"add") ;
+
+	addIndex++ ;
+	vector<string> storedAddList = fileObject.readFromFile() ;
+	vector<string>::iterator it ;
+	it = storedAddList.begin() ;
+
+	for(; it != storedAddList.end() ; it++) {
+		strcpy(addList[addIndex],(*(it)).c_str()) ;
+		addIndex++ ;
+	}
+
+	strcpy(addList[addIndex],"-1") ;
+}
+
+void CommandProcessor::initRemoveList() {
+	int removeIndex = 0 ;
+	int i ;
+	fileObject.setFileName(FILENAME_REMOVE_ALTERNATES) ;
+	strcpy(removeList[removeIndex],"delete") ;
+	
+	removeIndex++ ;
+	vector<string> storedRemoveList = fileObject.readFromFile() ;
+	vector<string>::iterator it ;
+	it = storedRemoveList.begin() ;
+	
+	for(; it != storedRemoveList.end() ; it++) {
+		strcpy(removeList[removeIndex],(*(it)).c_str()) ;
+		removeIndex++ ;
+	}
+
+	strcpy(removeList[removeIndex],"-1") ;
+}
+
+void CommandProcessor::initAltList() {
+	int altIndex = 0 ;
+	fileObject.setFileName(FILENAME_ALTERNATE_ALTERNATES) ;
+	strcpy(altList[altIndex],"alternate") ;
+  
+	altIndex++ ;
+	vector<string> storedAltList = fileObject.readFromFile() ;
+	vector<string>::iterator it ;
+	
+	it = storedAltList.begin() ;
+	for(; it != storedAltList.end() ; it++) {
+		strcpy(altList[altIndex],(*(it)).c_str()) ;
+		altIndex++ ;
+	}
+  
+	strcpy(altList[altIndex],"-1") ;
+}
+
+void CommandProcessor::initEditList() {
+	int editIndex = 0 ;
+	fileObject.setFileName(FILENAME_EDIT_ALTERNATES) ;
+	strcpy(editList[editIndex],"edit") ;
  
+	editIndex++ ;
+	vector<string> storedEditList = fileObject.readFromFile() ;
+	vector<string>::iterator it ;
+	it = storedEditList.begin() ;
+	
+	for(; it != storedEditList.end() ; it++) {
+		strcpy(editList[editIndex],(*(it)).c_str()) ;
+		editIndex++ ;
+	}
+
+	strcpy(editList[editIndex],"-1") ;
 }
 
-void CommandProcessor::initAddList()
-{
-  int addIndex = 0 ;
-  int i ;
-  fileObject.setFileName("addlist.txt") ;
-  strcpy(addList[addIndex],"add") ;
+void CommandProcessor::initSearchList() {
 
-  //changes
-  addIndex++ ;
-  vector<string> storedAddList = fileObject.readFromFile() ;
-  vector<string>::iterator it ;
-  it = storedAddList.begin() ;
-  for(; it != storedAddList.end() ; it++) {
-	  strcpy(addList[addIndex],(*(it)).c_str()) ;
-	  addIndex++ ;
-  }
-  //end changes
-
-  strcpy(addList[addIndex],"-1") ;
-}
-
-
-void CommandProcessor::initRemoveList()
-{
-  int removeIndex = 0 ;
-  int i ;
-  fileObject.setFileName("removelist.txt") ;
-  strcpy(removeList[removeIndex],"delete") ;
-
-  //changes
-  removeIndex++ ;
-  vector<string> storedRemoveList = fileObject.readFromFile() ;
-  vector<string>::iterator it ;
-  it = storedRemoveList.begin() ;
-  for(; it != storedRemoveList.end() ; it++) {
-	  strcpy(removeList[removeIndex],(*(it)).c_str()) ;
-	  removeIndex++ ;
-  }
-  //end changes
-
-  strcpy(removeList[removeIndex],"-1") ;
-}
-
-void CommandProcessor::initAltList()
-{
-  int altIndex = 0 ;
-  fileObject.setFileName("altlist.txt") ;
-  strcpy(altList[altIndex],"alternate") ;
-  //changes
-  altIndex++ ;
-  vector<string> storedAltList = fileObject.readFromFile() ;
-  vector<string>::iterator it ;
-  it = storedAltList.begin() ;
-  for(; it != storedAltList.end() ; it++) {
-	  strcpy(altList[altIndex],(*(it)).c_str()) ;
-	  altIndex++ ;
-  }
-  //end changes
-  strcpy(altList[altIndex],"-1") ;
-
-}
-
-void CommandProcessor::initEditList() 
-{
-  int editIndex = 0 ;
-  fileObject.setFileName("editlist.txt") ;
-  strcpy(editList[editIndex],"edit") ;
-  //changes
-  editIndex++ ;
-  vector<string> storedEditList = fileObject.readFromFile() ;
-  vector<string>::iterator it ;
-  it = storedEditList.begin() ;
-  for(; it != storedEditList.end() ; it++) {
-	  strcpy(editList[editIndex],(*(it)).c_str()) ;
-	  editIndex++ ;
-  }
-  //end changes
-  strcpy(editList[editIndex],"-1") ;
-}
-
-void CommandProcessor::initSearchList()
-{
-  int searchIndex = 0 ;
-  fileObject.setFileName("searchlist.txt") ;
-  strcpy(searchList[searchIndex],"search") ;
-  //changes
-  searchIndex++ ;
-  vector<string> storedSearchList = fileObject.readFromFile() ;
-  vector<string>::iterator it ;
-  it = storedSearchList.begin() ;
-  for(; it != storedSearchList.end() ; it++) {
-	  strcpy(searchList[searchIndex],(*(it)).c_str()) ;
-	  searchIndex++ ;
-  }
-  //end changes
+	int searchIndex = 0 ;
+	fileObject.setFileName(FILENAME_SEARCH_ALTERNATES) ;
+	strcpy(searchList[searchIndex],"search") ;
+	
+	searchIndex++ ;
+	vector<string> storedSearchList = fileObject.readFromFile() ;
+	vector<string>::iterator it ;
+	it = storedSearchList.begin() ;
+	
+	for(; it != storedSearchList.end() ; it++) {
+		strcpy(searchList[searchIndex],(*(it)).c_str()) ;
+		searchIndex++ ;
+	}
+  
   strcpy(searchList[searchIndex],"-1") ;
-
 }
 
-void CommandProcessor::initUndoList()
-{
+void CommandProcessor::initUndoList() {
+	int undoIndex = 0 ;
+	fileObject.setFileName(FILENAME_UNDO_ALTERNATES) ;
+	strcpy(undoList[undoIndex],"undo") ;
 
-  int undoIndex = 0 ;
-  fileObject.setFileName("undolist.txt") ;
-  strcpy(undoList[undoIndex],"undo") ;
-    //changes
-  undoIndex++ ;
-  vector<string> storedUndoList = fileObject.readFromFile() ;
-  vector<string>::iterator it ;
-  it = storedUndoList.begin() ;
-  for(; it != storedUndoList.end() ; it++) {
-	  strcpy(undoList[undoIndex],(*(it)).c_str()) ;
-	  undoIndex++ ;
-  }
-  //end changes
+	undoIndex++ ;
+	vector<string> storedUndoList = fileObject.readFromFile() ;
+	vector<string>::iterator it ;
+	it = storedUndoList.begin() ;
+	
+	for(; it != storedUndoList.end() ; it++) {
+		strcpy(undoList[undoIndex],(*(it)).c_str()) ;
+		undoIndex++ ;
+	}
+
   strcpy(undoList[undoIndex],"-1") ;
-
 }
 
-void CommandProcessor::initRedoList() 
-{
- 
-  int redoIndex = 0 ;
-  fileObject.setFileName("redolist.txt") ;
-  strcpy(redoList[redoIndex],"redo") ;
-    //changes
-  redoIndex++ ;
-  vector<string> storedRedoList = fileObject.readFromFile() ;
-  vector<string>::iterator it ;
-  it = storedRedoList.begin() ;
-  for(; it != storedRedoList.end() ; it++) {
+void CommandProcessor::initRedoList() {
+	
+	int redoIndex = 0 ;
+	fileObject.setFileName(FILENAME_REDO_ALTERNATES) ;
+	strcpy(redoList[redoIndex],"redo") ;
+  
+	redoIndex++ ;
+	vector<string> storedRedoList = fileObject.readFromFile() ;
+	vector<string>::iterator it ;
+	it = storedRedoList.begin() ;
+	
+	for(; it != storedRedoList.end() ; it++) {
 	  strcpy(redoList[redoIndex],(*(it)).c_str()) ;
 	  redoIndex++ ;
-  }
-  //end changes
-  strcpy(redoList[redoIndex],"-1") ;
-
+	}
+	
+	strcpy(redoList[redoIndex],"-1") ;
 }
 
-void CommandProcessor::initExitList()
-{
-  int exitIndex = 0 ;
-  fileObject.setFileName("exitlist.txt") ;
-  strcpy(exitList[exitIndex],"exit") ;
-    //changes
-  exitIndex++ ;
-  vector<string> storedExitList = fileObject.readFromFile() ;
-  vector<string>::iterator it ;
-  it = storedExitList.begin() ;
-  for(; it != storedExitList.end() ; it++) {
-	  strcpy(exitList[exitIndex],(*(it)).c_str()) ;
-	  exitIndex++ ;
-  }
+void CommandProcessor::initExitList() {
+ 
+	int exitIndex = 0 ;
+	fileObject.setFileName(FILENAME_EXIT_ALTERNATES) ;
+	strcpy(exitList[exitIndex],"exit") ;
+	
+	exitIndex++ ;
+	vector<string> storedExitList = fileObject.readFromFile() ;
+	vector<string>::iterator it ;
+	it = storedExitList.begin() ;
+	
+	for(; it != storedExitList.end() ; it++) {
+		strcpy(exitList[exitIndex],(*(it)).c_str()) ;
+		exitIndex++ ;
+	}
 
-  strcpy(exitList[exitIndex],"-1") ;
-
+	strcpy(exitList[exitIndex],"-1") ;
 }
-
 
 vector <int> CommandProcessor::intProcessor (string userInput) throw(string)
 {
@@ -323,8 +319,6 @@ string CommandProcessor::cmdProcessor (string userInput, Task*& newTask)
 	}
 	return cmd ;
 }
-
-
 
 void CommandProcessor::descProcessor (string userInput, Task*& newTask)
 {
@@ -482,8 +476,6 @@ tm* CommandProcessor::stringToTime (string startTime) {
 	int month = (startTime[2] - ASCII_VALUE_0) * 10 + (startTime[3] - ASCII_VALUE_0);
 	int year = (startTime[4] - ASCII_VALUE_0) * 1000 + (startTime[5] - ASCII_VALUE_0) * 100 + (startTime[6] - ASCII_VALUE_0) * 10 + (startTime[7] - ASCII_VALUE_0);
 	
-	
-	
 	if(date != 0) {
 		sTime->tm_mday = date;
 	}
@@ -515,6 +507,104 @@ tm* CommandProcessor::stringToTime (string startTime) {
 	sTime->tm_min = min;
 
 	return sTime ;
+}
+
+void CommandProcessor::appendToAddList(const char *newKeyword) {
+	int addIndex ; 
+	for (addIndex = 0 ; addIndex < MAX_NO_ALTERNATES ; addIndex++) {
+		if(!(strcmp("-1", addList[addIndex]))) {
+			strcpy(addList[addIndex], newKeyword) ;
+			break ;
+		}
+	}
+	strcpy(addList[addIndex+1], "-1") ;
+}
+
+void CommandProcessor::appendToRemoveList(const char *newKeyword) {
+
+	int removeIndex ;
+	
+	for(removeIndex = 0 ; removeIndex < MAX_NO_ALTERNATES ; removeIndex++) {
+		if(!(strcmp("-1", removeList[removeIndex]))) {
+			strcpy(removeList[removeIndex], newKeyword) ;
+			break ;
+		  }
+	  }
+	strcpy(removeList[removeIndex+1], "-1") ;
+}
+
+void CommandProcessor::appendToEditList(const char *newKeyword) {
+	int editIndex ;  
+	
+	for(editIndex = 0 ; editIndex < MAX_NO_ALTERNATES ; editIndex++) {
+		if(!(strcmp("-1", editList[editIndex]))) {
+			strcpy(editList[editIndex], newKeyword) ;
+			break ;
+		}
+	}
+	strcpy(editList[editIndex+1], "-1") ;
+}
+
+void CommandProcessor::appendToSearchList(const char *newKeyword) {
+	  
+	int searchIndex ;
+	
+	for(searchIndex = 0 ; searchIndex < MAX_NO_ALTERNATES ; searchIndex++) {
+		if(!(strcmp("-1", searchList[searchIndex]))) {
+			strcpy(searchList[searchIndex], newKeyword) ;
+			break ;
+		}
+	}
+	strcpy(searchList[searchIndex+1],"-1") ;
+}
+
+void CommandProcessor::appendToUndoList(const char *newKeyword) {
+	int undoIndex ;
+
+	for(undoIndex = 0 ; undoIndex < MAX_NO_ALTERNATES ; undoIndex++) {
+		if(!(strcmp("-1", undoList[undoIndex]))) {
+			strcpy(undoList[undoIndex], newKeyword) ;
+			break ;
+		}
+	}
+	strcpy(undoList[undoIndex+1], "-1") ;
+}
+
+void CommandProcessor::appendToRedoList(const char *newKeyword) {
+	int redoIndex ; 
+
+	for(redoIndex = 0 ; redoIndex < MAX_NO_ALTERNATES ; redoIndex++) {
+		if(!(strcmp("-1", redoList[redoIndex]))) {
+			strcpy(redoList[redoIndex], newKeyword) ;
+			break ;
+		}
+	}
+	strcpy(redoList[redoIndex + 1], "-1") ;
+}
+
+void CommandProcessor::appendToAltList(const char *newKeyword) {
+	int altIndex ;
+
+	for(altIndex = 0 ; altIndex < MAX_NO_ALTERNATES ; altIndex++) {
+		if(!(strcmp("-1", altList[altIndex]))) {
+			strcpy(altList[altIndex], newKeyword) ;
+			break ;
+		}
+	}
+	
+	strcpy(altList[altIndex + 1], "-1") ;
+}
+
+void CommandProcessor::appendToExitList(const char *newKeyword) {
+	int exitIndex ;
+	
+	for(exitIndex = 0 ; exitIndex < MAX_NO_ALTERNATES ; exitIndex++) {
+		if(!(strcmp("-1", exitList[exitIndex]))) {
+			strcpy(exitList[exitIndex], newKeyword) ;
+			break ;
+		}
+	}
+	strcpy(exitList[exitIndex + 1], "-1") ;
 }
 
 bool CommandProcessor::actualKeyWord(char userCmd[MAX_COMMAND_SIZE]) {
@@ -554,78 +644,87 @@ bool CommandProcessor::actualKeyWord(char userCmd[MAX_COMMAND_SIZE]) {
 
 }
 
-//delete & remove
 bool CommandProcessor::isFound(char cmd[MAX_COMMAND_SIZE], string cmdType) {
-
-	int i = 0;
+	int index = 0;
+	bool returnVal= false ;
 
 	if(cmdType == "add") {
-
-		while(strcmpi("-1", addList[i]) != 0) {
-		if(strcmpi(cmd, addList[i]) == 0)
-			return true;
-		i++;
+		while(strcmpi("-1", addList[index]) != 0) {
+			if(strcmpi(cmd, addList[index]) == 0) {
+				returnVal = true ;
+			}
+			index++;
 		}
 	}
+
 	else if(cmdType == "remove") {
-		while(strcmpi("-1", removeList[i]) != 0) {
-		if(strcmpi(cmd, removeList[i]) == 0)
-			return true;
-		i++;
+		while(strcmpi("-1", removeList[index]) != 0) {
+			if(strcmpi(cmd, removeList[index]) == 0) {
+				returnVal = true;
+			}
+			index++;
 		}
-
 	}
+	
 	else if(cmdType == "edit") {
-		while(strcmpi("-1", editList[i]) != 0) {
-		if(strcmpi(cmd, editList[i]) == 0)
-			return true;
-		i++;
+		while(strcmpi("-1", editList[index]) != 0) {
+			if(strcmpi(cmd, editList[index]) == 0) {
+				returnVal = true ;
+			}
+			index++;
 		}
-
 	}
+
 	else if(cmdType == "search") {
-		while(strcmpi("-1", searchList[i]) != 0) {
-		if(strcmpi(cmd, searchList[i]) == 0)
-			return true;
-		i++;
+		while(strcmpi("-1", searchList[index]) != 0) {
+			if(strcmpi(cmd, searchList[index]) == 0) {
+				returnVal = true;
+			}
+			index++;
 		}
-
 	}
+
 	else if(cmdType == "exit") {
-		while(strcmpi("-1", exitList[i]) != 0) {
-		if(strcmpi(cmd, exitList[i]) == 0)
-			return true;
-		i++;
+		while(strcmpi("-1", exitList[index]) != 0) {
+			if(strcmpi(cmd, exitList[index]) == 0) {
+				returnVal = true ;
+			}
+			index++;
 		}
 
 	}
 	else if(cmdType == "undo") {
-		while(strcmpi("-1", undoList[i]) != 0) {
-		if(strcmpi(cmd, undoList[i]) == 0)
-			return true;
-		i++;
+		while(strcmpi("-1", undoList[index]) != 0) {
+			if(strcmpi(cmd, undoList[index]) == 0) {
+				returnVal = true ;
+			}
+			index++;
 		}
-
 	}
+
 	else if(cmdType == "redo") {
-		while(strcmpi("-1", redoList[i]) != 0) {
-		if(strcmpi(cmd, redoList[i]) == 0)
-			return true;
-		i++;
+		while(strcmpi("-1", redoList[index]) != 0) {
+			if(strcmpi(cmd, redoList[index]) == 0) {
+				returnVal = true;
+			}
+			index++;
 		}
-
 	}
+
 	else if(cmdType == "alternate") {
-		while(strcmpi("-1", altList[i]) != 0) {
-		if(strcmpi(cmd, altList[i]) == 0)
-			return true;
-		i++;
+		while(strcmpi("-1", altList[index]) != 0) {
+			if(strcmpi(cmd, altList[index]) == 0) {
+				returnVal = true;
+			}
+			index++;
 		}
-
 	}
 
-	return false ;
+	else {
+		returnVal = false ;
+	}
 
+	return returnVal ;
 }
 
 bool CommandProcessor::isFound(char cmd[MAX_COMMAND_SIZE], const char cmdList[][MAX_COMMAND_SIZE]) {
@@ -926,21 +1025,15 @@ void CommandProcessor::addZeroes(char input[MAX_TIME_SIZE]){
 	strcpy(input, newDate);
 }
 
-string CommandProcessor::removeLastSpace(string word)
-{
-  
-  string tempWord ;
-
-  int lastLetterIndex = word.size()-1 ;
-
-  if(word[lastLetterIndex] == ' ') {
+string CommandProcessor::removeLastSpace(string word) {
+	string tempWord ;
+	int lastLetterIndex = word.size()-1 ;
+	
+	if(word[lastLetterIndex] == ' ') {
 	  tempWord = word.substr(0,lastLetterIndex) ;
 	  word = tempWord ;
- 
-  }
-
-  return word ;
-  
+	}
+	return word ;  
 }
 
 bool CommandProcessor::isDate(int first, int second, int third ){

@@ -24,13 +24,13 @@ public:
 	vector<Task*> getTaskList();
 	void writeInputLog(string);
 	void writeErrorLog(string);
-
-	//spatiks
+	
+	//for use when adding alternate keywords for existing command keywords
 	void writeToFile(const char *) ;
-	//by reference
 	vector<string> readFromFile() ;
 	tm* getCurrentTime();
 
 
-};
+} ;
+
 #endif

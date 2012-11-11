@@ -1,6 +1,15 @@
  #include "Logic.h"
 
 const string Logic::TASK_FILE_NAME = "task.txt";
+const string Logic::FILENAME_ADD_ALTERNATES = "addlist.txt" ;
+const string Logic::FILENAME_REMOVE_ALTERNATES = "removelist.txt" ;
+const string Logic::FILENAME_EDIT_ALTERNATES = "editlist.txt" ;
+const string Logic::FILENAME_EXIT_ALTERNATES  = "exitlist.txt" ;
+const string Logic::FILENAME_SEARCH_ALTERNATES = "searchlist.txt" ;
+const string Logic::FILENAME_ALTERNATE_ALTERNATES = "altlist.txt" ;
+const string Logic::FILENAME_UNDO_ALTERNATES = "undolist.txt" ;
+const string Logic::FILENAME_REDO_ALTERNATES = "redolist.txt" ;
+
 Logic::Logic()	{
 	fileObj.setFileName(TASK_FILE_NAME);
 	fileObj.readList();
@@ -66,7 +75,7 @@ Logic::CommandType Logic::determineCommand(string cmd) {
 
 bool Logic::execute(string cmd,Task* userInputTask) throw(string) {
 	CommandType type;
-	bool returnVal = false;
+	bool returnVal = false ;
 	try {
 		type = Logic::determineCommand(cmd);
 	}
@@ -117,28 +126,29 @@ bool Logic::execute(string cmd,Task* userInputTask) throw(string) {
 			}
 			catch(string except) {
 	   			UIObj.printThis(except) ;
-				returnVal = true ;
+				returnVal = false ;
 			}
 			break;
 		case REDO:
 			try {
-				 returnVal = redoTask();
+                           returnVal = redoTask();
 			}
 			catch(string except) {
-				UIObj.printThis(except) ;
-				returnVal = false;
+			   UIObj.printThis(except) ;
+			   returnVal = false ;
 			}
 			break;
 		case ALT:
 			try {
-				returnVal = createAlternateKeyword(userInputTask) ;
+			   returnVal = createAlternateKeyword(userInputTask) ;
 			}	
 			catch(string except) {
-				UIObj.printThis(except) ;
-				returnVal = false;
+			   UIObj.printThis(except) ;
+			   returnVal = false ;
 			}
-
+			 }		
 			break ;
+
 		case EXIT:
 			exit(0);
 		default:
@@ -147,146 +157,57 @@ bool Logic::execute(string cmd,Task* userInputTask) throw(string) {
 	return returnVal;
 }
 
-void Logic::appendToCommandList(const char * newKeyword, CommandType type)
-{
+bool Logic::createAlternateKeyword(Task * userInputTask) throw (string) {
 
- int i ; 
- switch(type) {
+	bool returnVal = true ;
+	Task * tempTask = new TimedTask ;
+	string keyword = cmdObj.cmdProcessor(userInputTask->getDesc(), tempTask) ;
+	CommandType type = determineCommand(keyword);
 
-  case ADD:
-	  for(i=0 ; i < MAX_NO_ALTERNATES ; i++) {
-		  if(!(strcmp("-1",cmdObj.addList[i]))) {
-			  strcpy(cmdObj.addList[i],newKeyword) ;
-			  break ;
-		  }
-	  }
-	  strcpy(cmdObj.addList[i+1],"-1") ;
-	  break ;
-  case REMOVE:
-	   for(i=0 ; i < MAX_NO_ALTERNATES ; i++) {
-		  if(!(strcmp("-1",cmdObj.removeList[i]))) {
-			  strcpy(cmdObj.removeList[i],newKeyword) ;
-			  break ;
-		  }
-	  }
-	  strcpy(cmdObj.removeList[i+1],"-1") ;
-	  break ;
-  case EDIT:
-	   for(i=0 ; i < MAX_NO_ALTERNATES ; i++) {
-		  if(!(strcmp("-1",cmdObj.editList[i]))) {
-			  strcpy(cmdObj.editList[i],newKeyword) ;
-			  break ;
-		  }
-	  }
-	  strcpy(cmdObj.editList[i+1],"-1") ;
-	  break ;
-  case SEARCH:
-	  for(i=0 ; i < MAX_NO_ALTERNATES ; i++) {
-		  if(!(strcmp("-1",cmdObj.searchList[i]))) {
-			  strcpy(cmdObj.searchList[i],newKeyword) ;
-			  break ;
-		  }
-	  }
-	  strcpy(cmdObj.searchList[i+1],"-1") ;
-	  break ;
-  case UNDO:
-	  for(i=0 ; i < MAX_NO_ALTERNATES ; i++) {
-		  if(!(strcmp("-1",cmdObj.undoList[i]))) {
-			  strcpy(cmdObj.undoList[i],newKeyword) ;
-			  break ;
-		  }
-	  }
-	  strcpy(cmdObj.undoList[i+1],"-1") ;
-	  break ;
-  case REDO:
-	   for(i=0 ; i < MAX_NO_ALTERNATES ; i++) {
-		  if(!(strcmp("-1",cmdObj.redoList[i]))) {
-			  strcpy(cmdObj.redoList[i],newKeyword) ;
-			  break ;
-		  }
-	  }
-	  strcpy(cmdObj.redoList[i+1],"-1") ;
-	  break ;
-  case ALT:
-	  for(i=0 ; i < MAX_NO_ALTERNATES ; i++) {
-		  if(!(strcmp("-1",cmdObj.altList[i]))) {
-			  strcpy(cmdObj.altList[i],newKeyword) ;
-			  break ;
-		  }
-	  }
-	  strcpy(cmdObj.altList[i+1],"-1") ;
-	  break ;
-  case EXIT:
-	  for(i=0 ; i < MAX_NO_ALTERNATES ; i++) {
-		  if(!(strcmp("-1",cmdObj.exitList[i]))) {
-			  strcpy(cmdObj.exitList[i],newKeyword) ;
-			  break ;
-		  }
-	  }
-	  strcpy(cmdObj.exitList[i+1],"-1") ;
-	  break ;
-  }
-
-}
-
-bool Logic::createAlternateKeyword(Task * userInputTask)
-{
-
-  bool returnVal = true ;
-  Task * tempTask = new TimedTask ;
-  string keyword = cmdObj.cmdProcessor(userInputTask->getDesc(), tempTask) ;
-  CommandType type = determineCommand(keyword);
-
-  //add the description of the new userInputTask to the text file (append) and also to the char array
   //NEED TO REMOVE TRAILING SPACE FROM TEMPTASK->description
-  string newKeyword = cmdObj.removeLastSpace(tempTask->getDesc()) ;
-  switch(type)
+	string newKeyword = cmdObj.removeLastSpace(tempTask->getDesc()) ;
+	switch(type)
 	{
-		case ADD:
-			    fileObj.setFileName("addlist.txt") ;
-				fileObj.writeToFile((newKeyword.c_str())) ;
-				appendToCommandList((newKeyword.c_str()), type) ;
-				break;
-		case REMOVE:
-			    fileObj.setFileName("removelist.txt") ;
-				fileObj.writeToFile(newKeyword.c_str()) ;
-				appendToCommandList(newKeyword.c_str(), type) ;
-				break;
-		case EDIT:
-			    fileObj.setFileName("editlist.txt") ;
-				fileObj.writeToFile(newKeyword.c_str()) ;
-				appendToCommandList(newKeyword.c_str(), type) ;
-				break;
-		case SEARCH:
-			    fileObj.setFileName("searchlist.txt") ;
-				fileObj.writeToFile(newKeyword.c_str()) ;
-				appendToCommandList(newKeyword.c_str(), type) ;
-				break;
-		case UNDO:
-			    fileObj.setFileName("undolist.txt") ;
-				fileObj.writeToFile(newKeyword.c_str()) ;
-				appendToCommandList(newKeyword.c_str(), type) ;
-				break;
-		case REDO:
-			    fileObj.setFileName("redolist.txt") ;
-				fileObj.writeToFile(newKeyword.c_str()) ;
-				appendToCommandList(newKeyword.c_str(), type) ;
-				break;
-		case ALT:
-			    fileObj.setFileName("altlist.txt") ;
-				fileObj.writeToFile(newKeyword.c_str()) ;
-				appendToCommandList(newKeyword.c_str(), type) ;
-			    break ;
-		case EXIT:
-			    fileObj.setFileName("exitlist.txt") ;
-				fileObj.writeToFile(newKeyword.c_str()) ;
-				appendToCommandList(newKeyword.c_str(), type) ;
-			    break ;
+	 case ADD:
+		 fileObj.setFileName(Logic::FILENAME_ADD_ALTERNATES) ;
+		 cmdObj.appendToAddList(newKeyword.c_str()) ;
+		 break;
+	 case REMOVE:
+		 fileObj.setFileName(Logic::FILENAME_REMOVE_ALTERNATES) ;
+		 cmdObj.appendToRemoveList(newKeyword.c_str()) ;
+		 break;
+	 case EDIT:
+		 fileObj.setFileName(Logic::FILENAME_EDIT_ALTERNATES) ;
+		 cmdObj.appendToEditList(newKeyword.c_str()) ;
+		 break;
+	 case SEARCH:
+		 fileObj.setFileName(Logic::FILENAME_SEARCH_ALTERNATES) ;
+		 cmdObj.appendToSearchList(newKeyword.c_str()) ;
+		 break;
+	 case UNDO:
+		 fileObj.setFileName(Logic::FILENAME_UNDO_ALTERNATES) ;
+		 cmdObj.appendToUndoList(newKeyword.c_str()) ;
+		 break;
+	 case REDO:
+		 fileObj.setFileName(Logic::FILENAME_REDO_ALTERNATES) ;
+		 cmdObj.appendToRedoList(newKeyword.c_str()) ;
+		 break;
+	 case ALT:
+		 fileObj.setFileName(Logic::FILENAME_ALTERNATE_ALTERNATES) ;
+		 cmdObj.appendToAltList(newKeyword.c_str()) ;
+		 break ;
+	 case EXIT:
+		 fileObj.setFileName(Logic::FILENAME_EXIT_ALTERNATES) ;
+		 cmdObj.appendToExitList(newKeyword.c_str()) ;
+		 break ;
+	default:
+		throw string("Unable to add alternate! Check keyword entered.") ;
 	}
-
-  delete tempTask ;
-  return returnVal ;
-
+  
+	fileObj.writeToFile(newKeyword.c_str()) ;
+  
+	delete tempTask ;
+	return returnVal ;
 }
 
 bool Logic::addTask(Task* userInputTask) throw(string) {
@@ -314,11 +235,17 @@ bool Logic::addTask(Task* userInputTask) throw(string) {
 }
 
 bool Logic::isUserIndexValid(int index, vector<int> vectorOfIndices) {
-  if(index >= 1 && index <= vectorOfIndices.size()) 
-	  return true ;
-  else 
-	  return false ;
 
+	bool returnVal ;
+  
+	if(index >= 1 && index <= vectorOfIndices.size()) {
+		returnVal = true ;
+	}
+	else { 
+		returnVal = false ;
+	}
+
+	return returnVal ;
 }
  
 bool Logic::findToDelete(Task * userInputTask) throw(string) {
@@ -464,7 +391,6 @@ void Logic::editTask(int index) {
 	taskList[index] = userInputTask;
 }
 	
-
 bool Logic::undoTask () throw(string) {
 	CommandType undoType;
 	bool returnVal = true;
@@ -590,54 +516,51 @@ bool Logic::redoTask() throw(string) {
 	return returnVal;
 }
 
-//spatiks
+void Logic::deleteExpiredTasks() {
+	
+	time_t now ;
+	time(&now);
+	
+	struct tm * currentTime = localtime(&now) ;
+	struct tm * endTimeFromFile ;
+	double timeDiff ;
 
-void Logic::deleteExpired()
-{
-	 time_t now ;
-	 time(&now);
-	 struct tm * currentTime = localtime(&now) ;
-	 struct tm * endTimeFromFile ;
-	 double timeDiff ;
-	 fileObj.setFileName("task.txt") ;
-	 int i = 0 ;
+	fileObj.setFileName("task.txt") ;
+	int index = 0 ;
 	
 	//check end time for both deadlined and timed tasks
-	for(i=0 ; i < taskList.size() ; i++)
-	{
+	for(index = 0 ; index < taskList.size() ; index++) {
 		//this bit will only work if taskList is properly sorted
 		/*if(taskList[i]->getEnd() == NULL && taskList[i]->getStart() == NULL)
 		{
 			break ;
 		}*/
-	    
+		if(taskList[index]->getEnd() != NULL || (taskList[index]->getEnd() == NULL  && taskList[index]->getStart() != NULL)) {
 
-		if(taskList[i]->getEnd() != NULL)
-		{
-			endTimeFromFile = taskList[i]->getEnd() ;
-			endTimeFromFile->tm_isdst = -1 ;
-			endTimeFromFile->tm_wday = 0 ;
-			endTimeFromFile->tm_yday = 0 ;
-			endTimeFromFile->tm_year -= 1900 ;
-			endTimeFromFile->tm_mon -= 1 ;
-			endTimeFromFile->tm_sec = 0 ;
-		    
-			time_t endTime = mktime(endTimeFromFile) ;
-			timeDiff = difftime(now,endTime) ;
-
-			if((timeDiff) > 0.0) {
-				delete taskList[i] ;
-				taskList.erase(taskList.begin()+i) ;
+			if(taskList[index]->getEnd()) {
+				endTimeFromFile = taskList[index]->getEnd() ;
 			}
+
 			else {
-			  endTimeFromFile->tm_year += 1900 ;
-			  endTimeFromFile->tm_mon += 1 ;
+				endTimeFromFile = taskList[index]->getStart() ;
+			}
+
+			UIObj.makeConvertible(endTimeFromFile) ;
+			time_t endTime = mktime(endTimeFromFile) ;
+			
+			timeDiff = difftime(now,endTime) ;
+			if((timeDiff) > 0.0) {
+				delete taskList[index] ;
+				taskList.erase(taskList.begin() + index) ;
+			}
+
+			else {
+				UIObj.changeBackTimePointer(endTimeFromFile) ;
 			}
 		}
 	}
-
-	fileObj.setTaskList(taskList) ;
-	fileObj.writeList();
+	
+	updateTaskFile() ;
 }
 
 tm* Logic::getCurrentTime()	{

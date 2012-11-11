@@ -59,17 +59,14 @@ bool Search::executeSearchTime(Task* query) throw(string){
 				else {
 					revertToOriginalTime(tempTime,tempHour);
 				}
-				
 			}
 			else {
 				returnVal = false;
 			}
-
-			
-
 	}
 	return returnVal;
 }
+
 bool Search::executeSearch(Task* query){
 
 	for(int i =  0; i < Search::inputList.size(); i++){
