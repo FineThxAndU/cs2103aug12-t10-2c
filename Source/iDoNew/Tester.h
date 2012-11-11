@@ -149,6 +149,99 @@ TEST(basic_test, addZeroes)
 	cp.addZeroes(dateTime);
 	ASSERT_EQ(0,strcmp(dateTime,"300809"));
 }
+		}
+		catch(string except) {
+			ASSERT_EQ(except,"No undo to redo yet!");
+		}
+}
+TEST(basic_test, addZeroes)
+{
+	CommandProcessor cp;
+	char dateTime[100];
+	strcpy(dateTime, "30.8.9");
+	cp.addZeroes(dateTime);
+	ASSERT_EQ(0,strcmp(dateTime,"300809"));
+}
+
+TEST (basic_test, undoTask) {
+	Logic testObj;
+	bool returnVal;
+		try {
+			returnVal=testObj.undoTask();
+			ASSERT_EQ(returnVal, true);
+	}
+	catch (string except) {
+		
+	ASSERT_EQ(except,"No commands to undo yet!");
+	}
+
+}
+
+TEST (basic_test, redoTask) {
+	Logic testObj;
+	bool returnVal;
+		try {
+			returnVal=testObj.redoTask();
+			ASSERT_EQ(returnVal,true);
+		}
+		catch(string except) {
+			ASSERT_EQ(except,"No undo to redo yet!");
+		}
+}
+
+TEST(basic_test, addTask)
+{
+	Logic testObj;
+	Task* testTask = new TimedTask;
+	tm* end=NULL;
+	end->tm_hour=4;
+	end->tm_min=0;
+	end->tm_mon=5;
+	end->tm_mday= 15;
+	end->tm_year=2012;
+	testTask->setDesc("Test");
+	testTask->setEnd(end);
+	tm* start;
+	start->tm_hour=4;
+	start->tm_min=0;
+	start->tm_mon=5;
+	start->tm_mday= 16;
+	start->tm_year=2012;
+	testTask->setStart(start);
+	bool returnVal=testObj.addTask(testTask);
+	ASSERT_EQ(returnVal,true);
+	//returnVal=testObj.search( testTask);
+	//ASSERT_EQ(returnVal,true);
+}
+TEST (basic_test,searchTask) {
+	Logic testObj;
+	Task* testTask = new TimedTask;
+	testTask->setDesc("test");
+	bool returnVal=testObj.search( testTask);
+	ASSERT_EQ(returnVal,true);
+}
+
+
+/*TEST (basic_test,deleteTask) {
+	Logic testObj;
+	Task* testTask = new TimedTask;
+	tm* end;
+	end->tm_hour=4;
+	end->tm_min=0;
+	end->tm_mon=5;
+	end->tm_mday= 15;
+	end->tm_year=2012;
+	testTask->setDesc("Test");
+	testTask->setEnd(end);
+	tm* start;
+	start->tm_hour=4;
+	start->tm_min=0;
+	start->tm_mon=5;
+	start->tm_mday= 16;
+	start->tm_year=2012;
+	testTask->setStart(start);
+	testObj.findToDelete(testTask);
+}*/
 
 /************************************************************************/
 

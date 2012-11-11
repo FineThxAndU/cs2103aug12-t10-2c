@@ -68,17 +68,20 @@
     <ClInclude Include="..\Source\iDoNew\Search.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\iDoNew\Sort.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\Source\iDoNew\Task.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\iDoNew\TimedTask.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\Source\iDoNew\UI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\Source\iDoNew\Tester.h">
       <Filter>Unit Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\iDoNew\Sort.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
