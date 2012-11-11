@@ -19,9 +19,9 @@ bool Search::executeSearch(string description){
 	}
 	return true;
 }
-bool Search::executeSearchTime(Task* query)
-	{
-	    tm* currentTime=query->getStart();
+
+bool Search::executeSearchTime(Task* query) {
+	    tm* currentTime=query->getStart() ;
 		currentTime->tm_sec=0;
 		currentTime->tm_isdst=-1;
 		currentTime->tm_wday=0;
@@ -85,15 +85,12 @@ bool Search::executeSearchTime(Task* query)
 					tempTime->tm_mon+=1;
 					tempTime->tm_year+=1900;
 					tempTime->tm_hour=tempHour;
-					}
-				
+					}	
 				}
-
-			
-
 	}
 	return true;
-	}
+}
+
 bool Search::executeSearch(Task* query){
 
 	for(int i =  0; i < Search::inputList.size(); i++){

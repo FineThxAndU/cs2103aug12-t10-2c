@@ -1,3 +1,5 @@
+//Parser class
+
 #ifndef COMMAND_H_
 #define COMMAND_H_
 
@@ -31,20 +33,19 @@ class CommandProcessor
 private:
 
 	FileIO fileObject ;
-	//every program run need to load from respective file into this
 
+	//to load alternates for command keywords into respective char arrays
 	void initAddList() ;
 	void initRemoveList() ;
 	void initEditList() ;
 	void initSearchList() ;
-        void initUndoList() ;
-        void initExitList() ;
+    void initUndoList() ;
+    void initExitList() ;
 	void initRedoList() ;
 	void initAltList() ;
 
-public:
-
-       	char addList[MAX_NO_ALTERNATES][MAX_COMMAND_SIZE] ;
+	//lists of alternate commands for keywords
+	char addList[MAX_NO_ALTERNATES][MAX_COMMAND_SIZE] ;
 	char removeList[MAX_NO_ALTERNATES][MAX_COMMAND_SIZE] ;
 	char editList[MAX_NO_ALTERNATES][MAX_COMMAND_SIZE] ;
 	char searchList[MAX_NO_ALTERNATES][MAX_COMMAND_SIZE] ;
@@ -53,6 +54,18 @@ public:
 	char redoList[MAX_NO_ALTERNATES][MAX_COMMAND_SIZE] ;
 	char altList[MAX_NO_ALTERNATES][MAX_COMMAND_SIZE] ;
 
+	
+	static const string FILENAME_ADD_ALTERNATES ;
+	static const string FILENAME_REMOVE_ALTERNATES ;
+	static const string FILENAME_EDIT_ALTERNATES ;
+	static const string FILENAME_EXIT_ALTERNATES ;
+	static const string FILENAME_SEARCH_ALTERNATES ;
+	static const string FILENAME_ALTERNATE_ALTERNATES ;
+	static const string FILENAME_UNDO_ALTERNATES ;
+	static const string FILENAME_REDO_ALTERNATES ;
+
+
+public:
 
 	CommandProcessor() ;
 	vector<int> intProcessor (string);
@@ -60,8 +73,10 @@ public:
 	void descProcessor (string, Task*& );
 	tm* stringToTime (string);
 	bool actualKeyWord(char userCmd[MAX_COMMAND_SIZE]);
+	//overloaded isFound
 	bool isFound(char cmd[MAX_COMMAND_SIZE], string cmdType);
 	bool isFound(char cmd[MAX_COMMAND_SIZE], const char [][MAX_COMMAND_SIZE]);
+
 	bool isStart(char singleWord[MAX_COMMAND_SIZE]);
 	bool isEnd(char singleWord[MAX_COMMAND_SIZE]);
 	bool isDateTime(char singleWord[MAX_COMMAND_SIZE]);
@@ -89,6 +104,18 @@ public:
 	bool isLeapYear(int year);
 	void dateToString(tm *date, char finalDate[MAX_TIME_SIZE]);
 	void deleteConsecSpaces(char input[MAX_INPUT_SIZE]);
+
+	//to add new keyword to private alternates list, called in Logic.cpp
+	//needed to have function for each type, as passing 2D char array as parameter was unpredictable
+	void appendToAddList(const char *) ;
+	void appendToRemoveList(const char *) ;
+	void appendToEditList(const char *) ;
+	void appendToSearchList(const char *) ;
+	void appendToUndoList(const char *) ;
+	void appendToRedoList(const char *) ;
+	void appendToAltList(const char *) ;
+	void appendToExitList(const char *) ;
+
 } ;
 
 

@@ -32,15 +32,28 @@ class Logic
 	string userInput;
 	CommandProcessor cmdObj;
 	Task* userInputTask ;
+
+	static enum CommandType {
+		ADD, REMOVE, EDIT, SEARCH, UNDO, REDO, ALT, INVALID, EXIT 
+	} ;
+
+
 	
 	//for findToDelete and findToEdit
 	bool isUserIndexValid(int, vector<int>) ;
 
+	static const string FILENAME_ADD_ALTERNATES ;
+	static const string FILENAME_REMOVE_ALTERNATES ;
+	static const string FILENAME_EDIT_ALTERNATES ;
+	static const string FILENAME_EXIT_ALTERNATES ;
+	static const string FILENAME_SEARCH_ALTERNATES ;
+	static const string FILENAME_ALTERNATE_ALTERNATES ;
+	static const string FILENAME_UNDO_ALTERNATES ;
+	static const string FILENAME_REDO_ALTERNATES ;
+
 public:
 	
-	static enum CommandType{
-		ADD, REMOVE, EDIT, SEARCH, UNDO,REDO,ALT,INVALID,EXIT //what happens for user command "1 2" it's not invalid, but it will determined to be in determineCommandType
-	} ;
+
 	struct Input
 	{
 		CommandType type;
@@ -67,10 +80,10 @@ public:
 	bool findToDelete(Task*);
 	bool findToEdit(Task*);
 	bool redoTask();
-	bool createAlternateKeyword(Task *) ;
-	void deleteExpired() ;
-	void appendToCommandList(const char *, CommandType type) ;
+	bool createAlternateKeyword(Task *) ;	
+	void deleteExpiredTasks() ;
 
+	
 private:
 		stack < Logic::Input> undoStack;
 		stack <Input> redoStack;
