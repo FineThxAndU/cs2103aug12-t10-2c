@@ -17,6 +17,7 @@ Logic::Logic()	{
 	while(!undoStack.empty()) {
 		undoStack.pop() ;
 	}
+
 }
 
 
@@ -24,13 +25,16 @@ int Logic::logicMain()	{
 	updateHomeScreen();
 
 	while(1) { 
+	userInputNewTask = new TimedTask;
+	userInputNewTask->setStart(current);
 	    userInput = UIObj.getUserInput();
 		assert(userInput != "\0") ;
-		string cmd = cmdObj.cmdProcessor(userInput, userInputTask);
+		string cmd = cmdObj.cmdProcessor(userInput, userInputTask, userInputNewTask);
 		assert(cmd != "\0") ;
 		bool returnVal;
 		try {
-			returnVal = Logic::execute(cmd,userInputTask);
+		        returnVal = Logic::execute(cmd,userInputTask, userInputNewTask);
+
 		}
 		catch (string except) {
 			returnVal=false;
@@ -74,7 +78,8 @@ Logic::CommandType Logic::determineCommand(string cmd) {
 	return type;
 }
 
-bool Logic::execute(string cmd,Task* userInputTask) throw(string) {
+bool Logic::execute(string cmd,Task* userInputTask, Task* userInputNewTask) throw(string) {
+
 	CommandType type;
 	bool returnVal = false ;
 	try {
@@ -105,7 +110,7 @@ bool Logic::execute(string cmd,Task* userInputTask) throw(string) {
 			break;
 		case EDIT:
 			try	{
-				returnVal = findToEdit(userInputTask) ;
+				returnVal=findToEdit(userInputTask, userInputNewTask);
 			}
 			catch(string except) {
 				UIObj.printThis(except) ;
@@ -266,43 +271,62 @@ bool Logic::findToDelete(Task * userInputTask) throw(string) {
 		throw string("No matches found");
 	}
 
-	UIObj.displayHomeScreen(tempList);
-	userInput = UIObj.getUserInput();
-	if ( userInput == "\0") {
-		updateTaskFile();
-		searchObj.clearSearchResults();
-		throw string ("Not a valid input");
-		returnVal=false;
-	}
-	vector<int> userIndex;
-	try {
-		userIndex = cmdObj.intProcessor(userInput);
-	}
-	catch (string except) {
-		UIObj.printThis(except);
-		returnVal = false;
-	}
-	for(i = 0; i < userIndex.size() ; i++) {
-	  if(isUserIndexValid(userIndex[i],userIndex)) {
-	       Logic::deleteTask(searchResults[userIndex[i]-1]) ;
-		}
-	  else {
-		  updateTaskFile();
-		  searchObj.clearSearchResults();
-		  throw string("Invalid option chosen.") ;
-		  returnVal = false;
-		}
+
+
+        if(searchResults.size() > 1){
+	       UIObj.displayHomeScreen(tempList);
+	       userInput = UIObj.getUserInput();
+               if ( userInput == "\0") {
+		     updateTaskFile();
+		     searchObj.clearSearchResults();
+		     throw string ("Not a valid input");
+		     returnVal=false;
+  	        }
+	        vector<int> userIndex;
+	        try {
+		     userIndex = cmdObj.intProcessor(userInput);
+	        }
+	        catch (string except) {
+		     UIObj.printThis(except);
+		     returnVal = false;
+	        }
+	        for(i = 0; i < userIndex.size() ; i++) {
+	             if(isUserIndexValid(userIndex[i],userIndex)) {
+	                  Logic::deleteTask(searchResults[userIndex[i]-1]) ;
+	             }
+	             else {
+		          updateTaskFile();
+		          searchObj.clearSearchResults();
+		          throw string("Invalid option chosen.") ;
+		          returnVal = false;
+                     }
      		   //for now do nothing else, later get user input again after printing same list?
+	}
+        
+        else if(searchResults.size() == 1){
+				Logic::deleteTask(0);
 	}
 
 	updateTaskFile();
+
 	searchObj.clearSearchResults();
+	
 //	assert ( searchObj.searchResults.size() == 0);
 	return returnVal ;
-
 }
 
+
+
+
+
+
+
+
+
+
 void Logic::deleteTask(int index) {
+
+
 	assert ( index >= 0 && index <= taskList.size());
 	setUndoStack(REMOVE,taskList[index],index);
 	delete taskList[index];
@@ -325,7 +349,7 @@ bool Logic::search(Task* userInputTask) throw(string){
 	return returnVal;
 }
 
-bool Logic::findToEdit(Task* userInputTask) throw (string) {
+bool Logic::findToEdit(Task* userInputTask, Task* userInputNewTask) throw (string) {
 	bool returnVal=true;
 	setSearchObj();
 	vector<int> searchResults = searchObj.getIndices();
@@ -334,45 +358,51 @@ bool Logic::findToEdit(Task* userInputTask) throw (string) {
 	for(int i = 0;i < searchResults.size();i++) {
 		tempList.push_back(taskList[searchResults[i]]);
 	}
-	if (tempList.size() == 0) {
-		returnVal=false;
-		searchObj.clearSearchResults();
-		throw string ("No matching tasks found");
-	}
-	UIObj.displayHomeScreen( tempList);
-	userInput = UIObj.getUserInput();
-	if ( userInput == "\0") {
-		searchObj.clearSearchResults();
-		updateTaskFile();
-		returnVal=false;
-		throw string ( "No user input found");
-	}
-	vector<int> userIndex;
-	try {
-		userIndex = cmdObj.intProcessor(userInput) ;
-	}
-	catch(string except) {
-		UIObj.printThis(except) ;
-		returnVal = false;
-	}
-	assert(userIndex.size() != 0) ;
-	for(int i = 0; i < userIndex.size();i++) {
-		if(isUserIndexValid(userIndex[i],userIndex)) {
-			try {
-					Logic::editTask(searchResults[userIndex[i]-1]);
-			}
-			catch (string except){
+	if(searchResults.size() > 1){
+	     if (tempList.size() == 0) {
+	   	     returnVal=false;
+		     searchObj.clearSearchResults();
+		     throw string ("No matching tasks found");
+	     }
+	     UIObj.displayHomeScreen( tempList);
+	     userInput = UIObj.getUserInput();
+	     if ( userInput == "\0") {
+	 	  searchObj.clearSearchResults();
+		  updateTaskFile();
+		  returnVal=false;
+		  throw string ( "No user input found");
+	     }
+	     vector<int> userIndex;
+	     try {
+		  userIndex = cmdObj.intProcessor(userInput) ;
+	     }
+	     catch(string except) {
+		  UIObj.printThis(except) ;
+		  returnVal = false;
+	     }
+	     assert(userIndex.size() != 0) ;
+	     for(int i = 0; i < userIndex.size();i++) {
+		   if(isUserIndexValid(userIndex[i],userIndex)) {
+			   try {
+				Logic::editTask(searchResults[userIndex[i]-1]);
+			    }
+		    	   catch (string except){
 				UIObj.printThis(except);
 				returnVal=false;
-			}
-		}
-	 else { 
-		returnVal=false;
-		updateTaskFile();
-		searchObj.clearSearchResults();
-	    throw string("Invalid option chosen.") ;
-	 }
+			   }
+	           }
+	        else { 
+		       returnVal=false;
+		       updateTaskFile();
+		       searchObj.clearSearchResults();
+	               throw string("Invalid option chosen.") ;
+	        }
+	      }
+	}	 
+	else if(searchResults.size() == 1){
+		Logic::editTask(searchResults[0]);
 	}
+
 	updateTaskFile();
 	searchObj.clearSearchResults();
 	return returnVal;
@@ -386,7 +416,14 @@ void Logic::editTask(int index) {
 		throw string ("User input not valid");
 	}
 	userInputTask = taskList[index];
-	cmdObj.descProcessor(userInput,userInputTask);
+	cmdObj.descProcessor(userInput,userInputTask);*/
+	if(userInputNewTask->getStart() == NULL ){
+			userInputNewTask->setStart(taskList[index]->getStart());
+	}
+	 if(userInputNewTask->getEnd() == NULL){
+			userInputNewTask->setEnd(taskList[index]->getEnd());
+	 }
+	
 	setUndoStack(EDIT,taskList[index],index);
 	delete taskList[index];
 	taskList[index] = userInputTask;
