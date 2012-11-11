@@ -23,9 +23,7 @@ const int hours_msb = 8, hours_lsb = 9, min_msb = 10, min_lsb = 11, date_size = 
 const int jan = 1, feb = 2, mar = 3, apr = 4, may = 5, june = 6, july = 7, aug = 8, sep = 9, octo = 10, novem = 11, decem = 12;
 const int MAX_COMMAND_SIZE = 100 , MAX_TIME_SIZE = 100, MAX_DESC_SIZE = 100, MAX_WORD_SIZE = 100 ,  MAX_NO_ALTERNATES = 100 , MAX_INPUT_SIZE = 100 ;
 const char startList[][MAX_COMMAND_SIZE] = {"s", "st", "sta", "sta", "start","b", "be", "beg", "begi", "begin", "-1"};
-const char startList[][MAX_COMMAND_SIZE] = {"s", "st", "sta", "sta", "start","b", "be", "beg", "begi", "begin", "-1"};
 const char endList[][MAX_COMMAND_SIZE] = {"e", "en", "end", "-1"};
-const char timeList[][MAX_COMMAND_SIZE] = {"day","after","today", "tomorrow","before","yesterday", "next" , "am" , "pm", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday","th", "st","nd","rd","coming","week","month","year","January","February","March","April","May","June","July","August","September","October","November","December","now", "-1"};
 const char timeList[][MAX_COMMAND_SIZE] = {"day","after","today", "tomorrow","before","yesterday", "next" , "am" , "pm", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday","th", "st","nd","rd","coming","week","month","year","January","February","March","April","May","June","July","August","September","October","November","December","now", "-1"};
 const char monthList[][MAX_COMMAND_SIZE]  = {"January","February","March","April","May","June","July","August","September","October","November","December", "-1"};
 const char days[][MAX_COMMAND_SIZE] = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "-1"};
