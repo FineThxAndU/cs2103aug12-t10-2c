@@ -1,7 +1,12 @@
+//User Interface class
+//Has function(s) to get input from user and pass it on to internal components, if called by those components
+//Has function(s) to display appropriate feedback to user depending on direction received from internal components
+
 #ifndef UI_H_
 #define UI_H_
 
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <vector>
 #include <iomanip>
@@ -17,14 +22,27 @@ class UI
 private:
 	
 	string userInput ;
+
 	void placeCursorAt(const int, const int) ;
-	void makeConvertibleToString(tm * timePointer) ;
-	void changeBackTimePointer(tm *) ;
-	void displayTimedTasks(tm * &, tm * &, string, int taskNo) ;
-	void displayDeadlineTasks(tm * &, string, int taskNo) ;
+	string convertToString(char * char_Array) ;
+
+	int displayTimedTask(tm * &, tm * &, string) ;
+	int displayDeadlineTask(tm * &, string) ;
+	int displayFloatingTask(string) ;
+
+	void goToNextLineBeginning(int) ;
+	void goToDescriptionBeginning() ;
+	void goToFromBeginning() ;
+	void goToToBeginning() ;
+	int printDescription(string) ;
+
+	//remove endl at the end, and the day of the week from the beginning for display
+	//also remove seconds counter from display 
+	string makePrintableTimeString(char *) ;
 	COORD currentCursor ;
 
-	
+	static const int MAX_DESCRIPTION_SIZE = 36 ;
+
 	static const int TABLE_START_POSITION_X = 2 ;
 	static const int TABLE_START_POSITION_Y = 4 ;
 	static const string TABLE_FIELDS ;
@@ -56,6 +74,14 @@ private:
  public:
 
 	void displayHomeScreen(vector<Task*>) ; 
+
+	//so that the tm pointer is compatible with the asctime() function of time.h library
+	//asctime() converts to string
+	void makeConvertible(tm * timePointer) ;
+
+	//so that any changes made to make tm pointer compatible with asctime() do not affect any internal functioning... 
+	//...where the tm pointer is used
+	void changeBackTimePointer(tm *) ;
 
 	void feedback(bool, string command) ;
 

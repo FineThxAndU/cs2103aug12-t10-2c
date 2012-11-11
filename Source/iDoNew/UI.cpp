@@ -6,7 +6,7 @@ const string UI::MESSAGE_WELCOME = "\t\t\t\t ****iDo****" ;
 const string UI::MESSAGE_HELP = "Valid Commands: add, delete, search, edit, undo, redo, alternate, exit." ;
 const string UI::MESSAGE_INVALID = "Invalid command entered!" ;
 
-const string UI::TABLE_FIELDS = "No.  Task Description\t\t\t  From/At\t\tTo\t\t" ;
+const string UI::TABLE_FIELDS = "No. Task Description                     From/At           To               " ;
 
 //const string UI::MESSAGE_EMPTY = "\niDo is empty! No tasks added yet." ;
 
@@ -29,7 +29,58 @@ const string UI::MESSAGE_EXIT = "Exiting iDo now." ;
 const string UI::MESSAGE_UNDONE = "Command successfully undone." ;
 const string UI::MESSAGE_UNDO_FAIL = "Undo not possible." ;
 
-void UI::makeConvertibleToString(tm * timePointer) {
+
+string UI::convertToString(char * sentence) {
+
+	string strOfSentence ;
+	stringstream ss ;
+	ss << sentence ;
+	strOfSentence = ss.str() ;
+	return strOfSentence ;
+}
+
+string UI::makePrintableTimeString(char * timeInAscii) {
+
+	string timeString = convertToString(timeInAscii) ;
+	string timeStringPart1 ;
+	string timeStringPart2 ;
+
+	//isolate timeStringPart2
+
+	int secondZeroOfMinute = 15 ;
+	int lastLetterIndex = secondZeroOfMinute ; 
+
+	int dayOfWeekSize = 3 ;
+	int firstLetterIndex = dayOfWeekSize + 1 ;
+	
+	int sizeOfNewSentence = lastLetterIndex - firstLetterIndex + 1 ;
+	timeStringPart1 = timeString.substr(firstLetterIndex, sizeOfNewSentence) ;
+
+	//isolate timeStringPart2
+	firstLetterIndex = lastLetterIndex + 4 ;
+	lastLetterIndex = timeString.size() - 2 ;
+	
+	sizeOfNewSentence = lastLetterIndex - firstLetterIndex + 1 ;
+	timeStringPart2 = timeString.substr(firstLetterIndex, sizeOfNewSentence) ;
+	
+	timeString = timeStringPart1 + timeStringPart2 ;
+
+	/*
+	int lastLetterIndex = timeString.size() - 2 ; 
+
+	//dont want 3 letters and space at the beginning
+	int dayOfWeekSize = 3 ;
+	int firstLetterIndex = dayOfWeekSize + 1 ;
+	int sizeOfNewSentence = lastLetterIndex - firstLetterIndex + 1 ;
+
+	string tempString = timeString.substr(firstLetterIndex, sizeOfNewSentence) ;
+	timeString = tempString ; */
+
+	return timeString ;
+
+}
+
+void UI::makeConvertible(tm * timePointer) {
 	
 	timePointer->tm_year -= 1900;
 	timePointer->tm_mon -= 1;
@@ -44,84 +95,206 @@ void UI::changeBackTimePointer(tm * timePointer) {
 
 	timePointer->tm_mon += 1;
     timePointer->tm_year += 1900;
-
 }
 
+void UI::goToNextLineBeginning(int yIncrement) {
+	currentCursor.X = 2 ;
+	currentCursor.Y++ ;
+	currentCursor.Y += yIncrement ;
+	placeCursorAt(currentCursor.X, currentCursor.Y) ;
+}
 
-void UI::displayTimedTasks(tm * & startTime, tm * & endTime, string description, int taskNo) {
+void UI::goToDescriptionBeginning() {
+	currentCursor.X = 6 ;
+	placeCursorAt(currentCursor.X, currentCursor.Y) ;
+}
 
-	makeConvertibleToString(startTime) ;
-	makeConvertibleToString(endTime) ;
-	cout << taskNo << "\t" << description << setw(17) ;
-	cout << asctime(startTime) << asctime(endTime) ;
+void UI::goToFromBeginning() {
+	currentCursor.X = 43 ;
+	placeCursorAt(currentCursor.X, currentCursor.Y) ;
+}
+
+void UI::goToToBeginning() {
+	currentCursor.X = 61 ;
+	placeCursorAt(currentCursor.X, currentCursor.Y) ;
+}
+
+int UI::printDescription(string description) {
+	int spaceIsAt ;
+	int letterCountOnCurrentLine = 0 ;
+	int taskLineNo = currentCursor.Y ;
+	int printedCount = 0 ;
+	int size = description.size() ;
+	int index = 0 ;
+	int currentlyAt = 0 ;
+	int yIncrement = 0 ;
+
+	if(size <= 36) {
+		cout << description ;
+	}
+
+	else {
+
+		while(printedCount < size) {
+			for(index = currentlyAt ; index < size ; index++) {
+				if(description[index] == ' ') {
+					break ;
+				}
+			}
+
+			if(index == size) {
+				int wordSize = index - currentlyAt + 1 ;
+				letterCountOnCurrentLine += wordSize ;
+					if(letterCountOnCurrentLine <= 36) {
+					string partialDescription = description.substr(currentlyAt, wordSize) ;
+					cout << partialDescription ;
+				    printedCount += wordSize ;
+				}
+				else {
+					yIncrement++ ;
+					letterCountOnCurrentLine = 0 ;
+					//zero because need to increment only by one line
+					goToNextLineBeginning(0) ;
+					goToDescriptionBeginning() ;
+					string partialDescription = description.substr(currentlyAt, wordSize) ;
+					cout << partialDescription ;
+					letterCountOnCurrentLine += wordSize ;
+					printedCount += wordSize ;
+				}
+				currentlyAt = index + 1 ;
+			}
+
+			else if(description[index] == ' ') {
+				int wordSize = index - currentlyAt + 1 ;
+				letterCountOnCurrentLine += wordSize ;
+					if(letterCountOnCurrentLine <= 36) {
+					string partialDescription = description.substr(currentlyAt, wordSize) ;
+					cout << partialDescription ;
+				    printedCount += wordSize ;
+				}
+				else {
+					yIncrement++ ;
+					letterCountOnCurrentLine = 0 ;
+					//zero because need to increment only by one line
+					goToNextLineBeginning(0) ;
+					goToDescriptionBeginning() ;
+					string partialDescription = description.substr(currentlyAt, wordSize) ;
+					cout << partialDescription ;
+					letterCountOnCurrentLine += wordSize ;
+					printedCount += wordSize ;
+				}
+				currentlyAt = index + 1 ;
+			}			
+		}
+	}
+
+	currentCursor.Y = taskLineNo + yIncrement ;
+	placeCursorAt(currentCursor.X, currentCursor.Y) ;
+	return yIncrement ;
+}
+
+int UI::displayFloatingTask(string description) {
+	goToDescriptionBeginning() ;
+	int yIncrement = printDescription(description) ;
+	return yIncrement ;
+}
+
+int UI::displayTimedTask(tm * & startTime, tm * & endTime, string description) {
+
+	makeConvertible(startTime) ;
+	makeConvertible(endTime) ;
+
+	goToDescriptionBeginning() ;
+	int yIncrement = printDescription(description) ;
+	
+	string sTime = makePrintableTimeString(asctime(startTime)) ;
+	string eTime = makePrintableTimeString(asctime(endTime)) ;
+
+	goToFromBeginning() ;
+	cout << sTime ; 
+	
+	goToToBeginning() ;
+	cout << eTime ;
+
     changeBackTimePointer(startTime) ;
-	changeBackTimePointer(endTime) ;
+	changeBackTimePointer(endTime) ;	
 
+	return yIncrement ;
 }
 
-void UI::displayDeadlineTasks(tm * & deadline, string description, int taskNo) {
+int UI::displayDeadlineTask(tm * & deadline, string description) {
 
-	makeConvertibleToString(deadline) ;
-	cout << taskNo << "\t" << description << "\t" ;
-	cout << asctime(deadline) ;
+	makeConvertible(deadline) ;
+
+	goToDescriptionBeginning() ;
+	int yIncrement = printDescription(description) ;
+
+	string printableDeadline = makePrintableTimeString(asctime(deadline)) ;
+	goToFromBeginning() ;
+	cout << printableDeadline ; 
+
     changeBackTimePointer(deadline) ;
+
+	return yIncrement ;
 }
 
 void UI::displayHomeScreen(vector<Task*> tasksToDisplay) {
 
- system("cls") ;
- cout << MESSAGE_WELCOME ;
- int taskNo = 0 ;
+	system("cls") ;
+	cout << MESSAGE_WELCOME ;
+	int taskNo = 0 ;
  
- vector<Task*>::iterator it = tasksToDisplay.begin() ;
+	vector<Task*>::iterator it = tasksToDisplay.begin() ;
 
- currentCursor.X = TABLE_START_POSITION_X ;
- currentCursor.Y = TABLE_START_POSITION_Y ;
+	currentCursor.X = TABLE_START_POSITION_X ;
+	currentCursor.Y = TABLE_START_POSITION_Y ;
 
- placeCursorAt(currentCursor.X, currentCursor.Y) ;
+	placeCursorAt(currentCursor.X, currentCursor.Y) ;
+	int yIncrement = 0 ;
 
- cout << UI::TABLE_FIELDS ; 
+	cout << UI::TABLE_FIELDS ; 
 
-  for( ; it != tasksToDisplay.end() ; it++) {
-	 taskNo++ ;
-	 currentCursor.Y++ ;
-	 placeCursorAt(currentCursor.X, currentCursor.Y) ;
-	 tm * startTime = (*it)->getStart() ;
-	 tm * endTime = (*it)->getEnd() ;
-	 string description = (*it)->getDesc() ;
+	for( ; it != tasksToDisplay.end() ; it++) {
+	 
+		taskNo++ ;
+		goToNextLineBeginning(yIncrement) ;
+		cout << taskNo ;
 
-	 if(startTime != NULL && endTime != NULL) {
-		 displayTimedTasks(startTime, endTime, description, taskNo) ;
-	 }
+		tm * startTime = (*it)->getStart() ;
+		tm * endTime = (*it)->getEnd() ;
+		string description = (*it)->getDesc() ;
 
-	 else if(startTime == NULL && endTime != NULL) {
-		displayDeadlineTasks(endTime, description, taskNo) ;
-	 }
-
-	 else if(startTime != NULL && endTime == NULL) {
-		displayDeadlineTasks(startTime, description, taskNo) ;
-	 }
-
-	 //floating tasks, sorted to the bottom of tasksToDisplay
-	 else if(startTime == NULL && endTime == NULL) {
-		 cout << taskNo << "\t" << description ;
+		if(startTime != NULL && endTime != NULL) {
+			yIncrement = displayTimedTask(startTime, endTime, description) ;
+		}
 		
-	 }	
-  }
+		else if(startTime == NULL && endTime != NULL) {
+			yIncrement = displayDeadlineTask(endTime, description) ;
+		}
 
+		else if(startTime != NULL && endTime == NULL) {
+			yIncrement = displayDeadlineTask(startTime, description) ;
+		}
+
+	 //floating tasks
+		else if(startTime == NULL && endTime == NULL) {
+			yIncrement = displayFloatingTask(description) ;
+		}
+  }
+	goToNextLineBeginning(0) ;
 }
 
 void UI::feedback(bool result, string command) {
 
- currentCursor.Y += 2 ;
- placeCursorAt(currentCursor.X, currentCursor.Y) ;
+	currentCursor.Y += 2 ;
+	placeCursorAt(currentCursor.X, currentCursor.Y) ;
 
- if(result == true) {
-	displayTrueFeedback(command) ;
- }
- else {
-	displayFalseFeedback(command) ;
- }
+	if(result == true) {
+		displayTrueFeedback(command) ;
+	}
+	else {
+		displayFalseFeedback(command) ;
+	}
 }
 
 void UI::displayTrueFeedback(string command) {
@@ -220,7 +393,6 @@ string UI::getUserInput() {
 }
 
 void UI::printThis(string messageToUser) {
-
 	currentCursor.Y++ ;
     placeCursorAt(currentCursor.X, currentCursor.Y) ;
 	cout << messageToUser ;

@@ -19,11 +19,11 @@ public:
 	void readList();
 	void writeList();
 	vector<Task*> getTaskList();
-
-	//spatiks
+	
+	//for use when adding alternate keywords for existing command keywords
 	void writeToFile(const char *) ;
-	//by reference
 	vector<string> readFromFile() ;
 
-};
+} ;
+
 #endif
