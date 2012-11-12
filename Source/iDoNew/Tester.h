@@ -1,10 +1,11 @@
 #include "gtest/gtest.h" //include to use Google Unit test's stuff
+#include <exception>
 
 #include <string>
 
 #include "CommandProcessor.h"
 #include "Logic.h"
-
+#include "UI.h"
 
 using namespace std;
 
@@ -13,6 +14,94 @@ using namespace std;
 /* We write test cases here */
 
 /************************************************************************/
+
+TEST(basic_test, removeLastSpace) {
+
+	CommandProcessor testObj ;
+	string result = testObj.removeLastSpace("abcd efgh ") ;
+	ASSERT_EQ(result,"abcd efgh") ;
+
+	result = testObj.removeLastSpace("abcd efgh") ;
+	ASSERT_EQ(result,"abcd efgh") ;
+}
+
+//cannot add keywords already in use
+TEST(basic_test, createAlternateKeywordFalse1) {
+
+	CommandProcessor testObj ;
+	Logic logicTestObj ;
+	Task * testTask = new FloatingTask ;
+	//trying to add 'delete' as an alternative keyword for 'exit'
+	testTask->setDesc("exit delete") ;
+	bool returnVal ;
+	returnVal = logicTestObj.createAlternateKeyword(testTask) ;
+	ASSERT_EQ(returnVal, false) ;
+    delete testTask ;
+
+}
+
+//cannot add 'space' or empty string as alternate keyword
+TEST(basic_test, createAlternateKeywordFalse2) {
+	CommandProcessor testObj ;
+	Logic logicTestObj ;
+	Task * testTask = new FloatingTask ;
+	//trying to add space as an alternative keyword for search
+	testTask->setDesc("search ") ;
+	bool returnVal ;
+	returnVal = logicTestObj.createAlternateKeyword(testTask) ;
+	ASSERT_EQ(returnVal, false) ;
+    delete testTask ;
+}
+
+TEST(basic_test, UIconvertToString) {
+	UI testObj ;
+	char * charArray = "test character array" ;
+	string stringArray = "test character array" ;
+	string result ;
+	result = testObj.convertToString(charArray) ;
+	ASSERT_EQ(result, stringArray) ;
+}
+
+
+TEST(basic_test, UImakeConvertiblemakePrintable) {
+	UI testObj ;
+	tm * testPointer = new tm ;
+	testPointer->tm_hour = 10 ;
+	testPointer->tm_min = 30 ;
+	testPointer->tm_mon = 12 ;
+	testPointer->tm_year = 2013 ;
+	testPointer->tm_mday = 10 ;
+
+	testObj.makeConvertible(testPointer) ;
+	char * timeInString = asctime(testPointer) ;
+
+	string result = testObj.makePrintableTimeString(timeInString) ;
+
+	ASSERT_EQ(result, "Dec 10 10:30 2013") ;
+	delete testPointer ;
+
+}
+
+TEST(basic_test, UIchangeBackTimePointer) {
+	UI testObj ;
+	tm * testPointer = new tm ;
+	testPointer->tm_hour = 10 ;
+	testPointer->tm_min = 30 ;
+	testPointer->tm_mon = 12 ;
+	testPointer->tm_year = 2013 ;
+	testPointer->tm_mday = 10 ;
+
+	testObj.makeConvertible(testPointer) ;
+	time_t testTime = mktime(testPointer) ;
+	testObj.changeBackTimePointer(testPointer) ;
+	testTime = mktime(testPointer) ;
+
+	ASSERT_EQ(-1, mktime(testPointer)) ;
+	ASSERT_EQ(2013, testPointer->tm_year) ;
+
+	delete testPointer ;
+	
+}
 
 TEST(basic_test, cmdProcessor)
 
@@ -176,6 +265,7 @@ TEST (basic_test, redoTask) {
 		}
 }
 
+/*
 TEST(basic_test, addTask)
 {
 	Logic testObj;
@@ -200,7 +290,9 @@ TEST(basic_test, addTask)
 	//returnVal=testObj.search( testTask);
 	//ASSERT_EQ(returnVal,true);
 }
-TEST (basic_test,searchTask) {
+*/
+
+TEST (basic_test, searchTask) {
 	Logic testObj;
 	TimedTask testTask;
 	testTask.setDesc("Test");
