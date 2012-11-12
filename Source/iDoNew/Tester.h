@@ -285,48 +285,37 @@ TEST(basic_test, addTask)
 	testTask.setStart(start);
 	bool returnVal=testObj.addTask(&testTask);
 	ASSERT_EQ(returnVal,true);
-	//returnVal=testObj.search( testTask);
-	//ASSERT_EQ(returnVal,true);
+	returnVal = testObj.search(&testTask);
+	delete start;
+	delete end;
+	ASSERT_EQ(returnVal,true);
+	
+	
+
 }
 
-
-
-
-
+TEST (basic_test,deleteTask) {
+	Logic testObj;
 	TimedTask testTask;
-
-	}
-	catch (string except) {
-		delete start;
-		delete end;
-		ASSERT_EQ(except,"No matching tasks found");
-	}
-
-}
-*/
-
-//TEST (basic_test,deleteTask) {
-//	Logic testObj;
-//	Task* testTask = new TimedTask;
-//	tm* end = new tm;
-//	end->tm_hour=4;
-//	end->tm_min=0;
-//	end->tm_mon=5;
-//	end->tm_mday= 15;
-//	end->tm_year=2012;
-//	testTask->setDesc("Test");
-//	testTask->setEnd(end);
-//	tm* start = new tm;
-//	start->tm_hour=4;
-//	start->tm_min=0;
-//	start->tm_mon=5;
-//	start->tm_mday= 16;
-//	start->tm_year=2012;
-//	testTask->setStart(start);
-//	testObj.findToDelete(testTask);
-//}
+	tm* end = new tm;
+	end->tm_hour=21;
+	end->tm_min=0;
+	end->tm_mon=5;
+	end->tm_mday= 11;
+	end->tm_year=2012;
+	testTask.setDesc("Test");
+	testTask.setEnd(end);
+	tm* start = new tm;
+	start->tm_hour = 20;
+	start->tm_min = 0;
+	start->tm_mon = 5;
+	start->tm_mday = 11;
+	start->tm_year = 2012;
+	testTask.setStart(start);
+	bool returnVal = testObj.findToDelete(&testTask);
+	ASSERT_EQ( returnVal, true);
 	try {
-		returnVal = testObj.findToDelete(testTask);
+		returnVal = testObj.search(&testTask);
 		delete end;
 		delete start;
 		ASSERT_EQ(returnVal,true);
@@ -336,7 +325,6 @@ TEST(basic_test, addTask)
 		delete start;
 		ASSERT_EQ(except,"No matches found");
 	}
-
 } 
 
 /************************************************************************/

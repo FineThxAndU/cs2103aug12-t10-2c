@@ -24,13 +24,10 @@ Logic::Logic()	{
 
 int Logic::logicMain()	{
 	updateHomeScreen();
-	time_t now;
-	time(&now);
-
-	tm * current = localtime(&now);
+	deleteExpiredTasks();
 	while(1) { 
 	userInputNewTask = new TimedTask;
-	userInputNewTask->setStart(current);
+	userInputNewTask->setStart(Logic::getCurrentTime());
 	userInput = UIObj.getUserInput();
 	string cmd = cmdObj.cmdProcessor(userInput, userInputTask, userInputNewTask);
 	assert(cmd != "\0") ;
@@ -97,6 +94,7 @@ bool Logic::execute(string cmd,Task* userInputTask, Task* userInputNewTask) thro
 		case ADD:
 			try	{
 				returnVal = addTask(userInputTask);
+				updateHomeScreen();
 			}
 			catch(string except) {
 				fileObj.writeErrorLog(except);
@@ -107,6 +105,7 @@ bool Logic::execute(string cmd,Task* userInputTask, Task* userInputNewTask) thro
 		case REMOVE:
 			try {
 						returnVal = findToDelete(userInputTask) ;
+						updateHomeScreen();
 					}
 			catch(string except) {
 				fileObj.writeErrorLog(except);
@@ -117,6 +116,7 @@ bool Logic::execute(string cmd,Task* userInputTask, Task* userInputNewTask) thro
 		case EDIT:
 			try	{
 				returnVal=findToEdit(userInputTask, userInputNewTask);
+				updateHomeScreen();
 			}
 			catch(string except) {
 				fileObj.writeErrorLog(except);
@@ -137,6 +137,7 @@ bool Logic::execute(string cmd,Task* userInputTask, Task* userInputNewTask) thro
 		case UNDO:
 			try {
 				returnVal = undoTask();
+				updateHomeScreen();
 			}
 			catch(string except) {
 				fileObj.writeErrorLog(except);
@@ -147,6 +148,7 @@ bool Logic::execute(string cmd,Task* userInputTask, Task* userInputNewTask) thro
 		case REDO:
 			try {
                returnVal = redoTask();
+			   updateHomeScreen();
 			}
 			catch(string except) {
 				fileObj.writeErrorLog(except);
@@ -169,9 +171,7 @@ bool Logic::execute(string cmd,Task* userInputTask, Task* userInputNewTask) thro
 		default:
 			throw string("Command type not found");
 	}
-	if(type != SEARCH) {
-		updateHomeScreen();
-	}
+	
 	return returnVal;
 }
 
@@ -527,7 +527,7 @@ bool Logic::undoTask () throw(string) {
 	undoType = Logic::undoStack.top().type;
 	//assert(undoType != INVALID);
 	userInputTask = undoStack.top().taskObj;
-	assert (undoType != NULL);
+	//assert (undoType != NULL);
 	int index = undoStack.top().index;
 	Task* newtask = new TimedTask;
 	setRedoStack(undoType,userInputTask,index);
@@ -541,9 +541,10 @@ bool Logic::undoTask () throw(string) {
 					returnVal = false;
 				}
 				else {
-					deleteTask(index);
+					delete taskList[index];
+					taskList.erase(taskList.begin()+index);
 				}
-				undoStack.pop();
+				//undoStack.pop();
 				updateTaskFile();
 				searchObj.clearSearchResults();
 				returnVal = true;
