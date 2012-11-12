@@ -243,19 +243,21 @@ void UI::displayHomeScreen(vector<Task*> tasksToDisplay) {
 
 	system("cls") ;
 	cout << MESSAGE_WELCOME ;
+
 	if(!ifstream("task.txt")){
-		cout<<"\n\n\n\n\n\n";
-		cout<<"    Welcome to iDo!!\n    Listed below are the format in which the commands are to be used.\n\n";
-		cout<<"    add :  <description> start <start time> end <end time>\n";
-		cout<<"    delete :	delete <partial description>\n";
-		cout<<"    edit :  edit <partial description> [new] <new description>\n";
-		cout<<"    search :	search <partial description>\n";
-		cout<<"    alternate :  alternate <existing keyword> <new key word>\n\n";
-		cout<<"    Press any key to continue...\n";
+		cout << "\n\n\n\n\n\n";
+		cout << "    Welcome to iDo!!\n    Listed below is the format in which the commands are to be used.\n\n";
+		cout << "    add:  <description> start <start time> end <end time>\n";
+		cout << "    delete:	delete <partial description>\n";
+		cout << "    edit:  edit <partial description> [new] <new description>\n";
+		cout << "    search:	search <partial description>\n";
+		cout << "    alternate:  alternate <existing keyword> <new key word>\n\n";
+		cout << "    Press any key to continue...\n";
 		std::getchar();
 		system("cls") ;
 		cout << MESSAGE_WELCOME ;
 	}
+
 	int taskNo = 0 ;
  
 	vector<Task*>::iterator it = tasksToDisplay.begin() ;
