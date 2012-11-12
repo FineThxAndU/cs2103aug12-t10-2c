@@ -26,8 +26,11 @@ void CommandProcessor::initAddList() {
 	int addIndex = 0 ;
 	fileObject.setFileName(FILENAME_ADD_ALTERNATES) ;
 	strcpy(addList[addIndex],"add") ;
-
 	addIndex++ ;
+
+	strcpy(addList[addIndex],"ad") ;
+	addIndex++ ;
+
 	vector<string> storedAddList = fileObject.readFromFile() ;
 	vector<string>::iterator it ;
 	it = storedAddList.begin() ;
@@ -197,6 +200,7 @@ vector <int> CommandProcessor::intProcessor (string userInput) throw(string)
 	}
 	return integers;
 }
+
 //Processing the initial command entered by the user
 string CommandProcessor::cmdProcessor (string userInput, Task*& newTask, Task*& editTask)
 {
@@ -605,8 +609,35 @@ tm* CommandProcessor::stringToTime (string startTime)
 	return sTime ;
 }
 
-void CommandProcessor::appendToAddList(const char *newKeyword) {
+bool CommandProcessor::isFoundAlready(char keywordEntered[MAX_COMMAND_SIZE]) {
+
+	bool isAdd, isRemove, isEdit, isSearch, isExit, isUndo,isRedo, isAlternate ;
+	bool returnVal = false ;
+	
+	isAdd = CommandProcessor::isFound(keywordEntered, "add") ;
+	isRemove = CommandProcessor::isFound(keywordEntered, "remove") ;
+	isEdit = CommandProcessor::isFound(keywordEntered, "edit");
+	isSearch = CommandProcessor::isFound(keywordEntered, "search") ;
+	isExit = CommandProcessor::isFound(keywordEntered, "exit");
+	isUndo = CommandProcessor::isFound(keywordEntered, "undo");
+	isRedo = CommandProcessor::isFound(keywordEntered, "redo");
+	isAlternate = CommandProcessor::isFound(keywordEntered, "alternate") ;
+
+	if(isAdd || isRemove || isEdit || isSearch || isExit || isUndo || isRedo || isAlternate) {
+		returnVal = true ;
+	}
+
+	return returnVal ;
+
+}
+
+void CommandProcessor::appendToAddList(char newKeyword[MAX_COMMAND_SIZE]) {
+
 	int addIndex ; 
+	if(isFoundAlready(newKeyword)) {
+		throw string("This keyword is already in use.") ;
+	}
+
 	for (addIndex = 0 ; addIndex < MAX_NO_ALTERNATES ; addIndex++) {
 		if(!(strcmp("-1", addList[addIndex]))) {
 			strcpy(addList[addIndex], newKeyword) ;
@@ -616,9 +647,12 @@ void CommandProcessor::appendToAddList(const char *newKeyword) {
 	strcpy(addList[addIndex+1], "-1") ;
 }
 
-void CommandProcessor::appendToRemoveList(const char *newKeyword) {
+void CommandProcessor::appendToRemoveList(char *newKeyword) {
 
 	int removeIndex ;
+	if(isFoundAlready(newKeyword)) {
+		throw string("This keyword is already in use.") ;
+	}
 	
 	for(removeIndex = 0 ; removeIndex < MAX_NO_ALTERNATES ; removeIndex++) {
 		if(!(strcmp("-1", removeList[removeIndex]))) {
@@ -629,8 +663,11 @@ void CommandProcessor::appendToRemoveList(const char *newKeyword) {
 	strcpy(removeList[removeIndex+1], "-1") ;
 }
 
-void CommandProcessor::appendToEditList(const char *newKeyword) {
-	int editIndex ;  
+void CommandProcessor::appendToEditList(char *newKeyword) {
+	int editIndex ; 
+	if(isFoundAlready(newKeyword)) {
+		throw string("This keyword is already in use.") ;
+	}
 	
 	for(editIndex = 0 ; editIndex < MAX_NO_ALTERNATES ; editIndex++) {
 		if(!(strcmp("-1", editList[editIndex]))) {
@@ -641,9 +678,12 @@ void CommandProcessor::appendToEditList(const char *newKeyword) {
 	strcpy(editList[editIndex+1], "-1") ;
 }
 
-void CommandProcessor::appendToSearchList(const char *newKeyword) {
+void CommandProcessor::appendToSearchList(char *newKeyword) {
 	  
 	int searchIndex ;
+	if(isFoundAlready(newKeyword)) {
+		throw string("This keyword is already in use.") ;
+	}
 	
 	for(searchIndex = 0 ; searchIndex < MAX_NO_ALTERNATES ; searchIndex++) {
 		if(!(strcmp("-1", searchList[searchIndex]))) {
@@ -654,9 +694,13 @@ void CommandProcessor::appendToSearchList(const char *newKeyword) {
 	strcpy(searchList[searchIndex+1],"-1") ;
 }
 
-void CommandProcessor::appendToUndoList(const char *newKeyword) {
+void CommandProcessor::appendToUndoList(char *newKeyword) {
 	int undoIndex ;
-
+	
+	if(isFoundAlready(newKeyword)) {
+		throw string("This keyword is already in use.") ;
+	}
+	
 	for(undoIndex = 0 ; undoIndex < MAX_NO_ALTERNATES ; undoIndex++) {
 		if(!(strcmp("-1", undoList[undoIndex]))) {
 			strcpy(undoList[undoIndex], newKeyword) ;
@@ -666,8 +710,12 @@ void CommandProcessor::appendToUndoList(const char *newKeyword) {
 	strcpy(undoList[undoIndex+1], "-1") ;
 }
 
-void CommandProcessor::appendToRedoList(const char *newKeyword) {
+void CommandProcessor::appendToRedoList(char *newKeyword) {
 	int redoIndex ; 
+
+	if(isFoundAlready(newKeyword)) {
+		throw string("This keyword is already in use.") ;
+	}
 
 	for(redoIndex = 0 ; redoIndex < MAX_NO_ALTERNATES ; redoIndex++) {
 		if(!(strcmp("-1", redoList[redoIndex]))) {
@@ -678,8 +726,12 @@ void CommandProcessor::appendToRedoList(const char *newKeyword) {
 	strcpy(redoList[redoIndex + 1], "-1") ;
 }
 
-void CommandProcessor::appendToAltList(const char *newKeyword) {
+void CommandProcessor::appendToAltList(char *newKeyword) {
 	int altIndex ;
+
+	if(isFoundAlready(newKeyword)) {
+		throw string("This keyword is already in use.") ;
+	}
 
 	for(altIndex = 0 ; altIndex < MAX_NO_ALTERNATES ; altIndex++) {
 		if(!(strcmp("-1", altList[altIndex]))) {
@@ -691,8 +743,12 @@ void CommandProcessor::appendToAltList(const char *newKeyword) {
 	strcpy(altList[altIndex + 1], "-1") ;
 }
 
-void CommandProcessor::appendToExitList(const char *newKeyword) {
+void CommandProcessor::appendToExitList(char *newKeyword) {
 	int exitIndex ;
+
+	if(isFoundAlready(newKeyword)) {
+		throw string("This keyword is already in use.") ;
+	}
 	
 	for(exitIndex = 0 ; exitIndex < MAX_NO_ALTERNATES ; exitIndex++) {
 		if(!(strcmp("-1", exitList[exitIndex]))) {
@@ -702,7 +758,6 @@ void CommandProcessor::appendToExitList(const char *newKeyword) {
 	}
 	strcpy(exitList[exitIndex + 1], "-1") ;
 }
-
 
 //returns the actual keyword in case a synonym/wrong spelling of a keyword is entered
 bool CommandProcessor::actualKeyWord(char userCmd[MAX_COMMAND_SIZE]) {
@@ -718,7 +773,7 @@ bool CommandProcessor::actualKeyWord(char userCmd[MAX_COMMAND_SIZE]) {
 	isRedo = CommandProcessor::isFound(userCmd, "redo");
 	isAlternate = CommandProcessor::isFound(userCmd, "alternate") ;
 
-	if(isAdd){
+	if(isAdd) {
 		strcpy(userCmd, "add");
 	}
 	
@@ -1193,8 +1248,13 @@ void CommandProcessor::addZeroes(char input[MAX_TIME_SIZE]){
 	strcpy(input, newDate);
 }
 
-string CommandProcessor::removeLastSpace(string word) {
+string CommandProcessor::removeLastSpace(string word) throw(string) {
 	string tempWord ;
+
+	if(word.size() == 0) {
+		throw string("Invalid/no alternative keyword entered.") ;
+	}
+
 	int lastLetterIndex = word.size()-1 ;
 	
 	if(word[lastLetterIndex] == ' ') {
