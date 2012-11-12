@@ -10,6 +10,7 @@ const string Logic::FILENAME_ALTERNATE_ALTERNATES = "altlist.txt" ;
 const string Logic::FILENAME_UNDO_ALTERNATES = "undolist.txt" ;
 const string Logic::FILENAME_REDO_ALTERNATES = "redolist.txt" ;
 
+
 Logic::Logic()	{
 	fileObj.setFileName(TASK_FILE_NAME);
 	fileObj.readList();
@@ -30,20 +31,19 @@ int Logic::logicMain()	{
 	while(1) { 
 	userInputNewTask = new TimedTask;
 	userInputNewTask->setStart(current);
-	    userInput = UIObj.getUserInput();
-		assert(userInput != "\0") ;
-		string cmd = cmdObj.cmdProcessor(userInput, userInputTask, userInputNewTask);
-		assert(cmd != "\0") ;
-		bool returnVal;
-		try {
-		        returnVal = Logic::execute(cmd,userInputTask, userInputNewTask);
-
-		}
-		catch (string except) {
-			returnVal=false;
-			UIObj.printThis(except);
-		}
-		UIObj.feedback(returnVal,cmd);
+	userInput = UIObj.getUserInput();
+	string cmd = cmdObj.cmdProcessor(userInput, userInputTask, userInputNewTask);
+	assert(cmd != "\0") ;
+	bool returnVal;
+	try {
+		returnVal = Logic::execute(cmd,userInputTask, userInputNewTask);
+	}
+	catch (string except) {
+		returnVal=false;
+			fileObj.writeErrorLog(except);
+		UIObj.printThis(except);
+	}
+	UIObj.feedback(returnVal,cmd);
 	}
 
 	return 0;
@@ -89,6 +89,7 @@ bool Logic::execute(string cmd,Task* userInputTask, Task* userInputNewTask) thro
 		type = Logic::determineCommand(cmd);
 	}
 	catch(string except) {
+		fileObj.writeErrorLog(except);
 		UIObj.printThis(except);
 		returnVal = false;
 	}
@@ -98,6 +99,7 @@ bool Logic::execute(string cmd,Task* userInputTask, Task* userInputNewTask) thro
 				returnVal = addTask(userInputTask);
 			}
 			catch(string except) {
+				fileObj.writeErrorLog(except);
 				UIObj.printThis(except);
 				returnVal = false;
 			}
@@ -107,6 +109,7 @@ bool Logic::execute(string cmd,Task* userInputTask, Task* userInputNewTask) thro
 						returnVal = findToDelete(userInputTask) ;
 					}
 			catch(string except) {
+				fileObj.writeErrorLog(except);
 				UIObj.printThis(except) ;
 				returnVal = false ;
 			}
@@ -116,6 +119,7 @@ bool Logic::execute(string cmd,Task* userInputTask, Task* userInputNewTask) thro
 				returnVal=findToEdit(userInputTask, userInputNewTask);
 			}
 			catch(string except) {
+				fileObj.writeErrorLog(except);
 				UIObj.printThis(except) ;
 				returnVal = false ;
 			}
@@ -125,6 +129,7 @@ bool Logic::execute(string cmd,Task* userInputTask, Task* userInputNewTask) thro
 				returnVal = Logic::search(userInputTask);
 			}	
 			catch(string except) {
+				fileObj.writeErrorLog(except);
 				UIObj.printThis(except) ;
 				returnVal = false ;
 			}
@@ -134,15 +139,17 @@ bool Logic::execute(string cmd,Task* userInputTask, Task* userInputNewTask) thro
 				returnVal = undoTask();
 			}
 			catch(string except) {
+				fileObj.writeErrorLog(except);
 	   			UIObj.printThis(except) ;
 				returnVal = false ;
 			}
 			break;
 		case REDO:
 			try {
-                           returnVal = redoTask();
+               returnVal = redoTask();
 			}
 			catch(string except) {
+				fileObj.writeErrorLog(except);
 			   UIObj.printThis(except) ;
 			   returnVal = false ;
 			}
@@ -152,65 +159,146 @@ bool Logic::execute(string cmd,Task* userInputTask, Task* userInputNewTask) thro
 			   returnVal = createAlternateKeyword(userInputTask) ;
 			}	
 			catch(string except) {
+				fileObj.writeErrorLog(except);
 			   UIObj.printThis(except) ;
 			   returnVal = false ;
 			}	
 			break ;
-
 		case EXIT:
 			exit(0);
 		default:
 			throw string("Command type not found");
 	}
+	if(type != SEARCH) {
+		updateHomeScreen();
+	}
 	return returnVal;
 }
 
+//alternate keyword should be one word only
 bool Logic::createAlternateKeyword(Task * userInputTask) throw (string) {
 
 	bool returnVal = true ;
 	Task * tempTask = new TimedTask ;
 	Task * editTask = new TimedTask ;
+
 	string keyword = cmdObj.cmdProcessor(userInputTask->getDesc(), tempTask, editTask) ;
 	CommandType type = determineCommand(keyword);
+	string newKeyword ;
+	char keywordChar[MAX_KEYWORD_SIZE] ;
 
-  //NEED TO REMOVE TRAILING SPACE FROM TEMPTASK->description
-	string newKeyword = cmdObj.removeLastSpace(tempTask->getDesc()) ;
+	try {
+		newKeyword = cmdObj.removeLastSpace(tempTask->getDesc()) ;
+		strcpy(keywordChar, newKeyword.c_str()) ;
+	} 
+	catch (string excption) {
+		UIObj.printThis(excption) ;
+		returnVal = false ;
+		return returnVal ;
+	}
+
 	switch(type)
 	{
 	 case ADD:
 		 fileObj.setFileName(Logic::FILENAME_ADD_ALTERNATES) ;
-		 cmdObj.appendToAddList(newKeyword.c_str()) ;
+		 try {
+			 cmdObj.appendToAddList(keywordChar) ;
+		 }
+		 catch (string except) {
+			 UIObj.printThis(except) ;
+			 returnVal = false ;
+			 return returnVal ;
+		 }
 		 break;
+
 	 case REMOVE:
 		 fileObj.setFileName(Logic::FILENAME_REMOVE_ALTERNATES) ;
-		 cmdObj.appendToRemoveList(newKeyword.c_str()) ;
+		 try {
+			 cmdObj.appendToRemoveList(keywordChar) ;
+		 }
+		 catch (string except) {
+			 UIObj.printThis(except) ;
+			 returnVal = false ;
+			 return returnVal ;
+		 }
 		 break;
+
 	 case EDIT:
 		 fileObj.setFileName(Logic::FILENAME_EDIT_ALTERNATES) ;
-		 cmdObj.appendToEditList(newKeyword.c_str()) ;
+		 try {
+			 cmdObj.appendToEditList(keywordChar) ;
+		 }
+		 catch (string except) {
+			 UIObj.printThis(except) ;
+			 returnVal = false ;
+			 return returnVal ;
+		 }
 		 break;
+
 	 case SEARCH:
 		 fileObj.setFileName(Logic::FILENAME_SEARCH_ALTERNATES) ;
-		 cmdObj.appendToSearchList(newKeyword.c_str()) ;
+		 try {
+			 cmdObj.appendToSearchList(keywordChar) ;
+		 }
+		 catch (string except) {
+			 UIObj.printThis(except) ;
+			 returnVal = false ;
+			 return returnVal ;
+		 }
 		 break;
+
 	 case UNDO:
 		 fileObj.setFileName(Logic::FILENAME_UNDO_ALTERNATES) ;
-		 cmdObj.appendToUndoList(newKeyword.c_str()) ;
+		 try {
+			 cmdObj.appendToUndoList(keywordChar) ;
+		 }
+		 catch (string except) {
+			 UIObj.printThis(except) ;
+			 returnVal = false ;
+			 return returnVal ;
+		 }
 		 break;
+
 	 case REDO:
 		 fileObj.setFileName(Logic::FILENAME_REDO_ALTERNATES) ;
-		 cmdObj.appendToRedoList(newKeyword.c_str()) ;
+		 try {
+		 cmdObj.appendToRedoList(keywordChar) ;
+		 }
+		 catch (string except) {
+			 UIObj.printThis(except) ;
+			 returnVal = false ;
+			 return returnVal ;
+		 }
 		 break;
+
 	 case ALT:
 		 fileObj.setFileName(Logic::FILENAME_ALTERNATE_ALTERNATES) ;
-		 cmdObj.appendToAltList(newKeyword.c_str()) ;
+		 try {
+			 cmdObj.appendToAltList(keywordChar) ;
+		 }
+		 catch (string except) {
+			 UIObj.printThis(except) ;
+			 returnVal = false ;
+			 return returnVal ;
+		 }
 		 break ;
+
 	 case EXIT:
 		 fileObj.setFileName(Logic::FILENAME_EXIT_ALTERNATES) ;
-		 cmdObj.appendToExitList(newKeyword.c_str()) ;
+		 try {
+			 cmdObj.appendToExitList(keywordChar) ;
+		 }
+		 catch (string except) {
+			 UIObj.printThis(except) ;
+			 returnVal = false ;
+			 return returnVal ;
+		 }
 		 break ;
+
 	default:
 		throw string("Unable to add alternate! Check keyword entered.") ;
+		returnVal = false ;
+		return returnVal ;
 	}
   
 	fileObj.writeToFile(newKeyword.c_str()) ;
@@ -264,7 +352,7 @@ bool Logic::findToDelete(Task * userInputTask) throw(string) {
 	bool returnVal = true ;
 	setSearchObj(userInputTask);
 	searchResults = searchObj.getIndices(); //returns the indices of matches corresponding to MAIN taskList
-	assert(searchResults.size() > 0);
+	//add exception here
 	vector<Task*> tempList ;
 	for(i = 0 ; i < searchResults.size() ; i++) {
 		tempList.push_back(taskList[searchResults[i]]);
@@ -289,11 +377,15 @@ bool Logic::findToDelete(Task * userInputTask) throw(string) {
 		    userIndex = cmdObj.intProcessor(userInput);
 	    }
 	    catch (string except) {
+			fileObj.writeErrorLog(except);
 		    UIObj.printThis(except);
 		    returnVal = false;
 	    }
 	    for(i = 0; i < userIndex.size() ; i++) {
 	            if(isUserIndexValid(userIndex[i],userIndex)) {
+					//writes to file description of Tasks being deleted
+					string writeToFile = "Deleted task :"+taskList[searchResults[userIndex[i]-1]]->getDesc();
+						fileObj.writeInputLog(writeToFile);
 	                Logic::deleteTask(searchResults[userIndex[i]-1]) ;
 	            }
 	            else {
@@ -302,7 +394,6 @@ bool Logic::findToDelete(Task * userInputTask) throw(string) {
 		        throw string("Invalid option chosen.") ;
 		        returnVal = false;
                     }
-     		//for now do nothing else, later get user input again after printing same list?
 		}
 	}    
         else if(searchResults.size() == 1){
@@ -345,7 +436,7 @@ bool Logic::findToEdit(Task* userInputTask, Task* userInputNewTask) throw (strin
 	bool returnVal=true;
 	setSearchObj(userInputTask);
 	vector<int> searchResults = searchObj.getIndices();
-	assert(searchResults.size() > 0);
+	//add exception here
 	int i = 0;
 	vector<Task*> tempList;
 	for(i = 0;i < searchResults.size();i++) {
@@ -366,23 +457,28 @@ bool Logic::findToEdit(Task* userInputTask, Task* userInputNewTask) throw (strin
 		  returnVal=false;
 		  throw string ( "No user input found");
 	     }
+
 	     vector<int> userIndex;
 	     try {
 		  userIndex = cmdObj.intProcessor(userInput) ;
 	     }
 	     catch(string except) {
-		  UIObj.printThis(except) ;
-		  returnVal = false;
+			fileObj.writeErrorLog(except);
+			UIObj.printThis(except) ;
+			returnVal = false;
 	     }
 	     assert(userIndex.size() != 0) ;
 	     for(i = 0; i < userIndex.size();i++) {
 		   if(isUserIndexValid(userIndex[i],searchResults)) {
+			   //writes to file description of Tasks being deleted
+				string writeToFile = "Edited task :"+taskList[searchResults[userIndex[i]-1]]->getDesc();
 			   try {
 				Logic::editTask(searchResults[userIndex[i]-1]);
 			    }
 		    		catch (string except){
-					UIObj.printThis(except);
-					returnVal=false;
+						fileObj.writeErrorLog(except);
+						UIObj.printThis(except);
+						returnVal=false;
 					}
 	           }
 	        else { 
@@ -404,9 +500,9 @@ bool Logic::findToEdit(Task* userInputTask, Task* userInputNewTask) throw (strin
 
 void Logic::editTask(int index) {
 	assert ( index < taskList.size() );
-	if (userInput == "\0"){
+	/* (userInput == "\0"){
 		throw string ("User input not valid");
-	}
+	}*/
 	userInputTask = taskList[index];
 	cmdObj.descProcessor(userInput,userInputTask);
 	if(userInputNewTask->getStart() == NULL ){
@@ -458,6 +554,7 @@ bool Logic::undoTask () throw(string) {
 				undoStack.pop();
 			}
 			catch (string except) {
+				fileObj.writeErrorLog(except);
 				UIObj.printThis( except);
 				returnVal=false;
 			}
@@ -521,6 +618,7 @@ bool Logic::redoTask() throw(string) {
 				undoStack.pop();
 			}
 			catch (string except) {
+				fileObj.writeErrorLog(except);
 				UIObj.printThis(except);
 				returnVal=false;
 			}

@@ -1,0 +1,2 @@
+Nov 12 09:20 2012	delete genere
+Nov 12 09:21 2012	exit

@@ -24,7 +24,6 @@ private:
 	string userInput ;
 
 	void placeCursorAt(const int, const int) ;
-	string convertToString(char * char_Array) ;
 
 	int displayTimedTask(tm * &, tm * &, string) ;
 	int displayDeadlineTask(tm * &, string) ;
@@ -36,9 +35,6 @@ private:
 	void goToToBeginning() ;
 	int printDescription(string) ;
 
-	//remove endl at the end, and the day of the week from the beginning for display
-	//also remove seconds counter from display 
-	string makePrintableTimeString(char *) ;
 	COORD currentCursor ;
 
 	static const int MAX_DESCRIPTION_SIZE = 36 ;
@@ -83,6 +79,12 @@ private:
 	//...where the tm pointer is used
 	void changeBackTimePointer(tm *) ;
 
+	string convertToString(char * char_Array) ;
+
+	//remove endl at the end, and the day of the week from the beginning for display
+	//also remove seconds counter from display 
+	string makePrintableTimeString(char *) ;
+
 	void feedback(bool, string command) ;
 
 	void displayTrueFeedback(string command) ;
@@ -92,6 +94,8 @@ private:
 	void printThis(string) ;
 	
 	string getUserInput() ;
+
+	tm* getCurrentTime() ;
 
 } ;
 
