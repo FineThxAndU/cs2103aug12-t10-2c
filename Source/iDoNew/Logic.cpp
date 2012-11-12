@@ -26,21 +26,21 @@ int Logic::logicMain()	{
 	updateHomeScreen();
 	deleteExpiredTasks();
 	while(1) { 
-	userInputNewTask = new TimedTask;
-	userInputNewTask->setStart(Logic::getCurrentTime());
-	userInput = UIObj.getUserInput();
-	string cmd = cmdObj.cmdProcessor(userInput, userInputTask, userInputNewTask);
-	assert(cmd != "\0") ;
-	bool returnVal;
-	try {
-		returnVal = Logic::execute(cmd,userInputTask, userInputNewTask);
-	}
-	catch (string except) {
-		returnVal=false;
+		userInputNewTask = new TimedTask;
+		userInputNewTask->setStart(Logic::getCurrentTime());
+		userInput = UIObj.getUserInput();
+		string cmd = cmdObj.cmdProcessor(userInput, userInputTask, userInputNewTask);
+		assert(cmd != "\0") ;
+		bool returnVal;
+		try {
+			returnVal = Logic::execute(cmd,userInputTask, userInputNewTask);
+		}
+		catch (string except) {
+			returnVal=false;
 			fileObj.writeErrorLog(except);
-		UIObj.printThis(except);
-	}
-	UIObj.feedback(returnVal,cmd);
+			UIObj.printThis(except);
+		}
+		UIObj.feedback(returnVal,cmd);
 	}
 
 	return 0;
@@ -104,9 +104,9 @@ bool Logic::execute(string cmd,Task* userInputTask, Task* userInputNewTask) thro
 			break;
 		case REMOVE:
 			try {
-						returnVal = findToDelete(userInputTask) ;
-						updateHomeScreen();
-					}
+				returnVal = findToDelete(userInputTask) ;
+				updateHomeScreen();
+			}
 			catch(string except) {
 				fileObj.writeErrorLog(except);
 				UIObj.printThis(except) ;
@@ -152,8 +152,8 @@ bool Logic::execute(string cmd,Task* userInputTask, Task* userInputNewTask) thro
 			}
 			catch(string except) {
 				fileObj.writeErrorLog(except);
-			   UIObj.printThis(except) ;
-			   returnVal = false ;
+				UIObj.printThis(except) ;
+				returnVal = false ;
 			}
 			break;
 		case ALT:
@@ -162,8 +162,8 @@ bool Logic::execute(string cmd,Task* userInputTask, Task* userInputNewTask) thro
 			}	
 			catch(string except) {
 				fileObj.writeErrorLog(except);
-			   UIObj.printThis(except) ;
-			   returnVal = false ;
+				UIObj.printThis(except) ;
+				returnVal = false ;
 			}	
 			break ;
 		case EXIT:
@@ -320,14 +320,13 @@ bool Logic::addTask(Task* userInputTask) throw(string) {
 	vector<int> searchResults;
 	searchResults = searchObj.getIndices();
 	assert ( searchResults.size() >= 1) ;
-	if(searchResults.size()>1) {
+	if(searchResults.size() > 1) {
 		setUndoStack(ADD,userInputTask,-1);
 	}
 	else {
 		setUndoStack(ADD,userInputTask,searchResults[0]);
 	}
 	searchObj.clearSearchResults();
-	//assert(searchObj.searchResults.size() == 0);
 	return returnVal;
 }
 //@author A0088416X
@@ -352,7 +351,6 @@ bool Logic::findToDelete(Task * userInputTask) throw(string) {
 	bool returnVal = true ;
 	setSearchObj(userInputTask);
 	searchResults = searchObj.getIndices(); //returns the indices of matches corresponding to MAIN taskList
-	//add exception here
 	vector<Task*> tempList ;
 	for(i = 0 ; i < searchResults.size() ; i++) {
 		tempList.push_back(taskList[searchResults[i]]);
@@ -366,11 +364,11 @@ bool Logic::findToDelete(Task * userInputTask) throw(string) {
 	if(searchResults.size() > 1){
 	    UIObj.displayHomeScreen(tempList);
 	    userInput = UIObj.getUserInput();
-            if ( userInput == "\0") {
+        if ( userInput == "\0") {
 		    updateTaskFile();
 		    searchObj.clearSearchResults();
 		    throw string ("Not a valid input");
-		    returnVal=false;
+		    returnVal = false;
   	    }
 	    vector<int> userIndex;
 	    try {
@@ -385,26 +383,22 @@ bool Logic::findToDelete(Task * userInputTask) throw(string) {
 	            if(isUserIndexValid(userIndex[i],userIndex)) {
 					//writes to file description of Tasks being deleted
 					string writeToFile = "Deleted task :"+taskList[searchResults[userIndex[i]-1]]->getDesc();
-						fileObj.writeInputLog(writeToFile);
+					fileObj.writeInputLog(writeToFile);
 	                Logic::deleteTask(searchResults[userIndex[i]-1]) ;
 	            }
 	            else {
-		        updateTaskFile();
-		        searchObj.clearSearchResults();
-		        throw string("Invalid option chosen.") ;
-		        returnVal = false;
-                    }
+					updateTaskFile();
+					searchObj.clearSearchResults();
+					throw string("Invalid option chosen.") ;
+					returnVal = false;
+                }
 		}
 	}    
-        else if(searchResults.size() == 1){
-				Logic::deleteTask(searchResults[0]);
+    else if(searchResults.size() == 1) {
+		Logic::deleteTask(searchResults[0]);
 	}
-
 	updateTaskFile();
-
 	searchObj.clearSearchResults();
-	
-//	assert ( searchObj.searchResults.size() == 0);
 	return returnVal ;
 }
 
@@ -419,7 +413,6 @@ void Logic::deleteTask(int index) {
 bool Logic::search(Task* userInputTask) throw(string){
 	setSearchObj(userInputTask);
 	bool returnVal = true;
-//	assert (searchObj.searchResults.size() == 0);
 	vector<Task*> searchResults = searchObj.getResults();
 	if (searchResults.size() == 0) {
 		returnVal = false;
@@ -428,39 +421,41 @@ bool Logic::search(Task* userInputTask) throw(string){
 	}
 	UIObj.displayHomeScreen(searchResults);
 	searchObj.clearSearchResults();
-//	assert (searchObj.searchResults.size() == 0);
 	return returnVal;
 }
 
 bool Logic::findToEdit(Task* userInputTask, Task* userInputNewTask) throw (string) {
 	bool returnVal=true;
+	if(userInputTask == NULL) {
+		returnVal = false;
+		throw( " No new description");
+	}
 	setSearchObj(userInputTask);
 	vector<int> searchResults = searchObj.getIndices();
-	//add exception here
 	int i = 0;
 	vector<Task*> tempList;
 	for(i = 0;i < searchResults.size();i++) {
 		tempList.push_back(taskList[searchResults[i]]);
 	}
 	if (tempList.size() == 0) {
-	   	     returnVal=false;
-		     searchObj.clearSearchResults();
-		     throw string ("No matching tasks found");
-	     }
+		returnVal=false;
+		searchObj.clearSearchResults();
+		throw string ("No matching tasks found");
+	}
 	if(searchResults.size() > 1){
 	     
 	     UIObj.displayHomeScreen( tempList);
 	     userInput = UIObj.getUserInput();
 	     if ( userInput == "\0") {
-	 	  searchObj.clearSearchResults();
-		  updateTaskFile();
-		  returnVal=false;
-		  throw string ( "No user input found");
+	 		searchObj.clearSearchResults();
+			updateTaskFile();
+			returnVal=false;
+			throw string ( "No user input found");
 	     }
 
 	     vector<int> userIndex;
 	     try {
-		  userIndex = cmdObj.intProcessor(userInput) ;
+			 userIndex = cmdObj.intProcessor(userInput) ;
 	     }
 	     catch(string except) {
 			fileObj.writeErrorLog(except);
@@ -473,23 +468,23 @@ bool Logic::findToEdit(Task* userInputTask, Task* userInputNewTask) throw (strin
 			   //writes to file description of Tasks being deleted
 				string writeToFile = "Edited task :"+taskList[searchResults[userIndex[i]-1]]->getDesc();
 			   try {
-				Logic::editTask(searchResults[userIndex[i]-1]);
+					Logic::editTask(searchResults[userIndex[i]-1]);
 			    }
-		    		catch (string except){
-						fileObj.writeErrorLog(except);
-						UIObj.printThis(except);
-						returnVal=false;
-					}
+				catch (string except) {
+					fileObj.writeErrorLog(except);
+					UIObj.printThis(except);
+					returnVal=false;
+				}
 	           }
 	        else { 
 		       returnVal=false;
 		       updateTaskFile();
 		       searchObj.clearSearchResults();
-	               throw string("Invalid option chosen.") ;
+	           throw string("Invalid option chosen.") ;
 	        }
 	      }
 	}	 
-	else if(searchResults.size() == 1){
+	else if(searchResults.size() == 1) {
 		Logic::editTask(searchResults[0]);
 	}
 
@@ -500,16 +495,13 @@ bool Logic::findToEdit(Task* userInputTask, Task* userInputNewTask) throw (strin
 
 void Logic::editTask(int index) {
 	assert ( index < taskList.size() );
-	/* (userInput == "\0"){
-		throw string ("User input not valid");
-	}*/
 	userInputTask = taskList[index];
 	cmdObj.descProcessor(userInput,userInputTask);
-	if(userInputNewTask->getStart() == NULL ){
-			userInputNewTask->setStart(taskList[index]->getStart());
+	if(userInputNewTask->getStart() == NULL ) {
+		userInputNewTask->setStart(taskList[index]->getStart());
 	}
-	 if(userInputNewTask->getEnd() == NULL){
-			userInputNewTask->setEnd(taskList[index]->getEnd());
+	 if(userInputNewTask->getEnd() == NULL) {
+		userInputNewTask->setEnd(taskList[index]->getEnd());
 	 }
 	
 	setUndoStack(EDIT,taskList[index],index);
@@ -525,30 +517,26 @@ bool Logic::undoTask () throw(string) {
 		returnVal = false;
 	}
 	undoType = Logic::undoStack.top().type;
-	//assert(undoType != INVALID);
 	userInputTask = undoStack.top().taskObj;
-	//assert (undoType != NULL);
 	int index = undoStack.top().index;
 	Task* newtask = new TimedTask;
 	setRedoStack(undoType,userInputTask,index);
 	Logic::undoStack.pop();
-	
-
 	switch(undoType) {
 		case ADD:
-				if(index == -1) {
-					throw string("Cannot perform undo multiple matching tasks found. Please use delete option");
-					returnVal = false;
-				}
-				else {
-					delete taskList[index];
-					taskList.erase(taskList.begin()+index);
-				}
-				//undoStack.pop();
-				updateTaskFile();
-				searchObj.clearSearchResults();
-				returnVal = true;
-				break;
+			if(index == -1) {
+				throw string("Cannot perform undo multiple matching tasks found. Please use delete option");
+				returnVal = false;
+			}
+			else {
+				delete taskList[index];
+				taskList.erase(taskList.begin()+index);
+			}
+				
+			updateTaskFile();
+			searchObj.clearSearchResults();
+			returnVal = true;
+			break;
 		case REMOVE:
 			try {
 				returnVal = addTask(userInputTask);
@@ -560,17 +548,17 @@ bool Logic::undoTask () throw(string) {
 				returnVal=false;
 			}
 				
-				break;
+			break;
 		case EDIT:
-				delete taskList[index];
-				taskList[index] = userInputTask;
-				updateTaskFile();
-				searchObj.clearSearchResults();
-				returnVal = true;
-				break;
+			delete taskList[index];
+			taskList[index] = userInputTask;
+			updateTaskFile();
+			searchObj.clearSearchResults();
+			returnVal = true;
+			break;
 		default:
-				throw string("Valid task not found");
-				returnVal = false;
+			throw string("Valid task not found");
+			returnVal = false;
 			
 	}
 	return returnVal;
@@ -581,7 +569,6 @@ void Logic::setUndoStack(CommandType type,Task* tempTask,int index) {
 	newTask->setDesc(tempTask->getDesc());
 	newTask->setEnd(tempTask->getEnd());
 	newTask->setStart(tempTask->getStart());
-//	assert(type != INVALID);
 	userStruct.type = type;
 	assert (newTask != NULL);
 	userStruct.taskObj = newTask;
@@ -593,7 +580,6 @@ void Logic::setRedoStack(CommandType type,Task* tempTask,int index) {
 	newTask->setDesc(tempTask->getDesc());
 	newTask->setEnd(tempTask->getEnd());
 	newTask->setStart(tempTask->getStart());
-//	assert(type != INVALID);
 	userStruct.type = type;
 	assert (newTask != NULL);
 	userStruct.taskObj = newTask;
@@ -623,21 +609,21 @@ bool Logic::redoTask() throw(string) {
 				UIObj.printThis(except);
 				returnVal=false;
 			}
-				break;
+			break;
 		case REMOVE:
-				deleteTask(index);
-				undoStack.pop();
-				updateTaskFile();
-				searchObj.clearSearchResults();
-				returnVal = true;
-				break;
+			deleteTask(index);
+			undoStack.pop();
+			updateTaskFile();
+			searchObj.clearSearchResults();
+			returnVal = true;
+			break;
 		case EDIT:
-				delete taskList[index];
-				taskList[index] = userInputTask;
-				updateTaskFile();
-				searchObj.clearSearchResults();
-				returnVal = true;
-				break;
+			delete taskList[index];
+			taskList[index] = userInputTask;
+			updateTaskFile();
+			searchObj.clearSearchResults();
+			returnVal = true;
+			break;
 		default: 
 			returnVal = false;
 			throw string (" No valid redo operation found");
@@ -659,11 +645,6 @@ void Logic::deleteExpiredTasks() {
 	
 	//check end time for both deadlined and timed tasks
 	for(index = 0 ; index < taskList.size() ; index++) {
-		//this bit will only work if taskList is properly sorted
-		/*if(taskList[i]->getEnd() == NULL && taskList[i]->getStart() == NULL)
-		{
-			break ;
-		}*/
 		if(taskList[index]->getEnd() != NULL || (taskList[index]->getEnd() == NULL  && taskList[index]->getStart() != NULL)) {
 
 			if(taskList[index]->getEnd()) {
@@ -710,7 +691,6 @@ void Logic::updateHomeScreen() throw(string) {
 	introList = searchObj.getResults();
 	if (introList.size() == 0)
 	{
-	//	throw string (" You do not have any tasks scheduled for today");
 		searchObj.clearSearchResults();
 	}
 	UIObj.displayHomeScreen(introList);
