@@ -44,6 +44,7 @@ private:
 	static const int TABLE_START_POSITION_Y = 4 ;
 	static const string TABLE_FIELDS ;
 
+	static const string MESSAGE_TODAY ;
 	static const string MESSAGE_NEXT_COMMAND ;
 	static const string MESSAGE_WELCOME ; 
 	static const string MESSAGE_HELP ;

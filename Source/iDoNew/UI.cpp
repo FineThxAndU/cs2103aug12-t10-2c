@@ -32,6 +32,7 @@ const string UI::MESSAGE_UNDO_FAIL = "Undo not possible." ;
 const string UI::MESSAGE_REDO = "Successfully redone.";
 const string UI::MESSAGE_REDO_FAIL = "Redo not possible";
 
+const string UI::MESSAGE_TODAY = "Today's Schedule: " ;
 
 string UI::convertToString(char * sentence) {
 
@@ -269,9 +270,10 @@ void UI::displayHomeScreen(vector<Task*> tasksToDisplay) {
 	int yIncrement = 0 ;
 	tm* current =  UI::getCurrentTime();
 	string time = UI::makePrintableTimeString (asctime(current));
-	cout << "Today's Schedule: " << time;
-	UI::goToNextLineBeginning(yIncrement);
-	UI::goToNextLineBeginning(yIncrement);
+	cout << MESSAGE_HELP ; 
+	UI::goToNextLineBeginning(0) ;
+	cout << MESSAGE_TODAY << time;
+	UI::goToNextLineBeginning(1);
 	cout << UI::TABLE_FIELDS ; 
 
 	for( ; it != tasksToDisplay.end() ; it++) {
@@ -407,9 +409,9 @@ void UI::placeCursorAt(int x, int y) {
 
 string UI::getUserInput() {
 
-	currentCursor.Y++ ;
-    placeCursorAt(currentCursor.X, currentCursor.Y) ;
-    cout << MESSAGE_HELP ;
+	//currentCursor.Y++ ;
+    //placeCursorAt(currentCursor.X, currentCursor.Y) ;
+    //cout << MESSAGE_HELP ;
 	
 	currentCursor.Y += 2 ;
 	placeCursorAt(currentCursor.X, currentCursor.Y) ;
