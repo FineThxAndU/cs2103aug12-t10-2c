@@ -5,9 +5,8 @@
 
 int main(int argument_count, char** argument_vars) {
 
-	//runTest(argument_count, argument_vars) ; 
+	runTest(argument_count, argument_vars) ; 
 	Logic driver ;
-	//driver.deleteExpired() ;
 	driver.logicMain() ;
 	return 0 ;
 
