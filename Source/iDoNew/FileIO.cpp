@@ -208,13 +208,13 @@ void FileIO::writeList(){
 }
 
 void FileIO::writeErrorLog (string log) {
-	ofstream filePtr(TASK_LOG_FILE_NAME, ios::app) ;
+	ofstream filePtr(ERROR_LOG_FILE_NAME, ios::app) ;
 	tm* current = getCurrentTime() ; 
 	string time = makePrintableTimeString(asctime(current)) ;
 	filePtr << time << "\t" << log << endl;
 }
 void FileIO::writeInputLog (string log) {
-	ofstream filePtr(ERROR_LOG_FILE_NAME, ios::app) ;
+	ofstream filePtr(TASK_LOG_FILE_NAME, ios::app) ;
 	tm* current = getCurrentTime() ; 
 	string time = makePrintableTimeString(asctime(current)) ;
 	filePtr << time << "\t" << log << endl;

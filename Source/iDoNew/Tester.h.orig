@@ -1,10 +1,11 @@
 #include "gtest/gtest.h" //include to use Google Unit test's stuff
+#include <exception>
 
 #include <string>
 
 #include "CommandProcessor.h"
 #include "Logic.h"
-
+#include "UI.h"
 
 using namespace std;
 
@@ -14,22 +15,110 @@ using namespace std;
 
 /************************************************************************/
 
+TEST(basic_test, removeLastSpace) {
+
+	CommandProcessor testObj ;
+	string result = testObj.removeLastSpace("abcd efgh ") ;
+	ASSERT_EQ(result,"abcd efgh") ;
+
+	result = testObj.removeLastSpace("abcd efgh") ;
+	ASSERT_EQ(result,"abcd efgh") ;
+}
+
+//cannot add keywords already in use
+TEST(basic_test, createAlternateKeywordFalse1) {
+
+	CommandProcessor testObj ;
+	Logic logicTestObj ;
+	Task * testTask = new FloatingTask ;
+	//trying to add 'delete' as an alternative keyword for 'exit'
+	testTask->setDesc("exit delete") ;
+	bool returnVal ;
+	returnVal = logicTestObj.createAlternateKeyword(testTask) ;
+	ASSERT_EQ(returnVal, false) ;
+    delete testTask ;
+
+}
+
+//cannot add 'space' or empty string as alternate keyword
+TEST(basic_test, createAlternateKeywordFalse2) {
+	CommandProcessor testObj ;
+	Logic logicTestObj ;
+	Task * testTask = new FloatingTask ;
+	//trying to add space as an alternative keyword for search
+	testTask->setDesc("search ") ;
+	bool returnVal ;
+	returnVal = logicTestObj.createAlternateKeyword(testTask) ;
+	ASSERT_EQ(returnVal, false) ;
+    delete testTask ;
+}
+
+TEST(basic_test, UIconvertToString) {
+	UI testObj ;
+	char * charArray = "test character array" ;
+	string stringArray = "test character array" ;
+	string result ;
+	result = testObj.convertToString(charArray) ;
+	ASSERT_EQ(result, stringArray) ;
+}
+
+
+TEST(basic_test, UImakeConvertiblemakePrintable) {
+	UI testObj ;
+	tm * testPointer = new tm ;
+	testPointer->tm_hour = 10 ;
+	testPointer->tm_min = 30 ;
+	testPointer->tm_mon = 12 ;
+	testPointer->tm_year = 2013 ;
+	testPointer->tm_mday = 10 ;
+
+	testObj.makeConvertible(testPointer) ;
+	char * timeInString = asctime(testPointer) ;
+
+	string result = testObj.makePrintableTimeString(timeInString) ;
+
+	ASSERT_EQ(result, "Dec 10 10:30 2013") ;
+	delete testPointer ;
+
+}
+
+TEST(basic_test, UIchangeBackTimePointer) {
+	UI testObj ;
+	tm * testPointer = new tm ;
+	testPointer->tm_hour = 10 ;
+	testPointer->tm_min = 30 ;
+	testPointer->tm_mon = 12 ;
+	testPointer->tm_year = 2013 ;
+	testPointer->tm_mday = 10 ;
+
+	testObj.makeConvertible(testPointer) ;
+	time_t testTime = mktime(testPointer) ;
+	testObj.changeBackTimePointer(testPointer) ;
+	testTime = mktime(testPointer) ;
+
+	ASSERT_EQ(-1, mktime(testPointer)) ;
+	ASSERT_EQ(2013, testPointer->tm_year) ;
+
+	delete testPointer ;
+	
+}
+
 TEST(basic_test, cmdProcessor)
 
 {
 	CommandProcessor cp;
-	Task *newTask = new TimedTask;
-	Task *editTask = new TimedTask;
+	Task* newTask = new TimedTask, *editTask = new TimedTask;
+
 	string op = cp.cmdProcessor("meeting start 30.08.93 9.25 boss at office", newTask, editTask).c_str();
 	
 	ASSERT_EQ(0, strcmp("add",op.c_str()));
 	ASSERT_EQ(0, strcmp("meeting boss at office ", newTask->getDesc().c_str()));
-	ASSERT_EQ(30, newTask->getEnd()->tm_mday);
-	ASSERT_EQ(8, newTask->getEnd()->tm_mon);
-	ASSERT_EQ(1993, newTask->getEnd()->tm_year);
-	ASSERT_EQ(9, newTask->getEnd()->tm_hour);
-	ASSERT_EQ(25, newTask->getEnd()->tm_min);
-	delete newTask;
+	ASSERT_EQ(30, newTask->getStart()->tm_mday);
+	ASSERT_EQ(8, newTask->getStart()->tm_mon);
+	ASSERT_EQ(1993, newTask->getStart()->tm_year);
+	ASSERT_EQ(9, newTask->getStart()->tm_hour);
+	ASSERT_EQ(25, newTask->getStart()->tm_min);
+	
 
 }
 
@@ -175,84 +264,37 @@ TEST (basic_test, redoTask) {
 			ASSERT_EQ(except,"No undo to redo yet!");
 		}
 }
-
 TEST(basic_test, addTask)
 {
 	Logic testObj;
-	Task* testTask = new TimedTask;
+	TimedTask testTask;
 	tm* end = new tm;
-	end->tm_hour=4;
+	end->tm_hour=21;
 	end->tm_min=0;
 	end->tm_mon=5;
-	end->tm_mday= 15;
+	end->tm_mday= 11;
 	end->tm_year=2012;
-	testTask->setDesc("Test");
-	testTask->setEnd(end);
+	testTask.setDesc("Test");
+	testTask.setEnd(end);
 	tm* start = new tm;
-	start->tm_hour=4;
-	start->tm_min=0;
-	start->tm_mon=5;
-	start->tm_mday= 16;
-	start->tm_year=2012;
-	testTask->setStart(start);
-	bool returnVal;
-	
-	try {
-		returnVal=testObj.addTask(testTask);
-		delete end;
-		delete start;
-		ASSERT_EQ(returnVal,true);
-	}
-	catch (string except) {
-		delete end;
-		delete start;
-		ASSERT_EQ(except,"Not a valid task");
-	}
-	//delete end;
-	//delete start;
-}
-TEST (basic_test,searchTask) {
-	Logic testObj;
-	Task* testTask = new TimedTask;
-	testTask->setDesc("Test");
-	bool returnVal;
-	try {
-		returnVal = testObj.search(testTask);
-		ASSERT_EQ(returnVal,true);
-	}
-	catch(string except) {
-		ASSERT_EQ(except, "No matches found");
-	}
+	start->tm_hour = 20;
+	start->tm_min = 0;
+	start->tm_mon = 5;
+	start->tm_mday = 11;
+	start->tm_year = 2012;
+	testTask.setStart(start);
+	bool returnVal=testObj.addTask(&testTask);
+	ASSERT_EQ(returnVal,true);
+	//returnVal=testObj.search( testTask);
+	//ASSERT_EQ(returnVal,true);
 }
 
-/*TEST (basic_test,editTask) {
-	Logic testObj;
-	Task* testTask = new TimedTask;
-	tm* end = new tm;
-	end->tm_hour=4;
-	end->tm_min=0;
-	end->tm_mon=5;
-	end->tm_mday= 15;
-	end->tm_year=2012;
-	testTask->setDesc("Test");
-	testTask->setEnd(end);
-	tm* start = new tm;
-	start->tm_hour=4;
-	start->tm_min=0;
-	start->tm_mon=5;
-	start->tm_mday= 16;
-	start->tm_year=2012;
-	testTask->setStart(start);
-	Task *newTask = new TimedTask;
-	newTask->setDesc("testing");
-	newTask->setStart(start);
-	newTask->setEnd(end);
-	bool returnVal;
-	try {
-		returnVal = testObj.findToEdit(testTask,newTask);
-		delete start;
-		delete end;
-		ASSERT_EQ(returnVal,true);
+
+
+
+
+	TimedTask testTask;
+
 	}
 	catch (string except) {
 		delete start;
@@ -263,27 +305,26 @@ TEST (basic_test,searchTask) {
 }
 */
 
-
-TEST (basic_test,deleteTask) {
-	Logic testObj;
-	Task* testTask = new TimedTask;
-	tm* end = new tm;
-	end->tm_hour=4;
-	end->tm_min=0;
-	end->tm_mon=5;
-	end->tm_mday= 15;
-	end->tm_year=2012;
-	testTask->setDesc("Test");
-	testTask->setEnd(end);
-	tm* start = new tm;
-	start->tm_hour=4;
-	start->tm_min=0;
-	start->tm_mon=5;
-	start->tm_mday= 16;
-	start->tm_year=2012;
-	testTask->setStart(start);
-	bool returnVal;
-	
+//TEST (basic_test,deleteTask) {
+//	Logic testObj;
+//	Task* testTask = new TimedTask;
+//	tm* end = new tm;
+//	end->tm_hour=4;
+//	end->tm_min=0;
+//	end->tm_mon=5;
+//	end->tm_mday= 15;
+//	end->tm_year=2012;
+//	testTask->setDesc("Test");
+//	testTask->setEnd(end);
+//	tm* start = new tm;
+//	start->tm_hour=4;
+//	start->tm_min=0;
+//	start->tm_mon=5;
+//	start->tm_mday= 16;
+//	start->tm_year=2012;
+//	testTask->setStart(start);
+//	testObj.findToDelete(testTask);
+//}
 	try {
 		returnVal = testObj.findToDelete(testTask);
 		delete end;

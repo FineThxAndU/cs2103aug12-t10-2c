@@ -48,6 +48,7 @@ class Logic
 	static const string FILENAME_ALTERNATE_ALTERNATES ;
 	static const string FILENAME_UNDO_ALTERNATES ;
 	static const string FILENAME_REDO_ALTERNATES ;
+	static const int MAX_KEYWORD_SIZE = 100 ;
 
 	struct Input
 	{

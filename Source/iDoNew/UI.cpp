@@ -120,82 +120,60 @@ void UI::goToToBeginning() {
 }
 
 int UI::printDescription(string description) {
-	int spaceIsAt ;
+
 	int letterCountOnCurrentLine = 0 ;
-	int taskLineNo = currentCursor.Y ;
 	int printedCount = 0 ;
-	int size = description.size() ;
 	int index = 0 ;
 	int currentlyAt = 0 ;
 	int yIncrement = 0 ;
 
-	if(size <= 36) {
-		cout << description ;
-	}
-
-	else {
-
-		while(printedCount < size) {
-			for(index = currentlyAt ; index < size ; index++) {
-				if(description[index] == ' ') {
-					break ;
-				}
+	int taskLineNo = currentCursor.Y ;
+	
+	int size = description.size() ;
+	
+	while(printedCount < size) {
+		for(index = currentlyAt ; index < size ; index++) {
+			if(description[index] == ' ') {
+				break ;
 			}
-
-			if(index == size) {
-				int wordSize = index - currentlyAt + 1 ;
-				letterCountOnCurrentLine += wordSize ;
-					if(letterCountOnCurrentLine <= 36) {
-					string partialDescription = description.substr(currentlyAt, wordSize) ;
-					cout << partialDescription ;
-				    printedCount += wordSize ;
-				}
-				else {
-					yIncrement++ ;
-					letterCountOnCurrentLine = 0 ;
-					//zero because need to increment only by one line
-					goToNextLineBeginning(0) ;
-					goToDescriptionBeginning() ;
-					string partialDescription = description.substr(currentlyAt, wordSize) ;
-					cout << partialDescription ;
-					letterCountOnCurrentLine += wordSize ;
-					printedCount += wordSize ;
-				}
-				currentlyAt = index + 1 ;
-			}
-
-			else if(description[index] == ' ') {
-				int wordSize = index - currentlyAt + 1 ;
-				letterCountOnCurrentLine += wordSize ;
-					if(letterCountOnCurrentLine <= 36) {
-					string partialDescription = description.substr(currentlyAt, wordSize) ;
-					cout << partialDescription ;
-				    printedCount += wordSize ;
-				}
-				else {
-					yIncrement++ ;
-					letterCountOnCurrentLine = 0 ;
-					//zero because need to increment only by one line
-					goToNextLineBeginning(0) ;
-					goToDescriptionBeginning() ;
-					string partialDescription = description.substr(currentlyAt, wordSize) ;
-					cout << partialDescription ;
-					letterCountOnCurrentLine += wordSize ;
-					printedCount += wordSize ;
-				}
-				currentlyAt = index + 1 ;
-			}			
 		}
-	}
+		if(index == size || description[index] == ' ') {
+			int wordSize = index - currentlyAt + 1 ;
+			letterCountOnCurrentLine += wordSize ;
 
-	currentCursor.Y = taskLineNo + yIncrement ;
+			if(letterCountOnCurrentLine > 36) {
+				yIncrement++ ;
+				letterCountOnCurrentLine = 0 ;
+				goToNextLineBeginning(0) ;
+				goToDescriptionBeginning() ;
+				letterCountOnCurrentLine += wordSize ;
+			}
+
+				string partialDescription = description.substr(currentlyAt, wordSize) ;
+				cout << partialDescription ;
+				printedCount += wordSize ;
+				currentlyAt = index + 1 ;
+			}
+			
+		}
+	currentCursor.Y = taskLineNo ;
 	placeCursorAt(currentCursor.X, currentCursor.Y) ;
 	return yIncrement ;
 }
 
 int UI::displayFloatingTask(string description) {
 	goToDescriptionBeginning() ;
-	int yIncrement = printDescription(description) ;
+	int yIncrement = 0 ;
+	
+	if(description.size() <= 36) {
+		yIncrement = 0 ;
+		cout << description ;
+	}
+
+	else {
+		yIncrement = printDescription(description) ;
+	}
+
 	return yIncrement ;
 }
 
@@ -205,7 +183,17 @@ int UI::displayTimedTask(tm * & startTime, tm * & endTime, string description) {
 	makeConvertible(endTime) ;
 
 	goToDescriptionBeginning() ;
-	int yIncrement = printDescription(description) ;
+	int yIncrement = 0 ;
+	int size = description.size() ;
+	
+	if(size <= 36) {
+		yIncrement = 0 ;
+		cout << description ;
+	}
+
+	else {
+		yIncrement = printDescription(description) ;
+	}
 	
 	string sTime = makePrintableTimeString(asctime(startTime)) ;
 	string eTime = makePrintableTimeString(asctime(endTime)) ;
@@ -227,8 +215,18 @@ int UI::displayDeadlineTask(tm * & deadline, string description) {
 	makeConvertible(deadline) ;
 
 	goToDescriptionBeginning() ;
-	int yIncrement = printDescription(description) ;
-
+	int yIncrement = 0 ;
+	int size= description.size() ;
+	
+	if(size <= 36) {
+		yIncrement = 0 ;
+		cout << description ;
+	}
+	
+	else {
+		yIncrement = printDescription(description) ;
+	}
+	
 	string printableDeadline = makePrintableTimeString(asctime(deadline)) ;
 	goToFromBeginning() ;
 	cout << printableDeadline ; 
@@ -251,7 +249,11 @@ void UI::displayHomeScreen(vector<Task*> tasksToDisplay) {
 
 	placeCursorAt(currentCursor.X, currentCursor.Y) ;
 	int yIncrement = 0 ;
-
+	tm* current =  UI::getCurrentTime();
+	string time = UI::makePrintableTimeString (asctime(current));
+	cout << "Today's Schedule: " << time;
+	UI::goToNextLineBeginning(yIncrement);
+	UI::goToNextLineBeginning(yIncrement);
 	cout << UI::TABLE_FIELDS ; 
 
 	for( ; it != tasksToDisplay.end() ; it++) {
@@ -396,4 +398,12 @@ void UI::printThis(string messageToUser) {
 	currentCursor.Y++ ;
     placeCursorAt(currentCursor.X, currentCursor.Y) ;
 	cout << messageToUser ;
+}
+
+tm* UI::getCurrentTime()	{
+	time_t now;
+	struct tm *current;
+	time(&now);
+	current = localtime(&now);
+	return current;
 }
