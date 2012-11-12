@@ -40,8 +40,8 @@ private:
 	void initRemoveList() ;
 	void initEditList() ;
 	void initSearchList() ;
-        void initUndoList() ;
-        void initExitList() ;
+    void initUndoList() ;
+    void initExitList() ;
 	void initRedoList() ;
 	void initAltList() ;
 
@@ -78,7 +78,7 @@ public:
 	//overloaded isFound
 	bool isFound(char cmd[MAX_COMMAND_SIZE], string cmdType);
 	bool isFound(char cmd[MAX_COMMAND_SIZE], const char [][MAX_COMMAND_SIZE]);
-
+	bool isFoundAlready(char[MAX_COMMAND_SIZE]) ; 
 	bool isStart(char singleWord[MAX_COMMAND_SIZE]);
 	bool isEnd(char singleWord[MAX_COMMAND_SIZE]);
 	bool isDateTime(char singleWord[MAX_COMMAND_SIZE]);
@@ -111,14 +111,14 @@ public:
 	void correctTaskDate(tm *t);
 	//to add new keyword to private alternates list, called in Logic.cpp
 	//needed to have function for each type, as passing 2D char array as parameter was unpredictable
-	void appendToAddList(const char *) ;
-	void appendToRemoveList(const char *) ;
-	void appendToEditList(const char *) ;
-	void appendToSearchList(const char *) ;
-	void appendToUndoList(const char *) ;
-	void appendToRedoList(const char *) ;
-	void appendToAltList(const char *) ;
-	void appendToExitList(const char *) ;
+	void appendToAddList(char *) ;
+	void appendToRemoveList(char *) ;
+	void appendToEditList(char *) ;
+	void appendToSearchList(char *) ;
+	void appendToUndoList(char *) ;
+	void appendToRedoList(char *) ;
+	void appendToAltList(char *) ;
+	void appendToExitList(char *) ;
 
 } ;
 
