@@ -8,8 +8,6 @@ const string UI::MESSAGE_INVALID = "Invalid command entered!" ;
 
 const string UI::TABLE_FIELDS = "No. Task Description                     From/At           To               " ;
 
-//const string UI::MESSAGE_EMPTY = "\niDo is empty! No tasks added yet." ;
-
 const string UI::MESSAGE_ALTERNATE_SUCCESS = "Successfully added alternate keyword." ;
 const string UI::MESSAGE_ALTERNATE_FAIL = "Unable to add alternate to keyword." ;
 
@@ -31,9 +29,9 @@ const string UI::MESSAGE_UNDO_FAIL = "Undo not possible." ;
 
 const string UI::MESSAGE_REDO = "Successfully redone.";
 const string UI::MESSAGE_REDO_FAIL = "Redo not possible";
-
 const string UI::MESSAGE_TODAY = "Today's Schedule: " ;
 
+//@author A0088416X
 string UI::convertToString(char * sentence) {
 
 	string strOfSentence ;
@@ -246,17 +244,7 @@ void UI::displayHomeScreen(vector<Task*> tasksToDisplay) {
 	cout << MESSAGE_WELCOME ;
 
 	if(!ifstream("task.txt")){
-		cout << "\n\n\n\n\n\n";
-		cout << "    Welcome to iDo!!\n    Listed below is the format in which the commands are to be used.\n\n";
-		cout << "    add:  <description> start <start time> end <end time>\n";
-		cout << "    delete:	delete <partial description>\n";
-		cout << "    edit:  edit <partial description> [new] <new description>\n";
-		cout << "    search:	search <partial description>\n";
-		cout << "    alternate:  alternate <existing keyword> <new key word>\n\n";
-		cout << "    Press any key to continue...\n";
-		std::getchar();
-		system("cls") ;
-		cout << MESSAGE_WELCOME ;
+		UI::helpScreen() ;
 	}
 
 	int taskNo = 0 ;
@@ -314,9 +302,6 @@ void UI::feedback(bool result, string command) {
 	if(result == true) {
 		displayTrueFeedback(command) ;
 	}
-	/*else {
-		displayFalseFeedback(command) ;
-	}*/
 }
 
 void UI::displayTrueFeedback(string command) {
@@ -354,7 +339,7 @@ void UI::displayTrueFeedback(string command) {
 
  }
 
-void UI::displayFalseFeedback(string command) {
+/*void UI::displayFalseFeedback(string command) {
 	
     if(command == "add") {
 		cout << MESSAGE_INVALID_ADD ;
@@ -395,7 +380,8 @@ void UI::displayFalseFeedback(string command) {
 		cout << MESSAGE_INVALID ;
 	}
 
- }
+ }*/
+
 
 void UI::placeCursorAt(int x, int y) {
 	
@@ -428,10 +414,26 @@ void UI::printThis(string messageToUser) {
 	cout << messageToUser ;
 }
 
+//@author A0088645N
 tm* UI::getCurrentTime()	{
 	time_t now;
 	struct tm *current;
 	time(&now);
 	current = localtime(&now);
 	return current;
+}
+
+//@author A0088819J
+void UI::helpScreen()	{
+		cout << "\n\n\n\n\n\n";
+		cout << "    Welcome to iDo!!\n    Listed below is the format in which the commands are to be used.\n\n";
+		cout << "    add:  <description> start <start time> end <end time>\n";
+		cout << "    delete:	delete <partial description>\n";
+		cout << "    edit:  edit <partial description> [new] <new description>\n";
+		cout << "    search:	search <partial description>\n";
+		cout << "    alternate:  alternate <existing keyword> <new key word>\n\n";
+		cout << "    Press any key to continue...\n";
+		std::getchar();
+		system("cls") ;
+		cout << MESSAGE_WELCOME ;
 }

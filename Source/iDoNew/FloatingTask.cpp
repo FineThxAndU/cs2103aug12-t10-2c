@@ -1,5 +1,5 @@
 #include "FloatingTask.h"
-
+//@author A0088819J
 FloatingTask::FloatingTask(){
 	FloatingTask::description = "\0";
 	FloatingTask::endTime = NULL;

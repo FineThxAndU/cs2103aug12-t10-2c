@@ -1,6 +1,6 @@
 #include "Search.h"
 
-
+//@author A0088819J
 void Search::setInputList(vector<Task*> list){
 
 	Search::inputList = list;
@@ -19,6 +19,7 @@ bool Search::executeSearch(string description){
 	}
 	return true;
 }
+//@author A0088645N
 bool Search::executeSearchTime(Task* query) throw(string){
 	bool returnVal = true;
 	assert(query != NULL);
@@ -64,7 +65,7 @@ bool Search::executeSearchTime(Task* query) throw(string){
 	}
 	return returnVal;
 }
-
+//@author A0088819J
 bool Search::executeSearch(Task* query){
 
 	for(int i =  0; i < Search::inputList.size(); i++){
@@ -93,7 +94,7 @@ void Search::clearSearchResults(){
 		Search::resultIndices.clear();
 	}
 }
-
+//@author A0088645N
 void Search::makeConvertible( tm *time) {
 		assert (time != NULL);
 		time->tm_sec=0;

@@ -9,6 +9,7 @@ const string CommandProcessor::FILENAME_ALTERNATE_ALTERNATES = "altlist.txt" ;
 const string CommandProcessor::FILENAME_UNDO_ALTERNATES = "undolist.txt" ;
 const string CommandProcessor::FILENAME_REDO_ALTERNATES = "redolist.txt" ;
 
+//@author A0088416X
 CommandProcessor::CommandProcessor() {
   //load stored alternates from previous runs
   //into the respective char arrays
@@ -172,7 +173,7 @@ void CommandProcessor::initExitList() {
 
 	strcpy(exitList[exitIndex],"-1") ;
 }
-
+//@author A0088645N
 //For processing the serial numbers of the tasks entered by the user when multiple tasks are to be edited or deleted
 vector <int> CommandProcessor::intProcessor (string userInput) throw(string)
 {
@@ -200,7 +201,7 @@ vector <int> CommandProcessor::intProcessor (string userInput) throw(string)
 	}
 	return integers;
 }
-
+//@author A0088819J
 //Processing the initial command entered by the user
 string CommandProcessor::cmdProcessor (string userInput, Task*& newTask, Task*& editTask)
 {
@@ -608,7 +609,7 @@ tm* CommandProcessor::stringToTime (string startTime)
 
 	return sTime ;
 }
-
+//@author A0088416X
 bool CommandProcessor::isFoundAlready(char keywordEntered[MAX_COMMAND_SIZE]) {
 
 	bool isAdd, isRemove, isEdit, isSearch, isExit, isUndo,isRedo, isAlternate ;
@@ -758,7 +759,7 @@ void CommandProcessor::appendToExitList(char *newKeyword) {
 	}
 	strcpy(exitList[exitIndex + 1], "-1") ;
 }
-
+//@author A0088819J
 //returns the actual keyword in case a synonym/wrong spelling of a keyword is entered
 bool CommandProcessor::actualKeyWord(char userCmd[MAX_COMMAND_SIZE]) {
 
@@ -812,7 +813,7 @@ bool CommandProcessor::actualKeyWord(char userCmd[MAX_COMMAND_SIZE]) {
 		return true;
 	}
 }
-
+//@author A0088416X
 bool CommandProcessor::isFound(char cmd[MAX_COMMAND_SIZE], string cmdType) {
 	int index = 0;
 	bool returnVal= false ;
@@ -895,7 +896,7 @@ bool CommandProcessor::isFound(char cmd[MAX_COMMAND_SIZE], string cmdType) {
 
 	return returnVal ;
 }
-
+//@author A0088819J
 //checks if the string cmd is found in cmdList
 bool CommandProcessor::isFound(char cmd[MAX_COMMAND_SIZE], const char cmdList[][MAX_COMMAND_SIZE]) {
 
@@ -1247,7 +1248,7 @@ void CommandProcessor::addZeroes(char input[MAX_TIME_SIZE]){
 	
 	strcpy(input, newDate);
 }
-
+//@author A0088416X
 string CommandProcessor::removeLastSpace(string word) throw(string) {
 	string tempWord ;
 
@@ -1263,7 +1264,7 @@ string CommandProcessor::removeLastSpace(string word) throw(string) {
 	}
 	return word ;  
 }
-
+//@author A0088819J
 //checks if first, second and third form a date
 bool CommandProcessor::isDate(int first, int second, int third ){
 	bool returnVal = false;

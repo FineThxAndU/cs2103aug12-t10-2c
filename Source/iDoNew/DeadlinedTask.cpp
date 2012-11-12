@@ -1,5 +1,5 @@
 #include "DeadlinedTask.h"
-
+////@author A0088819J
 DeadlinedTask::DeadlinedTask(){
 	DeadlinedTask::startTime = NULL;
 	DeadlinedTask::endTime = NULL;

@@ -1,5 +1,5 @@
 #include "TimedTask.h"
-
+//@author A0088819J
 TimedTask::TimedTask(){
 	TimedTask::description = "\0";
 	TimedTask::endTime = NULL;

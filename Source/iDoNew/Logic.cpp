@@ -10,7 +10,7 @@ const string Logic::FILENAME_ALTERNATE_ALTERNATES = "altlist.txt" ;
 const string Logic::FILENAME_UNDO_ALTERNATES = "undolist.txt" ;
 const string Logic::FILENAME_REDO_ALTERNATES = "redolist.txt" ;
 
-
+//@author A0088645N
 Logic::Logic()	{
 	fileObj.setFileName(TASK_FILE_NAME);
 	fileObj.readList();
@@ -174,7 +174,7 @@ bool Logic::execute(string cmd,Task* userInputTask, Task* userInputNewTask) thro
 	
 	return returnVal;
 }
-
+//@author A0088416X
 //alternate keyword should be one word only
 bool Logic::createAlternateKeyword(Task * userInputTask) throw (string) {
 
@@ -306,7 +306,7 @@ bool Logic::createAlternateKeyword(Task * userInputTask) throw (string) {
 	delete tempTask ;
 	return returnVal ;
 }
-
+//@author A0088645N
 bool Logic::addTask(Task* userInputTask) throw(string) {
 	bool returnVal = true;
 	if (userInputTask == '\0') {
@@ -330,7 +330,7 @@ bool Logic::addTask(Task* userInputTask) throw(string) {
 	//assert(searchObj.searchResults.size() == 0);
 	return returnVal;
 }
-
+//@author A0088416X
 bool Logic::isUserIndexValid(int index, vector<int> vectorOfIndices) {
 
 	bool returnVal ;
@@ -344,7 +344,7 @@ bool Logic::isUserIndexValid(int index, vector<int> vectorOfIndices) {
 
 	return returnVal ;
 }
- 
+ //@author A0088645N
 bool Logic::findToDelete(Task * userInputTask) throw(string) {
 	int i;
 	assert(userInputTask != '\0');
