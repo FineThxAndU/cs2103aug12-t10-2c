@@ -4,3 +4,12 @@ delete+
 
 ad
 del
++
+create
+addtask
++
++
+thisdef
+happy
+haha
+hmm
