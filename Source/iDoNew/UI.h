@@ -6,6 +6,7 @@
 #define UI_H_
 
 #include <iostream>
+#include <fstream>
 #include <sstream>
 #include <string>
 #include <vector>
