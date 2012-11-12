@@ -29,15 +29,16 @@ bool Search::executeSearchTime(Task* query) throw(string){
 			if(Search::inputList[i]->getStart()) {
 				tm* tempTime = Search::inputList[i]->getStart();
 				int tempHour = tempTime->tm_hour;
+				int tempMin = tempTime->tm_min;
 				formatHourYear(tempTime);
 				makeConvertible(tempTime);
 				if(!difftime(mktime(tempTime),mktime(query->getStart()))) {
-					revertToOriginalTime( tempTime, tempHour);
+					revertToOriginalTime( tempTime, tempHour, tempMin);
 					Search::searchResults.push_back(Search::inputList[i]);
 					Search::resultIndices.push_back(i);
 				}
 				else {
-					revertToOriginalTime(tempTime,tempHour);
+					revertToOriginalTime(tempTime,tempHour, tempMin);
 				}
 				
 			}
@@ -45,15 +46,16 @@ bool Search::executeSearchTime(Task* query) throw(string){
 			else if(Search::inputList[i]->getEnd())	{
 				tm* tempTime = Search::inputList[i]->getEnd();
 				int tempHour = tempTime->tm_hour;
+				int tempMin = tempTime->tm_min;
 				formatHourYear(tempTime);
 				makeConvertible(tempTime);
 				if(!difftime(mktime(tempTime),mktime(query->getStart()))) { 
-					revertToOriginalTime(tempTime,tempHour);
+					revertToOriginalTime(tempTime,tempHour, tempMin);
 					Search::searchResults.push_back(Search::inputList[i]);
 					Search::resultIndices.push_back(i);
 				}
 				else {
-					revertToOriginalTime(tempTime,tempHour);
+					revertToOriginalTime(tempTime,tempHour, tempMin);
 				}
 			}
 			else {
@@ -110,9 +112,10 @@ void Search::formatHourYear(tm *time) {
 
 }
 
-void Search::revertToOriginalTime( tm *time, int hour) {
+void Search::revertToOriginalTime( tm *time, int hour, int min) {
 	assert (time != NULL);
 	time->tm_mon += 1;
 	time->tm_year += 1900;
 	time->tm_hour = hour;
+	time->tm_min = min;
 }

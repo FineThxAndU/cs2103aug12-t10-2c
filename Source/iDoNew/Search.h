@@ -25,6 +25,6 @@ class Search
 		bool executeSearchTime(Task* query);
 		void makeConvertible(tm*);
 		void formatHourYear(tm*);
-		void revertToOriginalTime( tm *time, int hour);
+		void revertToOriginalTime( tm *time, int hour, int min);
 };
 #endif
