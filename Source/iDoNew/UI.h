@@ -93,6 +93,8 @@ private:
 	
 	string getUserInput() ;
 
+	tm* getCurrentTime() ;
+
 } ;
 
 #endif 

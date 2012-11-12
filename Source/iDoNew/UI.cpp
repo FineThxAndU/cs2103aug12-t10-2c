@@ -251,7 +251,11 @@ void UI::displayHomeScreen(vector<Task*> tasksToDisplay) {
 
 	placeCursorAt(currentCursor.X, currentCursor.Y) ;
 	int yIncrement = 0 ;
-
+	tm* current =  UI::getCurrentTime();
+	string time = UI::makePrintableTimeString (asctime(current));
+	cout << "Today's Schedule: " << time;
+	UI::goToNextLineBeginning(yIncrement);
+	UI::goToNextLineBeginning(yIncrement);
 	cout << UI::TABLE_FIELDS ; 
 
 	for( ; it != tasksToDisplay.end() ; it++) {
@@ -396,4 +400,12 @@ void UI::printThis(string messageToUser) {
 	currentCursor.Y++ ;
     placeCursorAt(currentCursor.X, currentCursor.Y) ;
 	cout << messageToUser ;
+}
+
+tm* UI::getCurrentTime()	{
+	time_t now;
+	struct tm *current;
+	time(&now);
+	current = localtime(&now);
+	return current;
 }
