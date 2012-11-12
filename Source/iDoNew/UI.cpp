@@ -29,6 +29,9 @@ const string UI::MESSAGE_EXIT = "Exiting iDo now." ;
 const string UI::MESSAGE_UNDONE = "Command successfully undone." ;
 const string UI::MESSAGE_UNDO_FAIL = "Undo not possible." ;
 
+const string UI::MESSAGE_REDO = "Successfully redone.";
+const string UI::MESSAGE_REDO_FAIL = "Redo not possible";
+
 
 string UI::convertToString(char * sentence) {
 
@@ -240,6 +243,19 @@ void UI::displayHomeScreen(vector<Task*> tasksToDisplay) {
 
 	system("cls") ;
 	cout << MESSAGE_WELCOME ;
+	if(!ifstream("task.txt")){
+		cout<<"\n\n\n\n\n\n";
+		cout<<"    Welcome to iDo!!\n    Listed below are the format in which the commands are to be used.\n\n";
+		cout<<"    add :  <description> start <start time> end <end time>\n";
+		cout<<"    delete :	delete <partial description>\n";
+		cout<<"    edit :  edit <partial description> [new] <new description>\n";
+		cout<<"    search :	search <partial description>\n";
+		cout<<"    alternate :  alternate <existing keyword> <new key word>\n\n";
+		cout<<"    Press any key to continue...\n";
+		std::getchar();
+		system("cls") ;
+		cout << MESSAGE_WELCOME ;
+	}
 	int taskNo = 0 ;
  
 	vector<Task*>::iterator it = tasksToDisplay.begin() ;
@@ -294,9 +310,9 @@ void UI::feedback(bool result, string command) {
 	if(result == true) {
 		displayTrueFeedback(command) ;
 	}
-	else {
+	/*else {
 		displayFalseFeedback(command) ;
-	}
+	}*/
 }
 
 void UI::displayTrueFeedback(string command) {
@@ -325,9 +341,13 @@ void UI::displayTrueFeedback(string command) {
 	else if(command == "alternate") {
 		cout << MESSAGE_ALTERNATE_SUCCESS ;
 	}
-	else {
+	else if(command == "undo") {
 		cout << MESSAGE_UNDONE ;
 	}
+	else {
+		cout<<MESSAGE_REDO;
+	}
+
  }
 
 void UI::displayFalseFeedback(string command) {
@@ -363,7 +383,11 @@ void UI::displayFalseFeedback(string command) {
 		placeCursorAt(currentCursor.X, currentCursor.Y) ;
 		system("pause") ;
 	}
-	else {
+	else if(command == "redo") {
+		cout<<MESSAGE_REDO_FAIL;
+	}
+	else
+		{
 		cout << MESSAGE_INVALID ;
 	}
 
