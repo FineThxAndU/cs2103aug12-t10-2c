@@ -31,6 +31,12 @@ void CommandProcessor::initAddList() {
 
 	strcpy(addList[addIndex],"ad") ;
 	addIndex++ ;
+	
+
+	strcpy(addList[addIndex],"add") ;
+	addIndex++ ;
+	
+
 
 	vector<string> storedAddList = fileObject.readFromFile() ;
 	vector<string>::iterator it ;
@@ -49,7 +55,10 @@ void CommandProcessor::initRemoveList() {
 	int i ;
 	fileObject.setFileName(FILENAME_REMOVE_ALTERNATES) ;
 	strcpy(removeList[removeIndex],"delete") ;
-	
+	removeIndex++ ;
+	strcpy(removeList[removeIndex],"delet") ;
+	removeIndex++ ;
+	strcpy(removeList[removeIndex],"deletee") ;
 	removeIndex++ ;
 	vector<string> storedRemoveList = fileObject.readFromFile() ;
 	vector<string>::iterator it ;
@@ -67,8 +76,16 @@ void CommandProcessor::initAltList() {
 	int altIndex = 0 ;
 	fileObject.setFileName(FILENAME_ALTERNATE_ALTERNATES) ;
 	strcpy(altList[altIndex],"alternate") ;
-  
 	altIndex++ ;
+	strcpy(altList[altIndex],"alterntae") ;
+	altIndex++ ;
+	strcpy(altList[altIndex],"altrnate") ;
+	altIndex++ ;
+	strcpy(altList[altIndex],"alternat") ;
+	altIndex++ ;
+	strcpy(altList[altIndex],"alternte") ;
+	altIndex++ ;
+
 	vector<string> storedAltList = fileObject.readFromFile() ;
 	vector<string>::iterator it ;
 	
@@ -85,7 +102,10 @@ void CommandProcessor::initEditList() {
 	int editIndex = 0 ;
 	fileObject.setFileName(FILENAME_EDIT_ALTERNATES) ;
 	strcpy(editList[editIndex],"edit") ;
- 
+	editIndex++ ;
+	strcpy(editList[editIndex],"editt") ;
+	editIndex++ ;
+	strcpy(editList[editIndex],"edt") ;
 	editIndex++ ;
 	vector<string> storedEditList = fileObject.readFromFile() ;
 	vector<string>::iterator it ;
@@ -104,7 +124,12 @@ void CommandProcessor::initSearchList() {
 	int searchIndex = 0 ;
 	fileObject.setFileName(FILENAME_SEARCH_ALTERNATES) ;
 	strcpy(searchList[searchIndex],"search") ;
-	
+	searchIndex++ ;
+	strcpy(searchList[searchIndex],"saerch") ;
+	searchIndex++ ;
+	strcpy(searchList[searchIndex],"serch") ;
+	searchIndex++ ;
+	strcpy(searchList[searchIndex],"sarch") ;
 	searchIndex++ ;
 	vector<string> storedSearchList = fileObject.readFromFile() ;
 	vector<string>::iterator it ;
@@ -122,7 +147,10 @@ void CommandProcessor::initUndoList() {
 	int undoIndex = 0 ;
 	fileObject.setFileName(FILENAME_UNDO_ALTERNATES) ;
 	strcpy(undoList[undoIndex],"undo") ;
-
+	undoIndex++ ;
+	strcpy(undoList[undoIndex],"undoo") ;
+	undoIndex++ ;
+	strcpy(undoList[undoIndex],"undo0 ");
 	undoIndex++ ;
 	vector<string> storedUndoList = fileObject.readFromFile() ;
 	vector<string>::iterator it ;
@@ -141,8 +169,10 @@ void CommandProcessor::initRedoList() {
 	int redoIndex = 0 ;
 	fileObject.setFileName(FILENAME_REDO_ALTERNATES) ;
 	strcpy(redoList[redoIndex],"redo") ;
-  
 	redoIndex++ ;
+	strcpy(redoList[redoIndex],"redoo") ;
+	redoIndex++ ;
+
 	vector<string> storedRedoList = fileObject.readFromFile() ;
 	vector<string>::iterator it ;
 	it = storedRedoList.begin() ;

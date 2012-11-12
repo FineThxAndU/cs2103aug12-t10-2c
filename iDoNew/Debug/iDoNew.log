@@ -1,535 +1,59 @@
-﻿Build started 12/11/2012 10:41:22 PM.
+﻿Build started 12/11/2012 11:13:23 PM.
      1>Project "C:\Users\Supraja\Documents\Visual Studio 2010\Projects\iDoNew\iDoNew\iDoNew.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\iDo.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\Source\iDoNew\CommandProcessor.cpp ..\Source\iDoNew\DeadlinedTask.cpp ..\Source\iDoNew\FileIO.cpp ..\Source\iDoNew\FloatingTask.cpp ..\Source\iDoNew\Logic.cpp ..\Source\iDoNew\Main.cpp ..\Source\iDoNew\Search.cpp ..\Source\iDoNew\Sort.cpp ..\Source\iDoNew\TimedTask.cpp ..\Source\iDoNew\UI.cpp
-         UI.cpp
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\ui.cpp(200): warning C4996: 'asctime': This function or variable may be unsafe. Consider using asctime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\time.h(153) : see declaration of 'asctime'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\ui.cpp(201): warning C4996: 'asctime': This function or variable may be unsafe. Consider using asctime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\time.h(153) : see declaration of 'asctime'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\ui.cpp(232): warning C4996: 'asctime': This function or variable may be unsafe. Consider using asctime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\time.h(153) : see declaration of 'asctime'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\ui.cpp(260): warning C4996: 'asctime': This function or variable may be unsafe. Consider using asctime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\time.h(153) : see declaration of 'asctime'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\ui.cpp(422): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\time.inl(112) : see declaration of 'localtime'
-         TimedTask.cpp
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\timedtask.cpp(46): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-         Sort.cpp
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\sort.cpp(27): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\sort.cpp(33): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\sort.cpp(44): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\sort.cpp(45): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\sort.cpp(46): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\sort.cpp(57): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\sort.cpp(58): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\sort.cpp(59): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\sort.cpp(70): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\sort.cpp(71): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\sort.cpp(93): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\sort.cpp(94): warning C4018: '<' : signed/unsigned mismatch
-         Search.cpp
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\search.cpp(14): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\search.cpp(23): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\search.cpp(29): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\search.cpp(71): warning C4018: '<' : signed/unsigned mismatch
-         Logic.cpp
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\logic.cpp(81): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\logic.cpp(179): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\logic.cpp(192): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\logic.cpp(310): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\logic.cpp(338): warning C4018: '<=' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\logic.cpp(348): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\logic.cpp(357): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\logic.cpp(384): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\logic.cpp(413): warning C4018: '<=' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\logic.cpp(419): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\logic.cpp(435): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\logic.cpp(442): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\logic.cpp(471): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\logic.cpp(502): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\logic.cpp(520): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\logic.cpp(604): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\logic.cpp(653): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\time.inl(112) : see declaration of 'localtime'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\logic.cpp(661): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\logic.cpp(699): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\time.inl(112) : see declaration of 'localtime'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\logic.cpp(703): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
-         FloatingTask.cpp
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\floatingtask.cpp(47): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-         FileIO.cpp
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\fileio.cpp(63): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\fileio.cpp(99): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\fileio.cpp(159): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\fileio.cpp(165): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdlib.h(867) : see declaration of 'itoa'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\fileio.cpp(168): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdlib.h(867) : see declaration of 'itoa'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\fileio.cpp(171): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdlib.h(867) : see declaration of 'itoa'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\fileio.cpp(174): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdlib.h(867) : see declaration of 'itoa'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\fileio.cpp(177): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdlib.h(867) : see declaration of 'itoa'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\fileio.cpp(187): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdlib.h(867) : see declaration of 'itoa'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\fileio.cpp(190): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdlib.h(867) : see declaration of 'itoa'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\fileio.cpp(193): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdlib.h(867) : see declaration of 'itoa'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\fileio.cpp(196): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdlib.h(867) : see declaration of 'itoa'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\fileio.cpp(199): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdlib.h(867) : see declaration of 'itoa'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\fileio.cpp(213): warning C4996: 'asctime': This function or variable may be unsafe. Consider using asctime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\time.h(153) : see declaration of 'asctime'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\fileio.cpp(219): warning C4996: 'asctime': This function or variable may be unsafe. Consider using asctime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\time.h(153) : see declaration of 'asctime'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\fileio.cpp(226): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\time.inl(112) : see declaration of 'localtime'
-         DeadlinedTask.cpp
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\deadlinedtask.cpp(47): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-         CommandProcessor.cpp
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(29): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(32): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(40): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(44): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(51): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(59): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(63): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(49): warning C4101: 'i' : unreferenced local variable
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(69): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(77): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(81): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(87): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(95): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(99): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(106): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(114): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(118): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(124): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(132): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(136): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(143): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(151): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(155): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(162): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(170): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(174): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(178): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(186): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(214): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(215): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(216): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(217): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(220): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(229): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(230): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(231): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(234): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(247): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(249): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(255): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(256): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(267): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(282): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(283): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(299): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(344): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(345): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(347): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(348): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(356): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(359): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(361): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(365): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(366): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(371): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(372): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(340): warning C4101: 'cmd' : unreferenced local variable
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(393): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(394): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(395): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(396): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(400): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(402): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(413): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(414): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(429): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(445): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(446): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(462): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(473): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(496): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(514): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(527): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(644): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(648): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(660): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(664): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(675): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(679): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(691): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(695): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(707): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(711): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(723): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(727): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(739): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(744): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(756): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(760): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(778): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(782): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(786): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(790): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(794): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(798): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(802): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(805): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(822): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(823): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(831): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(832): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(840): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(841): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(849): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(850): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(858): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(859): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(867): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(868): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(876): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(877): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(885): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(886): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(905): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(907): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(940): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1033): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1036): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1039): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1071): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1076): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1080): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1086): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1094): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1098): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1104): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1108): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1121): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdlib.h(867) : see declaration of 'itoa'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1122): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1125): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1128): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdlib.h(867) : see declaration of 'itoa'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1129): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1137): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1140): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1152): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1159): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1160): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1161): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1177): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdlib.h(867) : see declaration of 'itoa'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1178): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1183): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdlib.h(867) : see declaration of 'itoa'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1184): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1190): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdlib.h(867) : see declaration of 'itoa'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1191): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1193): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdlib.h(867) : see declaration of 'itoa'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1194): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1196): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1204): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1213): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1216): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1201): warning C4101: 'year' : unreferenced local variable
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1221): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1225): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1228): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1243): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdlib.h(867) : see declaration of 'itoa'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1244): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1249): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1252): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1340): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1345): warning C4018: '<=' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1351): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1354): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1360): warning C4018: '<=' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1366): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1369): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1375): warning C4018: '<=' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1406): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1418): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1424): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1428): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1432): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1436): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1441): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1443): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1448): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1451): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1460): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1462): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1469): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1507): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1394): warning C4101: 'tmp' : unreferenced local variable
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1523): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1523): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1524): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1524): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1525): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1525): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1526): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1526): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1527): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1527): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1528): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1528): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1529): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1529): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1696): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1699): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdlib.h(867) : see declaration of 'itoa'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1700): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1703): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1706): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdlib.h(867) : see declaration of 'itoa'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1707): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1710): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1713): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdlib.h(867) : see declaration of 'itoa'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1714): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1717): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1720): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdlib.h(867) : see declaration of 'itoa'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1721): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1724): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1727): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdlib.h(867) : see declaration of 'itoa'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1728): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : see declaration of 'strcat'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1734): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1738): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1763): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1763): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1764): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1764): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1765): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1765): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1766): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1766): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1767): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1767): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1768): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1768): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1769): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1769): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1770): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1770): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1771): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1771): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1772): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1772): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1773): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1773): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1774): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1774): warning C4996: 'strcmpi': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strcmpi. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(245) : see declaration of 'strcmpi'
-     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\commandprocessor.cpp(1881): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\time.inl(112) : see declaration of 'localtime'
-         Generating Code...
-         Skipping... (no relevant changes detected)
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\Source\iDoNew\Main.cpp
          Main.cpp
+     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\tester.h(76): warning C4996: 'asctime': This function or variable may be unsafe. Consider using asctime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\time.h(153) : see declaration of 'asctime'
+     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\tester.h(130): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\tester.h(139): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\tester.h(143): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\tester.h(147): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\tester.h(151): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\tester.h(155): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\tester.h(159): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\tester.h(169): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\tester.h(178): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\tester.h(180): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\tester.h(182): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\tester.h(184): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\tester.h(186): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\tester.h(188): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\tester.h(190): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\tester.h(192): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\tester.h(194): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\tester.h(196): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\tester.h(198): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\tester.h(206): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\time.inl(112) : see declaration of 'localtime'
+     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\tester.h(209): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\tester.h(212): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\tester.h(222): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\supraja\documents\visual studio 2010\projects\idonew\source\idonew\tester.h(237): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
        Link:
          c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Supraja\Documents\Visual Studio 2010\Projects\iDoNew\Debug\iDo.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\Users\Supraja\Documents\Visual Studio 2010\Projects\iDoNew\lib" gtestd.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\iDo.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Supraja\Documents\Visual Studio 2010\Projects\iDoNew\Debug\iDo.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Supraja\Documents\Visual Studio 2010\Projects\iDoNew\Debug\iDo.lib" /MACHINE:X86 Debug\CommandProcessor.obj
          Debug\DeadlinedTask.obj
@@ -552,4 +76,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:23.89
+Time Elapsed 00:00:20.13

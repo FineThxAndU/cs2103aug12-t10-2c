@@ -71,6 +71,7 @@ private:
 
 	static const string UI::MESSAGE_REDO;
 	static const string UI::MESSAGE_REDO_FAIL;
+	static const string UI::MESSAGE_NO_TASK;
  public:
 
 	void displayHomeScreen(vector<Task*>) ; 

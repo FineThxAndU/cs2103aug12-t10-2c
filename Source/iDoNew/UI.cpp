@@ -30,6 +30,7 @@ const string UI::MESSAGE_UNDO_FAIL = "Undo not possible." ;
 const string UI::MESSAGE_REDO = "Successfully redone.";
 const string UI::MESSAGE_REDO_FAIL = "Redo not possible";
 const string UI::MESSAGE_TODAY = "Today's Schedule: " ;
+const string UI::MESSAGE_NO_TASK = "You have no tasks scheduled for today";
 
 //@author A0088416X
 string UI::convertToString(char * sentence) {
@@ -262,6 +263,10 @@ void UI::displayHomeScreen(vector<Task*> tasksToDisplay) {
 	UI::goToNextLineBeginning(0) ;
 	cout << MESSAGE_TODAY << time;
 	UI::goToNextLineBeginning(1);
+	if(tasksToDisplay.size() == 0) {
+		cout << MESSAGE_NO_TASK << endl;
+	}
+	else {
 	cout << UI::TABLE_FIELDS ; 
 
 	for( ; it != tasksToDisplay.end() ; it++) {
@@ -292,6 +297,7 @@ void UI::displayHomeScreen(vector<Task*> tasksToDisplay) {
 		}
   }
 	goToNextLineBeginning(0) ;
+	}
 }
 
 void UI::feedback(bool result, string command) {

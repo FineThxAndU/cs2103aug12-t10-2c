@@ -211,13 +211,13 @@ void FileIO::writeErrorLog (string log) {
 	ofstream filePtr(ERROR_LOG_FILE_NAME, ios::app) ;
 	tm* current = getCurrentTime() ; 
 	string time = makePrintableTimeString(asctime(current)) ;
-	filePtr << time << "\t" << log << endl;
+	filePtr << time << "\t" << log << endl ;
 }
 void FileIO::writeInputLog (string log) {
 	ofstream filePtr(TASK_LOG_FILE_NAME, ios::app) ;
 	tm* current = getCurrentTime() ; 
 	string time = makePrintableTimeString(asctime(current)) ;
-	filePtr << time << "\t" << log << endl;
+	filePtr << time << "\t" << log << endl ;
 }
 tm* FileIO::getCurrentTime()	{
 	time_t now;

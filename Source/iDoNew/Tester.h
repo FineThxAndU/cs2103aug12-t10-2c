@@ -121,7 +121,7 @@ TEST(basic_test, cmdProcessor)
 	
 
 }
-
+// checks if a string is converted properly to int array
 TEST(basic_test, intProcessor)
 {
 	CommandProcessor cp;
@@ -238,7 +238,7 @@ TEST(basic_test, addZeroes)
 	cp.addZeroes(dateTime);
 	ASSERT_EQ(0,strcmp(dateTime,"300809"));
 }
-		
+// checks extreme condition when no undo operation can be performed	
 TEST (basic_test, undoTask) {
 	Logic testObj;
 	bool returnVal;
@@ -252,7 +252,7 @@ TEST (basic_test, undoTask) {
 	}
 
 }
-
+//checks extreme condition when no redo can be performed
 TEST (basic_test, redoTask) {
 	Logic testObj;
 	bool returnVal;
@@ -264,6 +264,7 @@ TEST (basic_test, redoTask) {
 			ASSERT_EQ(except,"No undo to redo yet!");
 		}
 }
+// checks if a task is being added properly
 TEST(basic_test, addTask)
 {
 	Logic testObj;
@@ -293,7 +294,7 @@ TEST(basic_test, addTask)
 	
 
 }
-
+//checks if a task is getting properly deleted
 TEST (basic_test,deleteTask) {
 	Logic testObj;
 	TimedTask testTask;
