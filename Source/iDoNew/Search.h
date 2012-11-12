@@ -23,8 +23,11 @@ class Search
 		vector<Task*> getInputList();
 		void clearSearchResults();
 		bool executeSearchTime(Task* query);
+		//changes the time to facilitate comparision of time
 		void makeConvertible(tm*);
-		void formatHourYear(tm*);
+		//converts to required month and year format
+		void formatMonYear(tm*);
+		//changes back to original time
 		void revertToOriginalTime( tm *time, int hour, int min);
 };
 #endif

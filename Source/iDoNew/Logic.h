@@ -49,7 +49,7 @@ class Logic
 	static const string FILENAME_UNDO_ALTERNATES ;
 	static const string FILENAME_REDO_ALTERNATES ;
 	static const int MAX_KEYWORD_SIZE = 100 ;
-
+	//structure to hold the type of operation, the task, and index of position in task list being used by th tassk (used by undo and redo stack)
 	struct Input
 	{
 		CommandType type;
@@ -57,14 +57,15 @@ class Logic
 		int index;
 	};
 
-	//
+	//Stores each operation performed in a stack for undo operation
 	stack < Logic::Input> undoStack;
-	//
+	//Stores undo operations in a stack to perform redo operation
 	stack <Input> redoStack;
-	//
+	//Variable to hold each operation along with operation performed to enable undo/ redo
 	Input userStruct;
-
-        bool execute(string,Task*, Task*);
+	//executes all the operations
+    bool execute(string,Task*, Task*);
+	//determines the command type
 	CommandType determineCommand(string);
 
 	void deleteExpiredTasks() ;
@@ -72,14 +73,14 @@ class Logic
 	void setRedoStack(CommandType,Task*,int);
 	void setUndoStack(CommandType,Task*,int);
 	string getUndoStack();
-
+	//retrieves current time
 	tm* getCurrentTime();
+	//updates the home screen with the edited task list
 	void updateHomeScreen();
-	//
+	//writes the modified list to file
 	void updateTaskFile();
-	//
+	//sets the search list
 	void setSearchObj(Task*);
-	//void updateSearchResults();
 
 public:
 	Logic();
