@@ -11,6 +11,7 @@
 #include <vector>
 #include <iomanip>
 #include <windows.h>
+#include <fstream>
 #include <time.h>
 #include "Task.h" 
 
@@ -67,6 +68,8 @@ private:
 	static const string MESSAGE_UNDONE ;
 	static const string MESSAGE_UNDO_FAIL ;
 
+	static const string UI::MESSAGE_REDO;
+	static const string UI::MESSAGE_REDO_FAIL;
  public:
 
 	void displayHomeScreen(vector<Task*>) ; 
