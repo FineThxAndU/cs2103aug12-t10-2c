@@ -101,6 +101,8 @@ private:
 
 	tm* getCurrentTime() ;
 
+	void helpScreen();
+
 } ;
 
 #endif 

@@ -8,14 +8,14 @@ const int MAX_INPUT_SIZE = 100;
 const string TASK_LOG_FILE_NAME = "Input.txt";
 const string ERROR_LOG_FILE_NAME = "Error.txt";
 
-
+//@author A0088819J
 vector<Task*> FileIO::getTaskList(){
 
 	return FileIO::taskList;
 
 }
 
-
+//@author A0088416X
 vector<string> FileIO::readFromFile() {
 
 	ifstream fin(fileName, ios::in) ;
@@ -39,7 +39,7 @@ void FileIO::writeToFile(const char * word) {
 
 	fout.close() ;
 }
-
+//@author A0088819J
 void FileIO::setFileName(string fileName){
 	this->fileName = fileName.c_str();
 }
@@ -206,7 +206,7 @@ void FileIO::writeList(){
 	fout.close();
 
 }
-
+//@author A0088645N
 void FileIO::writeErrorLog (string log) {
 	ofstream filePtr(ERROR_LOG_FILE_NAME, ios::app) ;
 	tm* current = getCurrentTime() ; 
@@ -226,7 +226,7 @@ tm* FileIO::getCurrentTime()	{
 	current = localtime(&now);
 	return current;
 }
-
+//@author A0088416X
 string FileIO::convertToString(char * sentence) {
 
 	string strOfSentence ;
@@ -235,7 +235,6 @@ string FileIO::convertToString(char * sentence) {
 	strOfSentence = ss.str() ;
 	return strOfSentence ;
 }
-
 
 string FileIO::makePrintableTimeString(char * timeInAscii) {
 
